@@ -1,21 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!--
-      DUEÑA/O: Susan Laime — Página de inicio (Home). Ver README.md (sección Equipo)
-
-      TODO (Susan): presentar LILA en pocas líneas (qué es y para quién: trabajadores y empleadores).
-      TODO (Susan): dos botones: "Iniciar sesión" -> auth/login.html y "Crear cuenta" -> auth/register.html.
-      TODO (Susan): cargar el navbar y el footer de Joaquín (components.js), igual que las otras pantallas.
-      TODO (Susan): usar los estilos globales (reset.css, typography.css, responsive.css) y home.css.
-      TODO (Susan): que se vea bien en celular (probar con F12 -> vista de dispositivo).
-      Alcance del Primer Parcial: SIN ofertas, búsqueda ni postulaciones. Solo presentación y acceso.
-      Referencia opcional: index.html del repositorio LILA anterior.
-    -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="LILA conecta talento y oportunidades laborales en Bolivia." />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/typography.css" />
+    <link rel="stylesheet" href="assets/css/pages/home.css" />
+    <link rel="stylesheet" href="assets/css/utilities/responsive.css" />
     <title>LILA — Librería Laboral</title>
 </head>
 <body>
+    <main class="home-page">
+        <nav class="home-nav" aria-label="Navegación principal">
+            <a class="home-brand" href="index.html" aria-label="LILA, página de inicio">
+                <img src="public/L-logo-oficial.png" alt="LILA" />
+            </a>
+            <div class="home-nav-actions">
+                <a class="home-link" href="auth/login.html">Iniciar sesión</a>
+                <a class="home-nav-button" href="auth/register.html">Crear cuenta</a>
+            </div>
+        </nav>
+
+        <section class="home-hero" aria-labelledby="home-title">
+            <div class="home-hero-copy">
+                <span class="home-eyebrow">Una nueva forma de conectar</span>
+                <h1 id="home-title">Tu talento merece una oportunidad.</h1>
+                <p>
+                    LILA conecta a personas que buscan trabajo con empleadores
+                    que necesitan talento. Encuentra oportunidades con confianza,
+                    cerca de ti.
+                </p>
+                <div class="home-hero-actions">
+                    <a class="home-primary-button" href="auth/register.html">Comenzar ahora</a>
+                    <a class="home-secondary-button" href="auth/login.html">Ya tengo una cuenta</a>
+                </div>
+            </div>
+            <div class="home-hero-art" aria-hidden="true">
+                <div class="home-orbit home-orbit-large"></div>
+                <div class="home-orbit home-orbit-small"></div>
+                <div class="home-art-card">
+                    <span class="home-art-icon">✦</span>
+                    <strong>Conexiones reales</strong>
+                    <span>Talento y oportunidades</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-audience" aria-labelledby="audience-title">
+            <div class="home-section-heading">
+                <span class="home-eyebrow">LILA es para ti</span>
+                <h2 id="audience-title">Crece con nuevas posibilidades</h2>
+            </div>
+            <div class="home-audience-grid">
+                <article class="home-audience-card">
+                    <span class="home-card-icon" aria-hidden="true">⌁</span>
+                    <h3>Si buscas trabajo</h3>
+                    <p>Presenta tus habilidades y experiencia para encontrar oportunidades que se ajusten a ti.</p>
+                    <a href="auth/register.html">Crear perfil de trabajador <span aria-hidden="true">→</span></a>
+                </article>
+                <article class="home-audience-card home-audience-card-accent">
+                    <span class="home-card-icon" aria-hidden="true">◈</span>
+                    <h3>Si buscas talento</h3>
+                    <p>Crea tu cuenta como empleador y prepárate para conectar con personas capaces.</p>
+                    <a href="auth/register.html">Crear cuenta de empleador <span aria-hidden="true">→</span></a>
+                </article>
+            </div>
+        </section>
+
+        <section class="home-trust" aria-label="Características de LILA">
+            <div><strong>Simple</strong><span>Regístrate en pocos pasos</span></div>
+            <div><strong>Humana</strong><span>Conexiones pensadas para ti</span></div>
+            <div><strong>Local</strong><span>Oportunidades en Bolivia</span></div>
+        </section>
+
+        <div id="footer-placeholder"></div>
+    </main>
+    <script type="module">
+        import { initFooter } from './assets/js/components.js';
+        initFooter();
+    </script>
 </body>
 </html>
