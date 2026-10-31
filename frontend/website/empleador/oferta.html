@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="Detalle de Oferta - LILA" />
+    <link rel="stylesheet" href="../../assets/css/base/reset.css" />
+    <link rel="stylesheet" href="../../assets/css/base/typography.css" />
+    <link rel="stylesheet" href="../../assets/css/pages/buscar.css" />
+    <link rel="stylesheet" href="../../assets/css/utilities/responsive.css" />
+    <title>LILA | Detalle Oferta</title>
+
+    <!-- Bootstrap CSS for Navbar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/components/header.css">
+    <link rel="stylesheet" href="../../assets/css/pages/profile.css">
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+    <main class="buscar-oportunidades">
+        <header class="offer-header">
+            <div class="offer-header-nav">
+                <a href="ofertas.html" class="btn-back">←</a>
+                <div class="offer-logo-container">
+                    <img class="marca offer-logo" src="../../public/Libreria%20Labora.jpeg" alt="Lila" />
+                </div>
+                <div style="width: 24px;"></div> <!-- Spacer -->
+            </div>
+        </header>
+
+        <section class="offer-content-section">
+            <div class="offer-content-container">
+                <h1 class="offer-title">Pintor de brocha gorda</h1>
+                <p class="offer-meta">Bs 150 / día · Quillacollo</p>
+                <p class="offer-description">Necesito pintar la fachada de mi casa
+                    (2 pisos). Proveo pintura y brochas. Trabajo para este sábado.</p>
+
+                <h2 class="offer-subtitle">
+                    Postulantes (3)</h2>
+
+                <!-- Postulante 1 -->
+                <article class="applicant-card">
+                    <div class="applicant-info">
+                        <div class="applicant-avatar">
+                            JP
+                        </div>
+                        <div>
+                            <h3 class="applicant-name">Juan Pérez</h3>
+                            <div class="applicant-badges">
+                                <span class="badge-verified-text">✓ Verificado</span>
+                                <span class="badge-rating-text">★ 4.8</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-contact-primary">
+                        Contactar
+                    </button>
+                </article>
+
+                <!-- Postulante 2 -->
+                <article class="applicant-card">
+                    <div class="applicant-info">
+                        <div class="applicant-avatar">
+                            MR
+                        </div>
+                        <div>
+                            <h3 class="applicant-name">María Rojas</h3>
+                            <div class="applicant-badges">
+                                <span class="badge-unverified-text">Sin verificar</span>
+                                <span class="badge-rating-text">★ 5.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-contact-secondary">
+                        Contactar
+                    </button>
+                </article>
+
+            </div>
+        </section>
+        <div id="footer-placeholder"></div>
+    </main>
+
+    <!-- Bootstrap JS for Navbar -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Initialize Dynamic Header -->
+    <script type="module">
+        import { initHeader, initFooter } from '../../assets/js/components.js';
+        const role = window.location.pathname.includes('empleador') ? 'empleador' : 'trabajador';
+        initHeader(role, 'verified');
+        initFooter();
+    </script>
+</body>
+
+</html>

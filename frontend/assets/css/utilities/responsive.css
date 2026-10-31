@@ -1,0 +1,165 @@
+/* responsive.css - Overrides absolute positioning to make the layout responsive */
+
+/* ---------------------------------
+   Global Resets for Both Screens
+----------------------------------- */
+.buscar-oportunidades {
+    min-width: 0 !important;
+    max-width: 1370px !important; /* Strict 1370px boxed constraint */
+    margin: 0 auto;
+    width: 100% !important;
+    min-height: 100vh !important;
+    position: relative !important;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Remove rigid absolute positioning globally inside these containers */
+.buscar-oportunidades * {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+}
+
+/* ---------------------------------
+   Buscar Oportunidades Styles
+----------------------------------- */
+.buscar-oportunidades header {
+    padding: 40px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.buscar-oportunidades .marca {
+    max-width: 100px !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+.buscar-oportunidades .t-tulo {
+    white-space: normal !important;
+    margin: 0 !important;
+    text-align: center;
+}
+
+.buscar-oportunidades form.buscar {
+    margin: 0 auto 20px auto !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    display: flex;
+    padding: 10px;
+}
+
+.buscar-oportunidades .text-wrapper {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+}
+
+.buscar-oportunidades input[type="search"] {
+    width: 100% !important;
+    border: none;
+    background: transparent;
+    margin-left: 10px;
+}
+
+.buscar-oportunidades .filtro, 
+.buscar-oportunidades .div {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto 20px auto !important;
+    width: max-content !important;
+    padding: 5px 20px !important;
+}
+
+.buscar-oportunidades section {
+    padding: 0 20px 100px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100% !important;
+    align-items: center !important;
+}
+
+.buscar-oportunidades article {
+    padding: 20px !important;
+    border: 1px solid #d6cee2 !important;
+    border-radius: 12px !important;
+    background: #fff;
+    width: 90% !important;
+    max-width: 642px !important;
+    margin: 0 auto !important;
+}
+
+.buscar-oportunidades .tarjeta-vendedor, 
+.buscar-oportunidades .tarjeta-plomero-para {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.buscar-oportunidades h2 {
+    white-space: normal !important;
+    margin: 0 !important;
+}
+
+.buscar-oportunidades p {
+    margin: 0 !important;
+    white-space: normal !important;
+}
+
+.buscar-oportunidades span.etiquetas-vendedor,
+.buscar-oportunidades span.etiquetas-plomero {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+}
+
+.buscar-oportunidades button.aplicar-vendedor,
+.buscar-oportunidades button.aplicar-plomero-para {
+    margin: 10px auto 0 auto !important;
+    padding: 10px !important;
+    background: #272348 !important;
+    color: #fff !important;
+    border-radius: 20px !important;
+    width: 90% !important;
+    max-width: 300px !important;
+    display: block !important;
+}
+
+.buscar-oportunidades footer.navegacin {
+    position: absolute !important; /* Bound to the .buscar-oportunidades relative container */
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important; /* Override the 390px from style.css */
+    background: #fff !important;
+    border-top: 1px solid #d6cee2 !important;
+    z-index: 1000;
+}
+
+.buscar-oportunidades nav.nav {
+    display: flex !important;
+    justify-content: space-around !important;
+    padding: 15px !important;
+    width: 100% !important;
+}
+
+.buscar-oportunidades nav.nav a {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    text-decoration: none !important;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="Publicar Oferta - LILA" />
+    <link rel="stylesheet" href="../../assets/css/base/reset.css" />
+    <link rel="stylesheet" href="../../assets/css/base/typography.css" />
+    <link rel="stylesheet" href="../../assets/css/pages/buscar.css" />
+    <link rel="stylesheet" href="../../assets/css/components/forms.css" />
+    <link rel="stylesheet" href="../../assets/css/utilities/responsive.css" />
+    <title>LILA | Publicar</title>
+
+    <!-- Bootstrap CSS for Navbar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/components/header.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main class="buscar-oportunidades">
+        
+
+        <section style="margin-top: 20px;">
+            <form class="registro-form" action="ofertas.html" method="get">
+                <div class="form-group">
+                    <label for="titulo">Título de la oferta</label>
+                    <input type="text" id="titulo" name="titulo" placeholder="Ej. Pintor de brocha gorda" required />
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="3" placeholder="Detalles del trabajo..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="pago">Pago ofrecido (Bs)</label>
+                    <input type="text" id="pago" name="pago" placeholder="Ej. 150 por día" required />
+                </div>
+                <div class="form-group">
+                    <label for="ubicacion">Ubicación</label>
+                    <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Quillacollo" required />
+                </div>
+                
+                <nav aria-label="Opciones" style="margin-top: 20px;">
+                    <button class="botn-crear" type="submit" style="background-color: #272348; color: #fff; width: 100%; max-width: 300px; margin: 0 auto; display: block; border-radius: 20px; padding: 15px; border: none; cursor: pointer;">
+                        Publicar Empleo
+                    </button>
+                </nav>
+            </form>
+        </section>
+        <div id="footer-placeholder"></div>
+    </main>
+
+    <!-- Bootstrap JS for Navbar -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Initialize Dynamic Header and Footer -->
+    <script type="module">
+        import { initHeader, initFooter } from '../../assets/js/components.js';
+        const role = window.location.pathname.includes('empleador') ? 'empleador' : 'trabajador';
+        initHeader(role, 'verified');
+        initFooter();
+    </script>
+</body>
+</html>

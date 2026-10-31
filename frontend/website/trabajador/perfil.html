@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="description" content="Perfil de Trabajador - LILA" />
+    <link rel="stylesheet" href="../../assets/css/base/reset.css" />
+    <link rel="stylesheet" href="../../assets/css/base/typography.css" />
+    <link rel="stylesheet" href="../../assets/css/pages/buscar.css" />
+    <link rel="stylesheet" href="../../assets/css/utilities/responsive.css" />
+    <title>LILA | Mi Perfil</title>
+
+    <!-- Bootstrap CSS for Navbar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/components/header.css">
+    <link rel="stylesheet" href="../../assets/css/pages/profile.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    <main class="buscar-oportunidades">
+        
+
+        <section style="margin-top: 20px;">
+            <article class="profile-container">
+                <div class="profile-avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70%" height="70%" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                      <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                    </svg>
+                </div>
+                <h2 class="profile-name">Juan Pérez</h2>
+                
+                <div class="profile-badges">
+                    <span class="badge-verified">
+                        ✓ Verificado
+                    </span>
+                    <span class="badge-rating">
+                        ★ 4.8 / 5
+                    </span>
+                </div>
+                
+                <hr class="profile-divider">
+                
+                <h3 class="profile-section-title">Mis Postulaciones</h3>
+                
+                <div class="profile-card">
+                    <h4 class="profile-card-title">Plomero para arreglo específico</h4>
+                    <p class="profile-card-meta">Estado: Aceptado - En curso</p>
+                    <a href="resenas.html" class="btn-rate-employer">Calificar Empleador</a>
+                </div>
+                
+                <div class="profile-card">
+                    <h4 class="profile-card-title">Vendedor temporal de feria</h4>
+                    <p class="profile-card-meta">Estado: Pendiente</p>
+                </div>
+
+            </article>
+        </section>
+        <div id="footer-placeholder"></div>
+    </main>
+
+    <!-- Bootstrap JS for Navbar -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Initialize Dynamic Header and Footer -->
+    <script type="module">
+        import { initHeader, initFooter } from '../../assets/js/components.js';
+        const role = window.location.pathname.includes('empleador') ? 'empleador' : 'trabajador';
+        initHeader(role, 'verified');
+        initFooter();
+    </script>
+</body>
+</html>

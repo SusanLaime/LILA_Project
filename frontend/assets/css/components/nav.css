@@ -1,0 +1,54 @@
+/* nav.css */
+.lila-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white, #ffffff);
+  border-top: 1px solid var(--color-gray-200, #e2e8f0);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.lila-nav-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.lila-nav-list li {
+  flex: 1;
+}
+
+.lila-nav-list a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  text-decoration: none;
+  color: var(--color-gray-500, #718096);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+
+.lila-nav-list a:hover,
+.lila-nav-list a:active,
+.lila-nav-list a.active {
+  color: var(--color-primary, #6b46c1);
+}
+
+/* Hide bottom nav on larger screens if we use a sidebar later */
+@media (min-width: 768px) {
+
+  /* For MVP it's mobile first, but we can style it nicely on desktop too */
+  .lila-bottom-nav {
+    max-width: 100%;
+  }
+}

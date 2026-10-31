@@ -1,0 +1,294 @@
+/* profile.css */
+/* Styles for Profile, Reviews, and Offer detail pages */
+
+/* Profile Page */
+.profile-container {
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.profile-avatar {
+    width: 96px;
+    height: 96px;
+    min-width: 96px;
+    max-width: 96px;
+    flex-shrink: 0;
+    background-color: #d6cee2;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #272348;
+}
+
+.profile-name {
+    font-size: 22px;
+    color: #272348;
+    margin-bottom: 5px;
+}
+
+.profile-badges {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.badge-verified {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge-rating {
+    background-color: #FFC107;
+    color: #272348;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.profile-divider {
+    border: 0;
+    border-top: 1px solid #d6cee2;
+    margin: 20px 0;
+}
+
+.profile-section-title {
+    text-align: left;
+    margin-bottom: 15px;
+    color: #272348;
+    font-size: 18px;
+}
+
+.profile-card {
+    text-align: left;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.profile-card-title {
+    margin: 0 0 5px 0;
+    color: #272348;
+}
+
+.profile-card-meta {
+    margin: 0;
+    font-size: 12px;
+    color: #6d6b7c;
+}
+
+.btn-rate-employer {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #272348;
+    padding: 5px 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.btn-rate-employer:hover {
+    color: #fff;
+    opacity: 0.9;
+}
+
+/* Reviews Page */
+.review-prompt {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #272348;
+}
+
+.review-stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    color: #d6cee2;
+    cursor: pointer;
+}
+
+.review-actions {
+    margin-top: 20px;
+}
+
+.btn-submit-review {
+    background-color: #272348;
+    color: #fff;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 20px;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cancel-review {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Offer Detail Page */
+.offer-header {
+    padding-bottom: 20px;
+}
+
+.offer-header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.btn-back {
+    text-decoration: none;
+    font-size: 24px;
+    color: #272348;
+}
+
+.offer-logo-container {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.offer-logo {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.offer-content-section {
+    margin-top: 10px;
+}
+
+.offer-content-container {
+    padding: 0 20px;
+}
+
+.offer-title {
+    color: #272348;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.offer-meta {
+    color: #6d6b7c;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.offer-description {
+    color: #272348;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.offer-subtitle {
+    font-size: 18px;
+    color: #272348;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #d6cee2;
+    padding-bottom: 5px;
+}
+
+.applicant-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border: 1px solid #d6cee2;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+.applicant-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.applicant-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #f2edfa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #272348;
+}
+
+.applicant-name {
+    font-size: 16px;
+    margin: 0;
+    color: #272348;
+}
+
+.applicant-badges {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.badge-verified-text {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.badge-rating-text {
+    color: #FFC107;
+    font-weight: bold;
+}
+
+.badge-unverified-text {
+    color: #6d6b7c;
+}
+
+.btn-contact-primary {
+    background: #272348;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-contact-secondary {
+    background: #fff;
+    color: #272348;
+    border: 1px solid #272348;
+    padding: 8px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+}

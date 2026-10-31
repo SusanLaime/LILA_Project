@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta name="description"
+        content="LILA, la red laboral de Bolivia para conectar talento, oportunidades y confianza." />
+    <link rel="stylesheet" href="../assets/css/base/reset.css" />
+    <link rel="stylesheet" href="../assets/css/base/typography.css" />
+    <link rel="stylesheet" href="../assets/css/pages/login.css" />
+    <link rel="stylesheet" href="../assets/css/utilities/responsive.css" />
+    <title>LILA | Librería Laboral</title>
+</head>
+
+<body>
+    <main class="bienvenida-mvil" aria-labelledby="saludo-principal">
+        <header>
+            <div class="fondo-lavanda" aria-hidden="true"></div>
+            <img class="logotipo-oficial" src="../public/LILA-logotipo-oficial.png" alt="LILA Librería Laboral" />
+        </header>
+        <section aria-labelledby="saludo-principal">
+            <h1 class="saludo" id="saludo-principal">Hola, bienvenida a LILA</h1>
+            <p class="introducci-n">
+                La red laboral de Bolivia para conectar talento, oportunidades y
+                confianza.
+            </p>
+        </section>
+        <nav aria-label="Opciones de acceso">
+            <div style="margin-bottom: 20px; text-align: center; position: relative;">
+                <label for="global-role" style="display: none;">Selecciona tu rol</label>
+                <select id="global-role" style="background-color: #d6cee2; color: #272348; border: 1px solid #d6cee2; border-radius: 20px; padding: 15px 20px; font-size: 16px; font-weight: bold; width: 100%; text-align: center; cursor: pointer;">
+                    <option value="trabajador">Soy Trabajador</option>
+                    <option value="empleador">Soy Empleador</option>
+                </select>
+            </div>
+            
+            <button class="botn-crear crear-cuenta" type="button" id="btn-crear">
+                Crear nueva cuenta
+            </button>
+            <button class="botn-ingresar ingresar" type="button" id="btn-ingresar">
+                Ingresar a mi cuenta
+            </button>
+            <button class="invitado" type="button" id="btn-invitado">Ver como invitado</button>
+        </nav>
+        <div style="text-align: center; margin: 40px 0 20px 0;">
+            <p class="legal" style="font-size: 12px; color: #666;">
+                Al continuar aceptas nuestros términos y política de privacidad.
+            </p>
+        </div>
+        <div id="footer-placeholder"></div>
+    </main>
+    <script src="../assets/js/shell.js"></script>
+    <script type="module">
+        import { initFooter } from '../assets/js/components.js';
+        initFooter();
+    </script>
+</body>
+
+</html>
