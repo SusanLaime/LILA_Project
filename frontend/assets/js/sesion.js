@@ -1,7 +1,7 @@
 // =====================================================================
-// DUEÑA/O: Persona 1 — Tarea T-01 (Frontend: token de sesión en el navegador)
-// Guía: docs/TAREAS.md  ·  Contrato con el backend: docs/API.md
-// Primera versión generada con ayuda de IA (ver docs/DECLARACION_IA.md):
+// DUEÑA/O: Joaquín Peredo — Token de sesión en el navegador
+// Responsables: README.md (sección Equipo)  ·  Contrato con el backend: docs/API.md
+// Primera versión generada con ayuda de IA (ver README.md, sección Uso de IA):
 // revisarla, entenderla y adaptarla es parte de la tarea.
 // =====================================================================
 
