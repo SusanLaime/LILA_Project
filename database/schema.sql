@@ -1,8 +1,10 @@
 -- =====================================================================
--- DUEÑA/O: Persona 1 — Tarea T-01 (Base de datos)
+-- DUEÑA/O: Persona 2 — Tarea T-02 (Base de datos)
 -- Modelo de datos acordado: docs/API.md (sección "Modelo de datos")
 -- =====================================================================
 --
--- TODO (Persona 1): crear la tabla "usuarios" (CREATE TABLE IF NOT EXISTS ...)
+-- TODO (Persona 2): crear la tabla "usuarios" (CREATE TABLE IF NOT EXISTS ...)
 --                   con las columnas y restricciones descritas en docs/API.md.
---                   Importante: "ci" y "telefono" deben ser UNIQUE (soporta la regla CA-02).
+--                   Importante:
+--                   - "ci" y "telefono" deben ser UNIQUE (soporta la regla CA-02).
+--                   - "rol" solo acepta 'trabajador' o 'empleador' (restricción CHECK).

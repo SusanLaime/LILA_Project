@@ -53,7 +53,7 @@ Ver [`.env.example`](.env.example). No contiene secretos reales.
 
 ## Datos de prueba
 
-<!-- TODO (Persona 2, con Persona 1): teléfono y contraseña del usuario de prueba de database/seed.sql
+<!-- TODO (Persona 2): teléfono y contraseña del usuario de prueba de database/seed.sql
      (datos inventados, nunca reales). -->
 
 ## Cómo comprobar el flujo principal
