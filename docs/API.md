@@ -14,7 +14,7 @@ Todas las respuestas son JSON. Cuando algo falla, la respuesta siempre tiene la 
 
 ## 1. Rutas
 
-### `POST /api/registro` — Persona 3
+### `POST /api/registro` — Natalia Arze
 
 Crea la cuenta de un **trabajador** o de un **empleador**.
 
@@ -36,7 +36,7 @@ Crea la cuenta de un **trabajador** o de un **empleador**.
 | `400` | Falta un dato o no cumple las reglas (sección 3) | `{ "error": "..." }` |
 | `409` | **El CI o el teléfono ya están registrados (CA-02)** | `{ "error": "El CI o el teléfono ya están registrados." }` |
 
-### `POST /api/login` — Persona 4
+### `POST /api/login` — Joaquín Peredo
 
 **Envía:**
 ```json
@@ -49,7 +49,7 @@ Crea la cuenta de un **trabajador** o de un **empleador**.
 | `400` | Falta el teléfono o la contraseña | `{ "error": "..." }` |
 | `401` | Teléfono o contraseña incorrectos | `{ "error": "Teléfono o contraseña incorrectos." }` |
 
-### `GET /api/perfil` — Persona 4
+### `GET /api/perfil` — Sara Revollo
 
 Requiere el encabezado `Authorization: Bearer <token>`.
 
@@ -60,7 +60,7 @@ Requiere el encabezado `Authorization: Bearer <token>`.
 
 > Nunca se devuelve `password_hash`.
 
-### `PUT /api/perfil` — Persona 4
+### `PUT /api/perfil` — Sara Revollo
 
 Requiere `Authorization: Bearer <token>`.
 
@@ -81,7 +81,7 @@ Requiere `Authorization: Bearer <token>`.
 
 ---
 
-## 2. Modelo de datos — Persona 2
+## 2. Modelo de datos — Natalia Arze
 
 Tabla **`usuarios`**:
 
@@ -102,7 +102,7 @@ Tabla **`usuarios`**:
 
 ---
 
-## 3. Reglas de validación — Persona 3 (las usa también la Persona 4)
+## 3. Reglas de validación — Susan Laime (las usan todos)
 
 | Campo | Regla |
 |---|---|
@@ -118,7 +118,7 @@ Tabla **`usuarios`**:
 
 ---
 
-## 4. Frontend: sesión en el navegador — Persona 1
+## 4. Frontend: sesión en el navegador — Joaquín Peredo
 
 - El token se guarda en `localStorage` con la clave **`lila_token`** (funciones en `frontend/assets/js/sesion.js`).
 - Las pantallas llaman al servidor con `pedirApi()` de `frontend/assets/js/api.js`.

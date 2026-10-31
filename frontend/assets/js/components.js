@@ -1,6 +1,6 @@
 // components.js
 // Carga los componentes compartidos (encabezado y pie de página) en cada pantalla.
-// DUEÑA/O: Persona 1 — Tarea T-01 (Frontend y diseño). Ver docs/TAREAS.md
+// DUEÑA/O: Joaquín Peredo — Navbar y footer. Ver README.md (sección Equipo)
 
 /**
  * Carga un archivo HTML y lo inserta dentro del contenedor indicado.

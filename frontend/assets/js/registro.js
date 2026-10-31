@@ -1,7 +1,7 @@
 // =====================================================================
-// DUEÑA/O: Persona 1 — Tarea T-01 (Frontend: pantalla de registro)
-// Guía: docs/TAREAS.md  ·  Contrato con el backend: docs/API.md
-// Primera versión generada con ayuda de IA (ver docs/DECLARACION_IA.md):
+// DUEÑA/O: Natalia Arze — Pantalla de registro (trabajador o empleador)
+// Responsables: README.md (sección Equipo)  ·  Contrato con el backend: docs/API.md
+// Primera versión generada con ayuda de IA (ver README.md, sección Uso de IA):
 // revisarla, entenderla y adaptarla es parte de la tarea.
 // =====================================================================
 
