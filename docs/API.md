@@ -16,7 +16,7 @@ Todas las respuestas son JSON. Cuando algo falla, la respuesta siempre tiene la 
 
 ### `POST /api/registro` — Persona 2
 
-Crea la cuenta de un trabajador.
+Crea la cuenta de un **trabajador** o de un **empleador**.
 
 **Envía:**
 ```json
@@ -25,7 +25,8 @@ Crea la cuenta de un trabajador.
   "ci": "1234567",
   "telefono": "70000001",
   "password": "clave-de-prueba",
-  "consentimiento": true
+  "consentimiento": true,
+  "rol": "trabajador"
 }
 ```
 
@@ -54,7 +55,7 @@ Requiere el encabezado `Authorization: Bearer <token>`.
 
 | Estado | Cuándo | Respuesta |
 |---|---|---|
-| `200` | Sesión válida | `{ "id", "nombre", "telefono", "ciudad", "habilidades", "experiencia", "estado_verificacion" }` |
+| `200` | Sesión válida | `{ "id", "nombre", "telefono", "rol", "ciudad", "habilidades", "experiencia", "estado_verificacion" }` |
 | `401` | Sin token o token inválido | `{ "error": "Debes iniciar sesión." }` |
 
 > Nunca se devuelve `password_hash`.
@@ -91,7 +92,7 @@ Tabla **`usuarios`**:
 | `ci` | TEXT | Obligatorio, **UNIQUE** |
 | `telefono` | TEXT | Obligatorio, **UNIQUE** |
 | `password_hash` | TEXT | Obligatorio (hash bcrypt, nunca texto plano) |
-| `rol` | TEXT | Por defecto `'trabajador'` |
+| `rol` | TEXT | `'trabajador'` o `'empleador'` (se elige al registrarse) |
 | `ciudad` | TEXT | Opcional (se llena en el perfil) |
 | `habilidades` | TEXT | Opcional (se llena en el perfil) |
 | `experiencia` | TEXT | Opcional (se llena en el perfil) |
@@ -110,9 +111,10 @@ Tabla **`usuarios`**:
 | `telefono` | Obligatorio, 8 dígitos, empieza con 6 o 7 (celular de Bolivia) |
 | `password` | Obligatoria, mínimo 8 caracteres |
 | `consentimiento` | Debe ser `true` |
+| `rol` | Obligatorio: `trabajador` o `empleador` |
 | `ciudad` | Opcional, máximo 60 caracteres |
-| `habilidades` | Opcional, máximo 300 caracteres |
-| `experiencia` | Opcional, máximo 1000 caracteres |
+| `habilidades` | Opcional, máximo 300 caracteres (solo se muestra a trabajadores) |
+| `experiencia` | Opcional, máximo 1000 caracteres (solo se muestra a trabajadores) |
 
 ---
 

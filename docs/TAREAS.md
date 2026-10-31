@@ -20,12 +20,13 @@ Crear cuenta  →  Validación  →  Se guarda en la base de datos  →  Iniciar
 
 | Paso | Qué ve el usuario | Regla que se comprueba |
 |---|---|---|
-| 1. Crear cuenta | Formulario: nombre, CI, teléfono, contraseña, consentimiento | Campos obligatorios y formatos. **CI o teléfono repetido → rechazo (CA-02)** |
+| 1. Crear cuenta | Formulario: nombre, CI, teléfono, contraseña, consentimiento y **rol (trabajador o empleador)** | Campos obligatorios y formatos. **CI o teléfono repetido → rechazo (CA-02)** |
 | 2. Iniciar sesión | Teléfono + contraseña | Contraseña cifrada; datos incorrectos → mensaje de error |
 | 3. Mi perfil | Ciudad, habilidades, experiencia → Guardar | **Los datos se guardan y se vuelven a mostrar (CA-01)** |
 
 **Queda fuera** (se explica en el informe, apartado V.5): verificación de CI, reconocimiento facial,
-entrevista, confirmación de teléfono, ofertas, postulaciones, empleadores, calificaciones y panel de administración.
+entrevista, confirmación de teléfono, ofertas, postulaciones, matching, calificaciones y panel de administración.
+El empleador puede registrarse y ver su perfil, pero todavía no publica ofertas.
 
 **Tecnología:** HTML/CSS/JavaScript (frontend) · Node.js + Express (servidor) · SQLite con el módulo
 incorporado `node:sqlite` (base de datos) · `bcryptjs` (contraseñas) · `jsonwebtoken` (sesión) ·

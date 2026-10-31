@@ -1,20 +1,27 @@
-// =====================================================================
-// DUEÑA/O: Persona 1 — Tarea T-01 (Servidor y base de datos)
-// Guía completa: docs/TAREAS.md  ·  Contrato de la API: docs/API.md
-// =====================================================================
-//
-// Qué debe hacer este archivo:
-//
-// TODO (Persona 1): crear la aplicación Express y aceptar JSON (express.json()).
-// TODO (Persona 1): servir la carpeta "frontend" en la ruta /frontend
-//                   (¡NO servir la raíz del proyecto: expondría backend/ y .env!).
-// TODO (Persona 1): redirigir "/" a /frontend/auth/login.html
-// TODO (Persona 1): montar las rutas de la API:
-//                     /api/registro  -> ./routes/registro.js  (Persona 2)
-//                     /api/login     -> ./routes/login.js     (Persona 3)
-//                     /api/perfil    -> ./routes/perfil.js    (Persona 4)
-// TODO (Persona 1): manejador de errores final que responda { error: "..." } con estado 500
-//                   y que nunca muestre detalles internos al usuario.
-// TODO (Persona 1): exportar "app" (para las pruebas) y llamar a app.listen(PORT)
-//                   solo cuando el archivo se ejecuta directamente (npm start).
-//                   PORT se lee de process.env.PORT (ver .env.example).
+import express from 'express';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import './db.js';
+import registroRouter from './routes/registro.js';
+import loginRouter from './routes/login.js';
+import perfilRouter from './routes/perfil.js';
+
+const app = express();
+const root = dirname(dirname(fileURLToPath(import.meta.url)));
+app.use(express.json());
+app.use('/frontend', express.static(join(root, 'frontend')));
+app.get('/', (req, res) => res.redirect('/frontend/auth/login.html'));
+app.use('/api/registro', registroRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/perfil', perfilRouter);
+app.use((error, req, res, next) => {
+  if (res.headersSent) return next(error);
+  res.status(500).json({ error: 'Error interno del servidor.' });
+});
+
+export { app };
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === fileURLToPath(`file://${process.argv[1]}`)) {
+  const port = Number(process.env.PORT || 3000);
+  app.listen(port, () => console.log(`LILA disponible en http://localhost:${port}`));
+}

@@ -22,15 +22,16 @@ async function loadComponent(url, containerId) {
 /**
  * Inicializa el encabezado.
  * @param {string} verificationStatus 'verificado' | 'pendiente' | 'no_verificado'
+ * @param {string} rol 'trabajador' | 'empleador'
  *        En el Primer Parcial todos los usuarios son 'no_verificado'
  *        (la verificación de CI queda para el Segundo Parcial).
  */
-export async function initHeader(verificationStatus = 'no_verificado') {
+export async function initHeader(verificationStatus = 'no_verificado', rol = 'trabajador') {
     await loadComponent('/frontend/components/header.html', 'header-placeholder');
 
     const roleBadge = document.getElementById('lila-role-badge');
     if (roleBadge) {
-        roleBadge.textContent = 'TRABAJADOR';
+        roleBadge.textContent = rol === 'empleador' ? 'EMPLEADOR' : 'TRABAJADOR';
     }
 
     const badge = document.getElementById('lila-verified-badge');
@@ -56,14 +57,15 @@ export async function initHeader(verificationStatus = 'no_verificado') {
         logoLink.href = '/frontend/website/trabajador/perfil.html';
     }
 
-    // Solo las pantallas del Primer Parcial.
-    // TODO (Persona 3): el enlace "Salir" debe cerrar la sesión (borrar el token) antes de ir al login.
     const navLinks = document.getElementById('lila-nav-links');
     if (navLinks) {
         navLinks.innerHTML = `
             <li class="nav-item"><a class="nav-link" href="/frontend/website/trabajador/perfil.html"><span aria-hidden="true">♙</span> Mi Perfil</a></li>
             <li class="nav-item"><a class="nav-link" id="lila-salir" href="/frontend/auth/login.html"><span aria-hidden="true">⍈</span> Salir</a></li>
         `;
+        document.getElementById('lila-salir')?.addEventListener('click', () => {
+            localStorage.removeItem('lila_token');
+        });
     }
 }
 
