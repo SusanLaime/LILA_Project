@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!--
+      DUEÑA/O: Persona 4 — Tarea T-04 (Perfil). Ver docs/TAREAS.md
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <meta name="description" content="Perfil de Trabajador - LILA" />
@@ -31,29 +34,22 @@
                 </div>
                 <h2 class="profile-name">Juan Pérez</h2>
                 
+                <!-- TODO (Persona 4): reemplazar "Juan Pérez" por el nombre real (GET /api/perfil). -->
+
                 <div class="profile-badges">
-                    <span class="badge-verified">
-                        ✓ Verificado
-                    </span>
-                    <span class="badge-rating">
-                        ★ 4.8 / 5
-                    </span>
+                    <span class="badge-verified" id="badge-verif">No verificado</span>
                 </div>
-                
+
                 <hr class="profile-divider">
-                
-                <h3 class="profile-section-title">Mis Postulaciones</h3>
-                
-                <div class="profile-card">
-                    <h4 class="profile-card-title">Plomero para arreglo específico</h4>
-                    <p class="profile-card-meta">Estado: Aceptado - En curso</p>
-                    <a href="resenas.html" class="btn-rate-employer">Calificar Empleador</a>
-                </div>
-                
-                <div class="profile-card">
-                    <h4 class="profile-card-title">Vendedor temporal de feria</h4>
-                    <p class="profile-card-meta">Estado: Pendiente</p>
-                </div>
+
+                <h3 class="profile-section-title">Mis datos</h3>
+
+                <!-- TODO (Persona 4): mostrar teléfono, ciudad, habilidades y experiencia
+                     leídos de GET /api/perfil (ver docs/API.md).
+                     Agregar un formulario para editar ciudad, habilidades y experiencia
+                     y guardarlos con PUT /api/perfil. Mostrar mensajes en #perfil-mensaje.
+                     Si no hay sesión (401): redirigir a /frontend/auth/login.html. -->
+                <p id="perfil-mensaje" role="alert" aria-live="polite"></p>
 
             </article>
         </section>
@@ -68,9 +64,9 @@
     <!-- Initialize Dynamic Header and Footer -->
     <script type="module">
         import { initHeader, initFooter } from '../../assets/js/components.js';
-        const role = window.location.pathname.includes('empleador') ? 'empleador' : 'trabajador';
-        initHeader(role, 'verified');
+        initHeader('no_verificado');
         initFooter();
     </script>
+    <script type="module" src="../../assets/js/perfil.js"></script>
 </body>
 </html>

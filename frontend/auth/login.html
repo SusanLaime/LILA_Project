@@ -2,6 +2,9 @@
 <html lang="es">
 
 <head>
+    <!--
+      DUEÑA/O: Persona 3 — Tarea T-03 (Inicio de sesión). Ver docs/TAREAS.md
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <meta name="description"
@@ -27,21 +30,19 @@
             </p>
         </section>
         <nav aria-label="Opciones de acceso">
-            <div style="margin-bottom: 20px; text-align: center; position: relative;">
-                <label for="global-role" style="display: none;">Selecciona tu rol</label>
-                <select id="global-role" style="background-color: #d6cee2; color: #272348; border: 1px solid #d6cee2; border-radius: 20px; padding: 15px 20px; font-size: 16px; font-weight: bold; width: 100%; text-align: center; cursor: pointer;">
-                    <option value="trabajador">Soy Trabajador</option>
-                    <option value="empleador">Soy Empleador</option>
-                </select>
-            </div>
-            
+            <!-- TODO (Persona 3): formulario de inicio de sesión con "Teléfono" y "Contraseña"
+                 (id="login-form", id="login-telefono", id="login-password").
+                 Al enviar: llamar a POST /api/login (ver docs/API.md), guardar el token
+                 y redirigir a /frontend/website/trabajador/perfil.html.
+                 Si los datos son incorrectos: mostrar el mensaje en #login-mensaje. -->
+            <p id="login-mensaje" role="alert" aria-live="polite"></p>
+
             <button class="botn-crear crear-cuenta" type="button" id="btn-crear">
                 Crear nueva cuenta
             </button>
             <button class="botn-ingresar ingresar" type="button" id="btn-ingresar">
                 Ingresar a mi cuenta
             </button>
-            <button class="invitado" type="button" id="btn-invitado">Ver como invitado</button>
         </nav>
         <div style="text-align: center; margin: 40px 0 20px 0;">
             <p class="legal" style="font-size: 12px; color: #666;">
@@ -50,7 +51,7 @@
         </div>
         <div id="footer-placeholder"></div>
     </main>
-    <script src="../assets/js/shell.js"></script>
+    <script type="module" src="../assets/js/login.js"></script>
     <script type="module">
         import { initFooter } from '../assets/js/components.js';
         initFooter();

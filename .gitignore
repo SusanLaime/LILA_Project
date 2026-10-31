@@ -58,3 +58,7 @@ build/
 coverage/
 .next/
 out/
+
+# Base de datos local de SQLite
+*.db
+*.db-journal

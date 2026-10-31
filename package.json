@@ -1,0 +1,16 @@
+{
+  "name": "lila",
+  "version": "0.1.0",
+  "description": "LILA - Librería Laboral. Primer incremento: registro, inicio de sesión y perfil de trabajador.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env backend/server.js",
+    "dev": "node --watch --env-file-if-exists=.env backend/server.js",
+    "test": "node --test tests/"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}

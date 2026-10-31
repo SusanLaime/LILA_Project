@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!--
+      DUEÑA/O: Persona 2 — Tarea T-02 (Registro). Ver docs/TAREAS.md
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <meta name="description" content="Registro en LILA" />
@@ -37,6 +40,10 @@
                 <label for="telefono">Teléfono (Celular)</label>
                 <input type="tel" id="telefono" name="telefono" placeholder="Ej. 70012345" required />
             </div>
+            <!-- TODO (Persona 2): agregar el campo "Contraseña" (type="password", mínimo 8 caracteres). -->
+            <!-- TODO (Persona 2): agregar la casilla de consentimiento (Ley 2472):
+                 "Acepto el tratamiento de mis datos personales" (id="consentimiento"). -->
+            <!-- TODO (Persona 2): en el Primer Parcial solo se registra el rol "trabajador". -->
             <div class="form-group">
                 <label for="rol">Soy...</label>
                 <select id="rol" name="rol" required>
@@ -45,6 +52,8 @@
                     <option value="empleador">Empleador (Ofrezco empleo)</option>
                 </select>
             </div>
+            <!-- TODO (Persona 2): zona para mostrar los mensajes de error/éxito que devuelve la API. -->
+            <p id="registro-mensaje" role="alert" aria-live="polite"></p>
             <nav aria-label="Opciones de acceso" style="margin-top: 20px;">
                 <button class="botn-crear crear-cuenta" type="submit">
                     Registrarse
@@ -61,7 +70,7 @@
         </div>
         <div id="footer-placeholder"></div>
     </main>
-    <script src="../assets/js/shell.js"></script>
+    <script type="module" src="../assets/js/registro.js"></script>
     <script type="module">
         import { initFooter } from '../assets/js/components.js';
         initFooter();
