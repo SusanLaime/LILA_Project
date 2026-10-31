@@ -5,7 +5,7 @@
 // =====================================================================
 //
 // TODO (Persona 4): P-06 — CA-01: guardar ciudad, habilidades y experiencia con PUT /api/perfil
-//                   y volver a leerlos con GET /api/perfil (los datos coinciden).
+//                   y volver a leerlos con GET /api/perfil (los datos y el rol coinciden).
 // TODO (Persona 4): P-07 — GET /api/perfil sin token -> 401.
 // TODO (Persona 4): P-08 — PUT /api/perfil con datos demasiado largos -> 400.
 // TODO (Persona 4): usar una base de datos de prueba (DB_PATH distinto), nunca la de la demostración.

@@ -6,10 +6,10 @@
 
 | Integrante | Tarea | Responsabilidad | Enlaces / evidencia | Demostración posible en la defensa |
 |---|---|---|---|---|
-| Persona 1 | T-01 | Servidor Express, base de datos SQLite, datos de prueba, `api.js`, `.env.example` | _Issue: · PR: · Commits: · Prueba: `tests/db.test.js`_ | Iniciar el proyecto desde cero y mostrar la tabla creada |
-| Persona 2 | T-02 | Registro, regla de CI/teléfono duplicado (CA-02), README y etiqueta de entrega | _Issue: · PR: · Commits: · Prueba: `tests/registro.test.js`_ | Registrar una cuenta y mostrar el rechazo del duplicado |
-| Persona 3 | T-03 | Inicio de sesión, cifrado de contraseñas, token, validaciones | _Issue: · PR: · Commits: · Prueba: `tests/login.test.js`_ | Ingresar, mostrar contraseña cifrada en la BD y el error de contraseña |
-| Persona 4 | T-04 | Perfil (ver y editar), pruebas, registro de pruebas (CA-01) | _Issue: · PR: · Commits: · Prueba: `tests/perfil.test.js`_ | Guardar el perfil, salir, volver y mostrar los mismos datos |
+| Persona 1 | T-01 | Frontend y diseño: pantallas de registro, inicio de sesión y perfil; estilos; comunicación con la API | _Issue: · PR: · Commits: · Prueba: P-09 a P-11_ | Hacer el recorrido completo en el navegador y explicar las decisiones de diseño |
+| Persona 2 | T-02 | Servidor Express, base de datos SQLite, datos de prueba, configuración, README | _Issue: · PR: · Commits: · Prueba: `tests/db.test.js`_ | Iniciar el proyecto desde cero siguiendo el README y mostrar la tabla creada |
+| Persona 3 | T-03 | Validaciones, registro con rol, regla de CI/teléfono duplicado (CA-02) | _Issue: · PR: · Commits: · Prueba: `tests/registro.test.js`_ | Mostrar el rechazo del duplicado y explicar la regla en el código |
+| Persona 4 | T-04 | Cifrado de contraseñas, inicio de sesión, token, perfil (CA-01) | _Issue: · PR: · Commits: · Pruebas: `tests/login.test.js`, `tests/perfil.test.js`_ | Mostrar la contraseña cifrada en la BD y el perfil guardado tras volver a ingresar |
 
 ## Coordinación del equipo
 

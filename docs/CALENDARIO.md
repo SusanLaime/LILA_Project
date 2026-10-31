@@ -5,13 +5,13 @@
 
 | Fechas | Quién | Qué | Listo cuando… |
 |---|---|---|---|
-| **1 – 4 nov** | Persona 1 | Servidor + base de datos + dependencias instaladas + `api.js` | `npm start` abre la página de login y se crea la base de datos. Unido a `dev`. |
-| 1 – 4 nov | Personas 2, 3 y 4 | Parte visual de su pantalla (formulario, campos, mensajes), sin servidor todavía | La pantalla se ve completa |
-| **5 – 7 nov** | Persona 3 | `validacion.js` y `seguridad.js` (las necesitan las Personas 2 y 4) | Unido a `dev` |
-| 5 – 11 nov | Persona 2 | Ruta de registro + regla de duplicados + conexión de la pantalla | CA-02 funciona en la pantalla |
-| 5 – 11 nov | Persona 3 | Ruta de login + sesión en el navegador | Se ingresa y se llega al perfil |
-| 5 – 11 nov | Persona 4 | Ruta de perfil + conexión de la pantalla | CA-01 funciona en la pantalla |
-| **12 – 14 nov** | Todos | Pruebas propias (`npm test`) + registro en `docs/PRUEBAS.md` + corrección de errores | Todas las pruebas pasan |
+| **1 – 4 nov** | Persona 2 | Servidor + base de datos + dependencias instaladas | `npm start` abre la página de login y se crea la base de datos. Unido a `dev`. |
+| 1 – 11 nov | Persona 1 | Diseño y pantallas (registro, login, perfil), revisando la versión inicial | Las 3 pantallas se ven completas y bien en el celular |
+| 1 – 7 nov | Persona 3 | `validacion.js` (la usa también la Persona 4) | Unido a `dev` |
+| **5 – 7 nov** | Persona 4 | `seguridad.js` (la necesita la Persona 3) | Unido a `dev` |
+| 7 – 11 nov | Persona 3 | Ruta de registro + regla de duplicados | CA-02 funciona por la API |
+| 7 – 11 nov | Persona 4 | Rutas de login y perfil | CA-01 funciona por la API |
+| **12 – 14 nov** | Todos | Unir frontend y backend; pruebas propias; registro en `docs/PRUEBAS.md`; corrección de errores | Todo el recorrido funciona desde el navegador y `npm test` pasa |
 | **15 – 16 nov** | Todos | README final, matriz de contribuciones, declaración de IA, informe técnico | Documentos completos |
 | **17 nov** | Todos | Ensayo: clonar el repositorio en **otra computadora** y seguir solo el README. Ensayar la demostración (8–10 min) y las preguntas individuales | Funciona sin ayuda del autor |
 | 17 nov | Persona 2 | Unir `dev` → `main` y crear la etiqueta `v0.1-parcial1` | Etiqueta visible en GitHub |

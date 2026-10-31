@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <!--
-      DUEÑA/O: Persona 4 — Tarea T-04 (Perfil). Ver docs/TAREAS.md
+      DUEÑA/O: Persona 1 — Tarea T-01 (Frontend: perfil). Ver docs/TAREAS.md
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
@@ -32,9 +32,7 @@
                       <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
                     </svg>
                 </div>
-                <h2 class="profile-name">Juan Pérez</h2>
-                
-                <!-- TODO (Persona 4): reemplazar "Juan Pérez" por el nombre real (GET /api/perfil). -->
+                <h2 class="profile-name">Cargando...</h2>
 
                 <div class="profile-badges">
                     <span class="badge-verified" id="badge-verif">No verificado</span>
@@ -44,11 +42,13 @@
 
                 <h3 class="profile-section-title">Mis datos</h3>
 
-                <!-- TODO (Persona 4): mostrar teléfono, ciudad, habilidades y experiencia
-                     leídos de GET /api/perfil (ver docs/API.md).
-                     Agregar un formulario para editar ciudad, habilidades y experiencia
-                     y guardarlos con PUT /api/perfil. Mostrar mensajes en #perfil-mensaje.
-                     Si no hay sesión (401): redirigir a /frontend/auth/login.html. -->
+                <p>Teléfono: <span id="perfil-telefono">Cargando...</span></p>
+                <form id="perfil-form" class="registro-form">
+                    <div class="form-group"><label for="ciudad">Ciudad</label><input id="ciudad" maxlength="60"></div>
+                    <div class="form-group solo-trabajador"><label for="habilidades">Habilidades</label><textarea id="habilidades" maxlength="300"></textarea></div>
+                    <div class="form-group solo-trabajador"><label for="experiencia">Experiencia</label><textarea id="experiencia" maxlength="1000"></textarea></div>
+                    <button type="submit" class="botn-crear">Guardar perfil</button>
+                </form>
                 <p id="perfil-mensaje" role="alert" aria-live="polite"></p>
 
             </article>
@@ -63,8 +63,8 @@
 
     <!-- Initialize Dynamic Header and Footer -->
     <script type="module">
-        import { initHeader, initFooter } from '../../assets/js/components.js';
-        initHeader('no_verificado');
+        import { initFooter } from '../../assets/js/components.js';
+        // El encabezado lo inicia perfil.js cuando ya conoce el rol del usuario.
         initFooter();
     </script>
     <script type="module" src="../../assets/js/perfil.js"></script>

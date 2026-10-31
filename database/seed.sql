@@ -1,8 +1,9 @@
 -- =====================================================================
--- DUEÑA/O: Persona 1 — Tarea T-01 (Datos de prueba)
+-- DUEÑA/O: Persona 2 — Tarea T-02 (Datos de prueba)
 -- =====================================================================
 --
--- TODO (Persona 1): insertar 1 o 2 usuarios de prueba para la demostración.
+-- TODO (Persona 2): insertar 2 usuarios de prueba para la demostración:
+--   - uno con rol 'trabajador' y otro con rol 'empleador'.
 --   - Datos inventados (nunca CI ni teléfonos reales).
 --   - La contraseña debe guardarse ya cifrada (hash bcrypt), nunca en texto plano.
 --   - Anotar el teléfono y la contraseña de prueba en el README (sección "Datos de prueba").

@@ -14,9 +14,9 @@ Todas las respuestas son JSON. Cuando algo falla, la respuesta siempre tiene la 
 
 ## 1. Rutas
 
-### `POST /api/registro` — Persona 2
+### `POST /api/registro` — Persona 3
 
-Crea la cuenta de un trabajador.
+Crea la cuenta de un **trabajador** o de un **empleador**.
 
 **Envía:**
 ```json
@@ -25,7 +25,8 @@ Crea la cuenta de un trabajador.
   "ci": "1234567",
   "telefono": "70000001",
   "password": "clave-de-prueba",
-  "consentimiento": true
+  "consentimiento": true,
+  "rol": "trabajador"
 }
 ```
 
@@ -35,7 +36,7 @@ Crea la cuenta de un trabajador.
 | `400` | Falta un dato o no cumple las reglas (sección 3) | `{ "error": "..." }` |
 | `409` | **El CI o el teléfono ya están registrados (CA-02)** | `{ "error": "El CI o el teléfono ya están registrados." }` |
 
-### `POST /api/login` — Persona 3
+### `POST /api/login` — Persona 4
 
 **Envía:**
 ```json
@@ -54,7 +55,7 @@ Requiere el encabezado `Authorization: Bearer <token>`.
 
 | Estado | Cuándo | Respuesta |
 |---|---|---|
-| `200` | Sesión válida | `{ "id", "nombre", "telefono", "ciudad", "habilidades", "experiencia", "estado_verificacion" }` |
+| `200` | Sesión válida | `{ "id", "nombre", "telefono", "rol", "ciudad", "habilidades", "experiencia", "estado_verificacion" }` |
 | `401` | Sin token o token inválido | `{ "error": "Debes iniciar sesión." }` |
 
 > Nunca se devuelve `password_hash`.
@@ -80,7 +81,7 @@ Requiere `Authorization: Bearer <token>`.
 
 ---
 
-## 2. Modelo de datos — Persona 1
+## 2. Modelo de datos — Persona 2
 
 Tabla **`usuarios`**:
 
@@ -91,7 +92,7 @@ Tabla **`usuarios`**:
 | `ci` | TEXT | Obligatorio, **UNIQUE** |
 | `telefono` | TEXT | Obligatorio, **UNIQUE** |
 | `password_hash` | TEXT | Obligatorio (hash bcrypt, nunca texto plano) |
-| `rol` | TEXT | Por defecto `'trabajador'` |
+| `rol` | TEXT | `'trabajador'` o `'empleador'` (se elige al registrarse) |
 | `ciudad` | TEXT | Opcional (se llena en el perfil) |
 | `habilidades` | TEXT | Opcional (se llena en el perfil) |
 | `experiencia` | TEXT | Opcional (se llena en el perfil) |
@@ -101,7 +102,7 @@ Tabla **`usuarios`**:
 
 ---
 
-## 3. Reglas de validación — Persona 3 (las usan las Personas 2 y 4)
+## 3. Reglas de validación — Persona 3 (las usa también la Persona 4)
 
 | Campo | Regla |
 |---|---|
@@ -110,13 +111,14 @@ Tabla **`usuarios`**:
 | `telefono` | Obligatorio, 8 dígitos, empieza con 6 o 7 (celular de Bolivia) |
 | `password` | Obligatoria, mínimo 8 caracteres |
 | `consentimiento` | Debe ser `true` |
+| `rol` | Obligatorio: `trabajador` o `empleador` |
 | `ciudad` | Opcional, máximo 60 caracteres |
-| `habilidades` | Opcional, máximo 300 caracteres |
-| `experiencia` | Opcional, máximo 1000 caracteres |
+| `habilidades` | Opcional, máximo 300 caracteres (solo se muestra a trabajadores) |
+| `experiencia` | Opcional, máximo 1000 caracteres (solo se muestra a trabajadores) |
 
 ---
 
-## 4. Sesión en el navegador — Persona 3
+## 4. Frontend: sesión en el navegador — Persona 1
 
 - El token se guarda en `localStorage` con la clave **`lila_token`** (funciones en `frontend/assets/js/sesion.js`).
-- Las pantallas llaman al servidor con `pedirApi()` de `frontend/assets/js/api.js` (Persona 1).
+- Las pantallas llaman al servidor con `pedirApi()` de `frontend/assets/js/api.js`.

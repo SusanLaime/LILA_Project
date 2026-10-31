@@ -3,7 +3,7 @@
 
 <head>
     <!--
-      DUEÑA/O: Persona 3 — Tarea T-03 (Inicio de sesión). Ver docs/TAREAS.md
+      DUEÑA/O: Persona 1 — Tarea T-01 (Frontend: inicio de sesión). Ver docs/TAREAS.md
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
@@ -30,11 +30,12 @@
             </p>
         </section>
         <nav aria-label="Opciones de acceso">
-            <!-- TODO (Persona 3): formulario de inicio de sesión con "Teléfono" y "Contraseña"
-                 (id="login-form", id="login-telefono", id="login-password").
-                 Al enviar: llamar a POST /api/login (ver docs/API.md), guardar el token
-                 y redirigir a /frontend/website/trabajador/perfil.html.
-                 Si los datos son incorrectos: mostrar el mensaje en #login-mensaje. -->
+            <form id="login-form">
+                <label for="login-telefono">Teléfono</label>
+                <input id="login-telefono" type="tel" required>
+                <label for="login-password">Contraseña</label>
+                <input id="login-password" type="password" required>
+            </form>
             <p id="login-mensaje" role="alert" aria-live="polite"></p>
 
             <button class="botn-crear crear-cuenta" type="button" id="btn-crear">
