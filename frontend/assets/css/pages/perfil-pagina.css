@@ -1,0 +1,671 @@
+/* DUEÑA/O: Sara Revollo — Pantalla de perfil (estilos propios) */
+
+/* Esta pantalla usa su propio menú lateral, así que se oculta el encabezado compartido
+   solo aquí. Para volver a mostrarlo, borra esta regla. */
+#header-placeholder {
+    display: none !important;
+}
+
+main.perfil-page {
+    --morado-oscuro: #272348;
+    --morado: #5b4b8a;
+    --morado-claro: #8a74c9;
+    --lila: #d6cee2;
+    --lila-suave: #f2edfa;
+    --fondo: #efe8fb;
+    --gris: #6d6b7c;
+
+    /* Anula lo que la página pueda heredar de otros estilos */
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    background: var(--fondo);
+    color: var(--morado-oscuro);
+}
+
+.perfil-page *,
+.perfil-page *::before,
+.perfil-page *::after {
+    box-sizing: border-box;
+}
+
+/* Sin esto, lo que el JS oculta a los empleadores seguiría visible */
+.perfil-page [hidden] {
+    display: none !important;
+}
+
+.perfil-page h1,
+.perfil-page h2,
+.perfil-page h3,
+.perfil-page p,
+.perfil-page ul {
+    margin: 0;
+    padding: 0;
+}
+
+.perfil-page a,
+.perfil-page a:hover {
+    text-decoration: none;
+}
+
+/* ---------- Íconos SVG (sin emojis) ---------- */
+.perfil-page .lp-ico,
+.perfil-page .lp-res-icono svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.perfil-page .lp-ico {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/* ---------- Estructura: menú + contenido ---------- */
+.perfil-page .lp-app {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 24px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.perfil-page .lp-contenido {
+    display: grid;
+    gap: 20px;
+    min-width: 0;
+    align-content: start;
+}
+
+/* ---------- Menú lateral ---------- */
+.perfil-page .lp-sidebar {
+    position: sticky;
+    top: 16px;
+    height: calc(100vh - 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px 16px;
+    border-radius: 24px;
+    color: #fff;
+    background: linear-gradient(180deg, #7a63bd 0%, #272348 100%);
+}
+
+/* Logo oficial */
+.perfil-page .lp-logo {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: #fff;
+}
+
+.perfil-page .lp-logo img {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.perfil-page .lp-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.perfil-page .lp-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.78);
+    white-space: nowrap;
+}
+
+.perfil-page .lp-menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.perfil-page .lp-menu a.activo {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-weight: 700;
+}
+
+.perfil-page .lp-menu a.pronto {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.perfil-page .lp-menu a.pronto:hover {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.perfil-page .lp-menu em {
+    margin-left: auto;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.perfil-page .lp-salir {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.perfil-page .lp-salir:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+/* ---------- Barra superior ---------- */
+.perfil-page .lp-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.perfil-page .lp-topbar h1 {
+    font-size: 22px;
+    color: var(--morado-oscuro);
+}
+
+.perfil-page .lp-fecha {
+    margin-top: 2px;
+    font-size: 13px;
+    color: var(--gris);
+}
+
+.perfil-page .lp-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 16px 6px 6px;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(39, 35, 72, 0.08);
+    min-width: 0;
+}
+
+.perfil-page .lp-chip-inicial {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+    background: var(--morado);
+    border: 2px solid var(--lila);
+}
+
+.perfil-page .lp-chip strong {
+    display: block;
+    font-size: 14px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.perfil-page .lp-chip small {
+    font-size: 12px;
+    color: var(--gris);
+    text-transform: capitalize;
+}
+
+/* ---------- Banner ---------- */
+.perfil-page .lp-banner {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 170px;
+    padding: 32px;
+    border-radius: 24px;
+    color: #fff;
+    background: linear-gradient(120deg, #5b4b8a 0%, #8a74c9 100%);
+}
+
+.perfil-page .lp-banner::before,
+.perfil-page .lp-banner::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.perfil-page .lp-banner::before {
+    width: 280px;
+    height: 280px;
+    right: -70px;
+    top: -110px;
+}
+
+.perfil-page .lp-banner::after {
+    width: 120px;
+    height: 120px;
+    right: 150px;
+    bottom: -60px;
+}
+
+.perfil-page .lp-banner > * {
+    position: relative;
+    z-index: 1;
+}
+
+.perfil-page .lp-banner-fecha {
+    margin-bottom: 14px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.perfil-page .lp-banner h2 {
+    font-size: clamp(22px, 3.5vw, 32px);
+    line-height: 1.2;
+    color: #fff;
+    overflow-wrap: anywhere;
+}
+
+.perfil-page .lp-banner .profile-name {
+    display: inline;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+}
+
+.perfil-page .lp-banner p.lp-banner-sub {
+    margin-top: 8px;
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.perfil-page .lp-banner-avatar {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: var(--morado-oscuro);
+    border: 5px solid rgba(255, 255, 255, 0.45);
+}
+
+.perfil-page .lp-banner-avatar svg {
+    width: 70%;
+    height: 70%;
+}
+
+/* ---------- Rejilla principal ---------- */
+.perfil-page .lp-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 24px;
+    align-items: start;
+}
+
+.perfil-page .lp-col {
+    display: grid;
+    gap: 20px;
+    min-width: 0;
+}
+
+.perfil-page .lp-titulo {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: var(--morado-oscuro);
+}
+
+/* ---------- Tarjetas de resumen ---------- */
+.perfil-page .lp-resumen {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.perfil-page .lp-res {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 12px;
+    border-radius: 20px;
+    text-align: center;
+    background: #fff;
+    border: 2px solid transparent;
+}
+
+.perfil-page .lp-res.destacada {
+    border-color: var(--morado);
+}
+
+.perfil-page .lp-res-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--lila-suave);
+    color: var(--morado);
+}
+
+.perfil-page .lp-res-icono svg {
+    width: 28px;
+    height: 28px;
+}
+
+.perfil-page .lp-res-valor {
+    font-size: 17px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    text-transform: capitalize;
+}
+
+.perfil-page .lp-res-etiqueta {
+    font-size: 13px;
+    color: var(--gris);
+}
+
+/* Estado: naranja suave por defecto, verde solo si está verificado */
+.perfil-page .perfil-estado {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: none;
+    background: #fff1dc;
+    color: #8a5200;
+}
+
+.perfil-page .perfil-estado.verificado {
+    background: #e3f5e6;
+    color: #1d6b2f;
+}
+
+/* ---------- Formulario ---------- */
+.perfil-page .lp-tarjeta {
+    padding: 24px;
+    border-radius: 20px;
+    background: #fff;
+}
+
+.perfil-page .perfil-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.perfil-page .perfil-campo label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--morado-oscuro);
+}
+
+.perfil-page .perfil-campo input,
+.perfil-page .perfil-campo textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--lila);
+    border-radius: 12px;
+    font: inherit;
+    color: var(--morado-oscuro);
+    background: #fff;
+}
+
+.perfil-page .perfil-campo textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.perfil-page .perfil-campo input:focus,
+.perfil-page .perfil-campo textarea:focus {
+    outline: none;
+    border-color: var(--morado);
+    box-shadow: 0 0 0 3px rgba(91, 75, 138, 0.2);
+}
+
+.perfil-page .perfil-boton {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 24px;
+    background: var(--morado);
+    color: #fff;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.perfil-page .perfil-boton:hover {
+    background: var(--morado-oscuro);
+}
+
+.perfil-page .perfil-mensaje {
+    min-height: 1.4em;
+    margin-top: 14px;
+    font-size: 14px;
+    color: var(--morado);
+}
+
+/* ---------- Próximamente ---------- */
+.perfil-page .lp-pronto-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.perfil-page .lp-pronto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    background: #e3d9f7;
+    color: var(--morado);
+}
+
+.perfil-page .lp-pronto strong {
+    font-size: 16px;
+    color: var(--morado-oscuro);
+}
+
+.perfil-page .lp-pronto span {
+    font-size: 13px;
+}
+
+.perfil-page .lp-pronto button {
+    padding: 8px 22px;
+    border: none;
+    border-radius: 999px;
+    background: var(--morado-claro);
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ---------- Columna derecha ---------- */
+.perfil-page .lp-progreso-texto {
+    margin: 4px 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--morado);
+}
+
+.perfil-page .lp-progreso {
+    height: 10px;
+    margin-bottom: 18px;
+    border-radius: 999px;
+    background: var(--lila-suave);
+    overflow: hidden;
+}
+
+.perfil-page .lp-progreso-barra {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #8a74c9, #5b4b8a);
+    transition: width 0.3s ease;
+}
+
+.perfil-page .lp-lista {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.perfil-page .lp-lista li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--gris);
+}
+
+.perfil-page .lp-lista li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--lila);
+}
+
+.perfil-page .lp-lista li.hecho {
+    color: var(--morado-oscuro);
+    font-weight: 600;
+}
+
+/* Marca de "hecho" dibujada, sin caracteres especiales */
+.perfil-page .lp-lista li.hecho::before {
+    background: var(--morado) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12 10 17 19 7'/%3E%3C/svg%3E") center / 13px no-repeat;
+    border-color: var(--morado);
+}
+
+.perfil-page .lp-aviso + .lp-aviso {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--lila-suave);
+}
+
+.perfil-page .lp-aviso strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.perfil-page .lp-aviso p {
+    font-size: 13px;
+    color: var(--gris);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+    .perfil-page .lp-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .perfil-page .lp-app {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+    /* El menú lateral pasa a ser una tira horizontal arriba */
+    .perfil-page .lp-sidebar {
+        position: static;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        overflow-x: auto;
+    }
+    .perfil-page .lp-logo {
+        flex-shrink: 0;
+        padding: 6px 12px;
+    }
+    .perfil-page .lp-logo img {
+        width: auto;
+        height: 36px;
+        max-width: none;
+    }
+    .perfil-page .lp-menu em {
+        display: none;
+    }
+    .perfil-page .lp-menu {
+        flex-direction: row;
+    }
+    .perfil-page .lp-salir {
+        margin-top: 0;
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .perfil-page .lp-app {
+        padding: 10px;
+    }
+    .perfil-page .lp-topbar {
+        flex-wrap: wrap;
+    }
+    .perfil-page .lp-banner {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 24px 20px;
+    }
+    .perfil-page .lp-banner-avatar {
+        width: 88px;
+        height: 88px;
+    }
+    .perfil-page .lp-resumen,
+    .perfil-page .lp-pronto-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .perfil-page .lp-tarjeta {
+        padding: 18px;
+    }
+    .perfil-page .perfil-boton {
+        width: 100%;
+    }
+}
