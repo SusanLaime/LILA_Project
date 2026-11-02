@@ -40,14 +40,14 @@ Crea la cuenta de un **trabajador** o de un **empleador**.
 
 **Envía:**
 ```json
-{ "telefono": "70000001", "password": "clave-de-prueba" }
+{ "ci": "1234567", "password": "clave-de-prueba" }
 ```
 
 | Estado | Cuándo | Respuesta |
 |---|---|---|
-| `200` | Datos correctos | `{ "token": "...", "usuario": { "id": 1, "nombre": "Ana Prueba" } }` |
-| `400` | Falta el teléfono o la contraseña | `{ "error": "..." }` |
-| `401` | Teléfono o contraseña incorrectos | `{ "error": "Teléfono o contraseña incorrectos." }` |
+| `200` | Datos correctos | `{ "token": "...", "usuario": { "id": 1, "nombre": "Ana Prueba", "rol": "trabajador" } }` |
+| `400` | Falta el CI válido o la contraseña | `{ "error": "..." }` |
+| `401` | Carnet o contraseña incorrectos | `{ "error": "Carnet o contraseña incorrectos." }` |
 
 ### `GET /api/perfil` — Sara Revollo
 

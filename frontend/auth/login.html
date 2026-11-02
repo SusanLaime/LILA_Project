@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../assets/css/base/reset.css" />
     <link rel="stylesheet" href="../assets/css/base/typography.css" />
     <link rel="stylesheet" href="../assets/css/pages/login.css" />
+    <link rel="stylesheet" href="../assets/css/components/forms.css" />
     <link rel="stylesheet" href="../assets/css/utilities/responsive.css" />
     <title>LILA | Librería Laboral</title>
 </head>
@@ -30,11 +31,24 @@
             </p>
         </section>
         <nav aria-label="Opciones de acceso">
-            <form id="login-form">
-                <label for="login-telefono">Teléfono</label>
-                <input id="login-telefono" type="tel" required>
-                <label for="login-password">Contraseña</label>
-                <input id="login-password" type="password" required>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="login-ci">Carnet de identidad (CI)</label>
+                    <input id="login-ci" name="ci" type="text" inputmode="numeric"
+                        autocomplete="username" minlength="5" maxlength="10"
+                        pattern="[0-9]{5,10}" placeholder="Ej. 1234567" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Contraseña</label>
+                    <div class="password-field">
+                        <input id="login-password" name="password" type="password"
+                            autocomplete="current-password" required>
+                        <button class="password-toggle" type="button" id="toggle-password"
+                            aria-controls="login-password" aria-pressed="false">
+                            Mostrar
+                        </button>
+                    </div>
+                </div>
             </form>
             <p id="login-mensaje" role="alert" aria-live="polite"></p>
 
