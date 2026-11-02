@@ -1,0 +1,553 @@
+.buscar-oportunidades {
+    background-color: var(--LILA-semantic-color-bg-canvas);
+    width: 100%;
+    min-width: 390px;
+    min-height: 844px;
+    position: relative;
+}
+
+.buscar-oportunidades .marca {
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    height: 33px;
+    width: auto;
+    object-fit: contain;
+}
+
+.buscar-oportunidades .t-tulo {
+    position: absolute;
+    top: 72px;
+    left: 28px;
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+    color: #181522;
+    font-size: 23px;
+    letter-spacing: 0;
+    line-height: 28.1px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .buscar {
+    position: absolute;
+    top: 122px;
+    left: 24px;
+    width: 342px;
+    height: 48px;
+    background-color: #f2edfa;
+    border-radius: 24px;
+}
+
+.buscar-oportunidades .text-wrapper {
+    position: absolute;
+    top: 137px;
+    left: 42px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #6d6b7c;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 17.1px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .filtro {
+    left: 24px;
+    width: 98px;
+    position: absolute;
+    top: 184px;
+    height: 32px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    border: 1px solid;
+    border-color: #d6cee2;
+}
+
+.buscar-oportunidades .ubicaci-n {
+    position: absolute;
+    top: 193px;
+    left: 36px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #272348;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .div {
+    left: 132px;
+    width: 82px;
+    position: absolute;
+    top: 184px;
+    height: 32px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    border: 1px solid;
+    border-color: #d6cee2;
+}
+
+.buscar-oportunidades .categor-a {
+    position: absolute;
+    top: 193px;
+    left: 145px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #272348;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .tarjeta-vendedor {
+    position: absolute;
+    top: 240px;
+    left: 24px;
+    width: 342px;
+    height: 148px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0px 3px 9px #00000014;
+}
+
+.buscar-oportunidades .puesto-vendedor {
+    position: absolute;
+    top: 256px;
+    left: 40px;
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+    color: #181522;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 18.3px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .empresa-vendedor {
+    position: absolute;
+    top: 279px;
+    left: 40px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #6d6b7c;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 14.6px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .meta-vendedor {
+    position: absolute;
+    top: 299px;
+    left: 40px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #6d6b7c;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .etiquetas-vendedor {
+    position: absolute;
+    top: 326px;
+    left: 40px;
+    width: 170px;
+    height: 24px;
+    background-color: #f2edfa;
+    border-radius: 12px;
+}
+
+.buscar-oportunidades .tags-vendedor {
+    position: absolute;
+    top: 332px;
+    left: 48px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #272348;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 12.2px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .aplicar-vendedor {
+    position: absolute;
+    top: 345px;
+    left: 259px;
+    width: 88px;
+    height: 30px;
+    background-color: #272348;
+    border-radius: 15px;
+}
+
+.buscar-oportunidades .aplicar-texto {
+    top: 353px;
+    position: absolute;
+    left: 280px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .tarjeta-plomero-para {
+    position: absolute;
+    top: 404px;
+    left: 24px;
+    width: 342px;
+    height: 148px;
+    background-color: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0px 3px 9px #00000014;
+}
+
+.buscar-oportunidades .puesto-plomero-para {
+    position: absolute;
+    top: 420px;
+    left: 40px;
+    font-family: "Poppins-Bold", Helvetica;
+    font-weight: 700;
+    color: #181522;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 18.3px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .empresa-plomero-para {
+    position: absolute;
+    top: 443px;
+    left: 40px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #6d6b7c;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 14.6px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .meta-plomero-para {
+    position: absolute;
+    top: 463px;
+    left: 40px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #6d6b7c;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .etiquetas-plomero {
+    position: absolute;
+    top: 490px;
+    left: 40px;
+    width: 170px;
+    height: 24px;
+    background-color: #f2edfa;
+    border-radius: 12px;
+}
+
+.buscar-oportunidades .tags-plomero-para {
+    position: absolute;
+    top: 496px;
+    left: 48px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #272348;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 12.2px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .aplicar-plomero-para {
+    position: absolute;
+    top: 509px;
+    left: 259px;
+    width: 88px;
+    height: 30px;
+    background-color: #272348;
+    border-radius: 15px;
+}
+
+.buscar-oportunidades .aplicar-texto-2 {
+    top: 517px;
+    position: absolute;
+    left: 280px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .navegacin {
+    position: absolute;
+    top: 768px;
+    left: 0;
+    width: 390px;
+    height: 76px;
+    background-color: #ffffff;
+}
+
+.buscar-oportunidades .nav {
+    position: absolute;
+    top: 794px;
+    left: 22px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #272348;
+    font-size: 11px;
+    letter-spacing: 0;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+/* Refactor overrides: inject after the original style.css rules. */
+
+.buscar-oportunidades {
+    width: min(100%, 390px);
+    min-width: 0;
+    min-height: 844px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.buscar-oportunidades .marca,
+.buscar-oportunidades .t-tulo,
+.buscar-oportunidades .text-wrapper,
+.buscar-oportunidades .ubicaci-n,
+.buscar-oportunidades .categor-a,
+.buscar-oportunidades .puesto-vendedor,
+.buscar-oportunidades .empresa-vendedor,
+.buscar-oportunidades .meta-vendedor,
+.buscar-oportunidades .tags-vendedor,
+.buscar-oportunidades .aplicar-texto,
+.buscar-oportunidades .puesto-plomero-para,
+.buscar-oportunidades .empresa-plomero-para,
+.buscar-oportunidades .meta-plomero-para,
+.buscar-oportunidades .tags-plomero-para,
+.buscar-oportunidades .aplicar-texto-2,
+.buscar-oportunidades .nav {
+    margin: 0;
+}
+
+.buscar-oportunidades .buscar {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 48px);
+    max-width: 342px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.buscar-oportunidades .text-wrapper {
+    position: static;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 18px;
+    color: #6d6b7c;
+    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 17.1px;
+}
+
+.buscar-oportunidades .text-wrapper input {
+    width: 100%;
+    min-width: 0;
+    margin-left: 8px;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #272348;
+    font: inherit;
+}
+
+.buscar-oportunidades .text-wrapper input::placeholder {
+    color: #6d6b7c;
+    opacity: 1;
+}
+
+.buscar-oportunidades .filtro,
+.buscar-oportunidades .div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+}
+
+.buscar-oportunidades .ubicaci-n,
+.buscar-oportunidades .categor-a {
+    position: static;
+    display: block;
+    pointer-events: none;
+}
+
+.buscar-oportunidades .tarjeta-vendedor,
+.buscar-oportunidades .tarjeta-plomero-para {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto 24px;
+    align-content: start;
+    gap: 0;
+    width: calc(100% - 48px);
+    max-width: 342px;
+    height: 148px;
+    padding: 16px;
+}
+
+.buscar-oportunidades .puesto-vendedor,
+.buscar-oportunidades .puesto-plomero-para {
+    position: static;
+    grid-column: 1 / -1;
+    margin: 0;
+    font-family: "Poppins-Bold", Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 18.3px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .empresa-vendedor,
+.buscar-oportunidades .empresa-plomero-para {
+    position: static;
+    grid-column: 1 / -1;
+    margin-top: 5px;
+    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.6px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .meta-vendedor,
+.buscar-oportunidades .meta-plomero-para {
+    position: static;
+    grid-column: 1 / -1;
+    margin-top: 5px;
+    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 13.4px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .etiquetas-vendedor,
+.buscar-oportunidades .etiquetas-plomero {
+    position: static;
+    grid-column: 1;
+    align-self: end;
+    display: inline-flex;
+    align-items: center;
+    width: max-content;
+    max-width: 100%;
+    height: 24px;
+    padding: 0 8px;
+}
+
+.buscar-oportunidades .tags-vendedor,
+.buscar-oportunidades .tags-plomero-para {
+    position: static;
+    display: block;
+    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 12.2px;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades .aplicar-vendedor,
+.buscar-oportunidades .aplicar-plomero-para {
+    position: static;
+    grid-column: 2;
+    grid-row: 4;
+    align-self: end;
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+.buscar-oportunidades .aplicar-texto,
+.buscar-oportunidades .aplicar-texto-2 {
+    position: static;
+    display: block;
+    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 13.4px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.buscar-oportunidades .navegacin {
+    width: 100%;
+    max-width: 390px;
+}
+
+.buscar-oportunidades .nav {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 22px;
+    white-space: normal;
+}
+
+.buscar-oportunidades .nav a {
+    color: #272348;
+    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 13.4px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.buscar-oportunidades button:focus-visible,
+.buscar-oportunidades input:focus-visible,
+.buscar-oportunidades .nav a:focus-visible {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+}
+
+@media (max-width: 389px) {
+    .buscar-oportunidades {
+        min-height: 100vh;
+    }
+
+    .buscar-oportunidades .navegacin {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        max-width: none;
+    }
+
+    .buscar-oportunidades .nav {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+}

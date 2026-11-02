@@ -1,0 +1,90 @@
+/* header.css - Top Navigation Bar */
+
+.lila-top-nav {
+  background-color: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 0.75rem 1rem;
+  max-width: 1370px;
+  margin: 0 auto;
+}
+
+.lila-brand {
+  font-weight: 700;
+  color: #6b46c1 !important;
+  /* Lavender tone */
+  letter-spacing: -0.5px;
+}
+
+.navbar-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  /* rounded rectangle */
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #272348;
+  /* Exact lavender tone requested */
+  background-color: #F2EDFA;
+  /* Exact light purple requested */
+}
+
+.lila-notifications-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4a5568;
+  padding: 0.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.lila-notifications-btn:hover {
+  background-color: #edf2f7;
+  color: #6b46c1;
+}
+
+.navbar-nav .nav-link {
+  color: #4a5568 !important;
+  font-weight: 600;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #6b46c1 !important;
+}
+
+/* Breakpoint behavior: Collapse at 425px */
+@media (max-width: 425px) {
+  .navbar-expand-custom .navbar-collapse {
+    margin-top: 1rem;
+  }
+}
+
+@media (min-width: 426px) {
+  .navbar-expand-custom {
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+  }
+
+  .navbar-expand-custom .navbar-nav {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .navbar-expand-custom .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+
+  .navbar-expand-custom .navbar-toggler {
+    display: none;
+  }
+}

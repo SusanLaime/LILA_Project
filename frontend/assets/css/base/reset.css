@@ -1,0 +1,59 @@
+/* 
+ * base/reset.css
+ * Universal CSS Reset for LILA Application
+ * Ensures consistent rendering across all browsers and fixes responsive scaling.
+ */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* The crucial fix for responsive padding */
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    background-color: var(--LILA-semantic-color-bg-canvas, #ffffff);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure images never bleed outside their containers */
+img, picture, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Inherit fonts for form elements */
+input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+}
+
+/* Remove default list styles */
+ol, ul {
+    list-style: none;
+}
+
+/* Remove default anchor styling */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Ensure footer sticks to bottom */
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+#footer-placeholder {
+    margin-top: auto;
+    width: 100%;
+    align-self: stretch;
+}

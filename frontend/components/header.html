@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Trabajador - LILA</title>
+
+    <!-- Ruta exacta al CSS desde frontend/components/ -->
+    <link rel="stylesheet" href="../assets/css/components/navbar.css">
+</head>
+<body>
+
+    <header class="navbar-trabajador">
+        <div class="navbar-container">
+            <!-- Logo a la izquierda (redirige al Home del trabajador) -->
+            <a href="../website/trabajador/home.html" class="navbar-brand">
+                <!-- Ruta exacta al Logo desde frontend/components/ -->
+                <img src="../public/L-logo-oficial.png" alt="LILA Logo" class="navbar-logo" />
+                <span class="brand-title">LILA</span>
+            </a>
+
+            <!-- Buscador central -->
+            <div class="navbar-search">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text"
+                           id="search-jobs"
+                           placeholder="Buscar trabajos"
+                           aria-label="Buscar trabajos" />
+                </div>
+            </div>
+
+            <!-- Foto de Perfil a la derecha (redirige a Perfil del trabajador) -->
+            <div class="navbar-profile">
+                <a href="../website/trabajador/perfil.html" title="Ir a mi perfil">
+                    <img src="https://via.placeholder.com/44"
+                         alt="Foto de Perfil"
+                         class="profile-avatar" />
+                </a>
+            </div>
+        </div>
+    </header>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+/* footer.css */
+.lila-footer {
+  background-color: var(--color-gray-50, #f7fafc);
+  border-top: 1px solid var(--color-gray-200, #e2e8f0);
+  padding: 2rem 1.5rem;
+  margin-top: 3rem;
+  padding-bottom: 5rem; /* Extra padding to avoid overlapping with bottom nav */
+}
+
+.lila-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.lila-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.lila-footer-brand strong {
+  color: var(--color-gray-800, #2d3748);
+  font-size: 1.125rem;
+}
+
+.lila-footer-brand span {
+  color: var(--color-gray-500, #718096);
+  font-size: 0.875rem;
+}
+
+.lila-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.lila-footer-links a {
+  color: var(--color-gray-600, #4a5568);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.lila-footer-links a:hover {
+  color: var(--color-primary, #6b46c1);
+}
+
+.lila-report-link {
+  color: var(--color-danger, #e53e3e) !important;
+}
