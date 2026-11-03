@@ -9,6 +9,15 @@ import { pedirApi } from './api.js';
 
 const form = document.getElementById('registroForm');
 const message = document.getElementById('registro-mensaje');
+const passwordInput = document.getElementById('password');
+const passwordToggle = document.getElementById('toggle-password');
+
+passwordToggle?.addEventListener('click', () => {
+    const mostrar = passwordInput.type === 'password';
+    passwordInput.type = mostrar ? 'text' : 'password';
+    passwordToggle.textContent = mostrar ? 'Ocultar' : 'Mostrar';
+    passwordToggle.setAttribute('aria-pressed', String(mostrar));
+});
 
 form?.addEventListener('submit', async event => {
     event.preventDefault();
