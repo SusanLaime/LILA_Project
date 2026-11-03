@@ -15,6 +15,11 @@
     font-family: "Poppins-Medium", Helvetica, sans-serif;
 }
 
+.role-home .lila-header-brand {
+    font-family: "Poppins", Helvetica, sans-serif;
+    font-weight: 700;
+}
+
 .role-home .home-nav,
 .role-home .role-content {
     width: min(1120px, calc(100% - 32px));
