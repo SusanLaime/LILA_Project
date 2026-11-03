@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 .home-page {
     background: var(--LILA-semantic-color-bg-canvas);
     color: var(--LILA-semantic-color-text-primary);
+    font-family: "Poppins", Helvetica, sans-serif;
 }
 
 .home-nav {

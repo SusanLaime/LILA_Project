@@ -1,6 +1,23 @@
 .role-home {
     background: var(--LILA-semantic-color-bg-canvas);
     color: var(--LILA-semantic-color-text-primary);
+    font-family: "Poppins-Regular", Helvetica, sans-serif;
+}
+
+.role-home h1,
+.role-home h2 {
+    font-family: "Poppins-Bold", Helvetica, sans-serif;
+}
+
+.role-home a,
+.role-home button,
+.role-home .role-label {
+    font-family: "Poppins-Medium", Helvetica, sans-serif;
+}
+
+.role-home .lila-header-brand {
+    font-family: "Poppins", Helvetica, sans-serif;
+    font-weight: 700;
 }
 
 .role-home .home-nav,
@@ -113,6 +130,7 @@
     border: 1px solid var(--LILA-semantic-color-border-default);
     border-radius: var(--LILA-primitives-radius-sm);
     background: #fff;
+    font-family: "Poppins-Regular", Helvetica, sans-serif;
 }
 
 .offer-form textarea {

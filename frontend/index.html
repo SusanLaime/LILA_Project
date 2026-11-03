@@ -8,19 +8,12 @@
     <link rel="stylesheet" href="assets/css/base/typography.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
     <link rel="stylesheet" href="assets/css/utilities/responsive.css" />
+    <link rel="stylesheet" href="assets/css/components/header.css" />
     <title>LILA — Librería Laboral</title>
 </head>
 <body>
     <main class="home-page">
-        <nav class="home-nav" aria-label="Navegación principal">
-            <a class="home-brand" href="index.html" aria-label="LILA, página de inicio">
-                <img src="public/L-logo-oficial.png" alt="LILA" />
-            </a>
-            <div class="home-nav-actions">
-                <a class="home-link" href="auth/login.html">Iniciar sesión</a>
-                <a class="home-nav-button" href="auth/register.html">Crear cuenta</a>
-            </div>
-        </nav>
+        <div id="header-placeholder"></div>
 
         <section class="home-hero" aria-labelledby="home-title">
             <div class="home-hero-copy">
@@ -77,7 +70,8 @@
         <div id="footer-placeholder"></div>
     </main>
     <script type="module">
-        import { initFooter } from './assets/js/components.js';
+        import { initFooter, initHeader } from './assets/js/components.js';
+        initHeader('', '');
         initFooter();
     </script>
 </body>
