@@ -30,7 +30,20 @@ form?.addEventListener('submit', async event => {
     });
     if (result.ok) {
         guardarToken(result.datos.token);
-        window.location.href = '/frontend/website/trabajador/perfil.html';
+        const rol = result.datos.usuario?.rol;
+        const destinos = {
+            trabajador: '/frontend/homeTrabajador.html',
+            empleador: '/frontend/homeEmpleador.html'
+        };
+        const destino = destinos[rol];
+
+        if (!destino) {
+            message.textContent = 'No se pudo identificar el tipo de cuenta.';
+            button.disabled = false;
+            return;
+        }
+
+        window.location.href = destino;
     } else {
         message.textContent = result.datos.error;
         button.disabled = false;
