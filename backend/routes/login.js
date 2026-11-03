@@ -1,13 +1,51 @@
 // =====================================================================
 // DUEÑA/O: Joaquín Peredo — Inicio de sesión
-// Responsables: README.md (sección Equipo)  ·  Contrato: docs/API.md (POST /api/login)
+// Responsables: README.md (sección Equipo)  ·  Contrato: docs/API.md
 // =====================================================================
-//
-// TODO (Joaquín): crear un express.Router con POST /
-// TODO (Joaquín): validar con validarLogin() de ../validacion.js (Susan) -> 400 si faltan datos.
-// TODO (Joaquín): buscar al usuario por teléfono y comparar con verificarPassword().
-// TODO (Joaquín): si no existe o la contraseña no coincide:
-//                   401 { error: "Teléfono o contraseña incorrectos." }
-//                   (el mismo mensaje en ambos casos: no revelar qué dato falló).
-// TODO (Joaquín): si es correcto: 200 { token, usuario: { id, nombre, rol } }
-// TODO (Joaquín): exportar el router.
+
+import express from 'express';
+import db from '../db.js';
+import { validarLogin } from '../validacion.js';
+import { crearToken, verificarPassword } from '../seguridad.js';
+
+const router = express.Router();
+
+router.post('/', async (req, res) => {
+  const datos = req.body ?? {};
+  const validacion = validarLogin(datos);
+
+  if (!validacion.ok) {
+    return res.status(400).json({ error: validacion.errores.join(' ') });
+  }
+
+  try {
+    const usuario = db.prepare(`
+      SELECT id, nombre, rol, password_hash
+      FROM usuarios
+      WHERE ci = ?
+    `).get(datos.ci.trim());
+
+    if (!usuario || !(await verificarPassword(datos.password, usuario.password_hash))) {
+      return res.status(401).json({
+        error: 'Carnet o contraseña incorrectos.'
+      });
+    }
+
+    const token = crearToken(usuario);
+    return res.status(200).json({
+      token,
+      usuario: {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        rol: usuario.rol
+      }
+    });
+  } catch (error) {
+    console.error('Error al iniciar sesión:', error);
+    return res.status(500).json({
+      error: 'No se pudo iniciar sesión. Verifica la configuración del servidor.'
+    });
+  }
+});
+
+export default router;

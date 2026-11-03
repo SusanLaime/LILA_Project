@@ -95,21 +95,21 @@ body {
 }
 
 .bienvenida-mvil .botn-crear.crear-cuenta {
-    background-color: #272348;
-    color: #ffffff;
-    border: none;
-}
-.bienvenida-mvil .botn-crear.crear-cuenta:hover {
-    opacity: 0.9;
-}
-
-.bienvenida-mvil .botn-ingresar.ingresar {
     background-color: #ffffff;
     color: #272348;
     border: 1px solid #272348;
 }
-.bienvenida-mvil .botn-ingresar.ingresar:hover {
+.bienvenida-mvil .botn-crear.crear-cuenta:hover {
     background-color: #f9f9f9;
+}
+
+.bienvenida-mvil .botn-ingresar.ingresar {
+    background-color: #272348;
+    color: #ffffff;
+    border: none;
+}
+.bienvenida-mvil .botn-ingresar.ingresar:hover {
+    opacity: 0.9;
 }
 
 .bienvenida-mvil .invitado {
