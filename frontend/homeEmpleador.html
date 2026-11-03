@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Publica una oferta de trabajo en LILA." />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/typography.css" />
+    <link rel="stylesheet" href="assets/css/pages/home.css" />
+    <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
+    <title>LILA — Publicar oferta</title>
+</head>
+<body>
+    <main class="role-home">
+        <nav class="home-nav" aria-label="Navegación principal">
+            <a class="home-brand" href="index.html" aria-label="Volver al inicio">
+                <img src="public/L-logo-oficial.png" alt="LILA" />
+            </a>
+            <div class="home-nav-actions">
+                <span class="role-label">EMPLEADOR</span>
+            </div>
+        </nav>
+
+        <section class="role-content employer-layout" aria-labelledby="employer-title">
+            <header class="role-header">
+                <span class="home-eyebrow">Encuentra talento</span>
+                <h1 id="employer-title">Publica una oferta y conecta con las personas indicadas.</h1>
+                <p>Describe el trabajo, indica las condiciones y recibe postulaciones de trabajadores de tu zona.</p>
+            </header>
+            <form class="offer-form" id="offer-form">
+                <h2>Crear oferta de trabajo</h2>
+                <label for="offer-title">Título de la oferta
+                    <input id="offer-title" name="title" type="text" placeholder="Ej. Ayudante de cocina" required />
+                </label>
+                <label for="offer-location">Ubicación
+                    <input id="offer-location" name="location" type="text" placeholder="Ej. Cochabamba" required />
+                </label>
+                <label for="offer-type">Modalidad
+                    <select id="offer-type" name="type" required>
+                        <option value="" disabled selected>Selecciona una modalidad</option>
+                        <option>Tiempo completo</option>
+                        <option>Tiempo parcial</option>
+                        <option>Por proyecto</option>
+                        <option>Fin de semana</option>
+                    </select>
+                </label>
+                <label for="offer-pay">Pago o presupuesto
+                    <input id="offer-pay" name="pay" type="text" placeholder="Ej. Bs. 150 por día" required />
+                </label>
+                <label for="offer-description">Descripción
+                    <textarea id="offer-description" name="description" placeholder="Cuenta qué tareas realizará la persona..." required></textarea>
+                </label>
+                <p class="form-message" id="offer-message" role="status" aria-live="polite"></p>
+                <button class="home-primary-button" type="submit">Publicar oferta</button>
+            </form>
+        </section>
+        <div id="footer-placeholder"></div>
+    </main>
+    <script type="module">
+        import { initFooter } from './assets/js/components.js';
+        initFooter();
+
+        document.getElementById('offer-form').addEventListener('submit', event => {
+            event.preventDefault();
+            document.getElementById('offer-message').textContent =
+                'La oferta está lista para publicarse. Inicia sesión para guardarla en tu cuenta.';
+        });
+    </script>
+</body>
+</html>
