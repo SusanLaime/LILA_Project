@@ -1,24 +1,48 @@
-<!-- DUEÑA/O: Joaquín Peredo — Navbar (encabezado de todas las pantallas). Ver README.md (sección Equipo) -->
-<nav class="navbar navbar-expand-custom navbar-light bg-light lila-top-nav">
-  <a class="navbar-brand lila-brand" href="#">
-    <img class="marca" src="../../public/L-logo-oficial.png" alt="Lila" style="height: 40px; width: auto;" />
-  </a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Trabajador - LILA</title>
 
-  <!-- Badges & Notifications outside toggler -->
-  <div class="d-flex align-items-center me-auto ml-auto ms-3"
-    style="margin-right: auto; margin-left: 1rem; gap: 0.5rem;">
-    <span class="navbar-badge" id="lila-role-badge">TRABAJADOR</span>
-    <span class="navbar-badge" id="lila-verified-badge" style="display: none;">NO VERIFICADO</span>
-  </div>
+    <!-- Ruta exacta al CSS desde frontend/components/ -->
+    <link rel="stylesheet" href="../assets/css/components/navbar.css">
+</head>
+<body>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <header class="navbar-trabajador">
+        <div class="navbar-container">
+            <!-- Logo a la izquierda (redirige al Home del trabajador) -->
+            <a href="../website/trabajador/home.html" class="navbar-brand">
+                <!-- Ruta exacta al Logo desde frontend/components/ -->
+                <img src="../public/L-logo-oficial.png" alt="LILA Logo" class="navbar-logo" />
+                <span class="brand-title">LILA</span>
+            </a>
 
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav ml-auto ms-auto" id="lila-nav-links">
-      <!-- Links injected dynamically -->
-    </ul>
-  </div>
-</nav>
+            <!-- Buscador central -->
+            <div class="navbar-search">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text"
+                           id="search-jobs"
+                           placeholder="Buscar trabajos"
+                           aria-label="Buscar trabajos" />
+                </div>
+            </div>
+
+            <!-- Foto de Perfil a la derecha (redirige a Perfil del trabajador) -->
+            <div class="navbar-profile">
+                <a href="../website/trabajador/perfil.html" title="Ir a mi perfil">
+                    <img src="https://via.placeholder.com/44"
+                         alt="Foto de Perfil"
+                         class="profile-avatar" />
+                </a>
+            </div>
+        </div>
+    </header>
+
+</body>
+</html>
