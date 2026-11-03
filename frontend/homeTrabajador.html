@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ofertas de trabajo disponibles en LILA." />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/typography.css" />
+    <link rel="stylesheet" href="assets/css/pages/home.css" />
+    <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
+    <title>LILA — Ofertas de trabajo</title>
+</head>
+<body>
+    <main class="role-home">
+        <nav class="home-nav" aria-label="Navegación principal">
+            <a class="home-brand" href="index.html" aria-label="Volver al inicio">
+                <img src="public/L-logo-oficial.png" alt="LILA" />
+            </a>
+            <div class="home-nav-actions">
+                <span class="role-label">TRABAJADOR</span>
+            </div>
+        </nav>
+
+        <section class="role-content" aria-labelledby="worker-title">
+            <header class="role-header">
+                <span class="home-eyebrow">Oportunidades para ti</span>
+                <h1 id="worker-title">Encuentra un trabajo que se adapte a tus habilidades.</h1>
+                <p>Estas son algunas ofertas de ejemplo. Revisa los detalles y postúlate a la que más te interese.</p>
+            </header>
+            <div class="offer-grid">
+                <article class="offer-card">
+                    <span class="role-label">Tiempo parcial</span>
+                    <h2>Ayudante de cocina</h2>
+                    <p>Apoya en la preparación de alimentos y mantén organizada el área de trabajo.</p>
+                    <div class="offer-meta"><span>Cochabamba</span><span>Bs. 120 por día</span></div>
+                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                </article>
+                <article class="offer-card">
+                    <span class="role-label">Por proyecto</span>
+                    <h2>Diseñador/a para redes sociales</h2>
+                    <p>Crea piezas visuales para un emprendimiento local y ayuda a fortalecer su presencia digital.</p>
+                    <div class="offer-meta"><span>Remoto</span><span>Bs. 800 por proyecto</span></div>
+                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                </article>
+                <article class="offer-card">
+                    <span class="role-label">Fin de semana</span>
+                    <h2>Asistente de eventos</h2>
+                    <p>Colabora con el montaje, la atención de invitados y el cierre de eventos.</p>
+                    <div class="offer-meta"><span>Cercado</span><span>Bs. 180 por jornada</span></div>
+                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                </article>
+                <article class="offer-card">
+                    <span class="role-label">Tiempo completo</span>
+                    <h2>Vendedor/a de tienda</h2>
+                    <p>Atiende a clientes, organiza productos y registra las ventas del día.</p>
+                    <div class="offer-meta"><span>Quillacollo</span><span>Bs. 2.500 al mes</span></div>
+                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                </article>
+            </div>
+        </section>
+        <div id="footer-placeholder"></div>
+    </main>
+    <script type="module">
+        import { initFooter } from './assets/js/components.js';
+        initFooter();
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+.role-home {
+    background: var(--LILA-semantic-color-bg-canvas);
+    color: var(--LILA-semantic-color-text-primary);
+}
+
+.role-home .home-nav,
+.role-home .role-content {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+.role-content {
+    padding: 64px 0 80px;
+}
+
+.role-header {
+    max-width: 700px;
+    margin-bottom: 32px;
+}
+
+.role-header h1 {
+    color: var(--LILA-primitives-purple-brand);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+}
+
+.role-header p {
+    margin-top: 16px;
+    color: var(--LILA-semantic-color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.offer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.offer-card,
+.offer-form {
+    padding: 26px;
+    border: 1px solid var(--LILA-semantic-color-border-default);
+    border-radius: var(--LILA-primitives-radius-md);
+    background: #fff;
+    box-shadow: var(--LILA-elevaci-n-tarjeta);
+}
+
+.offer-card h2 {
+    margin: 12px 0 8px;
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 1.3rem;
+}
+
+.offer-card p {
+    color: var(--LILA-semantic-color-text-muted);
+    line-height: 1.55;
+}
+
+.offer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.offer-meta span,
+.role-label {
+    display: inline-flex;
+    padding: 6px 11px;
+    border-radius: var(--LILA-primitives-radius-full);
+    background: var(--LILA-primitives-purple-lavender);
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.offer-card .home-primary-button {
+    margin-top: 22px;
+    border: 0;
+    cursor: pointer;
+}
+
+.employer-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1.2fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.offer-form {
+    display: grid;
+    gap: 16px;
+}
+
+.offer-form h2 {
+    color: var(--LILA-primitives-purple-brand);
+}
+
+.offer-form label {
+    display: grid;
+    gap: 7px;
+    color: var(--LILA-primitives-purple-brand);
+    font-weight: 600;
+}
+
+.offer-form input,
+.offer-form textarea,
+.offer-form select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--LILA-semantic-color-border-default);
+    border-radius: var(--LILA-primitives-radius-sm);
+    background: #fff;
+}
+
+.offer-form textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.offer-form button {
+    border: 0;
+    cursor: pointer;
+}
+
+.form-message {
+    min-height: 20px;
+    color: var(--LILA-semantic-color-status-success);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+    .role-content { padding: 48px 0 60px; }
+    .offer-grid,
+    .employer-layout { grid-template-columns: 1fr; }
+}

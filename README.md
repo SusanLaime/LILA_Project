@@ -61,6 +61,16 @@ npm start
 
 Abrir **http://localhost:3000** en el navegador.
 
+Para hacer pruebas con la base de datos configurada en `.env.local`, iniciar el mismo
+servidor principal con:
+
+```powershell
+node --env-file-if-exists=.env.local backend/server.js
+```
+
+`npm start` carga `.env`; confirma que `DB_PATH` apunte a la base que quieres usar antes
+de registrar usuarios.
+
 <!-- TODO (Susan): confirmar estos pasos en una computadora limpia antes de la entrega. -->
 
 ## Variables de entorno

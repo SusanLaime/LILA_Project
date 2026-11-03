@@ -45,3 +45,117 @@
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
+
+/* ===========================================
+   ESTILOS ADICIONALES DEL REGISTRO - NATALIA
+=========================================== */
+
+/* Evitar que el formulario toque los bordes */
+.registro-form {
+    width: calc(100% - 32px);
+    max-width: 400px;
+    margin: 0 auto 30px;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-form .form-group {
+    margin-bottom: 16px;
+}
+
+.password-field {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.password-field input {
+    flex: 1;
+    min-width: 0;
+}
+
+.password-toggle {
+    padding: 0 12px;
+    border: 1px solid #d6cee2;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #272348;
+    font: inherit;
+    cursor: pointer;
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid #272348;
+    outline-offset: 2px;
+}
+
+#login-mensaje {
+    width: 100%;
+    min-height: 1.5em;
+    color: #272348;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Alinear el checkbox con el texto */
+.registro-form .consentimiento-label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+/* Tamaño correcto de la casilla */
+.registro-form input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    padding: 0;
+    margin-top: 2px;
+    accent-color: #272348;
+}
+
+/* Texto auxiliar de la contraseña */
+.registro-form small {
+    display: block;
+    color: #6d6b7c;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* Mensajes de éxito o error */
+#registro-mensaje {
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #272348;
+}
+
+/* Contenedor de botones */
+.acciones-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+}
+
+/* Enlace para iniciar sesión */
+.acciones-registro .invitado {
+    display: block;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* Botón mientras se envía el registro */
+.registro-form button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
