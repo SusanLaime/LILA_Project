@@ -8,18 +8,12 @@
     <link rel="stylesheet" href="assets/css/base/typography.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
     <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
+    <link rel="stylesheet" href="assets/css/components/header.css" />
     <title>LILA — Publicar oferta</title>
 </head>
 <body>
     <main class="role-home">
-        <nav class="home-nav" aria-label="Navegación principal">
-            <a class="home-brand" href="index.html" aria-label="Volver al inicio">
-                <img src="public/L-logo-oficial.png" alt="LILA" />
-            </a>
-            <div class="home-nav-actions">
-                <span class="role-label">EMPLEADOR</span>
-            </div>
-        </nav>
+        <div id="header-placeholder"></div>
 
         <section class="role-content employer-layout" aria-labelledby="employer-title">
             <header class="role-header">
@@ -57,7 +51,8 @@
         <div id="footer-placeholder"></div>
     </main>
     <script type="module">
-        import { initFooter } from './assets/js/components.js';
+        import { initFooter, initHeader } from './assets/js/components.js';
+        initHeader('', 'empleador');
         initFooter();
 
         document.getElementById('offer-form').addEventListener('submit', event => {

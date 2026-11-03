@@ -31,7 +31,10 @@ export async function initHeader(verificationStatus = 'no_verificado', rol = 'tr
 
     const roleBadge = document.getElementById('lila-role-badge');
     if (roleBadge) {
-        roleBadge.textContent = rol === 'empleador' ? 'EMPLEADOR' : 'TRABAJADOR';
+        if (rol === 'trabajador' || rol === 'empleador') {
+            roleBadge.textContent = rol === 'empleador' ? 'EMPLEADOR' : 'TRABAJADOR';
+            roleBadge.hidden = false;
+        }
     }
 
     const badge = document.getElementById('lila-verified-badge');
