@@ -10,6 +10,15 @@ import { guardarToken } from './sesion.js';
 
 const form = document.getElementById('login-form');
 const message = document.getElementById('login-mensaje');
+const passwordInput = document.getElementById('login-password');
+const passwordToggle = document.getElementById('toggle-password');
+
+passwordToggle?.addEventListener('click', () => {
+    const mostrar = passwordInput.type === 'password';
+    passwordInput.type = mostrar ? 'text' : 'password';
+    passwordToggle.textContent = mostrar ? 'Ocultar' : 'Mostrar';
+    passwordToggle.setAttribute('aria-pressed', String(mostrar));
+});
 
 document.getElementById('btn-crear')?.addEventListener('click', () => {
     window.location.href = '/frontend/auth/register.html';
@@ -24,7 +33,7 @@ form?.addEventListener('submit', async event => {
     const result = await pedirApi('/api/login', {
         metodo: 'POST',
         cuerpo: {
-            telefono: document.getElementById('login-telefono').value,
+            ci: document.getElementById('login-ci').value.trim(),
             password: document.getElementById('login-password').value
         }
     });
