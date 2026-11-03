@@ -37,39 +37,18 @@ export async function initHeader(verificationStatus = 'no_verificado', rol = 'tr
         }
     }
 
-    const badge = document.getElementById('lila-verified-badge');
-    if (badge) {
-        badge.style.display = 'inline-flex';
-        if (verificationStatus === 'verificado') {
-            badge.textContent = 'VERIFICADO';
-            badge.style.backgroundColor = '#F2EDFA';
-            badge.style.color = '#272348';
-        } else if (verificationStatus === 'pendiente') {
-            badge.textContent = 'PENDIENTE';
-            badge.style.backgroundColor = '#FFF3CD';
-            badge.style.color = '#856404';
-        } else {
-            badge.textContent = 'NO VERIFICADO';
-            badge.style.backgroundColor = '#E2E3E5';
-            badge.style.color = '#383D41';
-        }
+    const authenticated = Boolean(localStorage.getItem('lila_token'));
+    const authActions = document.getElementById('lila-auth-actions');
+    const userActions = document.getElementById('lila-user-actions');
+    if (authActions && userActions) {
+        authActions.hidden = authenticated;
+        userActions.hidden = !authenticated;
     }
 
-    const logoLink = document.querySelector('.lila-brand');
-    if (logoLink) {
-        logoLink.href = '/frontend/website/trabajador/perfil.html';
-    }
+    document.getElementById('lila-salir')?.addEventListener('click', () => {
+        localStorage.removeItem('lila_token');
+    });
 
-    const navLinks = document.getElementById('lila-nav-links');
-    if (navLinks) {
-        navLinks.innerHTML = `
-            <li class="nav-item"><a class="nav-link" href="/frontend/website/trabajador/perfil.html"><span aria-hidden="true">♙</span> Mi Perfil</a></li>
-            <li class="nav-item"><a class="nav-link" id="lila-salir" href="/frontend/auth/login.html"><span aria-hidden="true">⍈</span> Salir</a></li>
-        `;
-        document.getElementById('lila-salir')?.addEventListener('click', () => {
-            localStorage.removeItem('lila_token');
-        });
-    }
 }
 
 /**
