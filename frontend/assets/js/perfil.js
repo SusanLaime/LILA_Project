@@ -523,6 +523,98 @@ if (!token) {
         mostrarMensaje('');
     });
 
+    
+    // ======================================================
+    // MENÚ HAMBURGUESA PARA CELULARES
+    // ======================================================
+
+    const btnMenuMovil = document.getElementById('btn-menu-movil');
+    const btnCerrarMenu = document.getElementById('btn-cerrar-menu');
+    const fondoMenuMovil = document.getElementById('fondo-menu-movil');
+    const menuLateral = document.getElementById('menu-lateral');
+
+    const mediaMenuMovil = window.matchMedia('(max-width: 900px)');
+
+    function cerrarMenuMovil() {
+        if (!menuLateral) return;
+
+        menuLateral.classList.remove('lp-sidebar-abierto');
+        fondoMenuMovil?.classList.remove('activo');
+
+        btnMenuMovil?.setAttribute('aria-expanded', 'false');
+        btnMenuMovil?.setAttribute(
+            'aria-label',
+            'Abrir menú de navegación'
+        );
+
+        document.body.style.overflow = '';
+
+        menuLateral.inert = mediaMenuMovil.matches;
+    }
+
+    function abrirMenuMovil() {
+        if (!menuLateral || !mediaMenuMovil.matches) return;
+
+        menuLateral.inert = false;
+
+        menuLateral.classList.add('lp-sidebar-abierto');
+        fondoMenuMovil?.classList.add('activo');
+
+        btnMenuMovil?.setAttribute('aria-expanded', 'true');
+        btnMenuMovil?.setAttribute(
+            'aria-label',
+            'Cerrar menú de navegación'
+        );
+
+        document.body.style.overflow = 'hidden';
+
+        btnCerrarMenu?.focus();
+    }
+
+    // Abrir al tocar el botón hamburguesa
+    btnMenuMovil?.addEventListener('click', () => {
+        if (menuLateral?.classList.contains('lp-sidebar-abierto')) {
+            cerrarMenuMovil();
+        } else {
+            abrirMenuMovil();
+        }
+    });
+
+    // Cerrar con el botón X
+    btnCerrarMenu?.addEventListener('click', () => {
+        cerrarMenuMovil();
+        btnMenuMovil?.focus();
+    });
+
+    // Cerrar al tocar fuera del menú
+    fondoMenuMovil?.addEventListener('click', () => {
+        cerrarMenuMovil();
+        btnMenuMovil?.focus();
+    });
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', (event) => {
+        if (
+            event.key === 'Escape' &&
+            menuLateral?.classList.contains('lp-sidebar-abierto')
+        ) {
+            cerrarMenuMovil();
+            btnMenuMovil?.focus();
+        }
+    });
+
+    // Cerrar al seleccionar un enlace
+    menuLateral?.querySelectorAll('a[href]').forEach((enlace) => {
+        enlace.addEventListener('click', cerrarMenuMovil);
+    });
+
+    // Adaptar el menú al cambiar el tamaño de pantalla
+    mediaMenuMovil.addEventListener('change', cerrarMenuMovil);
+
+    // Configurar estado inicial
+    cerrarMenuMovil();
+
+
     // ======================================================
     // INICIAR PERFIL
     // ======================================================
