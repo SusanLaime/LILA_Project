@@ -21,36 +21,74 @@
                 <h1 id="worker-title">Encuentra un trabajo que se adapte a tus habilidades.</h1>
                 <p>Estas son algunas ofertas de ejemplo. Revisa los detalles y postúlate a la que más te interese.</p>
             </header>
-            <div class="offer-grid">
-                <article class="offer-card">
-                    <span class="role-label">Tiempo parcial</span>
-                    <h2>Ayudante de cocina</h2>
-                    <p>Apoya en la preparación de alimentos y mantén organizada el área de trabajo.</p>
-                    <div class="offer-meta"><span>Cochabamba</span><span>Bs. 120 por día</span></div>
-                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
-                </article>
-                <article class="offer-card">
-                    <span class="role-label">Por proyecto</span>
-                    <h2>Diseñador/a para redes sociales</h2>
-                    <p>Crea piezas visuales para un emprendimiento local y ayuda a fortalecer su presencia digital.</p>
-                    <div class="offer-meta"><span>Remoto</span><span>Bs. 800 por proyecto</span></div>
-                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
-                </article>
-                <article class="offer-card">
-                    <span class="role-label">Fin de semana</span>
-                    <h2>Asistente de eventos</h2>
-                    <p>Colabora con el montaje, la atención de invitados y el cierre de eventos.</p>
-                    <div class="offer-meta"><span>Cercado</span><span>Bs. 180 por jornada</span></div>
-                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
-                </article>
-                <article class="offer-card">
-                    <span class="role-label">Tiempo completo</span>
-                    <h2>Vendedor/a de tienda</h2>
-                    <p>Atiende a clientes, organiza productos y registra las ventas del día.</p>
-                    <div class="offer-meta"><span>Quillacollo</span><span>Bs. 2.500 al mes</span></div>
-                    <a class="home-primary-button" href="auth/register.html">Postularme</a>
-                </article>
+            <div class="offer-filters" aria-label="Filtros de ofertas">
+                <label for="area-filter">Área
+                    <select id="area-filter">
+                        <option value="todas">Todas las áreas</option>
+                        <option value="gastronomia">Gastronomía</option>
+                        <option value="diseno">Diseño y marketing</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="ventas">Ventas y comercio</option>
+                    </select>
+                </label>
+                <label for="city-filter">Ciudad
+                    <select id="city-filter">
+                        <option value="todas">Todas las ciudades</option>
+                        <option value="Cochabamba">Cochabamba</option>
+                        <option value="Cercado">Cercado</option>
+                        <option value="Quillacollo">Quillacollo</option>
+                        <option value="Remoto">Remoto</option>
+                    </select>
+                </label>
             </div>
+            <section class="offer-category" aria-labelledby="category-gastronomia">
+                <h2 id="category-gastronomia">Gastronomía</h2>
+                <div class="offer-grid">
+                    <article class="offer-card" data-area="gastronomia" data-city="Cochabamba">
+                        <span class="role-label">Tiempo parcial</span>
+                        <h3>Ayudante de cocina</h3>
+                        <p>Apoya en la preparación de alimentos y mantén organizada el área de trabajo.</p>
+                        <div class="offer-meta"><span>Cochabamba</span><span>Bs. 120 por día</span></div>
+                        <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                    </article>
+                </div>
+            </section>
+            <section class="offer-category" aria-labelledby="category-diseno">
+                <h2 id="category-diseno">Diseño y marketing</h2>
+                <div class="offer-grid">
+                    <article class="offer-card" data-area="diseno" data-city="Remoto">
+                        <span class="role-label">Por proyecto</span>
+                        <h3>Diseñador/a para redes sociales</h3>
+                        <p>Crea piezas visuales para un emprendimiento local y ayuda a fortalecer su presencia digital.</p>
+                        <div class="offer-meta"><span>Remoto</span><span>Bs. 800 por proyecto</span></div>
+                        <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                    </article>
+                </div>
+            </section>
+            <section class="offer-category" aria-labelledby="category-eventos">
+                <h2 id="category-eventos">Eventos</h2>
+                <div class="offer-grid">
+                    <article class="offer-card" data-area="eventos" data-city="Cercado">
+                        <span class="role-label">Fin de semana</span>
+                        <h3>Asistente de eventos</h3>
+                        <p>Colabora con el montaje, la atención de invitados y el cierre de eventos.</p>
+                        <div class="offer-meta"><span>Cercado</span><span>Bs. 180 por jornada</span></div>
+                        <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                    </article>
+                </div>
+            </section>
+            <section class="offer-category" aria-labelledby="category-ventas">
+                <h2 id="category-ventas">Ventas y comercio</h2>
+                <div class="offer-grid">
+                    <article class="offer-card" data-area="ventas" data-city="Quillacollo">
+                        <span class="role-label">Tiempo completo</span>
+                        <h3>Vendedor/a de tienda</h3>
+                        <p>Atiende a clientes, organiza productos y registra las ventas del día.</p>
+                        <div class="offer-meta"><span>Quillacollo</span><span>Bs. 2.500 al mes</span></div>
+                        <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                    </article>
+                </div>
+            </section>
         </section>
         <div id="footer-placeholder"></div>
     </main>
@@ -58,6 +96,22 @@
         import { initFooter, initHeader } from './assets/js/components.js';
         initHeader('', 'trabajador');
         initFooter();
+
+        const areaFilter = document.getElementById('area-filter');
+        const cityFilter = document.getElementById('city-filter');
+        const categories = document.querySelectorAll('.offer-category');
+
+        function filterOffers() {
+            categories.forEach(category => {
+                const offer = category.querySelector('.offer-card');
+                const matchesArea = areaFilter.value === 'todas' || offer.dataset.area === areaFilter.value;
+                const matchesCity = cityFilter.value === 'todas' || offer.dataset.city === cityFilter.value;
+                category.hidden = !(matchesArea && matchesCity);
+            });
+        }
+
+        areaFilter.addEventListener('change', filterOffers);
+        cityFilter.addEventListener('change', filterOffers);
     </script>
 </body>
 </html>

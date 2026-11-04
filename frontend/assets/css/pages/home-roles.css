@@ -49,9 +49,44 @@
     line-height: 1.6;
 }
 
+.offer-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 36px;
+}
+
+.offer-filters label {
+    display: grid;
+    gap: 7px;
+    color: var(--LILA-primitives-purple-brand);
+    font-weight: 600;
+}
+
+.offer-filters select {
+    min-width: 220px;
+    padding: 11px 14px;
+    border: 1px solid var(--LILA-semantic-color-border-default);
+    border-radius: var(--LILA-primitives-radius-sm);
+    background: #fff;
+    color: var(--LILA-semantic-color-text-primary);
+    font: inherit;
+}
+
+.offer-category {
+    margin-top: 36px;
+}
+
+.offer-category h2 {
+    margin-bottom: 16px;
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 1.6rem;
+}
+
 .offer-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(280px, 560px);
+    justify-content: center;
     gap: 20px;
 }
 
@@ -64,7 +99,7 @@
     box-shadow: var(--LILA-elevaci-n-tarjeta);
 }
 
-.offer-card h2 {
+.offer-card h3 {
     margin: 12px 0 8px;
     color: var(--LILA-primitives-purple-brand);
     font-size: 1.3rem;
@@ -153,4 +188,7 @@
     .role-content { padding: 48px 0 60px; }
     .offer-grid,
     .employer-layout { grid-template-columns: 1fr; }
+    .offer-filters label,
+    .offer-filters select { width: 100%; }
+    .offer-filters select { min-width: 0; }
 }
