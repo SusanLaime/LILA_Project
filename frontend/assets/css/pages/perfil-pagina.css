@@ -1,671 +1,1790 @@
-/* DUEÑA/O: Sara Revollo — Pantalla de perfil (estilos propios) */
+/** DUEÑA/O: Sara Revollo — Pantalla de perfil (estilos propios) **/
 
-/* Esta pantalla usa su propio menú lateral, así que se oculta el encabezado compartido
-   solo aquí. Para volver a mostrarlo, borra esta regla. */
+/** Esta pantalla usa su propio menú lateral, así que se oculta el encabezado compartido*
+
+*   solo aquí. Para volver a mostrarlo, borra esta regla. **/
+
 #header-placeholder {
+
     display: none !important;
+
 }
 
 main.perfil-page {
+
     --morado-oscuro: #272348;
+
     --morado: #5b4b8a;
+
     --morado-claro: #8a74c9;
+
     --lila: #d6cee2;
+
     --lila-suave: #f2edfa;
+
     --fondo: #efe8fb;
+
     --gris: #6d6b7c;
 
-    /* Anula lo que la página pueda heredar de otros estilos */
+    /** Anula lo que la página pueda heredar de otros estilos **/
+
     display: block !important;
+
     width: 100% !important;
+
     max-width: none !important;
+
     margin: 0 !important;
+
     padding: 0 !important;
+
     min-height: 100vh;
+
     background: var(--fondo);
+
     color: var(--morado-oscuro);
+
 }
 
 .perfil-page *,
+
 .perfil-page *::before,
+
 .perfil-page *::after {
+
     box-sizing: border-box;
+
 }
 
-/* Sin esto, lo que el JS oculta a los empleadores seguiría visible */
+/** Sin esto, lo que el JS oculta a los empleadores seguiría visible **/
+
 .perfil-page [hidden] {
+
     display: none !important;
+
 }
 
 .perfil-page h1,
+
 .perfil-page h2,
+
 .perfil-page h3,
+
 .perfil-page p,
+
 .perfil-page ul {
+
     margin: 0;
+
     padding: 0;
+
 }
 
 .perfil-page a,
+
 .perfil-page a:hover {
+
     text-decoration: none;
+
 }
 
-/* ---------- Íconos SVG (sin emojis) ---------- */
+/** ---------- Íconos SVG (sin emojis) ---------- **/
+
 .perfil-page .lp-ico,
+
 .perfil-page .lp-res-icono svg {
+
     fill: none;
+
     stroke: currentColor;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+.perfil-page .lp-ico {
+
+    flex-shrink: 0;
+
+    width: 20px;
+
+    height: 20px;
+
+}
+
+/** ---------- Estructura: menú + contenido ---------- **/
+
+.perfil-page .lp-app {
+
+    display: grid;
+
+    grid-template-columns: 260px minmax(0, 1fr);
+
+    gap: 24px;
+
+    max-width: 1320px;
+
+    margin: 0 auto;
+
+    padding: 16px;
+
+}
+
+.perfil-page .lp-contenido {
+
+    display: grid;
+
+    gap: 20px;
+
+    min-width: 0;
+
+    align-content: start;
+
+}
+
+/** ---------- Menú lateral ---------- **/
+
+.perfil-page .lp-sidebar {
+
+    position: sticky;
+
+    top: 16px;
+
+    height: calc(100vh - 32px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+
+    padding: 24px 16px;
+
+    border-radius: 24px;
+
+    color: #fff;
+
+    background: linear-gradient(180deg, #7a63bd 0%, #272348 100%);
+
+}
+
+/** Logo oficial **/
+
+.perfil-page .lp-logo {
+
+    display: block;
+
+    padding: 12px 14px;
+
+    border-radius: 16px;
+
+    background: #fff;
+
+}
+
+.perfil-page .lp-logo img {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 180px;
+
+    height: auto;
+
+    margin: 0 auto;
+
+}
+
+.perfil-page .lp-menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+}
+
+.perfil-page .lp-menu a {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+
+    color: rgba(255, 255, 255, 0.78);
+
+    white-space: nowrap;
+
+}
+
+.perfil-page .lp-menu a:hover {
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: #fff;
+
+}
+
+.perfil-page .lp-menu a.activo {
+
+    background: rgba(255, 255, 255, 0.2);
+
+    color: #fff;
+
+    font-weight: 700;
+
+}
+
+.perfil-page .lp-menu a.pronto {
+
+    opacity: 0.55;
+
+    cursor: default;
+
+}
+
+.perfil-page .lp-menu a.pronto:hover {
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.78);
+
+}
+
+.perfil-page .lp-menu em {
+
+    margin-left: auto;
+
+    padding: 2px 8px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    font-style: normal;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    background: rgba(255, 255, 255, 0.2);
+
+}
+
+.perfil-page .lp-salir {
+
+    margin-top: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font: inherit;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+}
+
+.perfil-page .lp-salir:hover {
+
+    background: rgba(255, 255, 255, 0.12);
+
+    color: #fff;
+
+}
+
+/** ---------- Barra superior ---------- **/
+
+.perfil-page .lp-topbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+
+.perfil-page .lp-topbar h1 {
+
+    font-size: 22px;
+
+    color: var(--morado-oscuro);
+
+}
+
+.perfil-page .lp-fecha {
+
+    margin-top: 2px;
+
+    font-size: 13px;
+
+    color: var(--gris);
+
+}
+
+.perfil-page .lp-chip {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 6px 16px 6px 6px;
+
+    border-radius: 999px;
+
+    background: #fff;
+
+    box-shadow: 0 2px 10px rgba(39, 35, 72, 0.08);
+
+    min-width: 0;
+
+}
+
+.perfil-page .lp-chip-inicial {
+
+    flex-shrink: 0;
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    background: var(--morado);
+
+    border: 2px solid var(--lila);
+
+}
+
+.perfil-page .lp-chip strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    line-height: 1.2;
+
+    overflow-wrap: anywhere;
+
+}
+
+.perfil-page .lp-chip small {
+
+    font-size: 12px;
+
+    color: var(--gris);
+
+    text-transform: capitalize;
+
+}
+
+/** ---------- Banner ---------- **/
+
+.perfil-page .lp-banner {
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    min-height: 170px;
+
+    padding: 32px;
+
+    border-radius: 24px;
+
+    color: #fff;
+
+    background: linear-gradient(120deg, #5b4b8a 0%, #8a74c9 100%);
+
+}
+
+.perfil-page .lp-banner::before,
+
+.perfil-page .lp-banner::after {
+
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    pointer-events: none;
+
+}
+
+.perfil-page .lp-banner::before {
+
+    width: 280px;
+
+    height: 280px;
+
+    right: -70px;
+
+    top: -110px;
+
+}
+
+.perfil-page .lp-banner::after {
+
+    width: 120px;
+
+    height: 120px;
+
+    right: 150px;
+
+    bottom: -60px;
+
+}
+
+.perfil-page .lp-banner > * {
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+.perfil-page .lp-banner-fecha {
+
+    margin-bottom: 14px;
+
+    font-size: 13px;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+
+    opacity: 0.85;
+
+}
+
+.perfil-page .lp-banner h2 {
+
+    font-size: clamp(22px, 3.5vw, 32px);
+
+    line-height: 1.2;
+
+    color: #fff;
+
+    overflow-wrap: anywhere;
+
+}
+
+.perfil-page .lp-banner .profile-name {
+
+    display: inline;
+
+    margin: 0;
+
+    font-size: inherit;
+
+    color: inherit;
+
+}
+
+.perfil-page .lp-banner p.lp-banner-sub {
+
+    margin-top: 8px;
+
+    font-size: 15px;
+
+    opacity: 0.9;
+
+}
+
+.perfil-page .lp-banner-avatar {
+
+    flex-shrink: 0;
+
+    width: 120px;
+
+    height: 120px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #fff;
+
+    color: var(--morado-oscuro);
+
+    border: 5px solid rgba(255, 255, 255, 0.45);
+
+}
+
+.perfil-page .lp-banner-avatar svg {
+
+    width: 70%;
+
+    height: 70%;
+
+}
+
+/** ---------- Rejilla principal ---------- **/
+
+.perfil-page .lp-grid {
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 300px;
+
+    gap: 24px;
+
+    align-items: start;
+
+}
+
+.perfil-page .lp-col {
+
+    display: grid;
+
+    gap: 20px;
+
+    min-width: 0;
+
+}
+
+.perfil-page .lp-titulo {
+
+    margin-bottom: 12px;
+
+    font-size: 18px;
+
+    color: var(--morado-oscuro);
+
+}
+
+/** ---------- Tarjetas de resumen ---------- **/
+
+.perfil-page .lp-resumen {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+}
+
+.perfil-page .lp-res {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 20px 12px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    background: #fff;
+
+    border: 2px solid transparent;
+
+}
+
+.perfil-page .lp-res.destacada {
+
+    border-color: var(--morado);
+
+}
+
+.perfil-page .lp-res-icono {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 56px;
+
+    height: 56px;
+
+    border-radius: 16px;
+
+    background: var(--lila-suave);
+
+    color: var(--morado);
+
+}
+
+.perfil-page .lp-res-icono svg {
+
+    width: 28px;
+
+    height: 28px;
+
+}
+
+.perfil-page .lp-res-valor {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+
+    text-transform: capitalize;
+
+}
+
+.perfil-page .lp-res-etiqueta {
+
+    font-size: 13px;
+
+    color: var(--gris);
+
+}
+
+/** Estado: naranja suave por defecto, verde solo si está verificado **/
+
+.perfil-page .perfil-estado {
+
+    display: inline-block;
+
+    padding: 4px 12px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: none;
+
+    background: #fff1dc;
+
+    color: #8a5200;
+
+}
+
+.perfil-page .perfil-estado.verificado {
+
+    background: #e3f5e6;
+
+    color: #1d6b2f;
+
+}
+
+/** ---------- Formulario ---------- **/
+
+.perfil-page .lp-tarjeta {
+
+    padding: 24px;
+
+    border-radius: 20px;
+
+    background: #fff;
+
+}
+
+.perfil-page .perfil-campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-bottom: 18px;
+
+}
+
+.perfil-page .perfil-campo label {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--morado-oscuro);
+
+}
+
+.perfil-page .perfil-campo input,
+
+.perfil-page .perfil-campo textarea {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--lila);
+
+    border-radius: 12px;
+
+    font: inherit;
+
+    color: var(--morado-oscuro);
+
+    background: #fff;
+
+}
+
+.perfil-page .perfil-campo textarea {
+
+    min-height: 110px;
+
+    resize: vertical;
+
+}
+
+.perfil-page .perfil-campo input:focus,
+
+.perfil-page .perfil-campo textarea:focus {
+
+    outline: none;
+
+    border-color: var(--morado);
+
+    box-shadow: 0 0 0 3px rgba(91, 75, 138, 0.2);
+
+}
+
+.perfil-page .perfil-boton {
+
+    padding: 12px 32px;
+
+    border: none;
+
+    border-radius: 24px;
+
+    background: var(--morado);
+
+    color: #fff;
+
+    font: inherit;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.perfil-page .perfil-boton:hover {
+
+    background: var(--morado-oscuro);
+
+}
+
+.perfil-page .perfil-mensaje {
+
+    min-height: 1.4em;
+
+    margin-top: 14px;
+
+    font-size: 14px;
+
+    color: var(--morado);
+
+}
+
+/** ---------- Próximamente ---------- **/
+
+.perfil-page .lp-pronto-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+}
+
+.perfil-page .lp-pronto {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    background: #e3d9f7;
+
+    color: var(--morado);
+
+}
+
+.perfil-page .lp-pronto strong {
+
+    font-size: 16px;
+
+    color: var(--morado-oscuro);
+
+}
+
+.perfil-page .lp-pronto span {
+
+    font-size: 13px;
+
+}
+
+.perfil-page .lp-pronto button {
+
+    padding: 8px 22px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: var(--morado-claro);
+
+    color: #fff;
+
+    font: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+}
+
+/** ---------- Columna derecha ---------- **/
+
+.perfil-page .lp-progreso-texto {
+
+    margin: 4px 0 10px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--morado);
+
+}
+
+.perfil-page .lp-progreso {
+
+    height: 10px;
+
+    margin-bottom: 18px;
+
+    border-radius: 999px;
+
+    background: var(--lila-suave);
+
+    overflow: hidden;
+
+}
+
+.perfil-page .lp-progreso-barra {
+
+    height: 100%;
+
+    width: 0;
+
+    border-radius: 999px;
+
+    background: linear-gradient(90deg, #8a74c9, #5b4b8a);
+
+    transition: width 0.3s ease;
+
+}
+
+.perfil-page .lp-lista {
+
+    list-style: none;
+
+    display: grid;
+
+    gap: 10px;
+
+}
+
+.perfil-page .lp-lista li {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 14px;
+
+    color: var(--gris);
+
+}
+
+.perfil-page .lp-lista li::before {
+
+    content: "";
+
+    flex-shrink: 0;
+
+    width: 22px;
+
+    height: 22px;
+
+    border-radius: 50%;
+
+    border: 2px solid var(--lila);
+
+}
+
+.perfil-page .lp-lista li.hecho {
+
+    color: var(--morado-oscuro);
+
+    font-weight: 600;
+
+}
+
+/** Marca de "hecho" dibujada, sin caracteres especiales **/
+
+.perfil-page .lp-lista li.hecho::before {
+
+    background: var(--morado) url("data:image/svg+xml,%3Csvg xmlns='http://www\.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12 10 17 19 7'/%3E%3C/svg%3E") center / 13px no-repeat;
+
+    border-color: var(--morado);
+
+}
+
+.perfil-page .lp-aviso + .lp-aviso {
+
+    margin-top: 14px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid var(--lila-suave);
+
+}
+
+.perfil-page .lp-aviso strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 14px;
+
+}
+
+.perfil-page .lp-aviso p {
+
+    font-size: 13px;
+
+    color: var(--gris);
+
+}
+
+/** ---------- Responsive ---------- **/
+
+@media (max-width: 1100px) {
+
+    .perfil-page .lp-grid {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .perfil-page .lp-app {
+
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 16px;
+
+    }
+
+    /** El menú lateral pasa a ser una tira horizontal arriba **/
+
+    .perfil-page .lp-sidebar {
+
+        position: static;
+
+        height: auto;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        gap: 12px;
+
+        padding: 12px;
+
+        overflow-x: auto;
+
+    }
+
+    .perfil-page .lp-logo {
+
+        flex-shrink: 0;
+
+        padding: 6px 12px;
+
+    }
+
+    .perfil-page .lp-logo img {
+
+        width: auto;
+
+        height: 36px;
+
+        max-width: none;
+
+    }
+
+    .perfil-page .lp-menu em {
+
+        display: none;
+
+    }
+
+    .perfil-page .lp-menu {
+
+        flex-direction: row;
+
+    }
+
+    .perfil-page .lp-salir {
+
+        margin-top: 0;
+
+        margin-left: auto;
+
+    }
+
+}
+
+@media (max-width: 640px) {
+
+    .perfil-page .lp-app {
+
+        padding: 10px;
+
+    }
+
+    .perfil-page .lp-topbar {
+
+        flex-wrap: wrap;
+
+    }
+
+    .perfil-page .lp-banner {
+
+        flex-direction: column-reverse;
+
+        text-align: center;
+
+        padding: 24px 20px;
+
+    }
+
+    .perfil-page .lp-banner-avatar {
+
+        width: 88px;
+
+        height: 88px;
+
+    }
+
+    .perfil-page .lp-resumen,
+
+    .perfil-page .lp-pronto-grid {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .perfil-page .lp-tarjeta {
+
+        padding: 18px;
+
+    }
+
+    .perfil-page .perfil-boton {
+
+        width: 100%;
+
+    }
+
+    }
+
+/** ==========================================================*
+
+*    LILA - MIS DATOS V2*
+
+*    Reutiliza: lp-tarjeta, perfil-campo y perfil-boton*
+
+*    ========================================================== **/
+
+    /** Tarjeta principal **/
+
+    .perfil-page .lp-datos-card {
+
+        padding: 28px;
+
+        border: 1px solid #e8ddf4;
+
+        border-radius: 20px;
+
+        box-shadow: 0 8px 28px rgba(57, 32, 100, 0.06);
+
+    }
+
+    /* Los iconos de esta tarjeta requieren dimensiones explícitas.
+   Evita SVG gigantes por estilos compartidos de otras páginas. */
+.perfil-page .lp-datos-card svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+    min-width: 19px;
+    max-width: 19px;
+    min-height: 19px;
+    max-height: 19px;
+    fill: none;
+    stroke: #7039ac;
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
-.perfil-page .lp-ico {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-}
+/** Encabezado **/
 
-/* ---------- Estructura: menú + contenido ---------- */
-.perfil-page .lp-app {
-    display: grid;
-    grid-template-columns: 260px minmax(0, 1fr);
-    gap: 24px;
-    max-width: 1320px;
-    margin: 0 auto;
-    padding: 16px;
-}
+    .perfil-page .lp-datos-encabezado {
 
-.perfil-page .lp-contenido {
-    display: grid;
-    gap: 20px;
-    min-width: 0;
-    align-content: start;
-}
+        display: flex;
 
-/* ---------- Menú lateral ---------- */
-.perfil-page .lp-sidebar {
-    position: sticky;
-    top: 16px;
-    height: calc(100vh - 32px);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px 16px;
-    border-radius: 24px;
-    color: #fff;
-    background: linear-gradient(180deg, #7a63bd 0%, #272348 100%);
-}
+        align-items: flex-start;
 
-/* Logo oficial */
-.perfil-page .lp-logo {
-    display: block;
-    padding: 12px 14px;
-    border-radius: 16px;
-    background: #fff;
-}
+        gap: 14px;
 
-.perfil-page .lp-logo img {
-    display: block;
-    width: 100%;
-    max-width: 180px;
-    height: auto;
-    margin: 0 auto;
-}
+        margin-bottom: 26px;
 
-.perfil-page .lp-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.perfil-page .lp-menu a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    border-radius: 12px;
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.78);
-    white-space: nowrap;
-}
-
-.perfil-page .lp-menu a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-}
-
-.perfil-page .lp-menu a.activo {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    font-weight: 700;
-}
-
-.perfil-page .lp-menu a.pronto {
-    opacity: 0.55;
-    cursor: default;
-}
-
-.perfil-page .lp-menu a.pronto:hover {
-    background: transparent;
-    color: rgba(255, 255, 255, 0.78);
-}
-
-.perfil-page .lp-menu em {
-    margin-left: auto;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 10px;
-    font-style: normal;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.perfil-page .lp-salir {
-    margin-top: auto;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
-    border: none;
-    border-radius: 12px;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.85);
-    font: inherit;
-    font-size: 15px;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.perfil-page .lp-salir:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-}
-
-/* ---------- Barra superior ---------- */
-.perfil-page .lp-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-}
-
-.perfil-page .lp-topbar h1 {
-    font-size: 22px;
-    color: var(--morado-oscuro);
-}
-
-.perfil-page .lp-fecha {
-    margin-top: 2px;
-    font-size: 13px;
-    color: var(--gris);
-}
-
-.perfil-page .lp-chip {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 16px 6px 6px;
-    border-radius: 999px;
-    background: #fff;
-    box-shadow: 0 2px 10px rgba(39, 35, 72, 0.08);
-    min-width: 0;
-}
-
-.perfil-page .lp-chip-inicial {
-    flex-shrink: 0;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: #fff;
-    background: var(--morado);
-    border: 2px solid var(--lila);
-}
-
-.perfil-page .lp-chip strong {
-    display: block;
-    font-size: 14px;
-    line-height: 1.2;
-    overflow-wrap: anywhere;
-}
-
-.perfil-page .lp-chip small {
-    font-size: 12px;
-    color: var(--gris);
-    text-transform: capitalize;
-}
-
-/* ---------- Banner ---------- */
-.perfil-page .lp-banner {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    min-height: 170px;
-    padding: 32px;
-    border-radius: 24px;
-    color: #fff;
-    background: linear-gradient(120deg, #5b4b8a 0%, #8a74c9 100%);
-}
-
-.perfil-page .lp-banner::before,
-.perfil-page .lp-banner::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    pointer-events: none;
-}
-
-.perfil-page .lp-banner::before {
-    width: 280px;
-    height: 280px;
-    right: -70px;
-    top: -110px;
-}
-
-.perfil-page .lp-banner::after {
-    width: 120px;
-    height: 120px;
-    right: 150px;
-    bottom: -60px;
-}
-
-.perfil-page .lp-banner > * {
-    position: relative;
-    z-index: 1;
-}
-
-.perfil-page .lp-banner-fecha {
-    margin-bottom: 14px;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0.85;
-}
-
-.perfil-page .lp-banner h2 {
-    font-size: clamp(22px, 3.5vw, 32px);
-    line-height: 1.2;
-    color: #fff;
-    overflow-wrap: anywhere;
-}
-
-.perfil-page .lp-banner .profile-name {
-    display: inline;
-    margin: 0;
-    font-size: inherit;
-    color: inherit;
-}
-
-.perfil-page .lp-banner p.lp-banner-sub {
-    margin-top: 8px;
-    font-size: 15px;
-    opacity: 0.9;
-}
-
-.perfil-page .lp-banner-avatar {
-    flex-shrink: 0;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    color: var(--morado-oscuro);
-    border: 5px solid rgba(255, 255, 255, 0.45);
-}
-
-.perfil-page .lp-banner-avatar svg {
-    width: 70%;
-    height: 70%;
-}
-
-/* ---------- Rejilla principal ---------- */
-.perfil-page .lp-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 300px;
-    gap: 24px;
-    align-items: start;
-}
-
-.perfil-page .lp-col {
-    display: grid;
-    gap: 20px;
-    min-width: 0;
-}
-
-.perfil-page .lp-titulo {
-    margin-bottom: 12px;
-    font-size: 18px;
-    color: var(--morado-oscuro);
-}
-
-/* ---------- Tarjetas de resumen ---------- */
-.perfil-page .lp-resumen {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-}
-
-.perfil-page .lp-res {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding: 20px 12px;
-    border-radius: 20px;
-    text-align: center;
-    background: #fff;
-    border: 2px solid transparent;
-}
-
-.perfil-page .lp-res.destacada {
-    border-color: var(--morado);
-}
-
-.perfil-page .lp-res-icono {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    background: var(--lila-suave);
-    color: var(--morado);
-}
-
-.perfil-page .lp-res-icono svg {
-    width: 28px;
-    height: 28px;
-}
-
-.perfil-page .lp-res-valor {
-    font-size: 17px;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-    text-transform: capitalize;
-}
-
-.perfil-page .lp-res-etiqueta {
-    font-size: 13px;
-    color: var(--gris);
-}
-
-/* Estado: naranja suave por defecto, verde solo si está verificado */
-.perfil-page .perfil-estado {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: none;
-    background: #fff1dc;
-    color: #8a5200;
-}
-
-.perfil-page .perfil-estado.verificado {
-    background: #e3f5e6;
-    color: #1d6b2f;
-}
-
-/* ---------- Formulario ---------- */
-.perfil-page .lp-tarjeta {
-    padding: 24px;
-    border-radius: 20px;
-    background: #fff;
-}
-
-.perfil-page .perfil-campo {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 18px;
-}
-
-.perfil-page .perfil-campo label {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--morado-oscuro);
-}
-
-.perfil-page .perfil-campo input,
-.perfil-page .perfil-campo textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid var(--lila);
-    border-radius: 12px;
-    font: inherit;
-    color: var(--morado-oscuro);
-    background: #fff;
-}
-
-.perfil-page .perfil-campo textarea {
-    min-height: 110px;
-    resize: vertical;
-}
-
-.perfil-page .perfil-campo input:focus,
-.perfil-page .perfil-campo textarea:focus {
-    outline: none;
-    border-color: var(--morado);
-    box-shadow: 0 0 0 3px rgba(91, 75, 138, 0.2);
-}
-
-.perfil-page .perfil-boton {
-    padding: 12px 32px;
-    border: none;
-    border-radius: 24px;
-    background: var(--morado);
-    color: #fff;
-    font: inherit;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.perfil-page .perfil-boton:hover {
-    background: var(--morado-oscuro);
-}
-
-.perfil-page .perfil-mensaje {
-    min-height: 1.4em;
-    margin-top: 14px;
-    font-size: 14px;
-    color: var(--morado);
-}
-
-/* ---------- Próximamente ---------- */
-.perfil-page .lp-pronto-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-}
-
-.perfil-page .lp-pronto {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 20px;
-    border-radius: 20px;
-    background: #e3d9f7;
-    color: var(--morado);
-}
-
-.perfil-page .lp-pronto strong {
-    font-size: 16px;
-    color: var(--morado-oscuro);
-}
-
-.perfil-page .lp-pronto span {
-    font-size: 13px;
-}
-
-.perfil-page .lp-pronto button {
-    padding: 8px 22px;
-    border: none;
-    border-radius: 999px;
-    background: var(--morado-claro);
-    color: #fff;
-    font: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-/* ---------- Columna derecha ---------- */
-.perfil-page .lp-progreso-texto {
-    margin: 4px 0 10px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--morado);
-}
-
-.perfil-page .lp-progreso {
-    height: 10px;
-    margin-bottom: 18px;
-    border-radius: 999px;
-    background: var(--lila-suave);
-    overflow: hidden;
-}
-
-.perfil-page .lp-progreso-barra {
-    height: 100%;
-    width: 0;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #8a74c9, #5b4b8a);
-    transition: width 0.3s ease;
-}
-
-.perfil-page .lp-lista {
-    list-style: none;
-    display: grid;
-    gap: 10px;
-}
-
-.perfil-page .lp-lista li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: var(--gris);
-}
-
-.perfil-page .lp-lista li::before {
-    content: "";
-    flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--lila);
-}
-
-.perfil-page .lp-lista li.hecho {
-    color: var(--morado-oscuro);
-    font-weight: 600;
-}
-
-/* Marca de "hecho" dibujada, sin caracteres especiales */
-.perfil-page .lp-lista li.hecho::before {
-    background: var(--morado) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12 10 17 19 7'/%3E%3C/svg%3E") center / 13px no-repeat;
-    border-color: var(--morado);
-}
-
-.perfil-page .lp-aviso + .lp-aviso {
-    margin-top: 14px;
-    padding-top: 14px;
-    border-top: 1px solid var(--lila-suave);
-}
-
-.perfil-page .lp-aviso strong {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 14px;
-}
-
-.perfil-page .lp-aviso p {
-    font-size: 13px;
-    color: var(--gris);
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 1100px) {
-    .perfil-page .lp-grid {
-        grid-template-columns: minmax(0, 1fr);
     }
-}
 
-@media (max-width: 900px) {
-    .perfil-page .lp-app {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 16px;
-    }
-    /* El menú lateral pasa a ser una tira horizontal arriba */
-    .perfil-page .lp-sidebar {
-        position: static;
-        height: auto;
-        flex-direction: row;
-        align-items: center;
-        gap: 12px;
-        padding: 12px;
-        overflow-x: auto;
-    }
-    .perfil-page .lp-logo {
+    .perfil-page .lp-datos-encabezado > svg {
+    min-width: 27px;
+    max-width: 27px;
+    min-height: 27px;
+    max-height: 27px;
+
+        width: 27px;
+
+        height: 27px;
+
+        color: #6936a1;
+
         flex-shrink: 0;
-        padding: 6px 12px;
-    }
-    .perfil-page .lp-logo img {
-        width: auto;
-        height: 36px;
-        max-width: none;
-    }
-    .perfil-page .lp-menu em {
-        display: none;
-    }
-    .perfil-page .lp-menu {
-        flex-direction: row;
-    }
-    .perfil-page .lp-salir {
-        margin-top: 0;
-        margin-left: auto;
-    }
-}
 
-@media (max-width: 640px) {
-    .perfil-page .lp-app {
-        padding: 10px;
+        fill: none;
+
+        stroke: currentColor;
+
+        stroke-width: 1.8;
+
+        stroke-linecap: round;
+
+        stroke-linejoin: round;
+
     }
-    .perfil-page .lp-topbar {
-        flex-wrap: wrap;
+
+    .perfil-page .lp-datos-encabezado h2 {
+
+        margin: 0;
+
+        font-size: 22px;
+
+        font-weight: 700;
+
+        color: #281747;
+
     }
-    .perfil-page .lp-banner {
-        flex-direction: column-reverse;
-        text-align: center;
-        padding: 24px 20px;
+
+    .perfil-page .lp-datos-encabezado p {
+
+        margin-top: 5px;
+
+        font-size: 13px;
+
+        line-height: 1.5;
+
+        color: #6f6285;
+
     }
-    .perfil-page .lp-banner-avatar {
-        width: 88px;
-        height: 88px;
+
+    /** Formulario de dos columnas **/
+
+    .perfil-page .lp-datos-grid {
+
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 20px 22px;
+
+        margin-bottom: 20px;
+
     }
-    .perfil-page .lp-resumen,
-    .perfil-page .lp-pronto-grid {
-        grid-template-columns: minmax(0, 1fr);
+
+    .perfil-page .lp-datos-card .perfil-campo {
+
+        min-width: 0;
+
+        margin-bottom: 0;
+
+        gap: 9px;
+
     }
-    .perfil-page .lp-tarjeta {
-        padding: 18px;
+
+    /** Etiquetas e iconos **/
+
+    .perfil-page .lp-campo-etiqueta {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        color: #29194a;
+
+        font-size: 14px;
+
+        font-weight: 700;
+
     }
-    .perfil-page .perfil-boton {
+
+    .perfil-page .lp-campo-etiqueta svg {
+
+        width: 19px;
+
+        height: 19px;
+
+        flex-shrink: 0;
+
+        fill: none;
+
+        stroke: #7039ac;
+
+        stroke-width: 2;
+
+        stroke-linecap: round;
+
+        stroke-linejoin: round;
+
+    }
+
+    .perfil-page .lp-obligatorio {
+
+        color: #d42e60;
+
+    }
+
+    /** Campos generales **/
+
+    .perfil-page .lp-datos-card
+
+    :is(input:not([type="hidden"]), select, textarea) {
+
         width: 100%;
+
+        min-width: 0;
+
+        padding: 11px 14px;
+
+        border: 1px solid #d5c7e6;
+
+        border-radius: 10px;
+
+        color: #2e2148;
+
+        background: #fff;
+
+        font: inherit;
+
+        font-size: 13px;
+
+        line-height: 1.45;
+
+        box-sizing: border-box;
+
+        transition: border-color .2s, box-shadow .2s;
+
     }
-}
+
+    .perfil-page .lp-datos-card
+
+    :is(input:not([type="hidden"]), select, textarea):focus {
+
+        outline: none;
+
+        border-color: #8752be;
+
+        box-shadow: 0 0 0 3px rgba(135, 82, 190, .12);
+
+    }
+
+    .perfil-page .lp-datos-card
+
+    :is(input[readonly], select:disabled) {
+
+        background: #faf8fd;
+
+        color: #655878;
+
+        cursor: not-allowed;
+
+    }
+
+    .perfil-page .lp-datos-card select {
+
+        min-height: 43px;
+
+        cursor: pointer;
+
+    }
+
+    .perfil-page .lp-campo-nota {
+
+        font-size: 11px;
+
+        color: #82758e;
+
+    }
+
+    /** Habilidades **/
+
+    .perfil-page .lp-habilidades-box {
+
+        min-height: 84px;
+
+        padding: 10px;
+
+        border: 1px solid #d5c7e6;
+
+        border-radius: 10px;
+
+        background: #fff;
+
+    }
+
+    .perfil-page .lp-habilidades-box:focus-within {
+
+        border-color: #8752be;
+
+        box-shadow: 0 0 0 3px rgba(135, 82, 190, .12);
+
+    }
+
+    .perfil-page .lp-habilidades-tags {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 7px;
+
+    }
+
+    .perfil-page .lp-habilidad-tag {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        max-width: 100%;
+
+        gap: 7px;
+
+        padding: 6px 10px;
+
+        border-radius: 30px;
+
+        background: #efe5fb;
+
+        color: #462b70;
+
+        font-size: 12px;
+
+        line-height: 1.2;
+
+        overflow-wrap: anywhere;
+
+    }
+
+    .perfil-page .lp-habilidad-eliminar {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 0;
+
+        border: none;
+
+        background: transparent;
+
+        color: #694198;
+
+        font-size: 17px;
+
+        line-height: 1;
+
+        cursor: pointer;
+
+    }
+
+    .perfil-page .lp-habilidad-eliminar:hover {
+
+        color: #b3295d;
+
+    }
+
+    /** Entrada de nuevas habilidades **/
+
+    .perfil-page .lp-habilidad-entrada {
+
+        display: flex;
+
+        gap: 6px;
+
+        align-items: center;
+
+        margin-top: 9px;
+
+    }
+
+    .perfil-page .lp-habilidad-entrada input {
+
+        flex: 1;
+
+        width: 100%;
+
+    }
+
+    .perfil-page .lp-habilidad-entrada button {
+
+        width: 34px;
+
+        height: 36px;
+
+        flex-shrink: 0;
+
+        border: none;
+
+        border-radius: 9px;
+
+        background: #e9ddf8;
+
+        color: #63368f;
+
+        font-size: 22px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+    }
+
+    .perfil-page .lp-habilidad-entrada button:hover {
+
+        background: #d8c1f1;
+
+    }
+
+    /** Selector de habilidades sugeridas **/
+
+    .perfil-page .lp-habilidades-box
+
+    #habilidades-sugeridas {
+
+        margin-top: 8px;
+
+        border: none;
+
+        border-top: 1px solid #eee7f6;
+
+        border-radius: 0;
+
+        padding: 8px 2px 2px;
+
+        background: transparent;
+
+        font-size: 12px;
+
+        color: #78638e;
+
+        box-shadow: none;
+
+    }
+
+    /** Experiencia **/
+
+    .perfil-page .lp-experiencia {
+
+        margin-top: 4px;
+
+    }
+
+    .perfil-page .lp-datos-card
+
+    #experiencia {
+
+        min-height: 100px;
+
+        padding: 13px 15px;
+
+        resize: vertical;
+
+        line-height: 1.6;
+
+    }
+
+    .perfil-page .lp-contador {
+
+        text-align: right;
+
+        margin-top: -3px;
+
+        color: #6d5a88;
+
+        font-size: 12px;
+
+    }
+
+    /** Botones **/
+
+    .perfil-page .lp-datos-acciones {
+
+        display: flex;
+
+        gap: 14px;
+
+        align-items: center;
+
+        flex-wrap: wrap;
+
+        margin-top: 16px;
+
+    }
+
+    .perfil-page .lp-datos-acciones
+
+    .perfil-boton {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        min-height: 43px;
+
+        padding: 11px 28px;
+
+        border-radius: 10px;
+
+        background: linear-gradient(
+
+            180deg,
+
+            #9552ce 0%,
+
+            #5a2c87 100%
+
+        );
+
+        box-shadow: 0 5px 14px rgba(77, 37, 117, .14);
+
+    }
+
+    .perfil-page .lp-datos-acciones
+
+    .perfil-boton:hover {
+
+        filter: brightness(1.07);
+
+    }
+
+    .perfil-page .lp-datos-acciones
+
+    .perfil-boton:disabled {
+
+        opacity: .65;
+
+        cursor: wait;
+
+    }
+
+    .perfil-page .lp-boton-cancelar {
+
+        min-height: 43px;
+
+        padding: 10px 26px;
+
+        border: 1.5px solid #a77ad2;
+
+        border-radius: 10px;
+
+        background: #fff;
+
+        color: #5a3283;
+
+        font: inherit;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+    }
+
+    .perfil-page .lp-boton-cancelar:hover {
+
+        background: #f6effd;
+
+    }
+
+    /** Mensajes **/
+
+    .perfil-page .lp-datos-card
+
+    .perfil-mensaje {
+
+        margin-top: 12px;
+
+        font-size: 13px;
+
+    }
+
+    .perfil-page .lp-datos-card
+
+    .perfil-mensaje[data-tipo="error"] {
+
+        color: #b42348;
+
+    }
+
+    .perfil-page .lp-datos-card
+
+    .perfil-mensaje[data-tipo="exito"] {
+
+        color: #287445;
+
+    }
+
+    /** Adaptación a pantallas pequeñas **/
+
+    @media (max-width: 700px) {
+
+        .perfil-page .lp-datos-card {
+
+            padding: 20px 16px;
+
+        }
+
+        .perfil-page .lp-datos-grid {
+
+            grid-template-columns: minmax(0, 1fr);
+
+            gap: 18px;
+
+        }
+
+        .perfil-page .lp-datos-encabezado h2 {
+
+            font-size: 20px;
+
+        }
+
+        .perfil-page .lp-datos-acciones {
+
+            flex-direction: column;
+
+            align-items: stretch;
+
+        }
+
+        .perfil-page .lp-datos-acciones
+
+        .perfil-boton,
+
+        .perfil-page .lp-boton-cancelar {
+
+            width: 100%;
+
+        }
+
+    }
