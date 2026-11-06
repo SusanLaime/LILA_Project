@@ -63,4 +63,40 @@ export function validarLogin(datos) {
     : { ok: false, errores };
 }
 
-// TODO (Susan): validarPerfil(datos) — ciudad, habilidades y experiencia según docs/API.md.
+// TODO (Sara): validarPerfil(datos) — ciudad, habilidades y experiencia según docs/API.md.
+
+export function validarPerfil(datos) {
+  if (
+    !datos ||
+    typeof datos !== 'object' ||
+    Array.isArray(datos)
+  ) {
+    return {
+      ok: false,
+      errores: ['Los datos del perfil no son válidos.']
+    };
+  }
+
+  const errores = [];
+
+  const campos = [
+    ['ciudad', 60],
+    ['habilidades', 300],
+    ['experiencia', 1000]
+  ];
+
+  for (const [campo, maximo] of campos) {
+    if (
+      typeof datos[campo] !== 'string' ||
+      datos[campo].trim().length > maximo
+    ) {
+      errores.push(
+        `El campo ${campo} debe ser texto de máximo ${maximo} caracteres.`
+      );
+    }
+  }
+
+  return errores.length === 0
+    ? { ok: true }
+    : { ok: false, errores };
+}
