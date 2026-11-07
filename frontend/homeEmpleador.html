@@ -3,50 +3,89 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Publica una oferta de trabajo en LILA." />
+    <meta name="description" content="Panel de ofertas para empleadores en LILA." />
     <link rel="stylesheet" href="assets/css/base/reset.css" />
     <link rel="stylesheet" href="assets/css/base/typography.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
     <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
     <link rel="stylesheet" href="assets/css/components/header.css" />
-    <title>LILA — Publicar oferta</title>
+    <title>LILA — Panel del empleador</title>
 </head>
 <body>
-    <main class="role-home">
+    <main class="role-home employer-dashboard">
         <div id="header-placeholder"></div>
-
-        <section class="role-content employer-layout" aria-labelledby="employer-title">
-            <header class="role-header">
-                <span class="home-eyebrow">Encuentra talento</span>
-                <h1 id="employer-title">Publica una oferta y conecta con las personas indicadas.</h1>
-                <p>Describe el trabajo, indica las condiciones y recibe postulaciones de trabajadores de tu zona.</p>
+        <section class="role-content" aria-labelledby="employer-title">
+            <header class="dashboard-welcome">
+                <div>
+                    <span class="home-eyebrow">Panel del empleador</span>
+                    <h1 id="employer-title">Encuentra el talento que necesitas.</h1>
+                    <p>Revisa tus publicaciones, postulaciones y resultados desde un solo lugar.</p>
+                </div>
+                <a class="home-primary-button" href="publicarOferta.html">+ Publicar oferta</a>
             </header>
-            <form class="offer-form" id="offer-form">
-                <h2>Crear oferta de trabajo</h2>
-                <label for="offer-title">Título de la oferta
-                    <input id="offer-title" name="title" type="text" placeholder="Ej. Ayudante de cocina" required />
-                </label>
-                <label for="offer-location">Ubicación
-                    <input id="offer-location" name="location" type="text" placeholder="Ej. Cochabamba" required />
-                </label>
-                <label for="offer-type">Modalidad
-                    <select id="offer-type" name="type" required>
-                        <option value="" disabled selected>Selecciona una modalidad</option>
-                        <option>Tiempo completo</option>
-                        <option>Tiempo parcial</option>
-                        <option>Por proyecto</option>
-                        <option>Fin de semana</option>
-                    </select>
-                </label>
-                <label for="offer-pay">Pago o presupuesto
-                    <input id="offer-pay" name="pay" type="text" placeholder="Ej. Bs. 150 por día" required />
-                </label>
-                <label for="offer-description">Descripción
-                    <textarea id="offer-description" name="description" placeholder="Cuenta qué tareas realizará la persona..." required></textarea>
-                </label>
-                <p class="form-message" id="offer-message" role="status" aria-live="polite"></p>
-                <button class="home-primary-button" type="submit">Publicar oferta</button>
-            </form>
+
+            <section class="employer-report" aria-label="Resumen de rendimiento">
+                <div><strong>4</strong><span>Ofertas activas</span></div>
+                <div><strong>38</strong><span>Postulaciones</span></div>
+                <div><strong>246</strong><span>Visualizaciones</span></div>
+                <div><strong>6</strong><span>Contrataciones</span></div>
+            </section>
+
+            <section class="dashboard-section" aria-labelledby="recent-posts-title">
+                <header class="dashboard-section-heading">
+                    <div>
+                        <span class="home-eyebrow">Actividad reciente</span>
+                        <h2 id="recent-posts-title">Mis publicaciones</h2>
+                    </div>
+                    <label class="worker-sort" for="employer-sort">
+                        <span>Ordenar por</span>
+                        <select id="employer-sort">
+                            <option value="latest">Últimos publicados</option>
+                            <option value="az">Ordenar de A - Z</option>
+                            <option value="za">Ordenar de Z - A</option>
+                        </select>
+                    </label>
+                </header>
+                <div class="employer-post-grid" id="active-posts">
+                    <article class="employer-post-card" data-title="Ayudante de cocina" data-date="4" data-status="active">
+                        <div class="post-card-top"><span class="post-status active">Activa</span><span>Hace 2 días</span></div>
+                        <h3>Ayudante de cocina</h3>
+                        <p>Cochabamba · Tiempo parcial · Bs. 120 por día</p>
+                        <div class="post-metrics"><span><strong>12</strong> postulaciones</span><span><strong>86</strong> vistas</span></div>
+                        <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
+                    </article>
+                    <article class="employer-post-card" data-title="Diseñador/a para redes sociales" data-date="3" data-status="active">
+                        <div class="post-card-top"><span class="post-status active">Activa</span><span>Hace 4 días</span></div>
+                        <h3>Diseñador/a para redes sociales</h3>
+                        <p>Remoto · Por proyecto · Bs. 800 por proyecto</p>
+                        <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>64</strong> vistas</span></div>
+                        <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
+                    </article>
+                    <article class="employer-post-card" data-title="Vendedor/a de tienda" data-date="1" data-status="active">
+                        <div class="post-card-top"><span class="post-status active">Activa</span><span>Hace 1 semana</span></div>
+                        <h3>Vendedor/a de tienda</h3>
+                        <p>Quillacollo · Tiempo completo · Bs. 2.500 al mes</p>
+                        <div class="post-metrics"><span><strong>8</strong> postulaciones</span><span><strong>51</strong> vistas</span></div>
+                        <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
+                    </article>
+                </div>
+                <p class="dashboard-empty" id="active-empty" hidden>No tienes publicaciones activas. <a href="publicarOferta.html">Publica tu primera oferta.</a></p>
+            </section>
+
+            <section class="dashboard-section" aria-labelledby="past-posts-title">
+                <header class="dashboard-section-heading">
+                    <div><span class="home-eyebrow">Historial</span><h2 id="past-posts-title">Publicaciones anteriores</h2></div>
+                </header>
+                <div class="employer-post-grid past-posts">
+                    <article class="employer-post-card" data-title="Asistente de eventos" data-date="2" data-status="closed">
+                        <div class="post-card-top"><span class="post-status closed">Cerrada</span><span>Finalizada hace 2 semanas</span></div>
+                        <h3>Asistente de eventos</h3>
+                        <p>Cercado · Por servicio · Bs. 180 por jornada</p>
+                        <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>45</strong> vistas</span></div>
+                        <div class="post-actions"><button type="button" data-action="report">Ver reporte</button><button type="button" data-action="duplicate">Duplicar</button></div>
+                    </article>
+                </div>
+            </section>
         </section>
         <div id="footer-placeholder"></div>
     </main>
@@ -56,23 +95,43 @@
         initHeader('', 'empleador');
         initFooter();
 
+        const sortSelect = document.getElementById('employer-sort');
+        const activePosts = document.getElementById('active-posts');
+        const activeEmpty = document.getElementById('active-empty');
+        const posts = Array.from(activePosts.querySelectorAll('.employer-post-card'));
         const backToTop = document.querySelector('.back-to-top');
+
+        sortSelect.addEventListener('change', () => {
+            posts.sort((first, second) => {
+                if (sortSelect.value === 'az') return first.dataset.title.localeCompare(second.dataset.title);
+                if (sortSelect.value === 'za') return second.dataset.title.localeCompare(first.dataset.title);
+                return Number(second.dataset.date) - Number(first.dataset.date);
+            }).forEach(post => activePosts.appendChild(post));
+        });
+
+        document.querySelectorAll('[data-action]').forEach(button => {
+            button.addEventListener('click', () => {
+                const action = button.dataset.action;
+                if (action === 'pause') {
+                    const card = button.closest('.employer-post-card');
+                    const status = card.querySelector('.post-status');
+                    status.textContent = 'Pausada';
+                    status.className = 'post-status paused';
+                    button.textContent = 'Reactivar';
+                    button.dataset.action = 'reactivate';
+                    return;
+                }
+                button.closest('.employer-post-card').classList.add('is-selected');
+            });
+        });
 
         function updateBackToTopVisibility() {
             backToTop.classList.toggle('is-visible', window.scrollY > 320);
         }
-
         window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         updateBackToTopVisibility();
-
-        document.getElementById('offer-form').addEventListener('submit', event => {
-            event.preventDefault();
-            document.getElementById('offer-message').textContent =
-                'La oferta está lista para publicarse. Inicia sesión para guardarla en tu cuenta.';
-        });
+        activeEmpty.hidden = posts.length > 0;
     </script>
 </body>
 </html>
