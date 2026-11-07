@@ -16,12 +16,11 @@
         <div id="header-placeholder"></div>
 
         <section class="role-content" aria-labelledby="worker-title">
-            <header class="role-header">
-                <span class="home-eyebrow">Oportunidades para ti</span>
-                <h1 id="worker-title">Encuentra un trabajo que se adapte a tus habilidades.</h1>
-                <p>Estas son algunas ofertas de ejemplo. Revisa los detalles y postúlate a la que más te interese.</p>
-            </header>
-            <div class="offer-filters" aria-label="Filtros de ofertas">
+            <div class="worker-toolbar" aria-label="Buscar ofertas">
+                <label class="worker-search" for="job-search">
+                    <span aria-hidden="true">⌕</span>
+                    <input id="job-search" type="search" placeholder="Buscar por cargo o palabra clave">
+                </label>
                 <label for="area-filter">Área
                     <select id="area-filter">
                         <option value="todas">Todas las áreas</option>
@@ -41,46 +40,68 @@
                     </select>
                 </label>
             </div>
-            <section class="offer-category" aria-labelledby="category-gastronomia">
-                <h2 id="category-gastronomia">Gastronomía</h2>
-                <div class="offer-grid">
-                    <article class="offer-card" data-area="gastronomia" data-city="Cochabamba">
+            <div class="worker-layout">
+                <aside class="worker-sidebar" aria-label="Filtros adicionales">
+                    <div class="worker-promo">
+                        <span>Tu próximo paso</span>
+                        <strong>Encuentra un trabajo que se adapte a tus habilidades.</strong>
+                        <a href="website/trabajador/perfil.html">Completar mi perfil</a>
+                    </div>
+                    <div class="worker-checks">
+                        <h2>Filtros</h2>
+                        <fieldset>
+                            <legend>Modalidad</legend>
+                            <label><input class="modality-filter" type="checkbox" value="tiempo-completo"> Tiempo completo</label>
+                            <label><input class="modality-filter" type="checkbox" value="tiempo-parcial"> Tiempo parcial</label>
+                            <label><input class="modality-filter" type="checkbox" value="por-proyecto"> Por proyecto</label>
+                            <label><input class="modality-filter" type="checkbox" value="por-servicio"> Por servicio</label>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Tipo</legend>
+                            <label><input class="type-filter" type="checkbox" value="formal"> Formal</label>
+                            <label><input class="type-filter" type="checkbox" value="no-formal"> No formal</label>
+                        </fieldset>
+                    </div>
+                </aside>
+                <div class="worker-results">
+                    <header class="role-header">
+                        <div>
+                            <span class="home-eyebrow">Oportunidades para ti</span>
+                            <h1 id="worker-title">Ofertas recomendadas <span id="offer-count">4</span></h1>
+                        </div>
+                        <label class="worker-sort" for="sort-filter">
+                            <span>Ordenar por</span>
+                            <select id="sort-filter">
+                                <option value="latest">Últimos publicados</option>
+                                <option value="az">Ordenar de A - Z</option>
+                                <option value="za">Ordenar de Z - A</option>
+                            </select>
+                        </label>
+                        <p>Revisa los detalles y postúlate a la oportunidad que más te interese.</p>
+                    </header>
+                    <div class="offer-grid">
+                    <article class="offer-card" data-area="gastronomia" data-city="Cochabamba" data-modality="tiempo-parcial" data-type="formal" data-published="4">
                         <span class="role-label">Tiempo parcial</span>
                         <h3>Ayudante de cocina</h3>
                         <p>Apoya en la preparación de alimentos y mantén organizada el área de trabajo.</p>
                         <div class="offer-meta"><span>Cochabamba</span><span>Bs. 120 por día</span></div>
                         <a class="home-primary-button" href="auth/register.html">Postularme</a>
                     </article>
-                </div>
-            </section>
-            <section class="offer-category" aria-labelledby="category-diseno">
-                <h2 id="category-diseno">Diseño y marketing</h2>
-                <div class="offer-grid">
-                    <article class="offer-card" data-area="diseno" data-city="Remoto">
+                    <article class="offer-card" data-area="diseno" data-city="Remoto" data-modality="por-proyecto" data-type="no-formal" data-published="3">
                         <span class="role-label">Por proyecto</span>
                         <h3>Diseñador/a para redes sociales</h3>
                         <p>Crea piezas visuales para un emprendimiento local y ayuda a fortalecer su presencia digital.</p>
                         <div class="offer-meta"><span>Remoto</span><span>Bs. 800 por proyecto</span></div>
                         <a class="home-primary-button" href="auth/register.html">Postularme</a>
                     </article>
-                </div>
-            </section>
-            <section class="offer-category" aria-labelledby="category-eventos">
-                <h2 id="category-eventos">Eventos</h2>
-                <div class="offer-grid">
-                    <article class="offer-card" data-area="eventos" data-city="Cercado">
+                    <article class="offer-card" data-area="eventos" data-city="Cercado" data-modality="por-servicio" data-type="no-formal" data-published="2">
                         <span class="role-label">Fin de semana</span>
                         <h3>Asistente de eventos</h3>
                         <p>Colabora con el montaje, la atención de invitados y el cierre de eventos.</p>
                         <div class="offer-meta"><span>Cercado</span><span>Bs. 180 por jornada</span></div>
                         <a class="home-primary-button" href="auth/register.html">Postularme</a>
                     </article>
-                </div>
-            </section>
-            <section class="offer-category" aria-labelledby="category-ventas">
-                <h2 id="category-ventas">Ventas y comercio</h2>
-                <div class="offer-grid">
-                    <article class="offer-card" data-area="ventas" data-city="Quillacollo">
+                    <article class="offer-card" data-area="ventas" data-city="Quillacollo" data-modality="tiempo-completo" data-type="formal" data-published="1">
                         <span class="role-label">Tiempo completo</span>
                         <h3>Vendedor/a de tienda</h3>
                         <p>Atiende a clientes, organiza productos y registra las ventas del día.</p>
@@ -88,7 +109,8 @@
                         <a class="home-primary-button" href="auth/register.html">Postularme</a>
                     </article>
                 </div>
-            </section>
+                </div>
+            </div>
         </section>
         <div id="footer-placeholder"></div>
     </main>
@@ -99,19 +121,47 @@
 
         const areaFilter = document.getElementById('area-filter');
         const cityFilter = document.getElementById('city-filter');
-        const categories = document.querySelectorAll('.offer-category');
+        const searchInput = document.getElementById('job-search');
+        const sortFilter = document.getElementById('sort-filter');
+        const offerGrid = document.querySelector('.offer-grid');
+        const offers = Array.from(document.querySelectorAll('.offer-card'));
+        const offerCount = document.getElementById('offer-count');
+        const modalityFilters = document.querySelectorAll('.modality-filter');
+        const typeFilters = document.querySelectorAll('.type-filter');
 
         function filterOffers() {
-            categories.forEach(category => {
-                const offer = category.querySelector('.offer-card');
+            const search = searchInput.value.trim().toLowerCase();
+            const selectedModalities = Array.from(modalityFilters).filter(filter => filter.checked).map(filter => filter.value);
+            const selectedTypes = Array.from(typeFilters).filter(filter => filter.checked).map(filter => filter.value);
+            const sortedOffers = [...offers].sort((firstOffer, secondOffer) => {
+                if (sortFilter.value === 'az') {
+                    return firstOffer.querySelector('h3').textContent.localeCompare(secondOffer.querySelector('h3').textContent);
+                }
+                if (sortFilter.value === 'za') {
+                    return secondOffer.querySelector('h3').textContent.localeCompare(firstOffer.querySelector('h3').textContent);
+                }
+                return Number(secondOffer.dataset.published) - Number(firstOffer.dataset.published);
+            });
+            let visibleOffers = 0;
+            sortedOffers.forEach(offer => {
                 const matchesArea = areaFilter.value === 'todas' || offer.dataset.area === areaFilter.value;
                 const matchesCity = cityFilter.value === 'todas' || offer.dataset.city === cityFilter.value;
-                category.hidden = !(matchesArea && matchesCity);
+                const matchesSearch = !search || offer.textContent.toLowerCase().includes(search);
+                const matchesModality = selectedModalities.length === 0 || selectedModalities.includes(offer.dataset.modality);
+                const matchesType = selectedTypes.length === 0 || selectedTypes.includes(offer.dataset.type);
+                offer.hidden = !(matchesArea && matchesCity && matchesSearch && matchesModality && matchesType);
+                if (!offer.hidden) visibleOffers += 1;
+                offerGrid.appendChild(offer);
             });
+            offerCount.textContent = visibleOffers;
         }
 
         areaFilter.addEventListener('change', filterOffers);
         cityFilter.addEventListener('change', filterOffers);
+        searchInput.addEventListener('input', filterOffers);
+        sortFilter.addEventListener('change', filterOffers);
+        modalityFilters.forEach(filter => filter.addEventListener('change', filterOffers));
+        typeFilters.forEach(filter => filter.addEventListener('change', filterOffers));
     </script>
 </body>
 </html>
