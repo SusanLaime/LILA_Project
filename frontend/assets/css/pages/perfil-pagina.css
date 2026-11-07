@@ -1,8 +1,8 @@
-/** DUEÑA/O: Sara Revollo — Pantalla de perfil (estilos propios) **/
+/** DUEÑA/O: Sara Revollo — Pantalla de perfil (estilos propios) */
 
-/** Esta pantalla usa su propio menú lateral, así que se oculta el encabezado compartido*
+/** Esta pantalla usa su propio menú lateral, así que se oculta el encabezado compartido**
 
-*   solo aquí. Para volver a mostrarlo, borra esta regla. **/
+**   solo aquí. Para volver a mostrarlo, borra esta regla. */
 
 #header-placeholder {
 
@@ -26,7 +26,7 @@ main.perfil-page {
 
     --gris: #6d6b7c;
 
-    /** Anula lo que la página pueda heredar de otros estilos **/
+    /** Anula lo que la página pueda heredar de otros estilos */
 
     display: block !important;
 
@@ -56,7 +56,7 @@ main.perfil-page {
 
 }
 
-/** Sin esto, lo que el JS oculta a los empleadores seguiría visible **/
+/** Sin esto, lo que el JS oculta a los empleadores seguiría visible */
 
 .perfil-page [hidden] {
 
@@ -88,7 +88,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Íconos SVG (sin emojis) ---------- **/
+/** ---------- Íconos SVG (sin emojis) ---------- */
 
 .perfil-page .lp-ico,
 
@@ -116,7 +116,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Estructura: menú + contenido ---------- **/
+/** ---------- Estructura: menú + contenido ---------- */
 
 .perfil-page .lp-app {
 
@@ -146,7 +146,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Menú lateral ---------- **/
+/** ---------- Menú lateral ---------- */
 
 .perfil-page .lp-sidebar {
 
@@ -172,7 +172,7 @@ main.perfil-page {
 
 }
 
-/** Logo oficial **/
+/** Logo oficial */
 
 .perfil-page .lp-logo {
 
@@ -322,7 +322,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Barra superior ---------- **/
+/** ---------- Barra superior ---------- */
 
 .perfil-page .lp-topbar {
 
@@ -422,7 +422,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Banner ---------- **/
+/** ---------- Banner ---------- */
 
 .perfil-page .lp-banner {
 
@@ -578,7 +578,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Rejilla principal ---------- **/
+/** ---------- Rejilla principal ---------- */
 
 .perfil-page .lp-grid {
 
@@ -612,7 +612,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Tarjetas de resumen ---------- **/
+/** ---------- Tarjetas de resumen ---------- */
 
 .perfil-page .lp-resumen {
 
@@ -700,7 +700,7 @@ main.perfil-page {
 
 }
 
-/** Estado: naranja suave por defecto, verde solo si está verificado **/
+/** Estado: naranja suave por defecto, verde solo si está verificado */
 
 .perfil-page .perfil-estado {
 
@@ -730,7 +730,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Formulario ---------- **/
+/** ---------- Formulario ---------- */
 
 .perfil-page .lp-tarjeta {
 
@@ -844,7 +844,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Próximamente ---------- **/
+/** ---------- Próximamente ---------- */
 
 .perfil-page .lp-pronto-grid {
 
@@ -914,7 +914,7 @@ main.perfil-page {
 
 }
 
-/** ---------- Columna derecha ---------- **/
+/** ---------- Columna derecha ---------- */
 
 .perfil-page .lp-progreso-texto {
 
@@ -1004,11 +1004,11 @@ main.perfil-page {
 
 }
 
-/** Marca de "hecho" dibujada, sin caracteres especiales **/
+/** Marca de "hecho" dibujada, sin caracteres especiales */
 
 .perfil-page .lp-lista li.hecho::before {
 
-    background: var(--morado) url("data:image/svg+xml,%3Csvg xmlns='http://www\.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12 10 17 19 7'/%3E%3C/svg%3E") center / 13px no-repeat;
+    background: var(--morado) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='5 12 10 17 19 7'/%3E%3C/svg%3E") center / 13px no-repeat;
 
     border-color: var(--morado);
 
@@ -1042,83 +1042,13 @@ main.perfil-page {
 
 }
 
-/** ---------- Responsive ---------- **/
+/** ---------- Responsive ---------- */
 
 @media (max-width: 1100px) {
 
     .perfil-page .lp-grid {
 
         grid-template-columns: minmax(0, 1fr);
-
-    }
-
-}
-
-@media (max-width: 900px) {
-
-    .perfil-page .lp-app {
-
-        grid-template-columns: minmax(0, 1fr);
-
-        gap: 16px;
-
-    }
-
-    /** El menú lateral pasa a ser una tira horizontal arriba **/
-
-    .perfil-page .lp-sidebar {
-
-        position: static;
-
-        height: auto;
-
-        flex-direction: row;
-
-        align-items: center;
-
-        gap: 12px;
-
-        padding: 12px;
-
-        overflow-x: auto;
-
-    }
-
-    .perfil-page .lp-logo {
-
-        flex-shrink: 0;
-
-        padding: 6px 12px;
-
-    }
-
-    .perfil-page .lp-logo img {
-
-        width: auto;
-
-        height: 36px;
-
-        max-width: none;
-
-    }
-
-    .perfil-page .lp-menu em {
-
-        display: none;
-
-    }
-
-    .perfil-page .lp-menu {
-
-        flex-direction: row;
-
-    }
-
-    .perfil-page .lp-salir {
-
-        margin-top: 0;
-
-        margin-left: auto;
 
     }
 
@@ -1178,15 +1108,15 @@ main.perfil-page {
 
     }
 
-/** ==========================================================*
+/** ==========================================================**
 
-*    LILA - MIS DATOS V2*
+**    LILA - MIS DATOS V2**
 
-*    Reutiliza: lp-tarjeta, perfil-campo y perfil-boton*
+**    Reutiliza: lp-tarjeta, perfil-campo y perfil-boton**
 
-*    ========================================================== **/
+**    ========================================================== */
 
-    /** Tarjeta principal **/
+    /** Tarjeta principal */
 
     .perfil-page .lp-datos-card {
 
@@ -1200,24 +1130,39 @@ main.perfil-page {
 
     }
 
-    /* Los iconos de esta tarjeta requieren dimensiones explícitas.
-   Evita SVG gigantes por estilos compartidos de otras páginas. */
+    /** Los iconos de esta tarjeta requieren dimensiones explícitas.*
+
+*   Evita SVG gigantes por estilos compartidos de otras páginas. **/
+
 .perfil-page .lp-datos-card svg {
+
     display: block;
+
     width: 19px;
+
     height: 19px;
+
     min-width: 19px;
+
     max-width: 19px;
+
     min-height: 19px;
+
     max-height: 19px;
+
     fill: none;
+
     stroke: #7039ac;
+
     stroke-width: 2;
+
     stroke-linecap: round;
+
     stroke-linejoin: round;
+
 }
 
-/** Encabezado **/
+/** Encabezado */
 
     .perfil-page .lp-datos-encabezado {
 
@@ -1232,9 +1177,13 @@ main.perfil-page {
     }
 
     .perfil-page .lp-datos-encabezado > svg {
+
     min-width: 27px;
+
     max-width: 27px;
+
     min-height: 27px;
+
     max-height: 27px;
 
         width: 27px;
@@ -1281,7 +1230,7 @@ main.perfil-page {
 
     }
 
-    /** Formulario de dos columnas **/
+    /** Formulario de dos columnas */
 
     .perfil-page .lp-datos-grid {
 
@@ -1305,7 +1254,7 @@ main.perfil-page {
 
     }
 
-    /** Etiquetas e iconos **/
+    /** Etiquetas e iconos */
 
     .perfil-page .lp-campo-etiqueta {
 
@@ -1349,7 +1298,7 @@ main.perfil-page {
 
     }
 
-    /** Campos generales **/
+    /** Campos generales */
 
     .perfil-page .lp-datos-card
 
@@ -1421,7 +1370,7 @@ main.perfil-page {
 
     }
 
-    /** Habilidades **/
+    /** Habilidades */
 
     .perfil-page .lp-habilidades-box {
 
@@ -1511,7 +1460,7 @@ main.perfil-page {
 
     }
 
-    /** Entrada de nuevas habilidades **/
+    /** Entrada de nuevas habilidades */
 
     .perfil-page .lp-habilidad-entrada {
 
@@ -1563,7 +1512,7 @@ main.perfil-page {
 
     }
 
-    /** Selector de habilidades sugeridas **/
+    /** Selector de habilidades sugeridas */
 
     .perfil-page .lp-habilidades-box
 
@@ -1589,7 +1538,7 @@ main.perfil-page {
 
     }
 
-    /** Experiencia **/
+    /** Experiencia */
 
     .perfil-page .lp-experiencia {
 
@@ -1623,7 +1572,7 @@ main.perfil-page {
 
     }
 
-    /** Botones **/
+    /** Botones */
 
     .perfil-page .lp-datos-acciones {
 
@@ -1717,7 +1666,7 @@ main.perfil-page {
 
     }
 
-    /** Mensajes **/
+    /** Mensajes */
 
     .perfil-page .lp-datos-card
 
@@ -1745,7 +1694,7 @@ main.perfil-page {
 
     }
 
-    /** Adaptación a pantallas pequeñas **/
+    /** Adaptación a pantallas pequeñas */
 
     @media (max-width: 700px) {
 
@@ -1787,89 +1736,316 @@ main.perfil-page {
 
         }
 
+    }
 
-    /* ==========================================
-    PERFIL - TARJETA DE POSTULACIONES
-    ========================================== */
+/** ==========================================*
 
-    /* Cuatro tarjetas en el resumen */
+*    PERFIL - TARJETA DE POSTULACIONES*
+
+*    ========================================== **/
+
+    /** Cuatro tarjetas en el resumen **/
+
     .perfil-page .lp-resumen {
+
         grid-template-columns: repeat(4, minmax(0, 1fr));
+
         gap: 10px;
+
     }
 
-    /* Ajuste de espacio */
+    /** Ajuste de espacio **/
+
     .perfil-page .lp-res {
+
         padding: 18px 8px;
+
         min-width: 0;
+
     }
 
-    /* Texto de las tarjetas */
+    /** Texto de las tarjetas **/
+
     .perfil-page .lp-res-valor {
+
         font-size: 14px;
+
         overflow-wrap: anywhere;
+
     }
 
-    /* Postulaciones - estado temporal */
+    /** Postulaciones - estado temporal **/
+
     .perfil-page .lp-res-postulaciones .lp-res-valor {
+
         font-size: 12px;
+
         color: #7951a7;
+
         font-weight: 700;
+
     }
 
-    /* ==========================================
-    BOTÓN BUSCAR OFERTAS
-    ========================================== */
+    /** ==========================================*
+
+*    BOTÓN BUSCAR OFERTAS*
+
+*    ========================================== **/
 
     .perfil-page .lp-pronto-enlace {
+
         display: inline-flex;
+
         align-items: center;
+
         justify-content: center;
+
         gap: 8px;
 
         padding: 10px 20px;
+
         border-radius: 999px;
 
         background: #6c46a6;
+
         color: #ffffff;
 
         font-size: 13px;
+
         font-weight: 600;
+
         text-decoration: none;
 
         transition: background 0.2s ease;
+
     }
 
     .perfil-page .lp-pronto-enlace:hover {
+
         background: #4b2d7d;
+
         color: #ffffff;
+
         text-decoration: none;
+
     }
 
     .perfil-page .lp-pronto-enlace:focus-visible {
+
         outline: 3px solid #ad8ce0;
+
         outline-offset: 3px;
+
     }
 
-    /* ==========================================
-    RESPONSIVE
-    ========================================== */
+    /** ==========================================*
+
+*    RESPONSIVE*
+
+*    ========================================== **/
 
     @media (max-width: 700px) {
+
         .perfil-page .lp-resumen {
+
             grid-template-columns: repeat(2, minmax(0, 1fr));
+
         }
 
         .perfil-page .lp-res {
+
             padding: 16px 10px;
+
         }
+
     }
 
     @media (max-width: 400px) {
+
         .perfil-page .lp-resumen {
+
             grid-template-columns: minmax(0, 1fr);
+
         }
-    }
-
 
     }
+
+/* =====================================================
+   RESUMEN EN CUATRO COLUMNAS Y ADAPTACIÓN RESPONSIVA
+   ===================================================== */
+@media (max-width: 700px) {
+    .perfil-page .lp-resumen {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =====================================================
+   MENÚ HAMBURGUESA
+   Visibilidad explícita en escritorio para evitar
+   rectángulos vacíos de estilos heredados.
+   ===================================================== */
+.perfil-page .lp-app > .lp-menu-hamburguesa,
+.perfil-page .lp-app > .lp-menu-fondo,
+.perfil-page .lp-sidebar > .lp-menu-cerrar {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .perfil-page .lp-app {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .perfil-page .lp-app > .lp-menu-hamburguesa {
+        display: flex !important;
+        position: fixed;
+        top: 14px;
+        left: 14px;
+        z-index: 1002;
+        justify-content: center;
+        align-items: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        border-radius: 12px;
+        background: #68469c;
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(30, 15, 61, .18);
+        cursor: pointer;
+    }
+
+    .perfil-page .lp-app > .lp-menu-hamburguesa svg,
+    .perfil-page .lp-sidebar > .lp-menu-cerrar svg {
+        display: block;
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+
+    .perfil-page .lp-app > .lp-menu-fondo {
+        display: block !important;
+        position: fixed;
+        inset: 0;
+        z-index: 1003;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        background: rgba(26, 15, 51, .55);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .28s ease, visibility .28s ease;
+    }
+
+    .perfil-page .lp-app > .lp-menu-fondo.activo {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .perfil-page .lp-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1004;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        width: min(285px, 85vw);
+        height: 100vh;
+        height: 100dvh;
+        max-height: none;
+        padding: 64px 18px 24px;
+        margin: 0;
+        border-radius: 0 20px 20px 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background: linear-gradient(180deg, #795fba 0%, #302448 100%);
+        transform: translateX(-105%);
+        visibility: hidden;
+        transition: transform .28s ease, visibility .28s ease;
+    }
+
+    .perfil-page .lp-sidebar.lp-sidebar-abierto {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    .perfil-page .lp-menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .perfil-page .lp-menu a {
+        width: 100%;
+        padding: 13px 14px;
+        font-size: 14px;
+    }
+
+    .perfil-page .lp-menu em { display: inline-block; }
+
+    .perfil-page .lp-logo {
+        padding: 12px;
+        flex-shrink: 0;
+    }
+
+    .perfil-page .lp-logo img {
+        display: block;
+        width: 100%;
+        max-width: 165px;
+        height: auto;
+    }
+
+    .perfil-page .lp-salir {
+        margin-top: auto;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .perfil-page .lp-sidebar > .lp-menu-cerrar {
+        display: flex !important;
+        position: absolute;
+        top: 13px;
+        right: 14px;
+        z-index: 2;
+        justify-content: center;
+        align-items: center;
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        margin: 0;
+        border: none;
+        border-radius: 9px;
+        background: rgba(255, 255, 255, .15);
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .perfil-page .lp-contenido {
+        padding-top: 58px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .perfil-page .lp-sidebar,
+    .perfil-page .lp-app > .lp-menu-fondo {
+        transition: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .perfil-page .lp-resumen {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
