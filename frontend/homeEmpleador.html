@@ -50,10 +50,23 @@
         </section>
         <div id="footer-placeholder"></div>
     </main>
+    <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
     <script type="module">
         import { initFooter, initHeader } from './assets/js/components.js';
         initHeader('', 'empleador');
         initFooter();
+
+        const backToTop = document.querySelector('.back-to-top');
+
+        function updateBackToTopVisibility() {
+            backToTop.classList.toggle('is-visible', window.scrollY > 320);
+        }
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        updateBackToTopVisibility();
 
         document.getElementById('offer-form').addEventListener('submit', event => {
             event.preventDefault();

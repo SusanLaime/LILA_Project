@@ -114,6 +114,7 @@
         </section>
         <div id="footer-placeholder"></div>
     </main>
+    <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
     <script type="module">
         import { initFooter, initHeader } from './assets/js/components.js';
         initHeader('', 'trabajador');
@@ -128,6 +129,7 @@
         const offerCount = document.getElementById('offer-count');
         const modalityFilters = document.querySelectorAll('.modality-filter');
         const typeFilters = document.querySelectorAll('.type-filter');
+        const backToTop = document.querySelector('.back-to-top');
 
         function filterOffers() {
             const search = searchInput.value.trim().toLowerCase();
@@ -162,6 +164,16 @@
         sortFilter.addEventListener('change', filterOffers);
         modalityFilters.forEach(filter => filter.addEventListener('change', filterOffers));
         typeFilters.forEach(filter => filter.addEventListener('change', filterOffers));
+
+        function updateBackToTopVisibility() {
+            backToTop.classList.toggle('is-visible', window.scrollY > 320);
+        }
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        updateBackToTopVisibility();
     </script>
 </body>
 </html>
