@@ -86,7 +86,7 @@
                         <p>Apoya en la preparación de alimentos y mantén organizada el área de trabajo.</p>
                         <div class="offer-meta"><span>Cochabamba</span><span>Bs. 120 por día</span></div>
                         <div class="offer-card-footer">
-                            <div class="offer-publisher" tabindex="0" aria-label="Ver información de Restaurante Sazón Local">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Restaurante Sazón Local">
                                 <img src="https://via.placeholder.com/40" alt="Foto de Restaurante Sazón Local">
                                 <strong>Restaurante Sazón Local</strong>
                                 <span class="offer-rating" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -101,7 +101,7 @@
                         <p>Crea piezas visuales para un emprendimiento local y ayuda a fortalecer su presencia digital.</p>
                         <div class="offer-meta"><span>Remoto</span><span>Bs. 800 por proyecto</span></div>
                         <div class="offer-card-footer">
-                            <div class="offer-publisher" tabindex="0" aria-label="Ver información de Emprendimiento Creativo LILA">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Emprendimiento Creativo LILA">
                                 <img src="https://via.placeholder.com/40" alt="Foto de Emprendimiento Creativo LILA">
                                 <strong>Emprendimiento Creativo LILA</strong>
                                 <span class="offer-rating" aria-label="4 de 5 estrellas">★★★★<span aria-hidden="true">★</span></span>
@@ -116,7 +116,7 @@
                         <p>Colabora con el montaje, la atención de invitados y el cierre de eventos.</p>
                         <div class="offer-meta"><span>Cercado</span><span>Bs. 180 por jornada</span></div>
                         <div class="offer-card-footer">
-                            <div class="offer-publisher" tabindex="0" aria-label="Ver información de Eventos Cercado">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Eventos Cercado">
                                 <img src="https://via.placeholder.com/40" alt="Foto de Eventos Cercado">
                                 <strong>Eventos Cercado</strong>
                                 <span class="offer-rating" aria-label="5 de 5 estrellas">★★★★★</span>
@@ -131,7 +131,7 @@
                         <p>Atiende a clientes, organiza productos y registra las ventas del día.</p>
                         <div class="offer-meta"><span>Quillacollo</span><span>Bs. 2.500 al mes</span></div>
                         <div class="offer-card-footer">
-                            <div class="offer-publisher" tabindex="0" aria-label="Ver información de Comercial Quillacollo">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Comercial Quillacollo">
                                 <img src="https://via.placeholder.com/40" alt="Foto de Comercial Quillacollo">
                                 <strong>Comercial Quillacollo</strong>
                                 <span class="offer-rating" aria-label="4 de 5 estrellas">★★★★<span aria-hidden="true">★</span></span>
@@ -175,6 +175,7 @@
     <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
     <script type="module">
         import { initFooter, initHeader } from './assets/js/components.js';
+        import { obtenerToken } from './assets/js/sesion.js';
         initHeader('', 'trabajador');
         initFooter();
 
@@ -188,6 +189,23 @@
         const modalityFilters = document.querySelectorAll('.modality-filter');
         const typeFilters = document.querySelectorAll('.type-filter');
         const backToTop = document.querySelector('.back-to-top');
+        const hasSession = Boolean(obtenerToken());
+
+        document.querySelectorAll('[data-publisher-profile]').forEach(profile => {
+            if (hasSession) {
+                profile.classList.add('is-authenticated');
+                profile.setAttribute('aria-label', `${profile.querySelector('strong').textContent}: abrir perfil`);
+                profile.addEventListener('click', () => {
+                    window.location.href = 'perfilEmpleador.html';
+                });
+                profile.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        window.location.href = 'perfilEmpleador.html';
+                    }
+                });
+            }
+        });
         const offerModal = document.getElementById('offer-modal');
         const offerModalClose = document.getElementById('offer-modal-close');
         const offerSaveButton = document.getElementById('offer-save-button');

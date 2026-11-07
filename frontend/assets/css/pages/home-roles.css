@@ -353,6 +353,14 @@
     transform: translateY(0);
 }
 
+.offer-publisher.is-authenticated {
+    cursor: pointer;
+}
+
+.offer-publisher.is-authenticated .publisher-popover {
+    display: none;
+}
+
 .offer-card-footer {
     display: flex;
     align-items: center;
