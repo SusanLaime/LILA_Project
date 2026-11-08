@@ -844,76 +844,6 @@ main.perfil-page {
 
 }
 
-/** ---------- Próximamente ---------- */
-
-.perfil-page .lp-pronto-grid {
-
-    display: grid;
-
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 16px;
-
-}
-
-.perfil-page .lp-pronto {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 10px;
-
-    padding: 20px;
-
-    border-radius: 20px;
-
-    background: #e3d9f7;
-
-    color: var(--morado);
-
-}
-
-.perfil-page .lp-pronto strong {
-
-    font-size: 16px;
-
-    color: var(--morado-oscuro);
-
-}
-
-.perfil-page .lp-pronto span {
-
-    font-size: 13px;
-
-}
-
-.perfil-page .lp-pronto button {
-
-    padding: 8px 22px;
-
-    border: none;
-
-    border-radius: 999px;
-
-    background: var(--morado-claro);
-
-    color: #fff;
-
-    font: inherit;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    opacity: 0.7;
-
-    cursor: not-allowed;
-
-}
-
 /** ---------- Columna derecha ---------- */
 
 .perfil-page .lp-progreso-texto {
@@ -1086,12 +1016,8 @@ main.perfil-page {
 
     }
 
-    .perfil-page .lp-resumen,
-
-    .perfil-page .lp-pronto-grid {
-
-        grid-template-columns: minmax(0, 1fr);
-
+    .perfil-page .lp-resumen {
+    grid-template-columns: minmax(0, 1fr);
     }
 
     .perfil-page .lp-tarjeta {
@@ -1786,57 +1712,6 @@ main.perfil-page {
 
     }
 
-    /** ==========================================*
-
-*    BOTÓN BUSCAR OFERTAS*
-
-*    ========================================== **/
-
-    .perfil-page .lp-pronto-enlace {
-
-        display: inline-flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        gap: 8px;
-
-        padding: 10px 20px;
-
-        border-radius: 999px;
-
-        background: #6c46a6;
-
-        color: #ffffff;
-
-        font-size: 13px;
-
-        font-weight: 600;
-
-        text-decoration: none;
-
-        transition: background 0.2s ease;
-
-    }
-
-    .perfil-page .lp-pronto-enlace:hover {
-
-        background: #4b2d7d;
-
-        color: #ffffff;
-
-        text-decoration: none;
-
-    }
-
-    .perfil-page .lp-pronto-enlace:focus-visible {
-
-        outline: 3px solid #ad8ce0;
-
-        outline-offset: 3px;
-
-    }
 
     /** ==========================================*
 
@@ -2048,4 +1923,15 @@ main.perfil-page {
     .perfil-page .lp-resumen {
         grid-template-columns: minmax(0, 1fr);
     }
+}
+
+
+/* Footer a todo el ancho del perfil */
+.perfil-page > #footer-placeholder {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 24px 0 0;
+    padding: 0;
+    box-sizing: border-box;
 }
