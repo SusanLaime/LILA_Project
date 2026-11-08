@@ -31,6 +31,8 @@ const CAMPOS_PUBLICOS = `
     ciudad,
     habilidades,
     experiencia,
+    genero,
+    edad,
     estado_verificacion
 `;
 
@@ -95,6 +97,14 @@ router.put('/', (req, res) => {
     // Ciudad: disponible para ambos roles
     const ciudad = req.body.ciudad.trim();
 
+    const genero = req.body.genero === undefined
+        ? perfilAnterior.genero
+        : req.body.genero;
+
+    const edad = req.body.edad === undefined
+        ? perfilAnterior.edad
+        : req.body.edad;
+
     // Campos laborales: solo trabajadores
     const habilidades = perfilAnterior.rol === 'trabajador'
         ? req.body.habilidades.trim()
@@ -110,7 +120,9 @@ router.put('/', (req, res) => {
         SET
             ciudad = ?,
             habilidades = ?,
-            experiencia = ?
+            experiencia = ?,
+            genero = ?,
+            edad = ?
         WHERE id = ?
     `);
 
@@ -118,6 +130,8 @@ router.put('/', (req, res) => {
         ciudad,
         habilidades,
         experiencia,
+        genero,
+        edad,
         req.usuarioId
     );
 

@@ -28,6 +28,8 @@ if (!token) {
     const ciudad = document.getElementById('ciudad');
     const telefono = document.getElementById('telefono-perfil');
     const experiencia = document.getElementById('experiencia');
+    const genero = document.getElementById('genero');
+    const edad = document.getElementById('edad');
 
     const habilidades = document.getElementById('habilidades');
     const habilidadesTags = document.getElementById('habilidades-tags');
@@ -364,6 +366,9 @@ if (!token) {
         // Campos de Mis datos
         establecerCiudad(perfil.ciudad);
 
+        genero.value = perfil.genero || '';
+        edad.value = perfil.edad ?? '';
+
         telefono.value = perfil.telefono
             ? `+591 ${perfil.telefono}`
             : '';
@@ -446,6 +451,8 @@ if (!token) {
 
         const cuerpo = {
             ciudad: ciudad.value,
+            genero: genero.value,
+            edad: edad.value === '' ? null : Number(edad.value),
 
             // Mantener los valores anteriores si es empleador
             habilidades: esTrabajador
@@ -523,7 +530,7 @@ if (!token) {
         mostrarMensaje('');
     });
 
-    
+
     // ======================================================
     // MENÚ HAMBURGUESA PARA CELULARES
     // ======================================================
