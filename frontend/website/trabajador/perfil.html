@@ -107,7 +107,7 @@
                         Inicio
                     </a>
 
-                    <a href="/frontend/homeTrabajador.html">
+                    <a id="enlace-ofertas" href="/frontend/homeTrabajador.html">
                         <svg class="lp-ico"
                             viewBox="0 0 24 24"
                             aria-hidden="true">
@@ -115,7 +115,7 @@
                             <line x1="21" y1="21"
                                 x2="16.65" y2="16.65"/>
                         </svg>
-                        Ofertas
+                        <span id="texto-ofertas">Ofertas</span>
                     </a>
 
                     <a class="pronto"
@@ -290,21 +290,25 @@
                                         Rol
                                     </span>
                                 </article>
-                                <!-- POSTULACIONES -->
-                                <article class="lp-res lp-res-postulaciones">
-                                    <span class="lp-res-icono" aria-hidden="true">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M22 2L11 13"/>
-                                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+
+                                <!-- TARJETA CIUDAD -->
+                                <article class="lp-res">
+                                    <div class="lp-res-icono">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/>
+                                            <circle cx="12" cy="10" r="2.5"/>
                                         </svg>
-                                    </span>
-                                    <span class="lp-res-valor">
-                                        Próximamente
-                                    </span>
+                                    </div>
+
+                                    <strong class="lp-res-valor" id="perfil-ciudad">
+                                        Sin registrar
+                                    </strong>
+
                                     <span class="lp-res-etiqueta">
-                                        Postulaciones
+                                        Ciudad
                                     </span>
                                 </article>
+
                             </div>
                         </section>
                         <!--* =============================*
@@ -634,6 +638,13 @@
                             <ul class="lp-lista">
                                 <li data-campo="ciudad">
                                     Agrega tu ciudad
+                                </li>
+                                <li data-campo="genero">
+                                    Selecciona tu género
+                                </li>
+
+                                <li data-campo="edad">
+                                    Ingresa tu edad
                                 </li>
                                 <li
                                     class="solo-trabajador"

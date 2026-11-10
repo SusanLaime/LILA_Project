@@ -280,8 +280,8 @@ if (!token) {
     function actualizarProgreso(perfil) {
 
         const campos = perfil.rol === 'empleador'
-            ? ['ciudad']
-            : ['ciudad', 'habilidades', 'experiencia'];
+            ? ['ciudad', 'genero', 'edad']
+            : ['ciudad', 'genero', 'edad', 'habilidades', 'experiencia'];
 
         let completos = 0;
 
@@ -330,6 +330,20 @@ if (!token) {
         const nombre = perfil.nombre || 'Usuario';
         const rol = perfil.rol || 'trabajador';
 
+        // Adaptar el menú de ofertas según el rol
+        const enlaceOfertas = document.getElementById('enlace-ofertas');
+        const textoOfertas = document.getElementById('texto-ofertas');
+
+        if (enlaceOfertas && textoOfertas) {
+            if (rol === 'empleador') {
+                textoOfertas.textContent = 'Ofertas realizadas';
+                enlaceOfertas.href = '/frontend/homeEmpleador.html';
+            } else {
+                textoOfertas.textContent = 'Ofertas';
+                enlaceOfertas.href = '/frontend/homeTrabajador.html';
+            }
+        }
+
         const estado =
             perfil.estado_verificacion || 'no_verificado';
 
@@ -352,6 +366,13 @@ if (!token) {
 
         document.getElementById('perfil-rol').textContent =
             rol;
+
+        // Mostrar ciudad en la cuarta tarjeta del resumen
+        const tarjetaCiudad = document.getElementById('perfil-ciudad');
+
+        if (tarjetaCiudad) {
+            tarjetaCiudad.textContent = perfil.ciudad || 'Sin registrar';
+        }
 
         const badge = document.getElementById('badge-verif');
 
