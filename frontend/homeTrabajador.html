@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="assets/css/base/typography.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
     <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
+    <link rel="stylesheet" href="assets/css/pages/home-trabajador.css" />
     <link rel="stylesheet" href="assets/css/components/header.css" />
     <title>LILA — Ofertas de trabajo</title>
 </head>
 <body>
-    <main class="role-home">
+    <main class="role-home worker-home">
         <div id="header-placeholder"></div>
 
         <section class="role-content" aria-labelledby="worker-title">
@@ -44,7 +45,24 @@
                 <aside class="worker-sidebar" aria-label="Filtros adicionales">
                     <div class="worker-promo">
                         <span>Tu próximo paso</span>
-                        <strong>Encuentra un trabajo que se adapte a tus habilidades.</strong>
+                        <p class="worker-promo-copy">Encuentra un trabajo que se adapte a tus habilidades.</p>
+                        <div class="worker-profile-progress">
+                            <div class="worker-profile-progress-heading">
+                                <strong id="worker-profile-percentage">—</strong>
+                                <span>Perfil completo</span>
+                            </div>
+                            <div
+                                class="worker-profile-progress-track"
+                                role="progressbar"
+                                aria-label="Perfil completo"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                                aria-valuenow="0"
+                                hidden>
+                                <span></span>
+                            </div>
+                            <p class="worker-profile-progress-status" id="worker-profile-progress-status" role="status">Cargando progreso...</p>
+                        </div>
                         <a href="website/trabajador/perfil.html">Completar mi perfil</a>
                     </div>
                     <div class="worker-checks">
@@ -175,6 +193,7 @@
     <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
     <script type="module">
         import { initFooter, initHeader } from './assets/js/components.js';
+        import { pedirApi } from './assets/js/api.js';
         import { obtenerToken } from './assets/js/sesion.js';
         initHeader('', 'trabajador');
         initFooter();
@@ -189,7 +208,51 @@
         const modalityFilters = document.querySelectorAll('.modality-filter');
         const typeFilters = document.querySelectorAll('.type-filter');
         const backToTop = document.querySelector('.back-to-top');
-        const hasSession = Boolean(obtenerToken());
+        const token = obtenerToken();
+        const hasSession = Boolean(token);
+
+        const profileProgress = document.querySelector('.worker-profile-progress');
+        const profilePercentage = document.getElementById('worker-profile-percentage');
+        const profileProgressBar = profileProgress.querySelector('[role="progressbar"]');
+        const profileProgressFill = profileProgressBar.querySelector('span');
+        const profileProgressStatus = document.getElementById('worker-profile-progress-status');
+
+        async function cargarProgresoPerfil() {
+            if (!token) {
+                profileProgress.hidden = true;
+                return;
+            }
+
+            const resultado = await pedirApi('/api/perfil', { token });
+
+            if (!resultado.ok) {
+                profileProgressStatus.textContent =
+                    resultado.datos?.error || 'No se pudo cargar el progreso del perfil.';
+                return;
+            }
+
+            if (!resultado.datos || typeof resultado.datos !== 'object') {
+                profileProgressStatus.textContent =
+                    'El servidor no devolvió los datos del perfil.';
+                return;
+            }
+
+            const campos = resultado.datos.rol === 'empleador'
+                ? ['ciudad']
+                : ['ciudad', 'habilidades', 'experiencia'];
+            const completos = campos.filter(campo =>
+                Boolean(resultado.datos[campo] && String(resultado.datos[campo]).trim())
+            ).length;
+            const porcentaje = Math.round((completos / campos.length) * 100);
+
+            profilePercentage.textContent = `${porcentaje}%`;
+            profileProgressBar.setAttribute('aria-valuenow', String(porcentaje));
+            profileProgressFill.style.width = `${porcentaje}%`;
+            profileProgressBar.hidden = false;
+            profileProgressStatus.textContent = '';
+        }
+
+        cargarProgresoPerfil();
 
         document.querySelectorAll('[data-publisher-profile]').forEach(profile => {
             if (hasSession) {

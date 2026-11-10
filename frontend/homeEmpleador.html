@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/css/base/typography.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
     <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
+    <link rel="stylesheet" href="assets/css/pages/home-empleador.css" />
     <link rel="stylesheet" href="assets/css/components/header.css" />
     <title>LILA — Panel del empleador</title>
 </head>
@@ -18,72 +19,199 @@
             <header class="dashboard-welcome">
                 <div>
                     <span class="home-eyebrow">Panel del empleador</span>
-                    <h1 id="employer-title">Encuentra el talento que necesitas.</h1>
+                    <h1 id="employer-title">Encuentra el talento que necesitas</h1>
                     <p>Revisa tus publicaciones, postulaciones y resultados desde un solo lugar.</p>
                 </div>
                 <a class="home-primary-button" href="publicarOferta.html">+ Publicar oferta</a>
             </header>
 
             <section class="employer-report" aria-label="Resumen de rendimiento">
-                <div><strong>4</strong><span>Ofertas activas</span></div>
-                <div><strong>38</strong><span>Postulaciones</span></div>
-                <div><strong>246</strong><span>Visualizaciones</span></div>
-                <div><strong>6</strong><span>Contrataciones</span></div>
-            </section>
-
-            <section class="dashboard-section" aria-labelledby="recent-posts-title">
-                <header class="dashboard-section-heading">
-                    <div>
-                        <span class="home-eyebrow">Actividad reciente</span>
-                        <h2 id="recent-posts-title">Mis publicaciones</h2>
-                    </div>
-                    <label class="worker-sort" for="employer-sort">
-                        <span>Ordenar por</span>
-                        <select id="employer-sort">
-                            <option value="latest">Últimos publicados</option>
-                            <option value="az">Ordenar de A - Z</option>
-                            <option value="za">Ordenar de Z - A</option>
-                        </select>
-                    </label>
-                </header>
-                <div class="employer-post-grid" id="active-posts">
-                    <article class="employer-post-card" data-title="Ayudante de cocina" data-date="4" data-status="active">
-                        <div class="post-card-top"><span class="post-status active">Activa</span><span>Hace 2 días</span></div>
-                        <h3>Ayudante de cocina</h3>
-                        <p>Cochabamba · Tiempo parcial · Bs. 120 por día</p>
-                        <div class="post-metrics"><span><strong>12</strong> postulaciones</span><span><strong>86</strong> vistas</span></div>
-                        <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
-                    </article>
-                    <article class="employer-post-card" data-title="Diseñador/a para redes sociales" data-date="3" data-status="active">
-                        <div class="post-card-top"><span class="post-status active">Activa</span><span>Hace 4 días</span></div>
-                        <h3>Diseñador/a para redes sociales</h3>
-                        <p>Remoto · Por proyecto · Bs. 800 por proyecto</p>
-                        <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>64</strong> vistas</span></div>
-                        <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
-                    </article>
-                    <article class="employer-post-card" data-title="Vendedor/a de tienda" data-date="1" data-status="active">
-                        <div class="post-card-top"><span class="post-status active">Activa</span><span>Hace 1 semana</span></div>
-                        <h3>Vendedor/a de tienda</h3>
-                        <p>Quillacollo · Tiempo completo · Bs. 2.500 al mes</p>
-                        <div class="post-metrics"><span><strong>8</strong> postulaciones</span><span><strong>51</strong> vistas</span></div>
-                        <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
-                    </article>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>4</strong><span>Ofertas activas</span></span>
                 </div>
-                <p class="dashboard-empty" id="active-empty" hidden>No tienes publicaciones activas. <a href="publicarOferta.html">Publica tu primera oferta.</a></p>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>38</strong><span>Postulaciones</span></span>
+                </div>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>246</strong><span>Visualizaciones</span></span>
+                </div>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>6</strong><span>Contrataciones</span></span>
+                </div>
             </section>
 
-            <section class="dashboard-section" aria-labelledby="past-posts-title">
-                <header class="dashboard-section-heading">
-                    <div><span class="home-eyebrow">Historial</span><h2 id="past-posts-title">Publicaciones anteriores</h2></div>
+            <div class="employer-dashboard-grid">
+                <section class="dashboard-section employer-offers-panel" aria-labelledby="recent-posts-title">
+                    <header class="dashboard-section-heading employer-panel-heading">
+                        <div>
+                            <span class="home-eyebrow">Actividad reciente</span>
+                            <h2 id="recent-posts-title">Mis ofertas</h2>
+                            <p>Administra y da seguimiento a tus ofertas publicadas.</p>
+                        </div>
+                        <label class="worker-sort" for="employer-sort">
+                            <span>Ordenar por</span>
+                            <select id="employer-sort">
+                                <option value="latest">Últimas publicadas</option>
+                                <option value="az">Ordenar de A - Z</option>
+                                <option value="za">Ordenar de Z - A</option>
+                            </select>
+                        </label>
+                    </header>
+                    <div class="employer-offer-filters" aria-label="Filtrar ofertas">
+                        <label class="employer-search" for="employer-search">
+                            <span aria-hidden="true">⌕</span>
+                            <input id="employer-search" type="search" aria-label="Buscar por título de oferta" placeholder="Buscar por título de oferta">
+                        </label>
+                        <label for="employer-status-filter">Estado
+                            <select id="employer-status-filter">
+                                <option value="all">Todos</option>
+                                <option value="active">Activa</option>
+                                <option value="paused">Pausada</option>
+                            </select>
+                        </label>
+                        <label for="employer-city-filter">Ciudad
+                            <select id="employer-city-filter">
+                                <option value="all">Todas</option>
+                                <option value="cochabamba">Cochabamba</option>
+                                <option value="remoto">Remoto</option>
+                                <option value="quillacollo">Quillacollo</option>
+                            </select>
+                        </label>
+                        <label for="employer-category-filter">Categoría
+                            <select id="employer-category-filter">
+                                <option value="all">Todas</option>
+                                <option value="gastronomia">Gastronomía</option>
+                                <option value="marketing">Diseño y marketing</option>
+                                <option value="ventas">Ventas y comercio</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="employer-post-grid" id="active-posts">
+                        <article class="employer-post-card" data-title="Ayudante de cocina" data-date="4" data-status="active" data-city="cochabamba" data-category="gastronomia">
+                            <div class="employer-post-summary">
+                                <span class="employer-post-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg></span>
+                                <div class="employer-post-info">
+                                    <div class="post-card-top"><h3>Ayudante de cocina</h3><span class="post-status active">Activa</span></div>
+                                    <p>Cochabamba · Tiempo parcial · Bs. 120 por día</p>
+                                    <span class="employer-post-date">Publicada hace 2 días</span>
+                                </div>
+                            </div>
+                            <div class="employer-post-actions">
+                                <div class="post-metrics"><span><strong>12</strong> postulaciones</span><span><strong>86</strong> vistas</span></div>
+                                <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
+                            </div>
+                        </article>
+                        <article class="employer-post-card" data-title="Diseñador/a para redes sociales" data-date="3" data-status="active" data-city="remoto" data-category="marketing">
+                            <div class="employer-post-summary">
+                                <span class="employer-post-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg></span>
+                                <div class="employer-post-info">
+                                    <div class="post-card-top"><h3>Diseñador/a para redes sociales</h3><span class="post-status active">Activa</span></div>
+                                    <p>Remoto · Por proyecto · Bs. 800 por proyecto</p>
+                                    <span class="employer-post-date">Publicada hace 4 días</span>
+                                </div>
+                            </div>
+                            <div class="employer-post-actions">
+                                <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>64</strong> vistas</span></div>
+                                <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
+                            </div>
+                        </article>
+                        <article class="employer-post-card" data-title="Vendedor/a de tienda" data-date="1" data-status="active" data-city="quillacollo" data-category="ventas">
+                            <div class="employer-post-summary">
+                                <span class="employer-post-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg></span>
+                                <div class="employer-post-info">
+                                    <div class="post-card-top"><h3>Vendedor/a de tienda</h3><span class="post-status active">Activa</span></div>
+                                    <p>Quillacollo · Tiempo completo · Bs. 2.500 al mes</p>
+                                    <span class="employer-post-date">Publicada hace 1 semana</span>
+                                </div>
+                            </div>
+                            <div class="employer-post-actions">
+                                <div class="post-metrics"><span><strong>8</strong> postulaciones</span><span><strong>51</strong> vistas</span></div>
+                                <div class="post-actions"><button type="button" data-action="applicants">Ver postulantes</button><button type="button" data-action="pause">Pausar</button></div>
+                            </div>
+                        </article>
+                    </div>
+                    <p class="dashboard-empty" id="active-empty" hidden>No hay ofertas que coincidan con los filtros. <a href="publicarOferta.html">Publica una nueva oferta.</a></p>
+                </section>
+
+                <aside class="employer-side-column" aria-label="Actividad de postulaciones">
+                    <section class="employer-applications-panel" aria-labelledby="latest-applications-title">
+                        <header class="employer-side-heading">
+                            <h2 id="latest-applications-title">Últimas postulaciones</h2>
+                            <a href="#recent-posts-title">Ver ofertas <span aria-hidden="true">→</span></a>
+                        </header>
+                        <ul class="employer-applicant-list">
+                            <li>
+                                <span class="employer-applicant-avatar" aria-hidden="true">MC</span>
+                                <span class="employer-applicant-info"><strong>María Camila Rojas</strong><small>Postuló a: Ayudante de cocina</small></span>
+                                <time datetime="2026-11-10T10:24">Hoy, 10:24</time>
+                            </li>
+                            <li>
+                                <span class="employer-applicant-avatar" aria-hidden="true">JP</span>
+                                <span class="employer-applicant-info"><strong>Julián Pérez</strong><small>Postuló a: Vendedor/a de tienda</small></span>
+                                <time datetime="2026-11-10T09:47">Hoy, 09:47</time>
+                            </li>
+                            <li>
+                                <span class="employer-applicant-avatar" aria-hidden="true">AV</span>
+                                <span class="employer-applicant-info"><strong>Andrea Velandia</strong><small>Postuló a: Diseñador/a para redes sociales</small></span>
+                                <time datetime="2026-11-09T18:23">Ayer, 18:23</time>
+                            </li>
+                            <li>
+                                <span class="employer-applicant-avatar" aria-hidden="true">DS</span>
+                                <span class="employer-applicant-info"><strong>David Suárez</strong><small>Postuló a: Ayudante de cocina</small></span>
+                                <time datetime="2026-11-09T16:10">Ayer, 16:10</time>
+                            </li>
+                        </ul>
+                        <p class="employer-demo-note">Postulaciones de ejemplo para la demostración.</p>
+                    </section>
+                </aside>
+            </div>
+
+            <section class="dashboard-section employer-history-panel" aria-labelledby="past-posts-title">
+                <header class="dashboard-section-heading employer-history-heading">
+                    <div>
+                        <span class="home-eyebrow">Historial</span>
+                        <h2 id="past-posts-title">Publicaciones anteriores</h2>
+                    </div>
+                    <button
+                        class="employer-history-toggle"
+                        id="past-posts-toggle"
+                        type="button"
+                        aria-controls="past-posts-content"
+                        aria-expanded="true"
+                        aria-label="Ocultar publicaciones anteriores"
+                        title="Ocultar publicaciones anteriores">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="employer-history-eye-slash" d="m3 3 18 18"/></svg>
+                    </button>
                 </header>
-                <div class="employer-post-grid past-posts">
-                    <article class="employer-post-card" data-title="Asistente de eventos" data-date="2" data-status="closed">
-                        <div class="post-card-top"><span class="post-status closed">Cerrada</span><span>Finalizada hace 2 semanas</span></div>
-                        <h3>Asistente de eventos</h3>
-                        <p>Cercado · Por servicio · Bs. 180 por jornada</p>
-                        <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>45</strong> vistas</span></div>
-                        <div class="post-actions"><button type="button" data-action="report">Ver reporte</button><button type="button" data-action="duplicate">Duplicar</button></div>
-                    </article>
+                <div id="past-posts-content">
+                    <div class="employer-post-grid past-posts">
+                        <article class="employer-post-card" data-title="Asistente de eventos" data-date="2" data-status="closed">
+                            <div class="employer-post-summary">
+                                <span class="employer-post-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg></span>
+                                <div class="employer-post-info">
+                                    <div class="post-card-top"><h3>Asistente de eventos</h3><span class="post-status closed">Cerrada</span></div>
+                                    <p>Cercado · Por servicio · Bs. 180 por jornada</p>
+                                    <span class="employer-post-date">Finalizada hace 2 semanas</span>
+                                </div>
+                            </div>
+                            <div class="employer-post-actions">
+                                <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>45</strong> vistas</span></div>
+                                <div class="post-actions"><button type="button" data-action="report">Ver reporte</button><button type="button" data-action="duplicate">Duplicar</button></div>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </section>
         </section>
@@ -99,26 +227,72 @@
         const activePosts = document.getElementById('active-posts');
         const activeEmpty = document.getElementById('active-empty');
         const posts = Array.from(activePosts.querySelectorAll('.employer-post-card'));
+        const searchInput = document.getElementById('employer-search');
+        const statusFilter = document.getElementById('employer-status-filter');
+        const cityFilter = document.getElementById('employer-city-filter');
+        const categoryFilter = document.getElementById('employer-category-filter');
         const backToTop = document.querySelector('.back-to-top');
+        const historyToggle = document.getElementById('past-posts-toggle');
+        const historyContent = document.getElementById('past-posts-content');
 
-        sortSelect.addEventListener('change', () => {
-            posts.sort((first, second) => {
+        historyToggle.addEventListener('click', () => {
+            const expanded = historyToggle.getAttribute('aria-expanded') === 'true';
+            const nextExpanded = !expanded;
+
+            historyToggle.setAttribute('aria-expanded', String(nextExpanded));
+            historyToggle.setAttribute(
+                'aria-label',
+                nextExpanded ? 'Ocultar publicaciones anteriores' : 'Mostrar publicaciones anteriores'
+            );
+            historyToggle.title = nextExpanded
+                ? 'Ocultar publicaciones anteriores'
+                : 'Mostrar publicaciones anteriores';
+            historyContent.hidden = !nextExpanded;
+        });
+
+        function actualizarOfertas() {
+            const busqueda = searchInput.value.trim().toLocaleLowerCase('es');
+            const ordenadas = [...posts].sort((first, second) => {
                 if (sortSelect.value === 'az') return first.dataset.title.localeCompare(second.dataset.title);
                 if (sortSelect.value === 'za') return second.dataset.title.localeCompare(first.dataset.title);
                 return Number(second.dataset.date) - Number(first.dataset.date);
-            }).forEach(post => activePosts.appendChild(post));
+            });
+            let visibles = 0;
+
+            ordenadas.forEach(post => {
+                const coincideBusqueda = post.dataset.title.toLocaleLowerCase('es').includes(busqueda);
+                const coincideEstado = statusFilter.value === 'all' || post.dataset.status === statusFilter.value;
+                const coincideCiudad = cityFilter.value === 'all' || post.dataset.city === cityFilter.value;
+                const coincideCategoria = categoryFilter.value === 'all' || post.dataset.category === categoryFilter.value;
+                const mostrar = coincideBusqueda && coincideEstado && coincideCiudad && coincideCategoria;
+
+                post.hidden = !mostrar;
+                if (mostrar) visibles += 1;
+                activePosts.appendChild(post);
+            });
+
+            activeEmpty.hidden = visibles > 0;
+        }
+
+        [sortSelect, statusFilter, cityFilter, categoryFilter].forEach(filter => {
+            filter.addEventListener('change', actualizarOfertas);
         });
+        searchInput.addEventListener('input', actualizarOfertas);
 
         document.querySelectorAll('[data-action]').forEach(button => {
             button.addEventListener('click', () => {
                 const action = button.dataset.action;
-                if (action === 'pause') {
+                if (action === 'pause' || action === 'reactivate') {
                     const card = button.closest('.employer-post-card');
                     const status = card.querySelector('.post-status');
-                    status.textContent = 'Pausada';
-                    status.className = 'post-status paused';
-                    button.textContent = 'Reactivar';
-                    button.dataset.action = 'reactivate';
+                    const pausada = action === 'pause';
+
+                    status.textContent = pausada ? 'Pausada' : 'Activa';
+                    status.className = pausada ? 'post-status paused' : 'post-status active';
+                    card.dataset.status = pausada ? 'paused' : 'active';
+                    button.textContent = pausada ? 'Reactivar' : 'Pausar';
+                    button.dataset.action = pausada ? 'reactivate' : 'pause';
+                    actualizarOfertas();
                     return;
                 }
                 button.closest('.employer-post-card').classList.add('is-selected');
@@ -131,7 +305,7 @@
         window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
         backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         updateBackToTopVisibility();
-        activeEmpty.hidden = posts.length > 0;
+        actualizarOfertas();
     </script>
 </body>
 </html>
