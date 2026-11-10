@@ -330,6 +330,15 @@ if (!token) {
         const nombre = perfil.nombre || 'Usuario';
         const rol = perfil.rol || 'trabajador';
 
+        // Adaptar el destino del logo según el rol
+        const enlaceLogo = document.getElementById('enlace-logo');
+
+        if (enlaceLogo) {
+            enlaceLogo.href = rol === 'empleador'
+                ? '/frontend/homeEmpleador.html'
+                : '/frontend/homeTrabajador.html';
+        }
+
         // Adaptar el menú de ofertas según el rol
         const enlaceOfertas = document.getElementById('enlace-ofertas');
         const textoOfertas = document.getElementById('texto-ofertas');
