@@ -15,16 +15,14 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #ffffff;
 }
 
-/* Contenedor principal del Navbar */
+/* Barra superior base */
 .navbar-trabajador {
     width: 100%;
     background-color: var(--bg-navbar);
     padding: 12px 24px;
     border-bottom: 1px solid rgba(39, 35, 72, 0.05);
-    box-sizing: border-box;
 }
 
 .navbar-container {
@@ -38,37 +36,29 @@ body {
 }
 
 /* --- Brand / Logo --- */
-.navbar-brand {
+.nav-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
     text-decoration: none;
     flex-shrink: 0;
 }
 
-.navbar-logo {
+.nav-logo-img {
     height: 38px;
     width: auto;
     object-fit: contain;
 }
 
-.brand-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--purple-dark);
-    letter-spacing: 0.5px;
-}
-
 /* --- Buscador Central --- */
-.navbar-search {
+.nav-search {
     flex: 1;
     display: flex;
     justify-content: center;
     max-width: 550px;
-    min-width: 0; /* Evita que el flexbox desborde el contenedor */
+    min-width: 0;
 }
 
-.search-input-wrapper {
+.nav-search-wrapper {
     display: flex;
     align-items: center;
     background-color: var(--white);
@@ -81,7 +71,7 @@ body {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-    .search-input-wrapper:focus-within {
+    .nav-search-wrapper:focus-within {
         border-color: var(--purple-dark);
         box-shadow: 0 0 0 3px rgba(39, 35, 72, 0.1);
     }
@@ -94,7 +84,7 @@ body {
     flex-shrink: 0;
 }
 
-.search-input-wrapper input {
+.nav-search-wrapper input {
     border: none;
     outline: none;
     background: transparent;
@@ -102,21 +92,24 @@ body {
     font-size: 0.88rem;
     color: var(--purple-dark);
     width: 100%;
-    min-width: 0; /* Permite reducir el texto en pantallas muy pequeñas */
+    min-width: 0;
 }
 
-    .search-input-wrapper input::placeholder {
+    .nav-search-wrapper input::placeholder {
         color: var(--placeholder-color);
     }
 
-/* --- Perfil Derecho --- */
-.navbar-user {
+/* --- Zona Derecha: Avatar --- */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
     flex-shrink: 0;
 }
 
-.profile-avatar-circle {
-    width: 42px;
-    height: 42px;
+.nav-avatar {
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background-color: #b5b1bc;
     display: flex;
@@ -127,22 +120,22 @@ body {
     border: 2px solid var(--white);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
+    text-decoration: none;
 }
 
-    .profile-avatar-circle:hover {
+    .nav-avatar:hover {
         transform: scale(1.05);
     }
 
-    .profile-avatar-circle svg {
-        width: 24px;
-        height: 24px;
+    .nav-avatar svg {
+        width: 26px;
+        height: 26px;
         fill: var(--purple-dark);
     }
 
 /* ==========================================
-   MEDIA QUERIES (Ajuste para Celulares)
+   MEDIA QUERIES
    ========================================== */
-
 @media (max-width: 768px) {
     .navbar-trabajador {
         padding: 10px 16px;
@@ -152,56 +145,28 @@ body {
         gap: 12px;
     }
 
-    .navbar-logo {
-        height: 32px;
-    }
-
-    .brand-title {
-        font-size: 1.2rem;
-    }
-
-    .search-input-wrapper {
-        padding: 6px 12px;
-    }
-
-    .profile-avatar-circle {
-        width: 38px;
-        height: 38px;
+    .nav-avatar {
+        width: 40px;
+        height: 40px;
     }
 }
 
 @media (max-width: 480px) {
     .navbar-trabajador {
-        padding: 8px 12px; /* Espacio reducido para no empujar elementos */
+        padding: 8px 12px;
     }
 
     .navbar-container {
         gap: 8px;
     }
 
-    /* Oculta el texto "LILA" para dejar espacio suficiente al buscador */
-    .brand-title {
-        display: none;
-    }
-
-    .search-input-wrapper input::placeholder {
-        font-size: 0.75rem;
-    }
-
-    .profile-avatar-circle {
+    .nav-avatar {
         width: 36px;
         height: 36px;
     }
 
-        .profile-avatar-circle svg {
+        .nav-avatar svg {
             width: 20px;
             height: 20px;
         }
-}
-
-/* Celulares ultra estrechos (< 360px) */
-@media (max-width: 360px) {
-    .search-input-wrapper input::placeholder {
-        color: transparent; /* Oculta el texto del placeholder si la pantalla es enana */
-    }
 }
