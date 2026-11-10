@@ -26,10 +26,30 @@
             </header>
 
             <section class="employer-report" aria-label="Resumen de rendimiento">
-                <div><strong>4</strong><span>Ofertas activas</span></div>
-                <div><strong>38</strong><span>Postulaciones</span></div>
-                <div><strong>246</strong><span>Visualizaciones</span></div>
-                <div><strong>6</strong><span>Contrataciones</span></div>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>4</strong><span>Ofertas activas</span></span>
+                </div>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>38</strong><span>Postulaciones</span></span>
+                </div>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>246</strong><span>Visualizaciones</span></span>
+                </div>
+                <div>
+                    <span class="employer-kpi-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg>
+                    </span>
+                    <span class="employer-kpi-copy"><strong>6</strong><span>Contrataciones</span></span>
+                </div>
             </section>
 
             <div class="employer-dashboard-grid">
@@ -158,18 +178,40 @@
                 </aside>
             </div>
 
-            <section class="dashboard-section" aria-labelledby="past-posts-title">
-                <header class="dashboard-section-heading">
-                    <div><span class="home-eyebrow">Historial</span><h2 id="past-posts-title">Publicaciones anteriores</h2></div>
+            <section class="dashboard-section employer-history-panel" aria-labelledby="past-posts-title">
+                <header class="dashboard-section-heading employer-history-heading">
+                    <div>
+                        <span class="home-eyebrow">Historial</span>
+                        <h2 id="past-posts-title">Publicaciones anteriores</h2>
+                    </div>
+                    <button
+                        class="employer-history-toggle"
+                        id="past-posts-toggle"
+                        type="button"
+                        aria-controls="past-posts-content"
+                        aria-expanded="true"
+                        aria-label="Ocultar publicaciones anteriores"
+                        title="Ocultar publicaciones anteriores">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="employer-history-eye-slash" d="m3 3 18 18"/></svg>
+                    </button>
                 </header>
-                <div class="employer-post-grid past-posts">
-                    <article class="employer-post-card" data-title="Asistente de eventos" data-date="2" data-status="closed">
-                        <div class="post-card-top"><span class="post-status closed">Cerrada</span><span>Finalizada hace 2 semanas</span></div>
-                        <h3>Asistente de eventos</h3>
-                        <p>Cercado · Por servicio · Bs. 180 por jornada</p>
-                        <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>45</strong> vistas</span></div>
-                        <div class="post-actions"><button type="button" data-action="report">Ver reporte</button><button type="button" data-action="duplicate">Duplicar</button></div>
-                    </article>
+                <div id="past-posts-content">
+                    <div class="employer-post-grid past-posts">
+                        <article class="employer-post-card" data-title="Asistente de eventos" data-date="2" data-status="closed">
+                            <div class="employer-post-summary">
+                                <span class="employer-post-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg></span>
+                                <div class="employer-post-info">
+                                    <div class="post-card-top"><h3>Asistente de eventos</h3><span class="post-status closed">Cerrada</span></div>
+                                    <p>Cercado · Por servicio · Bs. 180 por jornada</p>
+                                    <span class="employer-post-date">Finalizada hace 2 semanas</span>
+                                </div>
+                            </div>
+                            <div class="employer-post-actions">
+                                <div class="post-metrics"><span><strong>9</strong> postulaciones</span><span><strong>45</strong> vistas</span></div>
+                                <div class="post-actions"><button type="button" data-action="report">Ver reporte</button><button type="button" data-action="duplicate">Duplicar</button></div>
+                            </div>
+                        </article>
+                    </div>
                 </div>
             </section>
         </section>
@@ -190,6 +232,23 @@
         const cityFilter = document.getElementById('employer-city-filter');
         const categoryFilter = document.getElementById('employer-category-filter');
         const backToTop = document.querySelector('.back-to-top');
+        const historyToggle = document.getElementById('past-posts-toggle');
+        const historyContent = document.getElementById('past-posts-content');
+
+        historyToggle.addEventListener('click', () => {
+            const expanded = historyToggle.getAttribute('aria-expanded') === 'true';
+            const nextExpanded = !expanded;
+
+            historyToggle.setAttribute('aria-expanded', String(nextExpanded));
+            historyToggle.setAttribute(
+                'aria-label',
+                nextExpanded ? 'Ocultar publicaciones anteriores' : 'Mostrar publicaciones anteriores'
+            );
+            historyToggle.title = nextExpanded
+                ? 'Ocultar publicaciones anteriores'
+                : 'Mostrar publicaciones anteriores';
+            historyContent.hidden = !nextExpanded;
+        });
 
         function actualizarOfertas() {
             const busqueda = searchInput.value.trim().toLocaleLowerCase('es');
