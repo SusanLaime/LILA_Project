@@ -1,0 +1,341 @@
+/* =====================================================
+   LILA - PANEL DE INICIO (homeEmpleador y homeTrabajador)
+   Mismo formato de título y bloques que la pantalla de perfil
+   (perfil-pagina.css). Todo va dentro de .lp-panel para no
+   afectar a otras páginas.
+   ===================================================== */
+
+.lp-panel {
+    --morado-oscuro: #272348;
+    --morado: #5b4b8a;
+    --morado-claro: #8a74c9;
+    --lila: #d6cee2;
+    --lila-suave: #f2edfa; /* mismo tono que el fondo del header */
+    --fondo: #efe8fb;
+    --gris: #6d6b7c;
+
+    min-height: 100vh;
+    background: var(--fondo);
+    color: var(--morado-oscuro);
+}
+
+.lp-panel *,
+.lp-panel *::before,
+.lp-panel *::after {
+    box-sizing: border-box;
+}
+
+.lp-panel [hidden] {
+    display: none !important;
+}
+
+.lp-panel h1,
+.lp-panel h2,
+.lp-panel h3,
+.lp-panel p {
+    margin: 0;
+}
+
+/* ---------- Íconos SVG ---------- */
+.lp-panel .lp-ico,
+.lp-panel .lp-res-icono svg,
+.lp-panel .lp-banner-avatar svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lp-panel .lp-ico {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/* ---------- Contenedor ---------- */
+.lp-panel .lp-contenido {
+    display: grid;
+    gap: 20px;
+    align-content: start;
+    min-width: 0;
+}
+
+/* ---------- Barra de título ---------- */
+.lp-panel .lp-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.lp-panel .lp-topbar h1 {
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: var(--morado-oscuro);
+}
+
+.lp-panel .lp-fecha {
+    margin-top: 2px;
+    font-size: 13px;
+    color: var(--gris);
+    text-transform: capitalize;
+}
+
+/* Botón principal (Publicar oferta, Completar perfil) */
+.lp-panel .lp-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 43px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 999px;
+    background: var(--morado);
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.lp-panel .lp-boton:hover {
+    background: var(--morado-oscuro);
+    color: #fff;
+    text-decoration: none;
+}
+
+.lp-panel .lp-boton:focus-visible {
+    outline: 3px solid var(--morado-claro);
+    outline-offset: 3px;
+}
+
+/* Variante clara, para usar sobre el banner */
+.lp-panel .lp-boton-claro {
+    background: #fff;
+    color: var(--morado-oscuro);
+}
+
+.lp-panel .lp-boton-claro:hover {
+    background: var(--lila-suave);
+    color: var(--morado-oscuro);
+}
+
+/* ---------- Banner ---------- */
+.lp-panel .lp-banner {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 170px;
+    padding: 32px;
+    border-radius: 24px;
+    color: #fff;
+    background: linear-gradient(120deg, #5b4b8a 0%, #8a74c9 100%);
+}
+
+.lp-panel .lp-banner::before,
+.lp-panel .lp-banner::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.lp-panel .lp-banner::before {
+    width: 280px;
+    height: 280px;
+    right: -70px;
+    top: -110px;
+}
+
+.lp-panel .lp-banner::after {
+    width: 120px;
+    height: 120px;
+    right: 150px;
+    bottom: -60px;
+}
+
+.lp-panel .lp-banner > * {
+    position: relative;
+    z-index: 1;
+}
+
+.lp-panel .lp-banner-fecha {
+    margin-bottom: 14px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.lp-panel .lp-banner h2 {
+    font-size: clamp(22px, 3.5vw, 32px);
+    line-height: 1.2;
+    color: #fff;
+    overflow-wrap: anywhere;
+}
+
+.lp-panel .lp-banner-sub {
+    margin-top: 8px;
+    font-size: 15px;
+    opacity: 0.9;
+}
+
+.lp-panel .lp-banner .lp-boton {
+    margin-top: 18px;
+}
+
+.lp-panel .lp-banner-avatar {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: var(--morado);
+    border: 5px solid rgba(255, 255, 255, 0.45);
+}
+
+.lp-panel .lp-banner-avatar svg {
+    width: 55%;
+    height: 55%;
+}
+
+/* ---------- Títulos de bloque ---------- */
+.lp-panel .lp-titulo {
+    margin-bottom: 12px;
+    font-size: 18px;
+    line-height: 1.3;
+    color: var(--morado-oscuro);
+}
+
+/* ---------- Tarjetas de resumen ---------- */
+.lp-panel .lp-resumen {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.lp-panel .lp-res {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    padding: 18px 8px;
+    border-radius: 20px;
+    text-align: center;
+    background: #fff;
+    border: 2px solid transparent;
+}
+
+.lp-panel .lp-res.destacada {
+    border-color: var(--morado);
+}
+
+.lp-panel .lp-res-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--lila-suave);
+    color: var(--morado);
+}
+
+.lp-panel .lp-res-icono svg {
+    width: 28px;
+    height: 28px;
+}
+
+.lp-panel .lp-res-valor {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--morado-oscuro);
+}
+
+.lp-panel .lp-res-etiqueta {
+    font-size: 13px;
+    color: var(--gris);
+}
+
+/* ---------- Bloque blanco ---------- */
+.lp-panel .lp-tarjeta {
+    padding: 24px;
+    border-radius: 20px;
+    background: #fff;
+}
+
+/* Encabezado de bloque con título + control (ordenar, etc.) */
+.lp-panel .lp-tarjeta-encabezado {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.lp-panel .lp-tarjeta-encabezado .lp-titulo {
+    margin-bottom: 0;
+}
+
+.lp-panel .lp-subtitulo {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--gris);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+    .lp-panel .lp-resumen {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lp-panel .lp-tarjeta-encabezado {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 640px) {
+    .lp-panel .lp-topbar {
+        flex-wrap: wrap;
+    }
+
+    .lp-panel .lp-topbar .lp-boton {
+        width: 100%;
+    }
+
+    .lp-panel .lp-banner {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 24px 20px;
+    }
+
+    .lp-panel .lp-banner-avatar {
+        width: 88px;
+        height: 88px;
+    }
+
+    .lp-panel .lp-tarjeta {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .lp-panel .lp-resumen {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

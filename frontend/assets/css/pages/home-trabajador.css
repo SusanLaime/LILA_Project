@@ -1,0 +1,120 @@
+.worker-home {
+    --home-morado-oscuro: #272348;
+    --home-morado: #5b4b8a;
+    --home-morado-claro: #8a74c9;
+    --home-lila-claro: var(--LILA-primitives-purple-lavender);
+    --home-lila-borde: #d6cee2;
+}
+
+.worker-home .worker-results .role-header h1 {
+    color: var(--home-morado-oscuro);
+    font-size: 22px;
+    line-height: 1.3;
+    letter-spacing: normal;
+}
+
+.worker-home .worker-checks h2 {
+    color: var(--home-morado-oscuro);
+    font-size: 18px;
+    line-height: 1.3;
+}
+
+.worker-home .worker-promo-copy {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.worker-home .worker-profile-progress {
+    display: grid;
+    gap: 8px;
+}
+
+.worker-home .worker-profile-progress[hidden],
+.worker-home .worker-profile-progress-track[hidden] {
+    display: none;
+}
+
+.worker-home .worker-profile-progress-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.worker-home .worker-profile-progress-heading strong {
+    font-size: 18px;
+}
+
+.worker-home .worker-profile-progress-track {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.worker-home .worker-profile-progress-track span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #fff;
+}
+
+.worker-home .worker-profile-progress-status {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.worker-home .worker-promo a {
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+}
+
+.worker-home .worker-promo a:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+}
+
+.worker-home .worker-promo a:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+.worker-home .worker-search span {
+    color: var(--home-morado-claro);
+}
+
+.worker-home .offer-card[data-area] {
+    border-color: var(--home-lila-borde);
+    background: var(--home-lila-claro);
+}
+
+.worker-home .offer-meta span,
+.worker-home .role-label,
+.worker-home #offer-count {
+    background: #fff;
+    color: var(--home-morado);
+}
+
+.worker-home #offer-count {
+    border-color: var(--home-lila-borde);
+}
+
+.worker-home .offer-rating {
+    color: var(--home-morado-claro);
+}
+
+.worker-home .offer-modal-close,
+.worker-home .offer-modal-meta span {
+    background: var(--home-lila-claro);
+}
+
+@media (max-width: 720px) {
+    .worker-home .worker-promo {
+        width: 100%;
+    }
+}
