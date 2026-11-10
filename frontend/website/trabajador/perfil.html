@@ -77,7 +77,7 @@
                    href="/frontend/index.html"
                    aria-label="LILA, ir al inicio">
                     <img
-                        src="../../public/LILA-logotipo-oficial.png"
+                        src="../../public/logotransparente.png"
                         alt="LILA - Librería Laboral"
                     >
                 </a>
@@ -106,18 +106,18 @@
                         </svg>
                         Inicio
                     </a>
-                    <a class="pronto"
-                       aria-disabled="true"
-                       tabindex="-1">
+
+                    <a id="enlace-ofertas" href="/frontend/homeTrabajador.html">
                         <svg class="lp-ico"
-                             viewBox="0 0 24 24"
-                             aria-hidden="true">
+                            viewBox="0 0 24 24"
+                            aria-hidden="true">
                             <circle cx="11" cy="11" r="8"/>
                             <line x1="21" y1="21"
-                                  x2="16.65" y2="16.65"/>
+                                x2="16.65" y2="16.65"/>
                         </svg>
-                        Ofertas <em>Pronto</em>
+                        <span id="texto-ofertas">Ofertas</span>
                     </a>
+
                     <a class="pronto"
                        aria-disabled="true"
                        tabindex="-1">
@@ -290,21 +290,25 @@
                                         Rol
                                     </span>
                                 </article>
-                                <!-- POSTULACIONES -->
-                                <article class="lp-res lp-res-postulaciones">
-                                    <span class="lp-res-icono" aria-hidden="true">
-                                        <svg viewBox="0 0 24 24">
-                                            <path d="M22 2L11 13"/>
-                                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+
+                                <!-- TARJETA CIUDAD -->
+                                <article class="lp-res">
+                                    <div class="lp-res-icono">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/>
+                                            <circle cx="12" cy="10" r="2.5"/>
                                         </svg>
-                                    </span>
-                                    <span class="lp-res-valor">
-                                        Próximamente
-                                    </span>
+                                    </div>
+
+                                    <strong class="lp-res-valor" id="perfil-ciudad">
+                                        Sin registrar
+                                    </strong>
+
                                     <span class="lp-res-etiqueta">
-                                        Postulaciones
+                                        Ciudad
                                     </span>
                                 </article>
+
                             </div>
                         </section>
                         <!--* =============================*
@@ -423,6 +427,39 @@
                                                 title="Teléfono registrado en tu cuenta"
                                             >
                                         </div>
+
+                                        <!-- GÉNERO -->
+                                        <div class="perfil-campo">
+                                            <label for="genero" class="lp-campo-etiqueta">
+                                                Género
+                                            </label>
+
+                                            <select id="genero" name="genero" required>
+                                                <option value="">Selecciona tu género</option>
+                                                <option value="masculino">Masculino</option>
+                                                <option value="femenino">Femenino</option>
+                                                <option value="otro">Otro</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- EDAD -->
+                                        <div class="perfil-campo">
+                                            <label for="edad" class="lp-campo-etiqueta">
+                                                Edad <span class="lp-obligatorio">*</span>
+                                            </label>
+
+                                            <input
+                                                type="number"
+                                                id="edad"
+                                                name="edad"
+                                                min="18"
+                                                max="100"
+                                                step="1"
+                                                placeholder="Ingresa tu edad"
+                                                required
+                                            >
+                                        </div>
+
                                         <!-- HABILIDADES -->
                                         <div class="perfil-campo solo-trabajador">
                                             <label for="habilidad-nueva">
@@ -575,43 +612,7 @@
                                 </form>
                             </article>
                         </section>
-                        <!--* =============================*
-*                             PRÓXIMAMENTE*
-  ============================= *-->
-                        <section>
-                            <h2 class="lp-titulo">
-                                Próximamente
-                            </h2>
-                            <div class="lp-pronto-grid">
-                                <article class="lp-pronto">
-                                    <strong>
-                                        Buscar ofertas
-                                    </strong>
-                                    <span>
-                                        Explora las oportunidades laborales
-                                        disponibles en LILA.
-                                    </span>
-                                    <a
-                                        href="/frontend/homeTrabajador.html"
-                                        class="lp-pronto-enlace"
-                                    >
-                                        Ver ofertas
-                                        <span aria-hidden="true">→</span>
-                                    </a>
-                                </article>
-                                <article class="lp-pronto">
-                                    <strong>
-                                        Mis postulaciones
-                                    </strong>
-                                    <span>
-                                        Sigue el estado de cada oferta.
-                                    </span>
-                                    <button type="button" disabled>
-                                        Pronto
-                                    </button>
-                                </article>
-                            </div>
-                        </section>
+
                     </div>
                     <!--* =================================*
 *                         COLUMNA DERECHA*
@@ -637,6 +638,13 @@
                             <ul class="lp-lista">
                                 <li data-campo="ciudad">
                                     Agrega tu ciudad
+                                </li>
+                                <li data-campo="genero">
+                                    Selecciona tu género
+                                </li>
+
+                                <li data-campo="edad">
+                                    Ingresa tu edad
                                 </li>
                                 <li
                                     class="solo-trabajador"
@@ -678,10 +686,10 @@
                         </article>
                     </aside>
                 </div>
-                <!-- FOOTER -->
-                <div id="footer-placeholder"></div>
             </div>
         </div>
+        <!-- FOOTER -->
+                <div id="footer-placeholder"></div
     </main>
     <!--* =============================================*
 *         SCRIPTS*

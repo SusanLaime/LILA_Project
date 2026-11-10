@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
     ciudad TEXT,
     habilidades TEXT,
     experiencia TEXT,
+    genero TEXT,
+    edad INTEGER,
     estado_verificacion TEXT NOT NULL
         DEFAULT 'no_verificado',
     consentimiento_fecha TEXT NOT NULL,

@@ -96,6 +96,28 @@ export function validarPerfil(datos) {
     }
   }
 
+  // Género obligatorio
+  const generosPermitidos = [
+      'masculino',
+      'femenino',
+      'otro'
+  ];
+
+  if (!generosPermitidos.includes(datos.genero)) {
+      errores.push('Debes seleccionar tu género.');
+  }
+
+  // Edad obligatoria
+  if (
+      !Number.isInteger(datos.edad) ||
+      datos.edad < 18 ||
+      datos.edad > 100
+  ) {
+      errores.push(
+          'Debes ingresar una edad válida entre 18 y 100 años.'
+      );
+  }
+
   return errores.length === 0
     ? { ok: true }
     : { ok: false, errores };
