@@ -95,50 +95,20 @@
 .home-secondary-button { padding: 14px 8px; }
 
 .home-hero-art {
-    position: relative;
-    min-height: 350px;
-    border-radius: 42% 58% 55% 45% / 38% 40% 60% 62%;
-    background: var(--LILA-primitives-purple-lavender);
+    min-width: 0;
+    background: transparent;
 }
 
-.home-orbit {
-    position: absolute;
-    border: 1px solid rgba(39, 35, 72, 0.16);
-    border-radius: 50%;
+.home-hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
 }
 
-.home-orbit-large {
-    width: 240px;
-    height: 240px;
-    top: 42px;
-    left: calc(50% - 120px);
-}
-
-.home-orbit-small {
-    width: 150px;
-    height: 150px;
-    top: 87px;
-    left: calc(50% - 75px);
-}
-
-.home-art-card {
-    position: absolute;
-    right: 8%;
-    bottom: 18%;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    min-width: 190px;
-    padding: 20px;
-    border: 1px solid rgba(39, 35, 72, 0.08);
-    border-radius: var(--LILA-primitives-radius-md);
-    background: #fff;
-    box-shadow: var(--LILA-elevaci-n-tarjeta);
-}
-
-.home-art-card strong { color: var(--LILA-primitives-purple-brand); }
-.home-art-card span:last-child { color: var(--LILA-semantic-color-text-muted); font-size: 0.8rem; }
-.home-art-icon, .home-card-icon { color: var(--LILA-semantic-color-text-brand); font-size: 1.8rem; }
+.home-card-icon { color: var(--LILA-semantic-color-text-brand); font-size: 1.8rem; }
 
 .home-audience {
     width: min(1120px, calc(100% - 32px));
@@ -211,9 +181,6 @@
         gap: 36px;
         padding: 52px 0 64px;
     }
-    .home-hero-art { min-height: 260px; }
-    .home-orbit-large { width: 190px; height: 190px; top: 35px; left: calc(50% - 95px); }
-    .home-orbit-small { width: 120px; height: 120px; top: 70px; left: calc(50% - 60px); }
     .home-audience-grid, .home-trust { grid-template-columns: 1fr; }
     .home-trust { gap: 18px; margin-bottom: 48px; }
 }
