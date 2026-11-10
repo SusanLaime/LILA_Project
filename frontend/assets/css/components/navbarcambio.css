@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-navbar: #f2edfa;
+    --purple-dark: #272348;
+    --purple-banner: #6e58a6;
+    --white: #ffffff;
+    --border-color: #dcd0f2;
+    --placeholder-color: #7a7393;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+}
+
+/* Barra superior base de borde a borde */
+.navbar-cambio {
+    width: 100%;
+    background-color: var(--bg-navbar);
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(39, 35, 72, 0.05);
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* --- Brand / Logo --- */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.nav-logo-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* --- Buscador Central --- */
+.nav-search {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 550px;
+    min-width: 0;
+}
+
+.nav-search-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 8px 16px;
+    width: 100%;
+    min-width: 0;
+    box-shadow: 0 2px 6px rgba(39, 35, 72, 0.03);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+    .nav-search-wrapper:focus-within {
+        border-color: var(--purple-dark);
+        box-shadow: 0 0 0 3px rgba(39, 35, 72, 0.1);
+    }
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    stroke: var(--placeholder-color);
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.nav-search-wrapper input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: var(--purple-dark);
+    width: 100%;
+    min-width: 0;
+}
+
+    .nav-search-wrapper input::placeholder {
+        color: var(--placeholder-color);
+    }
+
+/* --- Zona Derecha: Switch y Avatar --- */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+/* Botón Switch de Perfil */
+.btn-switch-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--purple-banner);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(110, 88, 166, 0.2);
+}
+
+    .btn-switch-profile:hover {
+        background-color: #5b488c;
+        transform: translateY(-1px);
+    }
+
+.switch-icon {
+    width: 16px;
+    height: 16px;
+    stroke: var(--white);
+}
+
+/* --- Avatar como Enlace --- */
+.nav-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #b5b1bc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid var(--white);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    text-decoration: none;
+}
+
+    .nav-avatar:hover {
+        transform: scale(1.05);
+    }
+
+    .nav-avatar svg {
+        width: 26px;
+        height: 26px;
+        fill: var(--purple-dark);
+    }
+
+/* ==========================================
+   MEDIA QUERIES (Ajuste para Celulares)
+   ========================================== */
+
+@media (max-width: 768px) {
+    .navbar-cambio {
+        padding: 10px 16px;
+    }
+
+    .navbar-container {
+        gap: 12px;
+    }
+
+    /* Se oculta el texto del botón switch para ahorrar espacio */
+    .switch-text {
+        display: none;
+    }
+
+    .btn-switch-profile {
+        padding: 8px 12px;
+    }
+
+    .nav-avatar {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-cambio {
+        padding: 8px 12px;
+    }
+
+    .navbar-container {
+        gap: 8px;
+    }
+
+    .search-input-wrapper {
+        padding: 6px 12px;
+    }
+
+    .nav-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+        .nav-avatar svg {
+            width: 20px;
+            height: 20px;
+        }
+}
