@@ -1,100 +1,207 @@
-/* Importar tipografía Poppins según guía visual */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-.navbar-trabajador {
-    background-color: #F2EDFA; /* Morado claro de fondo */
-    border-bottom: 2px solid #E0D5F5;
-    padding: 10px 24px;
+:root {
+    --bg-navbar: #f2edfa;
+    --purple-dark: #272348;
+    --white: #ffffff;
+    --border-color: #dcd0f2;
+    --placeholder-color: #7a7393;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
     font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+}
+
+/* Contenedor principal del Navbar */
+.navbar-trabajador {
     width: 100%;
+    background-color: var(--bg-navbar);
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(39, 35, 72, 0.05);
     box-sizing: border-box;
 }
 
 .navbar-container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    width: 100%;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* Logo y Título */
+/* --- Brand / Logo --- */
 .navbar-brand {
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .navbar-logo {
-    height: 42px;
+    height: 38px;
     width: auto;
     object-fit: contain;
 }
 
 .brand-title {
-    color: #272348; /* Morado oscuro */
+    font-size: 1.4rem;
     font-weight: 700;
-    font-size: 22px;
+    color: var(--purple-dark);
     letter-spacing: 0.5px;
 }
 
-/* Barra de búsqueda */
+/* --- Buscador Central --- */
 .navbar-search {
     flex: 1;
-    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    max-width: 550px;
+    min-width: 0; /* Evita que el flexbox desborde el contenedor */
 }
 
 .search-input-wrapper {
-    position: relative;
     display: flex;
     align-items: center;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 8px 16px;
+    width: 100%;
+    min-width: 0;
+    box-shadow: 0 2px 6px rgba(39, 35, 72, 0.03);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+    .search-input-wrapper:focus-within {
+        border-color: var(--purple-dark);
+        box-shadow: 0 0 0 3px rgba(39, 35, 72, 0.1);
+    }
+
 .search-icon {
-    position: absolute;
-    left: 14px;
     width: 18px;
     height: 18px;
-    color: #6C6C80;
+    stroke: var(--placeholder-color);
+    margin-right: 8px;
+    flex-shrink: 0;
 }
 
 .search-input-wrapper input {
-    width: 100%;
-    padding: 10px 16px 10px 42px;
-    border: 1px solid #D1C5EA;
-    border-radius: 24px;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    background-color: #FFFFFF;
-    color: #272348;
+    border: none;
     outline: none;
-    transition: all 0.2s ease-in-out;
+    background: transparent;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: var(--purple-dark);
+    width: 100%;
+    min-width: 0; /* Permite reducir el texto en pantallas muy pequeñas */
 }
 
-    .search-input-wrapper input:focus {
-        border-color: #272348;
-        box-shadow: 0 0 0 3px rgba(39, 35, 72, 0.15);
+    .search-input-wrapper input::placeholder {
+        color: var(--placeholder-color);
     }
 
-/* Avatar de Perfil */
-.navbar-profile {
+/* --- Perfil Derecho --- */
+.navbar-user {
+    flex-shrink: 0;
+}
+
+.profile-avatar-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #b5b1bc;
     display: flex;
     align-items: center;
-}
-
-.profile-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #272348;
+    justify-content: center;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+    border: 2px solid var(--white);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
 
-    .profile-avatar:hover {
+    .profile-avatar-circle:hover {
         transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(39, 35, 72, 0.2);
     }
+
+    .profile-avatar-circle svg {
+        width: 24px;
+        height: 24px;
+        fill: var(--purple-dark);
+    }
+
+/* ==========================================
+   MEDIA QUERIES (Ajuste para Celulares)
+   ========================================== */
+
+@media (max-width: 768px) {
+    .navbar-trabajador {
+        padding: 10px 16px;
+    }
+
+    .navbar-container {
+        gap: 12px;
+    }
+
+    .navbar-logo {
+        height: 32px;
+    }
+
+    .brand-title {
+        font-size: 1.2rem;
+    }
+
+    .search-input-wrapper {
+        padding: 6px 12px;
+    }
+
+    .profile-avatar-circle {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-trabajador {
+        padding: 8px 12px; /* Espacio reducido para no empujar elementos */
+    }
+
+    .navbar-container {
+        gap: 8px;
+    }
+
+    /* Oculta el texto "LILA" para dejar espacio suficiente al buscador */
+    .brand-title {
+        display: none;
+    }
+
+    .search-input-wrapper input::placeholder {
+        font-size: 0.75rem;
+    }
+
+    .profile-avatar-circle {
+        width: 36px;
+        height: 36px;
+    }
+
+        .profile-avatar-circle svg {
+            width: 20px;
+            height: 20px;
+        }
+}
+
+/* Celulares ultra estrechos (< 360px) */
+@media (max-width: 360px) {
+    .search-input-wrapper input::placeholder {
+        color: transparent; /* Oculta el texto del placeholder si la pantalla es enana */
+    }
+}
