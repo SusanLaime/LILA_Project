@@ -32,6 +32,8 @@
 
     <link rel="stylesheet"
           href="../assets/css/components/forms.css">
+    <link rel="stylesheet"
+          href="../assets/css/components/header.css">
 
     <link rel="stylesheet"
           href="../assets/css/utilities/responsive.css">
@@ -46,15 +48,7 @@
          1. LOGOTIPO DE LILA
     ========================================== -->
 
-    <header>
-        <div class="fondo-lavanda"
-             aria-hidden="true"></div>
-
-        <img
-            class="logotipo-oficial"
-            src="../public/LILA-logotipo-oficial.png"
-            alt="Logotipo de LILA - Librería Laboral">
-    </header>
+    <div id="header-placeholder"></div>
 
     <!-- =========================================
          2. PRESENTACIÓN DEL FORMULARIO
@@ -309,9 +303,10 @@
 
 <script type="module">
 
-    import { initFooter }
+    import { initFooter, initHeader }
         from '../assets/js/components.js';
 
+    initHeader('', '');
     initFooter();
 
 </script>

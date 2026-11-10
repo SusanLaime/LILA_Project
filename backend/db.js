@@ -40,6 +40,29 @@ const esquema = readFileSync(
 
 db.exec(esquema);
 
+/* =====================================================
+   Actualización automática del perfil del trabajador
+   ===================================================== */
+
+// Consultar las columnas existentes en usuarios
+const columnasUsuarios = db.prepare(
+  'PRAGMA table_info(usuarios)'
+).all();
+
+const nombresColumnas = new Set(
+  columnasUsuarios.map(columna => columna.name)
+);
+
+// Agregar género si todavía no existe
+if (!nombresColumnas.has('genero')) {
+  db.exec('ALTER TABLE usuarios ADD COLUMN genero TEXT');
+}
+
+// Agregar edad si todavía no existe
+if (!nombresColumnas.has('edad')) {
+  db.exec('ALTER TABLE usuarios ADD COLUMN edad INTEGER');
+}
+
 // 7. Cargar datos de prueba si no existen usuarios
 const resultado = db.prepare(
   'SELECT COUNT(*) AS total FROM usuarios'

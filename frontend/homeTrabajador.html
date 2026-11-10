@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ofertas de trabajo disponibles en LILA." />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/typography.css" />
+    <link rel="stylesheet" href="assets/css/pages/home.css" />
+    <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
+    <link rel="stylesheet" href="assets/css/components/header.css" />
+    <title>LILA — Ofertas de trabajo</title>
+</head>
+<body>
+    <main class="role-home">
+        <div id="header-placeholder"></div>
+
+        <section class="role-content" aria-labelledby="worker-title">
+            <div class="worker-toolbar" aria-label="Buscar ofertas">
+                <label class="worker-search" for="job-search">
+                    <span aria-hidden="true">⌕</span>
+                    <input id="job-search" type="search" placeholder="Buscar por cargo o palabra clave">
+                </label>
+                <label for="area-filter">Área
+                    <select id="area-filter">
+                        <option value="todas">Todas las áreas</option>
+                        <option value="gastronomia">Gastronomía</option>
+                        <option value="diseno">Diseño y marketing</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="ventas">Ventas y comercio</option>
+                    </select>
+                </label>
+                <label for="city-filter">Ciudad
+                    <select id="city-filter">
+                        <option value="todas">Todas las ciudades</option>
+                        <option value="Cochabamba">Cochabamba</option>
+                        <option value="Cercado">Cercado</option>
+                        <option value="Quillacollo">Quillacollo</option>
+                        <option value="Remoto">Remoto</option>
+                    </select>
+                </label>
+            </div>
+            <div class="worker-layout">
+                <aside class="worker-sidebar" aria-label="Filtros adicionales">
+                    <div class="worker-promo">
+                        <span>Tu próximo paso</span>
+                        <strong>Encuentra un trabajo que se adapte a tus habilidades.</strong>
+                        <a href="website/trabajador/perfil.html">Completar mi perfil</a>
+                    </div>
+                    <div class="worker-checks">
+                        <h2>Filtros</h2>
+                        <fieldset>
+                            <legend>Modalidad</legend>
+                            <label><input class="modality-filter" type="checkbox" value="tiempo-completo"> Tiempo completo</label>
+                            <label><input class="modality-filter" type="checkbox" value="tiempo-parcial"> Tiempo parcial</label>
+                            <label><input class="modality-filter" type="checkbox" value="por-proyecto"> Por proyecto</label>
+                            <label><input class="modality-filter" type="checkbox" value="por-servicio"> Por servicio</label>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Tipo</legend>
+                            <label><input class="type-filter" type="checkbox" value="formal"> Formal</label>
+                            <label><input class="type-filter" type="checkbox" value="no-formal"> No formal</label>
+                        </fieldset>
+                    </div>
+                </aside>
+                <div class="worker-results">
+                    <header class="role-header">
+                        <div>
+                            <span class="home-eyebrow">Oportunidades para ti</span>
+                            <h1 id="worker-title">Ofertas recomendadas <span id="offer-count">4</span></h1>
+                        </div>
+                        <label class="worker-sort" for="sort-filter">
+                            <span>Ordenar por</span>
+                            <select id="sort-filter">
+                                <option value="latest">Últimos publicados</option>
+                                <option value="az">Ordenar de A - Z</option>
+                                <option value="za">Ordenar de Z - A</option>
+                            </select>
+                        </label>
+                        <p>Revisa los detalles y postúlate a la oportunidad que más te interese.</p>
+                    </header>
+                    <div class="offer-grid">
+                    <article class="offer-card" data-area="gastronomia" data-city="Cochabamba" data-modality="tiempo-parcial" data-type="formal" data-published="4" data-employer="Restaurante Sazón Local" data-deadline="30 de noviembre de 2026" data-experience="No requiere experiencia previa" data-skills="Organización, trabajo en equipo y responsabilidad" data-description="Apoya en la preparación de alimentos, mantén organizada el área de trabajo y sigue las indicaciones del equipo de cocina." data-requirements="Disponibilidad de medio tiempo y compromiso con las normas de higiene.">
+                        <span class="role-label">Tiempo parcial</span>
+                        <h3>Ayudante de cocina</h3>
+                        <p>Apoya en la preparación de alimentos y mantén organizada el área de trabajo.</p>
+                        <div class="offer-meta"><span>Cochabamba</span><span>Bs. 120 por día</span></div>
+                        <div class="offer-card-footer">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Restaurante Sazón Local">
+                                <img src="https://via.placeholder.com/40" alt="Foto de Restaurante Sazón Local">
+                                <strong>Restaurante Sazón Local</strong>
+                                <span class="offer-rating" aria-label="5 de 5 estrellas">★★★★★</span>
+                                <span class="publisher-popover" role="tooltip"><strong>Restaurante Sazón Local</strong><span>Para conocer más sobre este empleador, inicia sesión en LILA.</span></span>
+                            </div>
+                            <button class="home-primary-button offer-details-button" type="button">Ver detalles</button>
+                        </div>
+                    </article>
+                    <article class="offer-card" data-area="diseno" data-city="Remoto" data-modality="por-proyecto" data-type="no-formal" data-published="3" data-employer="Emprendimiento Creativo LILA" data-deadline="15 de diciembre de 2026" data-experience="Experiencia básica en diseño digital" data-skills="Diseño para redes, creatividad y manejo de herramientas digitales" data-description="Crea piezas visuales para un emprendimiento local y ayuda a fortalecer su presencia digital." data-requirements="Presentar portafolio o ejemplos de trabajos anteriores.">
+                        <span class="role-label">Por proyecto</span>
+                        <h3>Diseñador/a para redes sociales</h3>
+                        <p>Crea piezas visuales para un emprendimiento local y ayuda a fortalecer su presencia digital.</p>
+                        <div class="offer-meta"><span>Remoto</span><span>Bs. 800 por proyecto</span></div>
+                        <div class="offer-card-footer">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Emprendimiento Creativo LILA">
+                                <img src="https://via.placeholder.com/40" alt="Foto de Emprendimiento Creativo LILA">
+                                <strong>Emprendimiento Creativo LILA</strong>
+                                <span class="offer-rating" aria-label="4 de 5 estrellas">★★★★<span aria-hidden="true">★</span></span>
+                                <span class="publisher-popover" role="tooltip"><strong>Emprendimiento Creativo LILA</strong><span>Para conocer más sobre este empleador, inicia sesión en LILA.</span></span>
+                            </div>
+                            <button class="home-primary-button offer-details-button" type="button">Ver detalles</button>
+                        </div>
+                    </article>
+                    <article class="offer-card" data-area="eventos" data-city="Cercado" data-modality="por-servicio" data-type="no-formal" data-published="2" data-employer="Eventos Cercado" data-deadline="5 de diciembre de 2026" data-experience="Se valorará experiencia en atención de eventos" data-skills="Atención al público, puntualidad y trabajo en equipo" data-description="Colabora con el montaje, la atención de invitados y el cierre de eventos." data-requirements="Disponibilidad para trabajar fines de semana y durante jornadas completas.">
+                        <span class="role-label">Fin de semana</span>
+                        <h3>Asistente de eventos</h3>
+                        <p>Colabora con el montaje, la atención de invitados y el cierre de eventos.</p>
+                        <div class="offer-meta"><span>Cercado</span><span>Bs. 180 por jornada</span></div>
+                        <div class="offer-card-footer">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Eventos Cercado">
+                                <img src="https://via.placeholder.com/40" alt="Foto de Eventos Cercado">
+                                <strong>Eventos Cercado</strong>
+                                <span class="offer-rating" aria-label="5 de 5 estrellas">★★★★★</span>
+                                <span class="publisher-popover" role="tooltip"><strong>Eventos Cercado</strong><span>Para conocer más sobre este empleador, inicia sesión en LILA.</span></span>
+                            </div>
+                            <button class="home-primary-button offer-details-button" type="button">Ver detalles</button>
+                        </div>
+                    </article>
+                    <article class="offer-card" data-area="ventas" data-city="Quillacollo" data-modality="tiempo-completo" data-type="formal" data-published="1" data-employer="Comercial Quillacollo" data-deadline="20 de diciembre de 2026" data-experience="Se requiere al menos 1 año en ventas" data-skills="Atención al cliente, ventas y organización" data-description="Atiende a clientes, organiza productos y registra las ventas del día." data-requirements="Disponibilidad de tiempo completo y facilidad para trabajar con público.">
+                        <span class="role-label">Tiempo completo</span>
+                        <h3>Vendedor/a de tienda</h3>
+                        <p>Atiende a clientes, organiza productos y registra las ventas del día.</p>
+                        <div class="offer-meta"><span>Quillacollo</span><span>Bs. 2.500 al mes</span></div>
+                        <div class="offer-card-footer">
+                            <div class="offer-publisher" tabindex="0" data-publisher-profile aria-label="Ver información de Comercial Quillacollo">
+                                <img src="https://via.placeholder.com/40" alt="Foto de Comercial Quillacollo">
+                                <strong>Comercial Quillacollo</strong>
+                                <span class="offer-rating" aria-label="4 de 5 estrellas">★★★★<span aria-hidden="true">★</span></span>
+                                <span class="publisher-popover" role="tooltip"><strong>Comercial Quillacollo</strong><span>Para conocer más sobre este empleador, inicia sesión en LILA.</span></span>
+                            </div>
+                            <button class="home-primary-button offer-details-button" type="button">Ver detalles</button>
+                        </div>
+                    </article>
+                </div>
+                </div>
+            </div>
+        </section>
+        <div id="footer-placeholder"></div>
+    </main>
+    <div class="offer-modal" id="offer-modal" role="dialog" aria-modal="true" aria-labelledby="modal-offer-title" hidden>
+        <div class="offer-modal-card">
+            <button class="offer-modal-close" id="offer-modal-close" type="button" aria-label="Cerrar detalles">×</button>
+            <span class="home-eyebrow" id="modal-offer-area"></span>
+            <h2 id="modal-offer-title"></h2>
+            <p class="offer-modal-employer" id="modal-offer-employer"></p>
+            <div class="offer-modal-meta" id="modal-offer-meta"></div>
+            <div class="offer-modal-section">
+                <h3>Descripción del trabajo</h3>
+                <p id="modal-offer-description"></p>
+            </div>
+            <div class="offer-modal-section">
+                <h3>Requisitos</h3>
+                <p id="modal-offer-requirements"></p>
+            </div>
+            <div class="offer-modal-section">
+                <h3>Experiencia y habilidades</h3>
+                <p><strong id="modal-offer-experience"></strong></p>
+                <p id="modal-offer-skills"></p>
+            </div>
+            <div class="offer-modal-actions">
+                <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                <button class="offer-save-button" id="offer-save-button" type="button" aria-pressed="false">♡ Guardar oferta</button>
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+    <script type="module">
+        import { initFooter, initHeader } from './assets/js/components.js';
+        import { obtenerToken } from './assets/js/sesion.js';
+        initHeader('', 'trabajador');
+        initFooter();
+
+        const areaFilter = document.getElementById('area-filter');
+        const cityFilter = document.getElementById('city-filter');
+        const searchInput = document.getElementById('job-search');
+        const sortFilter = document.getElementById('sort-filter');
+        const offerGrid = document.querySelector('.offer-grid');
+        const offers = Array.from(document.querySelectorAll('.offer-card'));
+        const offerCount = document.getElementById('offer-count');
+        const modalityFilters = document.querySelectorAll('.modality-filter');
+        const typeFilters = document.querySelectorAll('.type-filter');
+        const backToTop = document.querySelector('.back-to-top');
+        const hasSession = Boolean(obtenerToken());
+
+        document.querySelectorAll('[data-publisher-profile]').forEach(profile => {
+            if (hasSession) {
+                profile.classList.add('is-authenticated');
+                profile.setAttribute('aria-label', `${profile.querySelector('strong').textContent}: abrir perfil`);
+                profile.addEventListener('click', () => {
+                    window.location.href = 'perfilEmpleador.html';
+                });
+                profile.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        window.location.href = 'perfilEmpleador.html';
+                    }
+                });
+            }
+        });
+        const offerModal = document.getElementById('offer-modal');
+        const offerModalClose = document.getElementById('offer-modal-close');
+        const offerSaveButton = document.getElementById('offer-save-button');
+        const offerModalFields = {
+            area: document.getElementById('modal-offer-area'),
+            title: document.getElementById('modal-offer-title'),
+            employer: document.getElementById('modal-offer-employer'),
+            meta: document.getElementById('modal-offer-meta'),
+            description: document.getElementById('modal-offer-description'),
+            requirements: document.getElementById('modal-offer-requirements'),
+            experience: document.getElementById('modal-offer-experience'),
+            skills: document.getElementById('modal-offer-skills')
+        };
+
+        function openOfferModal(offer) {
+            const title = offer.querySelector('h3').textContent;
+            const meta = Array.from(offer.querySelectorAll('.offer-meta span')).map(item => item.textContent);
+            offerModalFields.area.textContent = offer.dataset.area;
+            offerModalFields.title.textContent = title;
+            offerModalFields.employer.textContent = offer.dataset.employer;
+            offerModalFields.meta.innerHTML = `<span>${meta[0]}</span><span>${meta[1]}</span><span>${offer.dataset.modality.replaceAll('-', ' ')}</span><span>${offer.dataset.type.replace('-', ' ')}</span><span>Publicado recientemente</span><span>Postularse hasta ${offer.dataset.deadline}</span>`;
+            offerModalFields.description.textContent = offer.dataset.description;
+            offerModalFields.requirements.textContent = offer.dataset.requirements;
+            offerModalFields.experience.textContent = offer.dataset.experience;
+            offerModalFields.skills.textContent = offer.dataset.skills;
+            offerModal.hidden = false;
+            document.body.classList.add('modal-open');
+            offerModalClose.focus();
+        }
+
+        function closeOfferModal() {
+            offerModal.hidden = true;
+            document.body.classList.remove('modal-open');
+        }
+
+        document.querySelectorAll('.offer-details-button').forEach(button => {
+            button.addEventListener('click', () => openOfferModal(button.closest('.offer-card')));
+        });
+        offerModalClose.addEventListener('click', closeOfferModal);
+        offerSaveButton.addEventListener('click', () => {
+            const isSaved = offerSaveButton.getAttribute('aria-pressed') === 'true';
+            offerSaveButton.setAttribute('aria-pressed', String(!isSaved));
+            offerSaveButton.textContent = isSaved ? '♡ Guardar oferta' : '♥ Oferta guardada';
+        });
+        offerModal.addEventListener('click', event => {
+            if (event.target === offerModal) closeOfferModal();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && !offerModal.hidden) closeOfferModal();
+        });
+
+        function filterOffers() {
+            const search = searchInput.value.trim().toLowerCase();
+            const selectedModalities = Array.from(modalityFilters).filter(filter => filter.checked).map(filter => filter.value);
+            const selectedTypes = Array.from(typeFilters).filter(filter => filter.checked).map(filter => filter.value);
+            const sortedOffers = [...offers].sort((firstOffer, secondOffer) => {
+                if (sortFilter.value === 'az') {
+                    return firstOffer.querySelector('h3').textContent.localeCompare(secondOffer.querySelector('h3').textContent);
+                }
+                if (sortFilter.value === 'za') {
+                    return secondOffer.querySelector('h3').textContent.localeCompare(firstOffer.querySelector('h3').textContent);
+                }
+                return Number(secondOffer.dataset.published) - Number(firstOffer.dataset.published);
+            });
+            let visibleOffers = 0;
+            sortedOffers.forEach(offer => {
+                const matchesArea = areaFilter.value === 'todas' || offer.dataset.area === areaFilter.value;
+                const matchesCity = cityFilter.value === 'todas' || offer.dataset.city === cityFilter.value;
+                const matchesSearch = !search || offer.textContent.toLowerCase().includes(search);
+                const matchesModality = selectedModalities.length === 0 || selectedModalities.includes(offer.dataset.modality);
+                const matchesType = selectedTypes.length === 0 || selectedTypes.includes(offer.dataset.type);
+                offer.hidden = !(matchesArea && matchesCity && matchesSearch && matchesModality && matchesType);
+                if (!offer.hidden) visibleOffers += 1;
+                offerGrid.appendChild(offer);
+            });
+            offerCount.textContent = visibleOffers;
+        }
+
+        areaFilter.addEventListener('change', filterOffers);
+        cityFilter.addEventListener('change', filterOffers);
+        searchInput.addEventListener('input', filterOffers);
+        sortFilter.addEventListener('change', filterOffers);
+        modalityFilters.forEach(filter => filter.addEventListener('change', filterOffers));
+        typeFilters.forEach(filter => filter.addEventListener('change', filterOffers));
+
+        function updateBackToTopVisibility() {
+            backToTop.classList.toggle('is-visible', window.scrollY > 320);
+        }
+
+        window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        updateBackToTopVisibility();
+    </script>
+</body>
+</html>

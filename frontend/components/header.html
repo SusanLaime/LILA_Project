@@ -1,24 +1,16 @@
-<!-- DUEÑA/O: Joaquín Peredo — Navbar (encabezado de todas las pantallas). Ver README.md (sección Equipo) -->
-<nav class="navbar navbar-expand-custom navbar-light bg-light lila-top-nav">
-  <a class="navbar-brand lila-brand" href="#">
-    <img class="marca" src="../../public/L-logo-oficial.png" alt="Lila" style="height: 40px; width: auto;" />
-  </a>
-
-  <!-- Badges & Notifications outside toggler -->
-  <div class="d-flex align-items-center me-auto ml-auto ms-3"
-    style="margin-right: auto; margin-left: 1rem; gap: 0.5rem;">
-    <span class="navbar-badge" id="lila-role-badge">TRABAJADOR</span>
-    <span class="navbar-badge" id="lila-verified-badge" style="display: none;">NO VERIFICADO</span>
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav ml-auto ms-auto" id="lila-nav-links">
-      <!-- Links injected dynamically -->
-    </ul>
-  </div>
-</nav>
+<header class="lila-header">
+    <a class="lila-header-brand" href="/frontend/index.html" aria-label="LILA, página de inicio">
+        <img src="/frontend/public/L-logo-oficial.png" alt="LILA">
+        <span>LILA</span>
+    </a>
+    <div class="lila-header-actions">
+        <span class="lila-role-badge" id="lila-role-badge" hidden></span>
+        <nav class="lila-session-actions" id="lila-auth-actions" aria-label="Acciones de sesión">
+            <a href="/frontend/auth/login.html">Iniciar sesión</a>
+            <a class="lila-create-account" href="/frontend/auth/register.html">Crear cuenta</a>
+            <a class="lila-profile-link" href="/frontend/website/trabajador/perfil.html" title="Ir a mi perfil">
+                <img class="lila-profile-avatar" src="https://via.placeholder.com/44" alt="Foto de perfil">
+            </a>
+        </nav>
+    </div>
+</header>
