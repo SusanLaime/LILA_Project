@@ -61,7 +61,8 @@ cp .env.example .env        # en Windows (PowerShell): Copy-Item .env.example .e
 npm start
 ```
 
-Abrir **http://localhost:3000** en el navegador.
+Abrir **http://localhost:3000** en el navegador. La ruta principal redirige a la página
+de inicio servida desde `frontend/website/index.html`.
 
 Para hacer pruebas con la base de datos configurada en `.env.local`, iniciar el mismo
 servidor principal con:

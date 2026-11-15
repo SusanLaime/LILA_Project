@@ -50,6 +50,10 @@ app.use('/api/perfil', perfilRouter);
 // RUTA PRINCIPAL
 // =====================================================================
 
+app.get('/frontend/index.html', (req, res) => {
+  return res.sendFile(resolve(raiz, 'frontend', 'website', 'index.html'));
+});
+
 app.get('/', (req, res) => {
   return res.redirect('/frontend/index.html');
 });
