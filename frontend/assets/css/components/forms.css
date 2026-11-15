@@ -84,7 +84,9 @@
     border-radius: 8px;
     background: #ffffff;
     color: #272348;
-    font: inherit;
+    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
     cursor: pointer;
 }
 

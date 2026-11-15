@@ -10,7 +10,7 @@ export async function pedirApi(ruta, { metodo = 'GET', cuerpo, token } = {}) {
         const headers = {};
         if (cuerpo !== undefined) headers['Content-Type'] = 'application/json';
         if (token) headers.Authorization = `Bearer ${token}`;
-        const response = await fetch(ruta, {
+        const response = await fetch(ruta, {//Entonces fetch() envía una solicitud HTTP a esa dirección del servidor.
             method: metodo,
             headers,
             body: cuerpo === undefined ? undefined : JSON.stringify(cuerpo)

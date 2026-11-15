@@ -28,6 +28,8 @@ if (!token) {
     const ciudad = document.getElementById('ciudad');
     const telefono = document.getElementById('telefono-perfil');
     const experiencia = document.getElementById('experiencia');
+    const genero = document.getElementById('genero');
+    const edad = document.getElementById('edad');
 
     const habilidades = document.getElementById('habilidades');
     const habilidadesTags = document.getElementById('habilidades-tags');
@@ -278,8 +280,8 @@ if (!token) {
     function actualizarProgreso(perfil) {
 
         const campos = perfil.rol === 'empleador'
-            ? ['ciudad']
-            : ['ciudad', 'habilidades', 'experiencia'];
+            ? ['ciudad', 'genero', 'edad']
+            : ['ciudad', 'genero', 'edad', 'habilidades', 'experiencia'];
 
         let completos = 0;
 
@@ -328,6 +330,29 @@ if (!token) {
         const nombre = perfil.nombre || 'Usuario';
         const rol = perfil.rol || 'trabajador';
 
+        // Adaptar el destino del logo según el rol
+        const enlaceLogo = document.getElementById('enlace-logo');
+
+        if (enlaceLogo) {
+            enlaceLogo.href = rol === 'empleador'
+                ? '/frontend/homeEmpleador.html'
+                : '/frontend/homeTrabajador.html';
+        }
+
+        // Adaptar el menú de ofertas según el rol
+        const enlaceOfertas = document.getElementById('enlace-ofertas');
+        const textoOfertas = document.getElementById('texto-ofertas');
+
+        if (enlaceOfertas && textoOfertas) {
+            if (rol === 'empleador') {
+                textoOfertas.textContent = 'Ofertas realizadas';
+                enlaceOfertas.href = '/frontend/homeEmpleador.html';
+            } else {
+                textoOfertas.textContent = 'Ofertas';
+                enlaceOfertas.href = '/frontend/homeTrabajador.html';
+            }
+        }
+
         const estado =
             perfil.estado_verificacion || 'no_verificado';
 
@@ -351,6 +376,13 @@ if (!token) {
         document.getElementById('perfil-rol').textContent =
             rol;
 
+        // Mostrar ciudad en la cuarta tarjeta del resumen
+        const tarjetaCiudad = document.getElementById('perfil-ciudad');
+
+        if (tarjetaCiudad) {
+            tarjetaCiudad.textContent = perfil.ciudad || 'Sin registrar';
+        }
+
         const badge = document.getElementById('badge-verif');
 
         badge.textContent =
@@ -363,6 +395,9 @@ if (!token) {
 
         // Campos de Mis datos
         establecerCiudad(perfil.ciudad);
+
+        genero.value = perfil.genero || '';
+        edad.value = perfil.edad ?? '';
 
         telefono.value = perfil.telefono
             ? `+591 ${perfil.telefono}`
@@ -446,6 +481,8 @@ if (!token) {
 
         const cuerpo = {
             ciudad: ciudad.value,
+            genero: genero.value,
+            edad: edad.value === '' ? null : Number(edad.value),
 
             // Mantener los valores anteriores si es empleador
             habilidades: esTrabajador
@@ -523,7 +560,7 @@ if (!token) {
         mostrarMensaje('');
     });
 
-    
+
     // ======================================================
     // MENÚ HAMBURGUESA PARA CELULARES
     // ======================================================

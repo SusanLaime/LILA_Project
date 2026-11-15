@@ -13,14 +13,12 @@
     <link rel="stylesheet" href="../assets/css/base/typography.css" />
     <link rel="stylesheet" href="../assets/css/pages/login.css" />
     <link rel="stylesheet" href="../assets/css/components/forms.css" />
-    <link rel="stylesheet" href="../assets/css/components/header.css" />
     <link rel="stylesheet" href="../assets/css/utilities/responsive.css" />
     <title>LILA | Librería Laboral</title>
 </head>
 
 <body>
     <main class="bienvenida-mvil" aria-labelledby="saludo-principal">
-        <div id="header-placeholder"></div>
         <section aria-labelledby="saludo-principal">
             <h1 class="saludo" id="saludo-principal">Hola, bienvenido/a a LILA</h1>
             <p class="introducci-n">
@@ -66,8 +64,7 @@
     </main>
     <script type="module" src="../assets/js/login.js"></script>
     <script type="module">
-        import { initFooter, initHeader } from '../assets/js/components.js';
-        initHeader('', '');
+        import { initFooter } from '../assets/js/components.js';
         initFooter();
     </script>
 </body>
