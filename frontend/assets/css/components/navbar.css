@@ -20,19 +20,22 @@ body {
 /* Barra superior base */
 .navbar-trabajador {
     width: 100%;
+    max-width: none;
+    margin: 0;
     background-color: var(--bg-navbar);
     padding: 12px 24px;
     border-bottom: 1px solid rgba(39, 35, 72, 0.05);
 }
 
+/* Contenido interno centrado */
 .navbar-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    gap: 16px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+    gap: 16px;
 }
 
 /* --- Brand / Logo --- */
