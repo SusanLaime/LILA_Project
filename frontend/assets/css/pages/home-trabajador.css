@@ -4,6 +4,7 @@
     --home-morado-claro: #8a74c9;
     --home-lila-claro: var(--LILA-primitives-purple-lavender);
     --home-lila-borde: #d6cee2;
+    background: var(--LILA-semantic-color-bg-canvas);
 }
 
 .worker-home .worker-results .role-header h1 {
