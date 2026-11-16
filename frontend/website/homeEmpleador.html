@@ -84,9 +84,6 @@
                         <label for="employer-city-filter">Ciudad
                             <select id="employer-city-filter">
                                 <option value="all">Todas</option>
-                                <option value="cochabamba">Cochabamba</option>
-                                <option value="remoto">Remoto</option>
-                                <option value="quillacollo">Quillacollo</option>
                             </select>
                         </label>
                         <label for="employer-category-filter">Categoría
@@ -237,13 +234,45 @@
     </template>
     <script type="module">
         import { initFooter, initHeader } from '../assets/js/components.js';
-        import { obtenerOfertas, obtenerEstados, guardarEstado } from '../assets/js/ofertas.js';
+        import { obtenerOfertas, obtenerEstados, guardarEstado, normalizarTexto } from '../assets/js/ofertas.js';
         initHeader('', 'empleador');
         initFooter();
 
         const activePostsContainer = document.getElementById('active-posts');
         const postTemplate = document.getElementById('employer-post-template');
         const cityFilterSelect = document.getElementById('employer-city-filter');
+
+        async function cargarCiudadesPerfil() {
+            const respuesta = await fetch('perfil.html');
+            if (!respuesta.ok) {
+                throw new Error(`No se pudo cargar la lista de ciudades (${respuesta.status}).`);
+            }
+
+            const htmlPerfil = await respuesta.text();
+            const documentoPerfil = new DOMParser().parseFromString(htmlPerfil, 'text/html');
+            const selectCiudadPerfil = documentoPerfil.getElementById('ciudad');
+            if (!selectCiudadPerfil) {
+                throw new Error('No se encontró el selector de ciudades del perfil.');
+            }
+
+            cityFilterSelect.replaceChildren(new Option('Todas', 'all'));
+            Array.from(selectCiudadPerfil.options)
+                .filter(opcion => opcion.value.trim())
+                .forEach(opcion => {
+                    cityFilterSelect.add(new Option(
+                        opcion.textContent.trim(),
+                        normalizarTexto(opcion.value)
+                    ));
+                });
+            cityFilterSelect.add(new Option('Remoto', 'remoto'));
+        }
+
+        try {
+            await cargarCiudadesPerfil();
+        } catch (error) {
+            console.error('No se pudo sincronizar el filtro con las ciudades del perfil:', error);
+            cityFilterSelect.disabled = true;
+        }
 
         // Ofertas publicadas desde publicarOferta.html (guardadas en localStorage).
         obtenerOfertas().slice().reverse().forEach(oferta => {
@@ -260,7 +289,12 @@
             activePostsContainer.prepend(card);
 
             if (oferta.city && !cityFilterSelect.querySelector(`option[value="${CSS.escape(oferta.city)}"]`)) {
-                cityFilterSelect.add(new Option(oferta.location, oferta.city));
+                const nombreUbicacion = oferta.location.trim();
+                const etiquetaUbicacion = normalizarTexto(nombreUbicacion) === 'remoto' ||
+                    nombreUbicacion.endsWith(', Bolivia')
+                    ? nombreUbicacion
+                    : `${nombreUbicacion}, Bolivia`;
+                cityFilterSelect.add(new Option(etiquetaUbicacion, oferta.city));
             }
         });
 
@@ -322,7 +356,8 @@
             ordenadas.forEach(post => {
                 const coincideBusqueda = post.dataset.title.toLocaleLowerCase('es').includes(busqueda);
                 const coincideEstado = statusFilter.value === 'all' || post.dataset.status === statusFilter.value;
-                const coincideCiudad = cityFilter.value === 'all' || post.dataset.city === cityFilter.value;
+                const coincideCiudad = cityFilter.value === 'all' ||
+                    normalizarTexto(post.dataset.city) === cityFilter.value;
                 const coincideCategoria = categoryFilter.value === 'all' || post.dataset.category === categoryFilter.value;
                 const mostrar = coincideBusqueda && coincideEstado && coincideCiudad && coincideCategoria;
 
