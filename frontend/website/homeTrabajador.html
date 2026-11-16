@@ -238,8 +238,8 @@
             }
 
             const campos = resultado.datos.rol === 'empleador'
-                ? ['ciudad']
-                : ['ciudad', 'habilidades', 'experiencia'];
+                ? ['ciudad', 'genero', 'edad']
+                : ['ciudad', 'genero', 'edad', 'habilidades', 'experiencia'];
             const completos = campos.filter(campo =>
                 Boolean(resultado.datos[campo] && String(resultado.datos[campo]).trim())
             ).length;
