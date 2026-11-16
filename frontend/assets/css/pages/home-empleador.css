@@ -5,6 +5,10 @@
     --home-lila-borde: #d6cee2;
 }
 
+.employer-dashboard .dashboard-welcome > div {
+    padding: 20px;
+}
+
 .employer-dashboard .dashboard-welcome h1 {
     color: var(--home-morado-oscuro);
     font-size: 22px;

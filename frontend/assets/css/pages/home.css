@@ -66,7 +66,10 @@
     gap: 48px;
 }
 
-.home-hero-copy { max-width: 580px; }
+.home-hero-copy {
+    max-width: 580px;
+    padding-left: 40px;
+}
 
 .home-eyebrow {
     display: inline-block;

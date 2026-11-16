@@ -52,7 +52,15 @@ beforeEach(async () => {
   page = await context.newPage();
   erroresConsola = [];
   page.on('pageerror', error => erroresConsola.push(error.message));
-  page.on('console', msg => { if (msg.type() === 'error') erroresConsola.push(msg.text()); });
+  page.on('console', msg => {
+    // Los 404 se revisan con el evento 'response' (así se ignora el favicon.ico que pide Chrome).
+    if (msg.type() === 'error' && !msg.text().startsWith('Failed to load resource')) {
+      erroresConsola.push(msg.text());
+    }
+  });
+  page.on('response', response => {
+    if (response.status() >= 400) erroresConsola.push(`${response.status()} ${response.url()}`);
+  });
 });
 
 afterEach(async () => {
@@ -339,9 +347,9 @@ describe('Filtros y búsqueda', () => {
   test('el orden se mantiene al aplicar un filtro', async () => {
     await abrirPanel();
     await page.selectOption('#employer-sort', 'za');
-    await page.fill('#employer-search', 'de');
+    await page.fill('#employer-search', 'or/a');
     assert.deepEqual(await titulosVisibles(), [
-      'Vendedor/a de tienda', 'Ayudante de cocina'
+      'Vendedor/a de tienda', 'Diseñador/a para redes sociales'
     ]);
   });
 });
@@ -449,8 +457,15 @@ describe('Otros elementos interactivos', () => {
     assert.match(await card.getAttribute('class'), /is-selected/);
   });
 
-  test('el botón "Volver arriba" aparece al hacer scroll y regresa al inicio', async () => {
+  test('el botón "Volver arriba" no se muestra en escritorio', async () => {
     await page.setViewportSize({ width: 1280, height: 600 });
+    await abrirPanel();
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    assert.equal(await page.isVisible('.back-to-top'), false);
+  });
+
+  test('en móvil, "Volver arriba" aparece al hacer scroll y regresa al inicio', async () => {
+    await page.setViewportSize({ width: 390, height: 700 });
     await abrirPanel();
     const boton = page.locator('.back-to-top');
     assert.doesNotMatch(await boton.getAttribute('class'), /is-visible/);
