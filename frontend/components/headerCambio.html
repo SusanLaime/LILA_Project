@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Cambio - LILA</title>
+    <link rel="stylesheet" href="../assets/css/components/navbarcambio.css">
+</head>
+<body>
+
+    <header class="navbar-cambio">
+        <div class="navbar-container">
+
+            <!-- Logo sin texto -->
+            <a href="../index.html" class="nav-brand">
+                <img src="../public/L-logo-oficial.png" alt="LILA Logo" class="nav-logo-img">
+            </a>
+
+            <!-- Buscador Central -->
+            <div class="nav-search">
+                <div class="nav-search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" placeholder="Buscar trabajos...">
+                </div>
+            </div>
+
+            <!-- Zona Derecha: Switch y Avatar -->
+            <div class="nav-actions">
+
+                <!-- Botón para alternar entre Trabajador / Empleador -->
+                <button class="btn-switch-profile" id="profileSwitcher" title="Cambiar de perfil">
+                    <svg class="switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 3 21 3 21 8"></polyline>
+                        <line x1="4" y1="14" x2="21" y2="3"></line>
+                        <polyline points="8 21 3 21 3 16"></polyline>
+                        <line x1="20" y1="10" x2="3" y2="21"></line>
+                    </svg>
+                    <span class="switch-text">Trabajador</span>
+                </button>
+
+                <!-- Avatar con enlace al perfil de trabajador -->
+                <a href="../website/trabajador/perfil.html" class="nav-avatar" title="Mi Perfil" id="avatarLink">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-3.8-.85-5.05-2.2.03-1.67 3.37-
