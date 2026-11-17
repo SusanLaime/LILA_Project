@@ -12,6 +12,7 @@ import app from '../../backend/server.js';
 const RUTA_PANEL = '/frontend/website/homeEmpleador.html';
 const RUTA_PUBLICAR = '/frontend/website/publicarOferta.html';
 const RUTA_TRABAJADOR = '/frontend/website/homeTrabajador.html';
+const RUTA_PERFIL = '/frontend/website/perfil.html';
 
 let server;
 let baseUrl;
@@ -140,6 +141,40 @@ describe('Carga de la página', () => {
     if (await badge.count()) {
       assert.equal((await badge.textContent()).trim(), 'EMPLEADOR');
     }
+  });
+
+  test('el perfil muestra la flecha para volver y oculta el cambio de rol', async () => {
+    await page.addInitScript(() => {
+      localStorage.setItem('lila_token', 'token-de-prueba');
+      localStorage.setItem('lila_rol_activo', 'trabajador');
+    });
+    await page.route('**/api/perfil*', route => route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        nombre: 'Ana',
+        rol: 'trabajador',
+        roles: ['trabajador', 'empleador'],
+        estado_verificacion: 'no_verificado',
+        ciudad: 'Cochabamba',
+        telefono: '70000000',
+        genero: '',
+        edad: null,
+        habilidades: '',
+        experiencia: ''
+      })
+    }));
+
+    await page.goto(baseUrl + RUTA_PERFIL);
+    await page.waitForSelector('#header-placeholder .nav-home-back svg');
+
+    assert.equal(await page.locator('#header-placeholder .navbar-cambio').count(), 1);
+    assert.equal(await page.locator('#header-placeholder .nav-brand').count(), 1);
+    assert.equal(await page.locator('.lp-sidebar .lp-logo').count(), 0);
+    assert.equal(await page.locator('#header-placeholder .nav-home-back').isVisible(), true);
+    assert.equal(await page.locator('#header-placeholder .nav-home-back svg').isVisible(), true);
+    assert.equal(await page.locator('#header-placeholder #btn-cambiar-rol').isVisible(), false);
+    assert.deepEqual(erroresConsola, []);
   });
 
   test('el botón Volver navega a la página interna anterior en lugar del index', async () => {

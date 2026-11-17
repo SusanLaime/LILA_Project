@@ -1,13 +1,17 @@
 /** DUEÑA/O: Sara Revollo — Pantalla de perfil (estilos propios) */
 
-/** Esta pantalla usa su propio menú lateral, así que se oculta el encabezado compartido**
-
-**   solo aquí. Para volver a mostrarlo, borra esta regla. */
-
 #header-placeholder {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-    display: none !important;
+#header-placeholder .nav-home-back {
+    display: inline-flex;
+}
 
+#header-placeholder #btn-cambiar-rol {
+    display: none;
 }
 
 main.perfil-page {
@@ -169,34 +173,6 @@ main.perfil-page {
     color: #fff;
 
     background: linear-gradient(180deg, #7a63bd 0%, #272348 100%);
-
-}
-
-/** Logo oficial */
-
-.perfil-page .lp-logo {
-
-    display: block;
-
-    padding: 12px 14px;
-
-    border-radius: 16px;
-
-    background: transparent;
-
-}
-
-.perfil-page .lp-logo img {
-
-    display: block;
-
-    width: 100%;
-
-    max-width: 180px;
-
-    height: auto;
-
-    margin: 0 auto;
 
 }
 

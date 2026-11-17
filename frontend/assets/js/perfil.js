@@ -331,15 +331,6 @@ if (!token) {
         const rol = perfil.rol || 'trabajador';
         localStorage.setItem('lila_rol_activo', rol);
 
-        // Adaptar el destino del logo según el rol
-        const enlaceLogo = document.getElementById('enlace-logo');
-
-        if (enlaceLogo) {
-            enlaceLogo.href = rol === 'empleador'
-                ? '/frontend/website/homeEmpleador.html'
-                : '/frontend/website/homeTrabajador.html';
-        }
-
         // Adaptar el menú de ofertas según el rol
         const enlaceOfertas = document.getElementById('enlace-ofertas');
         const textoOfertas = document.getElementById('texto-ofertas');
