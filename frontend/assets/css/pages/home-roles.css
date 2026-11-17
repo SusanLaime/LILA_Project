@@ -1,4 +1,6 @@
 .role-home {
+    width: min(1416px, 100%);
+    margin: 0 auto;
     background: #f3f5fa;
     color: var(--LILA-semantic-color-text-primary);
     font-family: "Poppins-Regular", Helvetica, sans-serif;
@@ -22,8 +24,8 @@
 
 .role-home .home-nav,
 .role-home .role-content {
-    width: min(1120px, calc(100% - 32px));
-    margin: 0 auto;
+    width: 100%;
+    margin: 0;
 }
 
 .role-content {

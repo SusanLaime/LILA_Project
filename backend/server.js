@@ -30,6 +30,18 @@ const app = express();
 // Permitir recibir datos JSON
 app.use(express.json({ limit: '20kb' }));
 
+const redireccionesFrontend = {
+  '/frontend/website/index.html': '/frontend/index.html',
+  '/frontend/homeTrabajador.html': '/frontend/website/homeTrabajador.html',
+  '/frontend/homeEmpleador.html': '/frontend/website/homeEmpleador.html',
+  '/frontend/website/trabajador/perfil.html': '/frontend/website/perfil.html',
+  '/frontend/website/perfilEmpleador.html': '/frontend/website/perfil.html'
+};
+
+app.get(Object.keys(redireccionesFrontend), (req, res) => {
+  return res.redirect(301, redireccionesFrontend[req.path]);
+});
+
 // Servir los archivos del frontend
 app.use('/frontend', express.static(resolve(raiz, 'frontend')));
 
@@ -49,6 +61,10 @@ app.use('/api/perfil', perfilRouter);
 // =====================================================================
 // RUTA PRINCIPAL
 // =====================================================================
+
+app.get('/frontend/index.html', (req, res) => {
+  return res.sendFile(resolve(raiz, 'frontend', 'website', 'index.html'));
+});
 
 app.get('/', (req, res) => {
   return res.redirect('/frontend/index.html');

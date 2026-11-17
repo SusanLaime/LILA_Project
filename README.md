@@ -30,6 +30,8 @@ Cada archivo indica su dueña o dueño en la primera línea (`DUEÑA/O: ...`).
 
 **Ramas:** `main` (entrega) ← `dev` ← una rama `feature/...` por persona. Se une a `dev` con pull request y cada quien hace commits desde su propia cuenta. Solo Natalia ejecuta `npm install` para agregar dependencias, así nadie más modifica `package.json`.
 
+Para resolver conflictos de combinación en VS Code, consulta [`docs/Solving_conflicts.md`](docs/Solving_conflicts.md).
+
 ## Funcionalidad implementada
 
 <!-- TODO (Susan): describir en 3–5 líneas solo lo que SÍ funciona al momento de la entrega. -->
@@ -59,7 +61,8 @@ cp .env.example .env        # en Windows (PowerShell): Copy-Item .env.example .e
 npm start
 ```
 
-Abrir **http://localhost:3000** en el navegador.
+Abrir **http://localhost:3000** en el navegador. La ruta principal redirige a la página
+de inicio servida desde `frontend/website/index.html`.
 
 Para hacer pruebas con la base de datos configurada en `.env.local`, iniciar el mismo
 servidor principal con:

@@ -13,24 +13,24 @@
     <title>LILA | Mi perfil</title>
     <!-- ESTILOS GENERALES -->
     <link rel="stylesheet"
-          href="../../assets/css/base/reset.css">
+          href="../assets/css/base/reset.css">
     <link rel="stylesheet"
-          href="../../assets/css/base/typography.css">
+          href="../assets/css/base/typography.css">
     <link rel="stylesheet"
-          href="../../assets/css/pages/buscar.css">
+          href="../assets/css/pages/buscar.css">
     <link rel="stylesheet"
-          href="../../assets/css/utilities/responsive.css">
+          href="../assets/css/utilities/responsive.css">
     <!-- BOOTSTRAP -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <!-- ESTILOS EXISTENTES DE LILA -->
     <link rel="stylesheet"
-          href="../../assets/css/components/header.css">
+          href="../assets/css/components/header.css">
     <link rel="stylesheet"
-          href="../../assets/css/pages/profile.css">
+          href="../assets/css/pages/profile.css">
     <!-- ESTILOS PROPIOS DEL PERFIL -->
     <link rel="stylesheet"
-          href="../../assets/css/pages/perfil-pagina.css">
+          href="../assets/css/pages/perfil-pagina.css">
 </head>
 <body>
     <!-- Encabezado dinámico requerido por components.js -->
@@ -78,7 +78,7 @@
                 href="/frontend/index.html"
                 aria-label="LILA, ir al inicio">
                     <img
-                        src="../../public/logotransparente.png"
+                        src="/frontend/images/logotransparente.png"
                         alt="LILA - Librería Laboral"
                     >
                 </a>
@@ -87,7 +87,7 @@
                      aria-label="Menú principal">
                     <a
                         class="activo"
-                        href="/frontend/website/trabajador/perfil.html"
+                        href="/frontend/website/perfil.html"
                         aria-current="page"
                     >
                         <svg class="lp-ico"
@@ -108,7 +108,7 @@
                         Inicio
                     </a>
 
-                    <a id="enlace-ofertas" href="/frontend/homeTrabajador.html">
+                    <a id="enlace-ofertas" href="/frontend/website/homeTrabajador.html">
                         <svg class="lp-ico"
                             viewBox="0 0 24 24"
                             aria-hidden="true">
@@ -700,7 +700,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Footer dinámico -->
     <script type="module">
-        import { initFooter } from '../../assets/js/components.js';
+        import { initFooter } from '../assets/js/components.js';
         // El encabezado se inicializa desde perfil.js
         // cuando se conoce el rol del usuario.
         initFooter();
@@ -708,7 +708,7 @@
     <!-- Lógica del perfil -->
     <script
         type="module"
-        src="../../assets/js/perfil.js">
+        src="../assets/js/perfil.js">
     </script>
 </body>
 </html>

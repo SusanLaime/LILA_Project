@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Ofertas de trabajo disponibles en LILA." />
-    <link rel="stylesheet" href="assets/css/base/reset.css" />
-    <link rel="stylesheet" href="assets/css/base/typography.css" />
-    <link rel="stylesheet" href="assets/css/pages/home.css" />
-    <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
-    <link rel="stylesheet" href="assets/css/pages/home-trabajador.css" />
-    <link rel="stylesheet" href="assets/css/components/navbar.css" />
+    <link rel="stylesheet" href="../assets/css/base/reset.css" />
+    <link rel="stylesheet" href="../assets/css/base/typography.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home-roles.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home-trabajador.css" />
+    <link rel="stylesheet" href="../assets/css/components/header.css" />
     <title>LILA — Ofertas de trabajo</title>
 </head>
 <body>
@@ -63,7 +63,7 @@
                             </div>
                             <p class="worker-profile-progress-status" id="worker-profile-progress-status" role="status">Cargando progreso...</p>
                         </div>
-                        <a href="website/trabajador/perfil.html">Completar mi perfil</a>
+                        <a href="/frontend/website/perfil.html">Completar mi perfil</a>
                     </div>
                     <div class="worker-checks">
                         <h2>Filtros</h2>
@@ -185,16 +185,16 @@
                 <p id="modal-offer-skills"></p>
             </div>
             <div class="offer-modal-actions">
-                <a class="home-primary-button" href="auth/register.html">Postularme</a>
+                <a class="home-primary-button" href="/frontend/auth/register.html">Postularme</a>
                 <button class="offer-save-button" id="offer-save-button" type="button" aria-pressed="false">♡ Guardar oferta</button>
             </div>
         </div>
     </div>
     <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
     <script type="module">
-        import { initFooter, initHeader } from './assets/js/components.js';
-        import { pedirApi } from './assets/js/api.js';
-        import { obtenerToken } from './assets/js/sesion.js';
+        import { initFooter, initHeader } from '../assets/js/components.js';
+        import { pedirApi } from '../assets/js/api.js';
+        import { obtenerToken } from '../assets/js/sesion.js';
         initHeader('', 'trabajador');
         initFooter();
 
@@ -238,8 +238,8 @@
             }
 
             const campos = resultado.datos.rol === 'empleador'
-                ? ['ciudad']
-                : ['ciudad', 'habilidades', 'experiencia'];
+                ? ['ciudad', 'genero', 'edad']
+                : ['ciudad', 'genero', 'edad', 'habilidades', 'experiencia'];
             const completos = campos.filter(campo =>
                 Boolean(resultado.datos[campo] && String(resultado.datos[campo]).trim())
             ).length;
@@ -259,12 +259,12 @@
                 profile.classList.add('is-authenticated');
                 profile.setAttribute('aria-label', `${profile.querySelector('strong').textContent}: abrir perfil`);
                 profile.addEventListener('click', () => {
-                    window.location.href = 'perfilEmpleador.html';
+                    window.location.href = '/frontend/website/perfil.html';
                 });
                 profile.addEventListener('keydown', event => {
                     if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
-                        window.location.href = 'perfilEmpleador.html';
+                        window.location.href = '/frontend/website/perfil.html';
                     }
                 });
             }

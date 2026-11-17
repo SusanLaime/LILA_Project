@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Publica una oferta de trabajo en LILA." />
-    <link rel="stylesheet" href="assets/css/base/reset.css" />
-    <link rel="stylesheet" href="assets/css/base/typography.css" />
-    <link rel="stylesheet" href="assets/css/pages/home.css" />
-    <link rel="stylesheet" href="assets/css/pages/home-roles.css" />
-    <link rel="stylesheet" href="assets/css/components/header.css" />
+    <link rel="stylesheet" href="../assets/css/base/reset.css" />
+    <link rel="stylesheet" href="../assets/css/base/typography.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home-roles.css" />
+    <link rel="stylesheet" href="../assets/css/components/header.css" />
     <title>LILA — Publicar oferta</title>
 </head>
 <body>
@@ -34,6 +34,15 @@
                         <option>Tiempo completo</option><option>Tiempo parcial</option><option>Por proyecto</option><option>Por servicio</option>
                     </select>
                 </label>
+                <label for="offer-category">Categoría
+                    <select id="offer-category" name="category" required>
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option value="gastronomia">Gastronomía</option>
+                        <option value="marketing">Diseño y marketing</option>
+                        <option value="ventas">Ventas y comercio</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </label>
                 <label for="offer-pay">Pago o presupuesto
                     <input id="offer-pay" name="pay" type="text" placeholder="Ej. Bs. 150 por día" required />
                 </label>
@@ -48,15 +57,24 @@
     </main>
     <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
     <script type="module">
-        import { initFooter, initHeader } from './assets/js/components.js';
+        import { initFooter, initHeader } from '../assets/js/components.js';
+        import { guardarOferta } from '../assets/js/ofertas.js';
         initHeader('', 'empleador');
         initFooter();
         const backToTop = document.querySelector('.back-to-top');
         window.addEventListener('scroll', () => backToTop.classList.toggle('is-visible', window.scrollY > 320), { passive: true });
         backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        document.getElementById('offer-form').addEventListener('submit', event => {
+        const form = document.getElementById('offer-form');
+        const message = document.getElementById('offer-message');
+        form.addEventListener('submit', event => {
             event.preventDefault();
-            document.getElementById('offer-message').textContent = 'La oferta está lista para publicarse. Inicia sesión para guardarla en tu cuenta.';
+            const oferta = guardarOferta(Object.fromEntries(new FormData(form)));
+            if (!oferta) {
+                message.textContent = 'Completa todos los campos para publicar la oferta.';
+                return;
+            }
+            message.textContent = 'Oferta publicada. Redirigiendo a tu panel...';
+            window.location.href = '/frontend/website/homeEmpleador.html';
         });
     </script>
 </body>

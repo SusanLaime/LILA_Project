@@ -41,8 +41,8 @@ form?.addEventListener('submit', async event => {
         guardarToken(result.datos.token);
         const rol = result.datos.usuario?.rol;
         const destinos = {
-            trabajador: '/frontend/homeTrabajador.html',
-            empleador: '/frontend/homeEmpleador.html'
+            trabajador: '/frontend/website/homeTrabajador.html',
+            empleador: '/frontend/website/homeEmpleador.html'
         };
         const destino = destinos[rol];
 

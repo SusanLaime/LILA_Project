@@ -335,8 +335,8 @@ if (!token) {
 
         if (enlaceLogo) {
             enlaceLogo.href = rol === 'empleador'
-                ? '/frontend/homeEmpleador.html'
-                : '/frontend/homeTrabajador.html';
+                ? '/frontend/website/homeEmpleador.html'
+                : '/frontend/website/homeTrabajador.html';
         }
 
         // Adaptar el menú de ofertas según el rol
@@ -346,10 +346,10 @@ if (!token) {
         if (enlaceOfertas && textoOfertas) {
             if (rol === 'empleador') {
                 textoOfertas.textContent = 'Ofertas realizadas';
-                enlaceOfertas.href = '/frontend/homeEmpleador.html';
+                enlaceOfertas.href = '/frontend/website/homeEmpleador.html';
             } else {
                 textoOfertas.textContent = 'Ofertas';
-                enlaceOfertas.href = '/frontend/homeTrabajador.html';
+                enlaceOfertas.href = '/frontend/website/homeTrabajador.html';
             }
         }
 
