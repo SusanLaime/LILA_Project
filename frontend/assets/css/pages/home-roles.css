@@ -1,10 +1,17 @@
+.role-home,
+.offer-modal {
+    --role-primary: #5b4b8a;
+    --role-primary-hover: #272348;
+}
+
 .role-home {
     --role-page-bg: #efe8fb;
     --role-surface: #ffffff;
     --role-text: #272348;
-    --role-primary: #5b4b8a;
     --role-accent: #8a74c9;
     --role-border: #d6cee2;
+    --role-filter-bg: #d8cbea;
+    --role-filter-border: #c6b6de;
     width: 100%;
     background: var(--role-page-bg);
     color: var(--LILA-semantic-color-text-primary);
@@ -43,6 +50,29 @@
     color: var(--role-primary);
 }
 
+.role-home .home-primary-button,
+.role-home .offer-card .home-primary-button,
+.offer-modal-actions .home-primary-button,
+.role-home .worker-promo a,
+.role-home .post-actions button,
+.role-home .nav-role-switch {
+    border-color: var(--role-primary);
+    background: var(--role-primary);
+    color: #fff;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.role-home .home-primary-button:hover,
+.role-home .offer-card .home-primary-button:hover,
+.offer-modal-actions .home-primary-button:hover,
+.role-home .worker-promo a:hover,
+.role-home .post-actions button:hover,
+.role-home .nav-role-switch:hover {
+    border-color: var(--role-primary-hover);
+    background: var(--role-primary-hover);
+    color: #fff;
+}
+
 .role-content {
     padding: 28px 0 80px;
 }
@@ -53,25 +83,26 @@
     gap: 14px;
     padding: 22px;
     border-radius: 18px;
-    background: #272348;
-    color: #fff;
+    border: 1px solid var(--role-filter-border);
+    background: var(--role-filter-bg);
+    color: var(--role-text);
 }
 
 .worker-toolbar label {
     display: grid;
     gap: 7px;
     min-width: 180px;
-    color: #d7d7d7;
+    color: #6d6b7c;
     font-size: 0.78rem;
 }
 
 .worker-toolbar select,
 .worker-search input {
     min-height: 44px;
-    border: 1px solid #fff;
+    border: 1px solid var(--role-border);
     border-radius: 10px;
     background: #fff;
-    color: #272348;
+    color: var(--role-text);
     padding: 0 12px;
 }
 
@@ -84,14 +115,14 @@
     position: absolute;
     left: 14px;
     bottom: 8px;
-    color: #8fd9fa;
+    color: var(--role-accent);
     font-size: 1.7rem;
 }
 
 .worker-search input {
     width: 100%;
     padding-left: 42px;
-    border-color: #fff;
+    border-color: var(--role-border);
     background: #fff;
     color: #272348;
 }
@@ -731,17 +762,17 @@
 
 .post-actions button {
     padding: 8px 11px;
-    border: 1px solid #d5d8e0;
+    border: 1px solid var(--role-primary);
     border-radius: 999px;
-    background: #fff;
-    color: #272348;
+    background: var(--role-primary);
+    color: #fff;
     cursor: pointer;
     font-size: 0.75rem;
 }
 
 .post-actions button:first-child {
-    border-color: #272348;
-    background: #272348;
+    border-color: var(--role-primary);
+    background: var(--role-primary);
     color: #fff;
 }
 

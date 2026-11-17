@@ -93,15 +93,6 @@
     box-shadow: inset 0 0 0 1px var(--home-lila-borde);
 }
 
-.employer-dashboard .post-actions button:first-child {
-    border-color: var(--home-morado);
-    background: var(--home-morado);
-}
-
-.employer-dashboard .post-actions button:first-child:hover {
-    background: var(--home-morado-oscuro);
-}
-
 .employer-dashboard-grid {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(270px, 0.9fr);
@@ -250,19 +241,16 @@
 
 .past-posts .post-actions button {
     padding: 6px 9px;
-    border-color: var(--home-lila-borde);
-    color: var(--home-morado);
+    border-color: var(--role-primary);
+    background: var(--role-primary);
+    color: #fff;
     font-size: 12px;
 }
 
-.past-posts .post-actions button:first-child {
-    border-color: var(--home-morado);
-    background: #fff;
-    color: var(--home-morado);
-}
-
-.past-posts .post-actions button:first-child:hover {
-    background: var(--home-lila-claro);
+.past-posts .post-actions button:hover {
+    border-color: var(--role-primary-hover);
+    background: var(--role-primary-hover);
+    color: #fff;
 }
 
 .employer-history-panel #past-posts-content[hidden] {
@@ -294,6 +282,10 @@
     grid-template-columns: minmax(150px, 1fr) repeat(3, minmax(85px, 0.42fr));
     gap: 10px;
     margin-bottom: 16px;
+    padding: 14px;
+    border: 1px solid var(--role-filter-border, #c6b6de);
+    border-radius: 14px;
+    background: var(--role-filter-bg, #d8cbea);
 }
 
 .employer-offer-filters label {
@@ -471,19 +463,16 @@
 
 #active-posts .post-actions button {
     padding: 6px 9px;
-    border-color: var(--home-lila-borde);
-    color: var(--home-morado);
+    border-color: var(--role-primary);
+    background: var(--role-primary);
+    color: #fff;
     font-size: 12px;
 }
 
-#active-posts .post-actions button:first-child {
-    border-color: var(--home-morado);
-    background: #fff;
-    color: var(--home-morado);
-}
-
-#active-posts .post-actions button:first-child:hover {
-    background: var(--home-lila-claro);
+#active-posts .post-actions button:hover {
+    border-color: var(--role-primary-hover);
+    background: var(--role-primary-hover);
+    color: #fff;
 }
 
 .employer-side-column {
