@@ -1,14 +1,8 @@
 -- =====================================================================
 -- DUEÑA/O: Natalia Arze — Base de datos
--- Modelo de datos acordado: docs/API.md (sección "Modelo de datos")
+-- Modelo objetivo: docs/API.md (sección "Modelo de datos")
 -- =====================================================================
 --
--- TODO (Natalia): crear la tabla "usuarios" (CREATE TABLE IF NOT EXISTS ...)
---                   con las columnas y restricciones descritas en docs/API.md.
---                   Importante:
---                   - "ci" y "telefono" deben ser UNIQUE (soporta la regla CA-02).
---                   - "rol" solo acepta 'trabajador' o 'empleador' (restricción CHECK).
-
 CREATE TABLE IF NOT EXISTS usuarios (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT NOT NULL,
@@ -27,4 +21,32 @@ CREATE TABLE IF NOT EXISTS usuarios (
     consentimiento_fecha TEXT NOT NULL,
     creado_en TEXT NOT NULL
         DEFAULT CURRENT_TIMESTAMP
+);
+
+-- usuarios.rol se conserva temporalmente para compatibilidad y referencia al rol inicial.
+-- usuario_roles es la fuente de verdad para los permisos de perfil.
+CREATE TABLE IF NOT EXISTS usuario_roles (
+    usuario_id INTEGER NOT NULL
+        REFERENCES usuarios(id) ON DELETE CASCADE,
+    rol TEXT NOT NULL
+        CHECK (rol IN ('trabajador', 'empleador')),
+    PRIMARY KEY (usuario_id, rol)
+);
+
+CREATE TABLE IF NOT EXISTS perfiles_trabajador (
+    usuario_id INTEGER PRIMARY KEY
+        REFERENCES usuarios(id) ON DELETE CASCADE,
+    ciudad TEXT,
+    habilidades TEXT,
+    experiencia TEXT,
+    genero TEXT,
+    edad INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS perfiles_empleador (
+    usuario_id INTEGER PRIMARY KEY
+        REFERENCES usuarios(id) ON DELETE CASCADE,
+    ciudad TEXT,
+    genero TEXT,
+    edad INTEGER
 );

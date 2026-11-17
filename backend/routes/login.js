@@ -31,13 +31,27 @@ router.post('/', async (req, res) => {
       });
     }
 
+    const rolesGuardados = db.prepare(`
+      SELECT rol
+      FROM usuario_roles
+      WHERE usuario_id = ?
+      ORDER BY CASE rol
+        WHEN 'trabajador' THEN 0
+        WHEN 'empleador' THEN 1
+      END
+    `).all(usuario.id).map(fila => fila.rol);
+    const roles = rolesGuardados.length > 0
+      ? rolesGuardados
+      : [usuario.rol];
+
     const token = crearToken(usuario);
     return res.status(200).json({
       token,
       usuario: {
         id: usuario.id,
         nombre: usuario.nombre,
-        rol: usuario.rol
+        rol: roles[0],
+        roles
       }
     });
   } catch (error) {

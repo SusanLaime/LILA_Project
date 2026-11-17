@@ -77,6 +77,34 @@ if (resultado.total === 0) {
   db.exec(datosPrueba);
 }
 
+// Migrar las cuentas existentes a roles y perfiles separados sin borrar datos.
+db.exec('BEGIN');
+try {
+  db.exec(`
+    INSERT OR IGNORE INTO usuario_roles (usuario_id, rol)
+    SELECT id, rol
+    FROM usuarios;
+
+    INSERT OR IGNORE INTO perfiles_trabajador (
+      usuario_id, ciudad, habilidades, experiencia, genero, edad
+    )
+    SELECT id, ciudad, habilidades, experiencia, genero, edad
+    FROM usuarios
+    WHERE rol = 'trabajador';
+
+    INSERT OR IGNORE INTO perfiles_empleador (
+      usuario_id, ciudad, genero, edad
+    )
+    SELECT id, ciudad, genero, edad
+    FROM usuarios
+    WHERE rol = 'empleador';
+  `);
+  db.exec('COMMIT');
+} catch (error) {
+  db.exec('ROLLBACK');
+  throw error;
+}
+
 // 8. Exportar la conexión para otros módulos
 export { db };
 export default db;

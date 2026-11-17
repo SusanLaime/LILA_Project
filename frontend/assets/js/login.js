@@ -39,7 +39,12 @@ form?.addEventListener('submit', async event => {
     });
     if (result.ok) {
         guardarToken(result.datos.token);
-        const rol = result.datos.usuario?.rol;
+        const usuario = result.datos.usuario;
+        const roles = Array.isArray(usuario?.roles)
+            ? usuario.roles
+            : [usuario?.rol].filter(Boolean);
+        const rolGuardado = localStorage.getItem('lila_rol_activo');
+        const rol = roles.includes(rolGuardado) ? rolGuardado : roles[0];
         const destinos = {
             trabajador: '/frontend/website/homeTrabajador.html',
             empleador: '/frontend/website/homeEmpleador.html'
@@ -52,6 +57,7 @@ form?.addEventListener('submit', async event => {
             return;
         }
 
+        localStorage.setItem('lila_rol_activo', rol);
         window.location.href = destino;
     } else {
         message.textContent = result.datos.error;

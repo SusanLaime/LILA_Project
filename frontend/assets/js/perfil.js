@@ -329,6 +329,7 @@ if (!token) {
 
         const nombre = perfil.nombre || 'Usuario';
         const rol = perfil.rol || 'trabajador';
+        localStorage.setItem('lila_rol_activo', rol);
 
         // Adaptar el destino del logo según el rol
         const enlaceLogo = document.getElementById('enlace-logo');
@@ -432,7 +433,11 @@ if (!token) {
 
     async function cargarPerfil() {
 
-        const resultado = await pedirApi('/api/perfil', {
+        const rolActivo = localStorage.getItem('lila_rol_activo');
+        const ruta = rolActivo
+            ? `/api/perfil?rol=${encodeURIComponent(rolActivo)}`
+            : '/api/perfil';
+        const resultado = await pedirApi(ruta, {
             token
         });
 
@@ -480,6 +485,7 @@ if (!token) {
         }
 
         const cuerpo = {
+            rol: perfilGuardado.rol,
             ciudad: ciudad.value,
             genero: genero.value,
             edad: edad.value === '' ? null : Number(edad.value),

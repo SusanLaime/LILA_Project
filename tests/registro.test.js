@@ -133,7 +133,7 @@ after(async () => {
 // También comprobamos que la contraseña se guarde
 // mediante un hash bcrypt y no como texto plano.
 
-test('REG-01: registra un usuario correctamente', async () => {
+test('REG-01: registra un usuario y crea su perfil correctamente', async () => {
 
   // Preparar los datos.
   const datos = usuarioValido();
@@ -161,6 +161,15 @@ test('REG-01: registra un usuario correctamente', async () => {
   assert.equal(guardado.ci, datos.ci);
   assert.equal(guardado.telefono, datos.telefono);
   assert.equal(guardado.rol, datos.rol);
+  assert.deepEqual(
+    db.prepare(
+      'SELECT rol FROM usuario_roles WHERE usuario_id = ?'
+    ).all(cuerpo.id).map(fila => fila.rol),
+    ['trabajador']
+  );
+  assert.ok(db.prepare(
+    'SELECT usuario_id FROM perfiles_trabajador WHERE usuario_id = ?'
+  ).get(cuerpo.id));
 
   // La contraseña guardada no debe ser la original.
   assert.notEqual(
@@ -255,6 +264,37 @@ test('REG-04: rechaza rol no permitido', async () => {
 
   // No debe permitir registrar un administrador.
   assert.equal(respuesta.status, 400);
+});
+
+test('REG-07: una cuenta puede registrarse con ambos perfiles', async () => {
+  const datos = usuarioValido({
+    roles: ['trabajador', 'empleador']
+  });
+  delete datos.rol;
+
+  const respuesta = await enviarRegistro(datos);
+  const cuerpo = await respuesta.json();
+
+  assert.equal(respuesta.status, 201);
+  assert.deepEqual(
+    db.prepare(
+      'SELECT rol FROM usuario_roles WHERE usuario_id = ? ORDER BY rol'
+    ).all(cuerpo.id).map(fila => fila.rol),
+    ['empleador', 'trabajador']
+  );
+  assert.ok(db.prepare(
+    'SELECT usuario_id FROM perfiles_trabajador WHERE usuario_id = ?'
+  ).get(cuerpo.id));
+  assert.ok(db.prepare(
+    'SELECT usuario_id FROM perfiles_empleador WHERE usuario_id = ?'
+  ).get(cuerpo.id));
+});
+
+test('REG-08: rechaza una lista de perfiles vacía, repetida o desconocida', async () => {
+  for (const roles of [[], ['trabajador', 'trabajador'], ['admin']]) {
+    const respuesta = await enviarRegistro(usuarioValido({ roles }));
+    assert.equal(respuesta.status, 400);
+  }
 });
 
 // =======================================================

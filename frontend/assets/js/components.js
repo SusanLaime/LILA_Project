@@ -104,12 +104,15 @@ async function configurarHeaderCambio(token, rolSugerido) {
     const resultado = await pedirApi('/api/perfil', { token });
     if (resultado.ok && resultado.datos) {
         const d = resultado.datos;
-        rolBackend = d.rol || rolBackend;
+        const roles = Array.isArray(d.roles) ? d.roles : [d.rol];
+        rolBackend = d.rol || roles[0] || rolBackend;
         tieneTrabajador =
+            roles.includes('trabajador') ||
             d.rol === 'trabajador' ||
             d.rol === 'ambos' ||
             Boolean(d.tieneTrabajador || d.perfilTrabajador || d.es_trabajador);
         tieneEmpleador =
+            roles.includes('empleador') ||
             d.rol === 'empleador' ||
             d.rol === 'ambos' ||
             Boolean(d.tieneEmpleador || d.perfilEmpleador || d.es_empleador);

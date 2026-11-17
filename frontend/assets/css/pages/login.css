@@ -10,6 +10,48 @@ body {
     padding: 0;
 }
 
+.auth-layout {
+    font-family: "Poppins", Helvetica, sans-serif;
+    position: relative;
+}
+
+.bienvenida-mvil.auth-layout > section {
+    padding-top: 76px;
+}
+
+.auth-back-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border: 0;
+    background: transparent;
+    color: #272348;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-back-link svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+
+.auth-back-link:focus-visible {
+    outline: 2px solid #272348;
+    outline-offset: 2px;
+}
+
 .bienvenida-mvil {
     background-color: #ffffff;
     width: 100%;
@@ -48,7 +90,7 @@ body {
 }
 
 .bienvenida-mvil .saludo {
-    font-family: "Poppins-Bold", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     font-weight: 700;
     color: #272348;
     font-size: 24px;
@@ -56,7 +98,7 @@ body {
 }
 
 .bienvenida-mvil .introducci-n {
-    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     color: #6d6b7c;
     font-size: 15px;
     line-height: 1.4;
@@ -87,7 +129,7 @@ body {
     width: 100%;
     height: 52px;
     border-radius: 26px;
-    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     font-weight: 500;
     font-size: 15px;
     cursor: pointer;
@@ -116,7 +158,7 @@ body {
     background-color: transparent;
     border: none;
     color: #272348;
-    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     font-size: 14px;
     margin-top: 10px;
     cursor: pointer;
@@ -133,5 +175,5 @@ body {
 .bienvenida-mvil .legal {
     color: #6d6b7c;
     font-size: 11px;
-    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
 }

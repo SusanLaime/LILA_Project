@@ -28,7 +28,10 @@ router.post('/', async (req, res) => {
       });
     }
 
-    const { nombre, ci, telefono, password, rol } = datos;
+    const { nombre, ci, telefono, password } = datos;
+    const roles = Array.isArray(datos.roles)
+      ? datos.roles
+      : [datos.rol];
 
     // 2. Comprobar si ya existe el usuario
     const existente = db.prepare(
@@ -45,20 +48,47 @@ router.post('/', async (req, res) => {
     const passwordHash = await hashPassword(password);
 
     // 4. Guardar el nuevo usuario
-    const resultado = db.prepare(`
-      INSERT INTO usuarios (
-        nombre, ci, telefono, password_hash,
-        rol, estado_verificacion, consentimiento_fecha
-      )
-      VALUES (?, ?, ?, ?, ?, 'no_verificado', ?)
-    `).run(
-      nombre,
-      ci,
-      telefono,
-      passwordHash,
-      rol,
-      new Date().toISOString()
-    );
+    db.exec('BEGIN IMMEDIATE');
+    let resultado;
+    try {
+      resultado = db.prepare(`
+        INSERT INTO usuarios (
+          nombre, ci, telefono, password_hash,
+          rol, estado_verificacion, consentimiento_fecha
+        )
+        VALUES (?, ?, ?, ?, ?, 'no_verificado', ?)
+      `).run(
+        nombre,
+        ci,
+        telefono,
+        passwordHash,
+        roles[0],
+        new Date().toISOString()
+      );
+
+      const usuarioId = Number(resultado.lastInsertRowid);
+      const insertarRol = db.prepare(
+        'INSERT INTO usuario_roles (usuario_id, rol) VALUES (?, ?)'
+      );
+      roles.forEach(rol => insertarRol.run(usuarioId, rol));
+
+      if (roles.includes('trabajador')) {
+        db.prepare(
+          'INSERT INTO perfiles_trabajador (usuario_id) VALUES (?)'
+        ).run(usuarioId);
+      }
+
+      if (roles.includes('empleador')) {
+        db.prepare(
+          'INSERT INTO perfiles_empleador (usuario_id) VALUES (?)'
+        ).run(usuarioId);
+      }
+
+      db.exec('COMMIT');
+    } catch (error) {
+      db.exec('ROLLBACK');
+      throw error;
+    }
 
     // 5. Responder que la cuenta fue creada
     return res.status(201).json({

@@ -1,12 +1,155 @@
-// =====================================================================
-// DUEÑA/O: Sara Revollo — Perfil (P-06 a P-08)
-// Registro de resultados: README.md (sección Pruebas)
-// Se ejecuta con: npm test   (usa el ejecutor incorporado de Node: node --test)
-// =====================================================================
-//
-// TODO (Sara): P-06 — CA-01: guardar ciudad, habilidades y experiencia con PUT /api/perfil
-//                   y volver a leerlos con GET /api/perfil (los datos y el rol coinciden).
-// TODO (Sara): P-07 — GET /api/perfil sin token -> 401.
-// TODO (Sara): P-08 — PUT /api/perfil con datos demasiado largos -> 400.
-// TODO (Sara): usar una base de datos de prueba (DB_PATH distinto), nunca la de la demostración.
-// TODO (Sara): anotar el resultado real en README.md (sección Pruebas) (fecha, entorno y commit).
+import test, { after } from 'node:test';
+import assert from 'node:assert/strict';
+
+process.env.DB_PATH = ':memory:';
+process.env.JWT_SECRET = 'solo-para-pruebas-de-integracion';
+
+const [
+  { default: express },
+  { default: perfilRouter },
+  { default: db },
+  { crearToken }
+] = await Promise.all([
+  import('express'),
+  import('../backend/routes/perfil.js'),
+  import('../backend/db.js'),
+  import('../backend/seguridad.js')
+]);
+
+const usuarioId = Number(db.prepare(`
+  INSERT INTO usuarios (
+    nombre, ci, telefono, password_hash, rol, consentimiento_fecha
+  )
+  VALUES (?, ?, ?, ?, ?, ?)
+`).run(
+  'Ana Prueba',
+  '1234567',
+  '70000001',
+  'hash-solo-pruebas',
+  'trabajador',
+  new Date().toISOString()
+).lastInsertRowid);
+
+db.prepare(
+  'INSERT INTO usuario_roles (usuario_id, rol) VALUES (?, ?)'
+).run(usuarioId, 'trabajador');
+db.prepare(`
+  INSERT INTO perfiles_trabajador (
+    usuario_id, ciudad, habilidades, experiencia, genero, edad
+  )
+  VALUES (?, ?, ?, ?, ?, ?)
+`).run(usuarioId, 'La Paz', 'Ventas', 'Un año', 'femenino', 25);
+
+const app = express();
+app.use(express.json());
+app.use('/api/perfil', perfilRouter);
+
+const server = app.listen(0, '127.0.0.1');
+await new Promise(resolve => server.once('listening', resolve));
+const url = `http://127.0.0.1:${server.address().port}/api/perfil`;
+const token = crearToken({ id: usuarioId });
+
+after(async () => {
+  await new Promise((resolve, reject) => {
+    server.close(error => error ? reject(error) : resolve());
+  });
+  db.close();
+});
+
+async function pedirPerfil({ method = 'GET', body, authorization = `Bearer ${token}`, rol } = {}) {
+  const response = await fetch(
+    rol ? `${url}?rol=${encodeURIComponent(rol)}` : url,
+    {
+      method,
+      headers: {
+        ...(authorization ? { Authorization: authorization } : {}),
+        ...(body ? { 'Content-Type': 'application/json' } : {})
+      },
+      body: body ? JSON.stringify(body) : undefined
+    }
+  );
+  return { response, body: await response.json() };
+}
+
+test('GET perfil requiere sesión y devuelve roles y perfil activo', async () => {
+  const anonimo = await pedirPerfil({ authorization: '' });
+  assert.equal(anonimo.response.status, 401);
+
+  const resultado = await pedirPerfil();
+  assert.equal(resultado.response.status, 200);
+  assert.deepEqual(resultado.body.roles, ['trabajador']);
+  assert.equal(resultado.body.rol, 'trabajador');
+  assert.equal(resultado.body.ciudad, 'La Paz');
+  assert.equal(resultado.body.perfiles.trabajador.experiencia, 'Un año');
+  assert.equal('ci' in resultado.body, false);
+  assert.equal('password_hash' in resultado.body, false);
+});
+
+test('PUT perfil no permite modificar roles no asignados', async () => {
+  const resultado = await pedirPerfil({
+    method: 'PUT',
+    body: {
+      rol: 'empleador',
+      ciudad: 'Cochabamba',
+      habilidades: '',
+      experiencia: '',
+      genero: 'femenino',
+      edad: 30
+    }
+  });
+
+  assert.equal(resultado.response.status, 403);
+  assert.equal(resultado.body.error, 'No tienes activo ese perfil.');
+});
+
+test('PUT perfil guarda los datos del perfil trabajador', async () => {
+  const resultado = await pedirPerfil({
+    method: 'PUT',
+    body: {
+      rol: 'trabajador',
+      ciudad: 'Cochabamba',
+      habilidades: 'Atención al cliente',
+      experiencia: 'Dos años',
+      genero: 'femenino',
+      edad: 30
+    }
+  });
+
+  assert.equal(resultado.response.status, 200);
+  assert.equal(resultado.body.ciudad, 'Cochabamba');
+  assert.equal(resultado.body.habilidades, 'Atención al cliente');
+  assert.equal(resultado.body.perfiles.trabajador.edad, 30);
+});
+
+test('una cuenta con ambos roles mantiene separados sus perfiles', async () => {
+  db.prepare(
+    'INSERT INTO usuario_roles (usuario_id, rol) VALUES (?, ?)'
+  ).run(usuarioId, 'empleador');
+  db.prepare(
+    'INSERT INTO perfiles_empleador (usuario_id, ciudad) VALUES (?, ?)'
+  ).run(usuarioId, 'Santa Cruz');
+
+  const actualizacion = await pedirPerfil({
+    method: 'PUT',
+    body: {
+      rol: 'empleador',
+      ciudad: 'Sucre',
+      habilidades: '',
+      experiencia: '',
+      genero: 'otro',
+      edad: 40
+    }
+  });
+  assert.equal(actualizacion.response.status, 200);
+  assert.equal(actualizacion.body.rol, 'empleador');
+  assert.deepEqual(actualizacion.body.roles, ['trabajador', 'empleador']);
+  assert.equal(actualizacion.body.ciudad, 'Sucre');
+
+  const trabajador = await pedirPerfil({ rol: 'trabajador' });
+  assert.equal(trabajador.body.ciudad, 'Cochabamba');
+  assert.equal(trabajador.body.habilidades, 'Atención al cliente');
+
+  const empleador = await pedirPerfil({ rol: 'empleador' });
+  assert.equal(empleador.body.ciudad, 'Sucre');
+  assert.equal(empleador.body.habilidades, null);
+});

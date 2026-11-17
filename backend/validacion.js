@@ -34,8 +34,20 @@ export function validarRegistro(datos) {
     errores.push('Debes aceptar el tratamiento de tus datos personales.');
   }
 
-  if (datos.rol !== 'trabajador' && datos.rol !== 'empleador') {
-    errores.push('El rol debe ser trabajador o empleador.');
+  const roles = Array.isArray(datos.roles)
+    ? datos.roles
+    : [datos.rol];
+  const rolesValidos = ['trabajador', 'empleador'];
+
+  if (
+    roles.length < 1 ||
+    roles.length > rolesValidos.length ||
+    roles.some(rol => !rolesValidos.includes(rol)) ||
+    new Set(roles).size !== roles.length
+  ) {
+    errores.push(
+      'Selecciona trabajador, empleador o ambos perfiles, sin repetirlos.'
+    );
   }
 
   return errores.length === 0

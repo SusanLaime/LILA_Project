@@ -21,6 +21,16 @@ passwordToggle?.addEventListener('click', () => {
 
 form?.addEventListener('submit', async event => {
     event.preventDefault();
+    const roles = Array.from(
+        form.querySelectorAll('input[name="roles"]:checked')
+    ).map(input => input.value);
+
+    if (roles.length === 0) {
+        message.textContent = 'Selecciona al menos un perfil.';
+        form.querySelector('input[name="roles"]')?.focus();
+        return;
+    }
+
     const button = form.querySelector('button[type="submit"]');
     button.disabled = true;
     const result = await pedirApi('/api/registro', {
@@ -31,10 +41,11 @@ form?.addEventListener('submit', async event => {
             telefono: document.getElementById('telefono').value,
             password: document.getElementById('password').value,
             consentimiento: document.getElementById('consentimiento').checked,
-            rol: document.getElementById('rol').value
+            roles
         }
     });
-    message.textContent = result.datos.error || result.datos.mensaje;
+    message.textContent = result.datos.error || result.datos.mensaje ||
+        'No se pudo completar el registro.';
     if (result.ok) {
         setTimeout(() => { window.location.href = '/frontend/auth/login.html'; }, 800);
     } else {

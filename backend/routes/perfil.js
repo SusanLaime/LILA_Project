@@ -1,7 +1,6 @@
-
 /* =====================================================================
- * DUEÑA/O: Sara Revollo — Perfil (CA-01)
- * Contrato: docs/API.md (GET y PUT /api/perfil)
+ * Perfil de cuenta y perfiles laborales.
+ * Contrato: docs/API.md
  * ===================================================================== */
 
 import express from 'express';
@@ -10,55 +9,80 @@ import { requiereSesion } from '../seguridad.js';
 import { validarPerfil } from '../validacion.js';
 
 const router = express.Router();
-
-// ================================================================
-// PROTEGER LAS RUTAS
-// ================================================================
-
-// Solo usuarios autenticados pueden consultar o modificar su perfil
 router.use(requiereSesion);
 
-// ================================================================
-// CAMPOS PÚBLICOS DEL PERFIL
-// ================================================================
+function obtenerRoles(usuarioId) {
+    const roles = db.prepare(`
+        SELECT rol
+        FROM usuario_roles
+        WHERE usuario_id = ?
+        ORDER BY CASE rol
+            WHEN 'trabajador' THEN 0
+            WHEN 'empleador' THEN 1
+        END
+    `).all(usuarioId).map(fila => fila.rol);
 
-// No incluir CI ni password_hash en las respuestas
-const CAMPOS_PUBLICOS = `
-    id,
-    nombre,
-    telefono,
-    rol,
-    ciudad,
-    habilidades,
-    experiencia,
-    genero,
-    edad,
-    estado_verificacion
-`;
+    if (roles.length > 0) {
+        return roles;
+    }
 
-// ================================================================
-// CONSULTAR PERFIL EN SQLITE
-// ================================================================
+    const usuario = db.prepare(
+        'SELECT rol FROM usuarios WHERE id = ?'
+    ).get(usuarioId);
 
-function obtenerPerfil(id) {
-
-    const consulta = db.prepare(`
-        SELECT ${CAMPOS_PUBLICOS}
-        FROM usuarios
-        WHERE id = ?
-    `);
-
-    return consulta.get(id);
+    return usuario ? [usuario.rol] : [];
 }
 
-// ================================================================
-// GET /api/perfil
-// ================================================================
+function obtenerPerfil(usuarioId, rolSolicitado) {
+    const usuario = db.prepare(`
+        SELECT id, nombre, telefono, estado_verificacion
+        FROM usuarios
+        WHERE id = ?
+    `).get(usuarioId);
 
-// Devuelve los datos del usuario autenticado
+    if (!usuario) {
+        return null;
+    }
+
+    const roles = obtenerRoles(usuarioId);
+    const rolActivo = roles.includes(rolSolicitado)
+        ? rolSolicitado
+        : roles[0];
+    const trabajador = roles.includes('trabajador')
+        ? db.prepare(`
+            SELECT ciudad, habilidades, experiencia, genero, edad
+            FROM perfiles_trabajador
+            WHERE usuario_id = ?
+        `).get(usuarioId) || null
+        : null;
+    const empleador = roles.includes('empleador')
+        ? db.prepare(`
+            SELECT ciudad, genero, edad
+            FROM perfiles_empleador
+            WHERE usuario_id = ?
+        `).get(usuarioId) || null
+        : null;
+    const perfilActivo = rolActivo === 'empleador' ? empleador : trabajador;
+
+    return {
+        ...usuario,
+        rol: rolActivo,
+        roles,
+        ciudad: perfilActivo?.ciudad ?? null,
+        habilidades: rolActivo === 'trabajador'
+            ? trabajador?.habilidades ?? null
+            : null,
+        experiencia: rolActivo === 'trabajador'
+            ? trabajador?.experiencia ?? null
+            : null,
+        genero: perfilActivo?.genero ?? null,
+        edad: perfilActivo?.edad ?? null,
+        perfiles: { trabajador, empleador }
+    };
+}
+
 router.get('/', (req, res) => {
-
-    const perfil = obtenerPerfil(req.usuarioId);
+    const perfil = obtenerPerfil(req.usuarioId, req.query.rol);
 
     if (!perfil) {
         return res.status(401).json({
@@ -69,14 +93,7 @@ router.get('/', (req, res) => {
     return res.status(200).json(perfil);
 });
 
-// ================================================================
-// PUT /api/perfil
-// ================================================================
-
-// Actualiza los datos editables del perfil
 router.put('/', (req, res) => {
-
-    // Validar información enviada
     const validacion = validarPerfil(req.body);
 
     if (!validacion.ok) {
@@ -85,65 +102,55 @@ router.put('/', (req, res) => {
         });
     }
 
-    // Consultar el perfil existente
-    const perfilAnterior = obtenerPerfil(req.usuarioId);
+    const roles = obtenerRoles(req.usuarioId);
+    const rol = req.body.rol || roles[0];
 
-    if (!perfilAnterior) {
-        return res.status(401).json({
-            error: 'Debes iniciar sesión.'
+    if (rol !== 'trabajador' && rol !== 'empleador') {
+        return res.status(400).json({
+            error: 'El perfil debe ser trabajador o empleador.'
         });
     }
 
-    // Ciudad: disponible para ambos roles
-    const ciudad = req.body.ciudad.trim();
+    if (!roles.includes(rol)) {
+        return res.status(403).json({
+            error: 'No tienes activo ese perfil.'
+        });
+    }
 
-    const genero = req.body.genero === undefined
-        ? perfilAnterior.genero
-        : req.body.genero;
+    const valoresComunes = [
+        req.body.ciudad.trim(),
+        req.body.genero,
+        req.body.edad
+    ];
 
-    const edad = req.body.edad === undefined
-        ? perfilAnterior.edad
-        : req.body.edad;
+    if (rol === 'trabajador') {
+        db.prepare(`
+            UPDATE perfiles_trabajador
+            SET ciudad = ?, habilidades = ?, experiencia = ?, genero = ?, edad = ?
+            WHERE usuario_id = ?
+        `).run(
+            valoresComunes[0],
+            req.body.habilidades.trim(),
+            req.body.experiencia.trim(),
+            valoresComunes[1],
+            valoresComunes[2],
+            req.usuarioId
+        );
+    } else {
+        db.prepare(`
+            UPDATE perfiles_empleador
+            SET ciudad = ?, genero = ?, edad = ?
+            WHERE usuario_id = ?
+        `).run(
+            valoresComunes[0],
+            valoresComunes[1],
+            valoresComunes[2],
+            req.usuarioId
+        );
+    }
 
-    // Campos laborales: solo trabajadores
-    const habilidades = perfilAnterior.rol === 'trabajador'
-        ? req.body.habilidades.trim()
-        : perfilAnterior.habilidades;
-
-    const experiencia = perfilAnterior.rol === 'trabajador'
-        ? req.body.experiencia.trim()
-        : perfilAnterior.experiencia;
-
-    // Actualizar en SQLite con consulta preparada
-    const actualizar = db.prepare(`
-        UPDATE usuarios
-        SET
-            ciudad = ?,
-            habilidades = ?,
-            experiencia = ?,
-            genero = ?,
-            edad = ?
-        WHERE id = ?
-    `);
-
-    actualizar.run(
-        ciudad,
-        habilidades,
-        experiencia,
-        genero,
-        edad,
-        req.usuarioId
-    );
-
-    // Recuperar los datos actualizados
-    const perfilActualizado = obtenerPerfil(req.usuarioId);
-
-    // Responder al frontend
+    const perfilActualizado = obtenerPerfil(req.usuarioId, rol);
     return res.status(200).json(perfilActualizado);
 });
-
-// ================================================================
-// EXPORTAR ROUTER
-// ================================================================
 
 export default router;

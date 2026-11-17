@@ -7,7 +7,7 @@
         RESPONSABLE: Natalia
         MÓDULO: Registro de usuarios
 
-        Permite crear cuentas de trabajador o empleador.
+        Permite crear cuentas de trabajador, empleador o ambos.
         Los datos se enviarán a POST /api/registro.
     -->
 
@@ -41,6 +41,12 @@
 
 <main class="bienvenida-mvil auth-layout"
       aria-labelledby="registro-titulo">
+    <a class="auth-back-link" href="/frontend/index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 12H5m7 7-7-7 7-7"/>
+        </svg>
+        <span>Volver</span>
+    </a>
 
     <!-- =========================================
          PRESENTACIÓN DEL FORMULARIO
@@ -171,36 +177,24 @@
         <!-- =====================================
              4. TIPO DE USUARIO
 
-             El backend solamente acepta:
-             trabajador o empleador.
+             El backend acepta uno o ambos perfiles.
         ====================================== -->
 
-        <div class="form-group">
+        <fieldset class="form-group selector-roles">
+            <legend>Quiero ser:</legend>
 
-            <label for="rol">
-                ¿Qué tipo de cuenta deseas crear?
+            <label>
+                <input type="checkbox" name="roles" value="trabajador">
+                <span>Trabajador - Busco empleo</span>
             </label>
 
-            <select
-                id="rol"
-                name="rol"
-                required>
+            <label>
+                <input type="checkbox" name="roles" value="empleador">
+                <span>Empleador - Ofrezco empleo</span>
+            </label>
 
-                <option value="" disabled selected>
-                    Selecciona una opción
-                </option>
-
-                <option value="trabajador">
-                    Trabajador - Busco empleo
-                </option>
-
-                <option value="empleador">
-                    Empleador - Ofrezco empleo
-                </option>
-
-            </select>
-
-        </div>
+            <small>Puedes seleccionar uno o los dos perfiles.</small>
+        </fieldset>
 
         <!-- =====================================
              5. CONSENTIMIENTO
