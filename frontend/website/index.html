@@ -8,13 +8,10 @@
     <link rel="stylesheet" href="assets/css/base/typography.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
     <link rel="stylesheet" href="assets/css/utilities/responsive.css" />
-    <link rel="stylesheet" href="assets/css/components/header.css" />
     <title>LILA — Librería Laboral</title>
 </head>
 <body>
     <main class="home-page">
-        <div id="header-placeholder"></div>
-
         <section class="home-hero" aria-labelledby="home-title">
             <div class="home-hero-copy">
                 <span class="home-eyebrow">Una nueva forma de conectar</span>
@@ -72,8 +69,7 @@
         <div id="footer-placeholder"></div>
     </main>
     <script type="module">
-        import { initFooter, initHeader } from './assets/js/components.js';
-        initHeader('', '');
+        import { initFooter } from './assets/js/components.js';
         initFooter();
     </script>
 </body>

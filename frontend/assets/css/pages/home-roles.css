@@ -1,6 +1,5 @@
 .role-home {
-    width: min(1416px, 100%);
-    margin: 0 auto;
+    width: 100%;
     background: #f3f5fa;
     color: var(--LILA-semantic-color-text-primary);
     font-family: "Poppins-Regular", Helvetica, sans-serif;
