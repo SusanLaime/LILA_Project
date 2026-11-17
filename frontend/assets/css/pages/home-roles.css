@@ -1,7 +1,7 @@
 .role-home {
     width: min(1416px, 100%);
     margin: 0 auto;
-    background: #f3f5fa;
+    background: #fff; /* antes gris #f3f5fa */
     color: var(--LILA-semantic-color-text-primary);
     font-family: "Poppins-Regular", Helvetica, sans-serif;
 }
@@ -26,6 +26,33 @@
 .role-home .role-content {
     width: 100%;
     margin: 0;
+}
+
+/* Header y footer de borde a borde (homeEmpleador, homeTrabajador, publicarOferta).
+   El main mide máx. 1416px, así que el fondo se extiende con un pseudo-elemento
+   de 100vw; el contenido del header y del footer se queda donde está. */
+.role-home .navbar-auth,
+.role-home .navbar-cambio,
+.role-home .lila-footer {
+    position: relative;
+    isolation: isolate;
+}
+
+.role-home .navbar-auth::before,
+.role-home .navbar-cambio::before,
+.role-home .lila-footer::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -1px;
+    bottom: -1px;
+    left: 50%;
+    width: 100vw;
+    border-top: inherit;    /* repite la línea superior del footer */
+    border-bottom: inherit; /* repite la línea inferior del header */
+    background: inherit;
+    transform: translateX(-50%);
+    pointer-events: none;
 }
 
 .role-content {
