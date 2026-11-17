@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+html {
+    overflow-x: clip;
+}
+
 .home-page {
     width: min(1416px, 100%);
     margin: 0 auto;
@@ -134,12 +138,41 @@
     color: #fff;
 }
 
+.home-page .navbar-cambio,
+.home-page .lila-footer,
+.home-trust,
+.home-purpose-band {
+    position: relative;
+    isolation: isolate;
+}
+
+.home-page .navbar-cambio::before,
+.home-page .lila-footer::before,
+.home-trust::before,
+.home-purpose-band::before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    background: inherit;
+    content: "";
+    pointer-events: none;
+    transform: translateX(-50%);
+}
+
 .home-trust div { display: flex; flex-direction: column; gap: 4px; text-align: center; }
 .home-trust span { color: #d9d4e8; font-size: 0.85rem; }
+
+.home-purpose-band {
+    background: var(--LILA-primitives-purple-brand);
+}
 
 .home-purpose {
     overflow: hidden;
     width: 100%;
+    max-width: 1416px;
     margin: 0 auto 72px;
     padding: 88px 40px 96px;
     border-radius: 0;

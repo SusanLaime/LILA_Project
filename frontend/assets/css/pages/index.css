@@ -1,0 +1,599 @@
+/* index.css — Estilos exclusivos de la landing (website/index.html).
+   Se carga después de home.css y solo en esta página, así no afecta a
+   homeTrabajador, homeEmpleador ni publicarOferta. */
+
+/* =====================================================================
+   1. Ancho único del contenido
+   ===================================================================== */
+
+:root {
+    --container: 1100px;
+    --landing-morado: #5b4b8a;
+    --landing-morado-claro: #8a74c9;
+    --landing-lila-borde: #d6cee2;
+}
+
+.container {
+    width: min(100% - 2rem, var(--container));
+    margin-inline: auto;
+}
+
+/* El hero, Simple/Humana/Local y Misión/Visión ahora se alinean con .container */
+.landing .home-hero { padding-inline: 0; }
+.landing .home-hero-copy { padding-left: 0; }
+
+/* Mismo degradado que el menú lateral de perfil.html (perfil-pagina.css) */
+.landing .home-trust,
+.landing .home-purpose-band,
+.landing .home-cta {
+    background: linear-gradient(180deg, #7a63bd 0%, #272348 100%);
+}
+
+/* La sección interior de Misión / Visión tenía su propio fondo sólido: se deja
+   transparente para que se vea el degradado de la banda de borde a borde. */
+.landing .home-purpose {
+    background: transparent;
+    box-shadow: none; /* sin fondo, la sombra dibujaría un recuadro tenue en pantallas anchas */
+}
+
+.landing .home-trust {
+    display: block;
+    padding: 24px 0;
+}
+
+.landing .home-trust-inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: initial;
+}
+
+.landing .home-purpose { padding-inline: 0; }
+
+/* Espacio en blanco antes del footer: viene de `main { min-height: 100vh }`
+   + `#footer-placeholder { margin-top: auto }` en reset.css. En esta página la
+   franja final absorbe ese espacio (flex-grow), así no queda un hueco blanco
+   y el footer sigue pegado al fondo cuando la página es más corta que la ventana. */
+.landing .home-cta { flex-grow: 1; }
+
+/* Franjas oscuras de borde a borde: el fondo se extiende con un pseudo-elemento
+   (el main mide máx. 1416px para no alterar el header ni el footer). */
+.landing .home-cta {
+    position: relative;
+    isolation: isolate;
+}
+
+.landing .home-cta::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    background: inherit;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+/* Encabezado común de sección */
+.section-head {
+    margin-bottom: 56px;
+}
+
+.section-head h2 {
+    color: var(--LILA-primitives-purple-brand);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.section-head p {
+    max-width: 560px;
+    margin-top: 14px;
+    color: var(--LILA-semantic-color-text-muted);
+    font-size: 1.08rem;
+    line-height: 1.65;
+}
+
+/* =====================================================================
+   2. Cómo funciona
+   ===================================================================== */
+
+.how {
+    padding: 48px 0 120px;
+}
+
+.how-block-title {
+    margin-bottom: 40px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--landing-lila-borde);
+    color: var(--landing-morado);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* Números grandes */
+.how-num {
+    display: block;
+    color: var(--landing-morado-claro);
+    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+.how-num--sm {
+    font-size: clamp(2.4rem, 4vw, 3rem);
+}
+
+/* --- Bloque A: zigzag --- */
+
+.how-step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 64px;
+}
+
+.how-step--reverse .how-step-text { order: 2; }
+
+.how-step-text h4 {
+    margin: 16px 0 10px;
+    color: var(--LILA-primitives-purple-brand);
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    line-height: 1.2;
+}
+
+.how-step-text p {
+    max-width: 420px;
+    color: var(--LILA-semantic-color-text-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.how-step-media {
+    display: grid;
+    place-items: center;
+    min-height: 340px;
+    padding: 40px;
+    border-radius: 28px;
+    background: var(--LILA-primitives-purple-lavender);
+}
+
+/* Flechas curvas entre pasos (decorativas) */
+.how-arrow {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.how-arrow .how-arrow-curve { display: block; width: min(100%, 560px); height: auto; }
+.how-arrow .how-arrow-straight { display: none; width: 24px; height: 72px; }
+.how-arrow--flip .how-arrow-curve { transform: scaleX(-1); }
+
+.how-arrow-line,
+.how-arrow-head {
+    stroke: var(--landing-morado-claro);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.how-arrow-line { stroke-dasharray: 2 10; }
+
+/* Maquetas: no interactivas */
+.mock {
+    width: min(100%, 380px);
+    padding: 24px;
+    border: 1px solid var(--landing-lila-borde);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: var(--LILA-elevaci-n-tarjeta);
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Paso 1: tarjeta de perfil */
+.mock-profile-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.mock-avatar {
+    flex: 0 0 64px;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.mock-avatar svg { display: block; width: 100%; height: 100%; }
+
+.mock-profile-id {
+    display: grid;
+    gap: 2px;
+}
+
+.mock-profile-id strong {
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 1.1rem;
+}
+
+.mock-profile-id > span {
+    color: var(--LILA-semantic-color-text-muted);
+    font-size: 0.9rem;
+}
+
+.mock-profile-id .mock-stars {
+    color: var(--landing-morado-claro);
+    font-size: 0.85rem;
+}
+
+.mock-stars em {
+    color: var(--LILA-semantic-color-text-muted);
+    font-style: normal;
+}
+
+.mock-verified {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 5px 12px;
+    border-radius: var(--LILA-primitives-radius-full);
+    background: var(--LILA-primitives-purple-lavender);
+    color: var(--landing-morado);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.mock-label {
+    margin: 18px 0 8px;
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.mock-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mock-chips span {
+    padding: 6px 11px;
+    border: 1px solid var(--landing-lila-borde);
+    border-radius: var(--LILA-primitives-radius-full);
+    color: var(--landing-morado);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Paso 2: lista de ofertas cercanas */
+.mock-list-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.mock-list-head strong {
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 1.05rem;
+}
+
+.mock-list-head span {
+    color: var(--LILA-semantic-color-text-muted);
+    font-size: 0.82rem;
+}
+
+.mock-row {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid #eee9f5;
+}
+
+.mock-row div { display: grid; gap: 2px; min-width: 0; }
+
+.mock-row strong {
+    overflow: hidden;
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 0.9rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mock-row div span {
+    color: var(--LILA-semantic-color-text-muted);
+    font-size: 0.78rem;
+}
+
+.mock-pin {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--LILA-primitives-purple-lavender);
+}
+
+.mock-pin svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: var(--landing-morado);
+    stroke-width: 2;
+}
+
+.mock-pay {
+    color: var(--landing-morado);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* Paso 3: ilustración (reemplazable por <img>) */
+.how-illustration {
+    width: min(100%, 400px);
+    margin: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.how-illustration svg,
+.how-illustration img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* --- Bloque B: compacto --- */
+
+.how-block--compact {
+    margin-top: 120px;
+}
+
+.how-compact {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Línea fina que une los tres iconos */
+.how-compact::before {
+    content: "";
+    position: absolute;
+    top: 32px;
+    left: calc(100% / 6);
+    right: calc(100% / 6);
+    height: 1px;
+    background: var(--landing-lila-borde);
+}
+
+.how-compact-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.how-compact-icon {
+    position: relative; /* queda por encima de la línea */
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    border: 1px solid var(--landing-lila-borde);
+    border-radius: 50%;
+    background: #fff;
+}
+
+.how-compact-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: var(--LILA-primitives-purple-brand);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.how-compact-step p {
+    max-width: 240px;
+    margin-top: 8px;
+    color: var(--LILA-primitives-purple-brand);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+/* =====================================================================
+   3. Carrusel decorativo de ofertas
+   ===================================================================== */
+
+.home-offers {
+    padding-bottom: 120px;
+}
+
+.home-offers-viewport {
+    display: grid;
+    gap: 16px;
+    overflow: hidden;
+    padding: 12px 0 20px; /* espacio para la sombra */
+    pointer-events: none;  /* nada es clicable, ni el botón */
+    user-select: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.home-offers-viewport * {
+    pointer-events: none;
+    user-select: none;
+}
+
+.home-offers-track {
+    display: flex;
+    width: max-content;
+    animation: home-offers-scroll 60s linear infinite;
+}
+
+.home-offers-track--reverse {
+    animation-direction: reverse;
+    animation-duration: 70s;
+}
+
+/* margin-right (no gap) para que ambas mitades midan igual y -50% cierre el bucle */
+.home-offer-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 0 0 280px;
+    margin-right: 20px;
+    padding: 20px;
+    border: 1px solid var(--landing-lila-borde);
+    border-radius: 18px;
+    background: var(--LILA-primitives-purple-lavender);
+    box-shadow: var(--LILA-elevaci-n-tarjeta);
+}
+
+.home-offer-tag,
+.home-offer-meta span {
+    display: inline-flex;
+    padding: 6px 11px;
+    border-radius: var(--LILA-primitives-radius-full);
+    background: #fff;
+    color: var(--landing-morado);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.home-offer-card h3 {
+    margin: 12px 0 0;
+    color: #191a20;
+    font-size: 1.2rem;
+    line-height: 1.15;
+}
+
+.home-offer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 18px;
+}
+
+.home-offer-button {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    margin-top: auto; /* alinea el botón abajo en todas las tarjetas */
+    padding: 0 18px;
+    border-radius: var(--LILA-primitives-radius-full);
+    background: #151515;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@keyframes home-offers-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+/* Movimiento reducido: la cinta se mueve mucho más lento */
+@media (prefers-reduced-motion: reduce) {
+    .home-offers-track { animation-duration: 240s; }
+    .home-offers-track--reverse { animation-duration: 280s; }
+}
+
+/* =====================================================================
+   4. Llamado a la acción final
+   ===================================================================== */
+
+.home-cta {
+    display: grid;
+    align-content: center;
+    padding: 104px 0;
+    color: #fff;
+}
+
+.home-cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    text-align: center;
+}
+
+.home-cta h2 {
+    max-width: 720px;
+    color: #fff;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 400; /* sin negrilla */
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+/* Mismo botón que el hero; colores invertidos para que se lea sobre el fondo oscuro */
+.home-cta .home-primary-button,
+.home-cta .home-primary-button:hover {
+    background: #fff;
+    color: var(--LILA-primitives-purple-brand);
+}
+
+/* =====================================================================
+   Responsive
+   ===================================================================== */
+
+@media (max-width: 720px) {
+    .landing .home-trust-inner { grid-template-columns: 1fr; gap: 18px; }
+    .landing .home-purpose { padding-inline: 0; }
+
+    .section-head { margin-bottom: 40px; }
+    .how { padding-bottom: 80px; }
+
+    /* Bloque A: texto arriba, imagen abajo */
+    .how-step { grid-template-columns: 1fr; gap: 28px; }
+    .how-step--reverse .how-step-text { order: 0; }
+    .how-step-media { min-height: 0; padding: 28px 20px; }
+
+    /* Flecha recta hacia abajo */
+    .how-arrow .how-arrow-curve { display: none; }
+    .how-arrow .how-arrow-straight { display: block; }
+    .how-arrow { margin: 16px 0; }
+
+    /* Bloque B: vertical con línea conectora vertical */
+    .how-block--compact { margin-top: 80px; }
+    .how-compact { grid-template-columns: 1fr; gap: 28px; }
+    .how-compact::before {
+        top: 32px;
+        bottom: 32px;
+        left: 32px;
+        right: auto;
+        width: 1px;
+        height: auto;
+    }
+    .how-compact-step {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        column-gap: 20px;
+        align-items: center;
+        text-align: left;
+    }
+    .how-compact-icon { grid-row: span 2; margin-bottom: 0; }
+    .how-compact-step p { margin-top: 0; max-width: none; }
+
+    /* Carrusel */
+    .home-offers { padding-bottom: 80px; }
+    .home-offer-card { flex-basis: 240px; margin-right: 14px; }
+
+    .home-cta { padding: 72px 0; }
+}

@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="assets/css/base/reset.css" />
     <link rel="stylesheet" href="assets/css/base/typography.css" />
     <link rel="stylesheet" href="assets/css/pages/home.css" />
+    <!-- Estilos exclusivos de esta landing (no afectan a otras páginas que usan home.css) -->
+    <link rel="stylesheet" href="assets/css/pages/index.css" />
     <link rel="stylesheet" href="assets/css/utilities/responsive.css" />
     <link rel="stylesheet" href="assets/css/components/header.css" />
     <title>LILA — Librería Laboral</title>
 </head>
 <body>
-    <main class="home-page">
+    <main class="home-page landing">
         <div id="header-placeholder"></div>
 
-        <section class="home-hero" aria-labelledby="home-title">
+        <!-- ===== Hero ===== -->
+        <section class="home-hero container" aria-labelledby="home-title">
             <div class="home-hero-copy">
                 <span class="home-eyebrow">Una nueva forma de conectar</span>
                 <h1 id="home-title">Tu talento merece una oportunidad.</h1>
@@ -40,32 +43,267 @@
 
         <div class="home-audience-space" aria-hidden="true"></div>
 
+        <!-- ===== Franja Simple / Humana / Local ===== -->
         <section class="home-trust" aria-label="Características de LILA">
-            <div><strong>Simple</strong><span>Regístrate en pocos pasos</span></div>
-            <div><strong>Humana</strong><span>Conexiones pensadas para ti</span></div>
-            <div><strong>Local</strong><span>Oportunidades en Bolivia</span></div>
+            <div class="container home-trust-inner">
+                <div><strong>Simple</strong><span>Regístrate en pocos pasos</span></div>
+                <div><strong>Humana</strong><span>Conexiones pensadas para ti</span></div>
+                <div><strong>Local</strong><span>Oportunidades en Bolivia</span></div>
+            </div>
         </section>
 
-        <section class="home-purpose" aria-label="Misión y visión de LILA">
-            <div class="home-purpose-inner">
-                <article class="home-purpose-item home-purpose-mission">
-                    <div class="home-purpose-copy">
-                        <h2>MISIÓN</h2>
-                        <p>
-                            Conectar de forma segura y confiable a trabajadores con habilidades técnicas y a personas que necesitan el servicio en Bolivia, empezando en Cochabamba, centralizando ofertas no formales con perfiles verificados, reputación y matching por habilidades.
-                        </p>
+        <!-- ===== Franja Misión / Visión ===== -->
+        <div class="home-purpose-band">
+            <section class="home-purpose" aria-label="Misión y visión de LILA">
+                <div class="home-purpose-inner container">
+                    <article class="home-purpose-item home-purpose-mission">
+                        <div class="home-purpose-copy">
+                            <h2>MISIÓN</h2>
+                            <p>
+                                Conectar de forma segura y confiable a trabajadores con habilidades técnicas y a personas que necesitan el servicio en Bolivia, empezando en Cochabamba, centralizando ofertas no formales con perfiles verificados, reputación y matching por habilidades.
+                            </p>
+                        </div>
+                        <span class="home-purpose-connector" aria-hidden="true"></span>
+                    </article>
+                    <article class="home-purpose-item home-purpose-vision">
+                        <div class="home-purpose-copy">
+                            <h2>VISIÓN</h2>
+                            <p>
+                                Ser la plataforma de referencia del trabajo no formal en Bolivia, donde los trabajadores con oficios sean encontrados y accedan a ofertas confiables en un mercado laboral más transparente.
+                            </p>
+                        </div>
+                        <span class="home-purpose-connector" aria-hidden="true"></span>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== Cómo funciona ===== -->
+        <section class="how" aria-labelledby="how-title">
+            <div class="container">
+                <header class="section-head">
+                    <span class="home-eyebrow">Paso a paso</span>
+                    <h2 id="how-title">Cómo funciona</h2>
+                </header>
+
+                <!-- Bloque A: Si buscas trabajo (zigzag) -->
+                <div class="how-block">
+                    <h3 class="how-block-title">Si buscas trabajo</h3>
+
+                    <!-- Paso 1: texto izquierda, imagen derecha -->
+                    <article class="how-step">
+                        <div class="how-step-text">
+                            <span class="how-num">01</span>
+                            <h4>Crea tu perfil</h4>
+                            <p>Cuenta a qué te dedicas, qué sabes hacer y dónde trabajas. Así las personas te encuentran con confianza.</p>
+                        </div>
+                        <div class="how-step-media">
+                            <!-- Maqueta decorativa: tarjeta de perfil -->
+                            <div class="mock mock-profile" aria-hidden="true">
+                                <div class="mock-profile-top">
+                                    <span class="mock-avatar">
+                                        <svg viewBox="0 0 64 64">
+                                            <rect width="64" height="64" fill="#e7dafa" />
+                                            <path d="M14 40c2-12 8-20 18-20s16 8 18 20v4H14z" fill="#272348" />
+                                            <circle cx="32" cy="27" r="11" fill="#e8b48f" />
+                                            <path d="M10 64c2-11 10-17 22-17s20 6 22 17z" fill="#5b4b8a" />
+                                        </svg>
+                                    </span>
+                                    <div class="mock-profile-id">
+                                        <strong>María Quispe</strong>
+                                        <span>Electricista</span>
+                                        <span class="mock-stars">★★★★★ <em>4.9</em></span>
+                                    </div>
+                                </div>
+                                <span class="mock-verified">✓ Perfil verificado</span>
+                                <p class="mock-label">Habilidades</p>
+                                <div class="mock-chips">
+                                    <span>Instalaciones</span>
+                                    <span>Reparaciones</span>
+                                    <span>Tableros eléctricos</span>
+                                    <span>Puntualidad</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Flecha 1 → 2 (decorativa) -->
+                    <div class="how-arrow" aria-hidden="true">
+                        <svg class="how-arrow-curve" viewBox="0 0 600 140" fill="none">
+                            <path class="how-arrow-line" d="M450 6 C450 90 150 40 150 122" />
+                            <path class="how-arrow-head" d="M138 110 L150 126 L162 110" />
+                        </svg>
+                        <svg class="how-arrow-straight" viewBox="0 0 24 80" fill="none">
+                            <path class="how-arrow-line" d="M12 2 V74" />
+                            <path class="how-arrow-head" d="M4 64 L12 76 L20 64" />
+                        </svg>
                     </div>
-                    <span class="home-purpose-connector" aria-hidden="true"></span>
-                </article>
-                <article class="home-purpose-item home-purpose-vision">
-                    <div class="home-purpose-copy">
-                        <h2>VISIÓN</h2>
-                        <p>
-                            Ser la plataforma de referencia del trabajo no formal en Bolivia, donde los trabajadores con oficios sean encontrados y accedan a ofertas confiables en un mercado laboral más transparente.
-                        </p>
+
+                    <!-- Paso 2: imagen izquierda, texto derecha -->
+                    <article class="how-step how-step--reverse">
+                        <div class="how-step-text">
+                            <span class="how-num">02</span>
+                            <h4>Encuentra quién te necesita</h4>
+                            <p>Mira las personas que necesitan tu servicio cerca de ti, con la ubicación y el pago a la vista.</p>
+                        </div>
+                        <div class="how-step-media">
+                            <!-- Maqueta decorativa: ofertas cercanas -->
+                            <div class="mock mock-list" aria-hidden="true">
+                                <div class="mock-list-head">
+                                    <strong>Cerca de ti</strong>
+                                    <span>Cochabamba</span>
+                                </div>
+                                <div class="mock-row">
+                                    <span class="mock-pin"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg></span>
+                                    <div><strong>Cambiar enchufes y focos</strong><span>Cala Cala · a 1,2 km</span></div>
+                                    <span class="mock-pay">Bs. 150</span>
+                                </div>
+                                <div class="mock-row">
+                                    <span class="mock-pin"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg></span>
+                                    <div><strong>Revisar tablero eléctrico</strong><span>Sarco · a 2,5 km</span></div>
+                                    <span class="mock-pay">Bs. 200</span>
+                                </div>
+                                <div class="mock-row">
+                                    <span class="mock-pin"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></svg></span>
+                                    <div><strong>Instalar lámparas</strong><span>Queru Queru · a 3 km</span></div>
+                                    <span class="mock-pay">Bs. 120</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Flecha 2 → 3 (decorativa, espejada) -->
+                    <div class="how-arrow how-arrow--flip" aria-hidden="true">
+                        <svg class="how-arrow-curve" viewBox="0 0 600 140" fill="none">
+                            <path class="how-arrow-line" d="M450 6 C450 90 150 40 150 122" />
+                            <path class="how-arrow-head" d="M138 110 L150 126 L162 110" />
+                        </svg>
+                        <svg class="how-arrow-straight" viewBox="0 0 24 80" fill="none">
+                            <path class="how-arrow-line" d="M12 2 V74" />
+                            <path class="how-arrow-head" d="M4 64 L12 76 L20 64" />
+                        </svg>
                     </div>
-                    <span class="home-purpose-connector" aria-hidden="true"></span>
-                </article>
+
+                    <!-- Paso 3: texto izquierda, imagen derecha -->
+                    <article class="how-step">
+                        <div class="how-step-text">
+                            <span class="how-num">03</span>
+                            <h4>Conversa y acuerda</h4>
+                            <p>Habla directamente con la persona, pónganse de acuerdo en el trabajo y empieza.</p>
+                        </div>
+                        <div class="how-step-media">
+                            <!--
+                                Ilustración reemplazable. Para usar tu propia imagen, cambia todo el <svg>
+                                por: <img src="assets/img/conversacion.png" alt="" />
+                            -->
+                            <figure class="how-illustration" aria-hidden="true">
+                                <svg viewBox="0 0 400 300">
+                                    <ellipse cx="200" cy="272" rx="160" ry="14" fill="#e7dafa" />
+                                    <!-- Burbujas de diálogo -->
+                                    <rect x="52" y="34" width="120" height="58" rx="18" fill="#fff" stroke="#d6cee2" stroke-width="2" />
+                                    <path d="M92 92 L100 108 L112 92" fill="#fff" stroke="#d6cee2" stroke-width="2" stroke-linejoin="round" />
+                                    <circle cx="90" cy="63" r="6" fill="#8a74c9" />
+                                    <circle cx="112" cy="63" r="6" fill="#8a74c9" />
+                                    <circle cx="134" cy="63" r="6" fill="#8a74c9" />
+                                    <rect x="232" y="56" width="116" height="52" rx="18" fill="#272348" />
+                                    <path d="M290 108 L300 124 L308 108" fill="#272348" />
+                                    <path d="M266 82 l12 12 l26 -24" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                                    <!-- Persona 1 -->
+                                    <path d="M70 272 c0-60 22-96 60-96 s60 36 60 96z" fill="#5b4b8a" />
+                                    <circle cx="130" cy="144" r="30" fill="#e8b48f" />
+                                    <path d="M98 142 c0-24 14-36 32-36 s32 12 32 34 c-12-10-38-12-64 2z" fill="#272348" />
+                                    <!-- Persona 2 -->
+                                    <path d="M214 272 c0-56 22-90 58-90 s58 34 58 90z" fill="#8a74c9" />
+                                    <circle cx="272" cy="154" r="28" fill="#c68a62" />
+                                    <path d="M242 150 c-2-22 12-34 30-34 s32 12 30 34 c-6-12-22-16-30-16 s-24 4-30 16z" fill="#3b2f2a" />
+                                </svg>
+                            </figure>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Bloque B: Si necesitas un servicio (compacto) -->
+                <div class="how-block how-block--compact">
+                    <h3 class="how-block-title">Si necesitas un servicio</h3>
+                    <ol class="how-compact">
+                        <li class="how-compact-step">
+                            <span class="how-compact-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5" /><path d="M12 11v6M9 14h6" /></svg>
+                            </span>
+                            <span class="how-num how-num--sm">01</span>
+                            <p>Publica lo que necesitas.</p>
+                        </li>
+                        <li class="how-compact-step">
+                            <span class="how-compact-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20c.8-3.8 3.3-6 6.5-6s5.7 2.2 6.5 6" /><circle cx="17" cy="9" r="2.5" /><path d="M16.5 14.2c2.6.2 4.4 2.2 5 5.3" /></svg>
+                            </span>
+                            <span class="how-num how-num--sm">02</span>
+                            <p>Recibe postulaciones de trabajadores.</p>
+                        </li>
+                        <li class="how-compact-step">
+                            <span class="how-compact-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M8 12.5l2.8 2.8L16.5 9.5" /></svg>
+                            </span>
+                            <span class="how-num how-num--sm">03</span>
+                            <p>Elige a la persona que mejor te convenga.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Carrusel decorativo de ofertas ===== -->
+        <section class="home-offers" aria-labelledby="home-offers-title">
+            <div class="container">
+                <header class="section-head">
+                    <h2 id="home-offers-title">Así se ven las oportunidades</h2>
+                    <p>Encuentra una oferta, revisa los detalles y postula en segundos.</p>
+                </header>
+
+                <!-- Vista previa decorativa: nada aquí es clicable ni seleccionable -->
+                <div class="home-offers-viewport" aria-hidden="true">
+                    <!-- Fila 1 (hacia la izquierda). El grupo se repite dos veces para que el bucle no tenga saltos. -->
+                    <div class="home-offers-track">
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Gasfitería a domicilio</h3><div class="home-offer-meta"><span>Cala Cala</span><span>Bs. 150 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por trabajo</span><h3>Pintura de departamento</h3><div class="home-offer-meta"><span>Sacaba</span><span>Bs. 1.200 en total</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Medio tiempo</span><h3>Cuidado de adultos mayores</h3><div class="home-offer-meta"><span>Queru Queru</span><span>Bs. 2.500 al mes</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por día</span><h3>Jardinería</h3><div class="home-offer-meta"><span>Tiquipaya</span><span>Bs. 120 por día</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por hora</span><h3>Clases particulares</h3><div class="home-offer-meta"><span>Cercado</span><span>Bs. 50 por hora</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Mudanza ligera</h3><div class="home-offer-meta"><span>Quillacollo</span><span>Bs. 300 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                        <!-- copia -->
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Gasfitería a domicilio</h3><div class="home-offer-meta"><span>Cala Cala</span><span>Bs. 150 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por trabajo</span><h3>Pintura de departamento</h3><div class="home-offer-meta"><span>Sacaba</span><span>Bs. 1.200 en total</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Medio tiempo</span><h3>Cuidado de adultos mayores</h3><div class="home-offer-meta"><span>Queru Queru</span><span>Bs. 2.500 al mes</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por día</span><h3>Jardinería</h3><div class="home-offer-meta"><span>Tiquipaya</span><span>Bs. 120 por día</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por hora</span><h3>Clases particulares</h3><div class="home-offer-meta"><span>Cercado</span><span>Bs. 50 por hora</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Mudanza ligera</h3><div class="home-offer-meta"><span>Quillacollo</span><span>Bs. 300 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                    </div>
+
+                    <!-- Fila 2 (dirección contraria, otro orden) -->
+                    <div class="home-offers-track home-offers-track--reverse">
+                        <article class="home-offer-card"><span class="home-offer-tag">Por hora</span><h3>Clases particulares</h3><div class="home-offer-meta"><span>Cercado</span><span>Bs. 50 por hora</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Mudanza ligera</h3><div class="home-offer-meta"><span>Quillacollo</span><span>Bs. 300 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por día</span><h3>Jardinería</h3><div class="home-offer-meta"><span>Tiquipaya</span><span>Bs. 120 por día</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Gasfitería a domicilio</h3><div class="home-offer-meta"><span>Cala Cala</span><span>Bs. 150 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Medio tiempo</span><h3>Cuidado de adultos mayores</h3><div class="home-offer-meta"><span>Queru Queru</span><span>Bs. 2.500 al mes</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por trabajo</span><h3>Pintura de departamento</h3><div class="home-offer-meta"><span>Sacaba</span><span>Bs. 1.200 en total</span></div><span class="home-offer-button">Postular</span></article>
+                        <!-- copia -->
+                        <article class="home-offer-card"><span class="home-offer-tag">Por hora</span><h3>Clases particulares</h3><div class="home-offer-meta"><span>Cercado</span><span>Bs. 50 por hora</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Mudanza ligera</h3><div class="home-offer-meta"><span>Quillacollo</span><span>Bs. 300 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por día</span><h3>Jardinería</h3><div class="home-offer-meta"><span>Tiquipaya</span><span>Bs. 120 por día</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por servicio</span><h3>Gasfitería a domicilio</h3><div class="home-offer-meta"><span>Cala Cala</span><span>Bs. 150 por servicio</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Medio tiempo</span><h3>Cuidado de adultos mayores</h3><div class="home-offer-meta"><span>Queru Queru</span><span>Bs. 2.500 al mes</span></div><span class="home-offer-button">Postular</span></article>
+                        <article class="home-offer-card"><span class="home-offer-tag">Por trabajo</span><h3>Pintura de departamento</h3><div class="home-offer-meta"><span>Sacaba</span><span>Bs. 1.200 en total</span></div><span class="home-offer-button">Postular</span></article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Llamado a la acción final ===== -->
+        <section class="home-cta" aria-labelledby="home-cta-title">
+            <div class="container home-cta-inner">
+                <h2 id="home-cta-title">Tu talento o tu necesidad, aquí se encuentran</h2>
+                <a class="home-primary-button" href="/frontend/auth/register.html">Comenzar ahora</a>
             </div>
         </section>
 
