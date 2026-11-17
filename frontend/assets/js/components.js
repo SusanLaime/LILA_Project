@@ -36,6 +36,57 @@ function setNavbarStylesheet(cssHref) {
     document.head.appendChild(link);
 }
 
+function configurarEnlacesVolver(selector, fallback) {
+    const clavePaginaAnterior = 'lila_pagina_anterior';
+    const urlActual = new URL(window.location.href);
+    let paginaAnterior = '';
+
+    if (document.referrer) {
+        try {
+            const anterior = new URL(document.referrer);
+            if (
+                anterior.origin === window.location.origin &&
+                anterior.pathname.startsWith('/frontend/') &&
+                anterior.pathname !== urlActual.pathname
+            ) {
+                paginaAnterior = `${anterior.pathname}${anterior.search}${anterior.hash}`;
+            }
+        } catch (error) {
+            console.warn('No se pudo interpretar la página anterior:', error);
+        }
+    }
+
+    if (!paginaAnterior) {
+        const guardada = sessionStorage.getItem(clavePaginaAnterior);
+        if (guardada) {
+            try {
+                const anterior = new URL(guardada, window.location.origin);
+                if (
+                    anterior.origin === window.location.origin &&
+                    anterior.pathname.startsWith('/frontend/') &&
+                    anterior.pathname !== urlActual.pathname
+                ) {
+                    paginaAnterior = `${anterior.pathname}${anterior.search}${anterior.hash}`;
+                }
+            } catch (error) {
+                console.warn('No se pudo interpretar la página anterior guardada:', error);
+            }
+        }
+    }
+
+    const destino = paginaAnterior || fallback;
+    document.querySelectorAll(selector).forEach(enlace => {
+        enlace.href = destino;
+    });
+
+    if (urlActual.pathname.startsWith('/frontend/')) {
+        sessionStorage.setItem(
+            clavePaginaAnterior,
+            `${urlActual.pathname}${urlActual.search}${urlActual.hash}`
+        );
+    }
+}
+
 /**
  * Muestra un pop-up cuando el usuario intenta cambiar a un rol que aún no creó.
  */
@@ -200,11 +251,18 @@ export async function initHeader(verificationStatus = 'no_verificado', rol = 'tr
     if (!token) {
         setNavbarStylesheet('/frontend/assets/css/components/navbarauth.css');
         await loadComponent('/frontend/components/headerauth.html', 'header-placeholder');
+        configurarEnlacesVolver('.nav-home-back', '/frontend/index.html');
         return;
     }
 
     setNavbarStylesheet('/frontend/assets/css/components/navbarcambio.css');
     await loadComponent('/frontend/components/headerCambio.html', 'header-placeholder');
+    configurarEnlacesVolver(
+        '.nav-home-back',
+        rol === 'empleador'
+            ? '/frontend/website/homeEmpleador.html'
+            : '/frontend/website/homeTrabajador.html'
+    );
     await configurarHeaderCambio(token, rol);
 }
 
@@ -212,5 +270,6 @@ export async function initHeader(verificationStatus = 'no_verificado', rol = 'tr
  * Inicializa el pie de página.
  */
 export async function initFooter() {
+    configurarEnlacesVolver('.auth-back-link', '/frontend/index.html');
     await loadComponent('/frontend/components/footer.html', 'footer-placeholder');
 }

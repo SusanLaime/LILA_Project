@@ -142,6 +142,31 @@ describe('Carga de la página', () => {
     }
   });
 
+  test('el botón Volver navega a la página interna anterior en lugar del index', async () => {
+    await page.goto(baseUrl + RUTA_PANEL);
+    await page.goto(baseUrl + RUTA_TRABAJADOR);
+    await page.waitForSelector('#header-placeholder .nav-home-back');
+
+    const volver = page.locator('#header-placeholder .nav-home-back');
+    assert.equal(await volver.getAttribute('href'), RUTA_PANEL);
+    await Promise.all([
+      page.waitForURL(`**${RUTA_PANEL}`),
+      volver.click()
+    ]);
+  });
+
+  test('el botón Volver del registro apunta a la página interna anterior', async () => {
+    await page.goto(baseUrl + RUTA_TRABAJADOR);
+    await page.goto(`${baseUrl}/frontend/auth/register.html`);
+    const volver = page.locator('.auth-back-link');
+    await page.waitForFunction(
+      destino => document.querySelector('.auth-back-link')?.getAttribute('href') === destino,
+      RUTA_TRABAJADOR
+    );
+
+    assert.equal(await volver.getAttribute('href'), RUTA_TRABAJADOR);
+  });
+
   test('el encabezado del trabajador ofrece cambiar al perfil de empleador aunque el rol guardado esté desactualizado', async () => {
     await page.addInitScript(() => {
       localStorage.setItem('lila_token', 'token-de-prueba');
