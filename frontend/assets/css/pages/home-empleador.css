@@ -361,6 +361,10 @@
     box-shadow: none;
 }
 
+#active-posts .employer-post-card[hidden] {
+    display: none;
+}
+
 #active-posts .employer-post-card:hover,
 #active-posts .employer-post-card.is-selected {
     border-color: var(--home-lila-borde);
