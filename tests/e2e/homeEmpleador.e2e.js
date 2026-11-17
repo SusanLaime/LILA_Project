@@ -95,6 +95,7 @@ async function publicarOferta(datos = {}) {
     title: 'Mesero/a para fin de semana',
     location: 'Cochabamba',
     type: 'Por servicio',
+    employmentType: 'formal',
     category: 'gastronomia',
     pay: 'Bs. 150 por día',
     description: 'Atención de mesas los sábados y domingos.',
@@ -104,6 +105,7 @@ async function publicarOferta(datos = {}) {
   await page.fill('#offer-title', oferta.title);
   await page.fill('#offer-location', oferta.location);
   await page.selectOption('#offer-type', oferta.type);
+  await page.selectOption('#offer-employment-type', oferta.employmentType);
   await page.selectOption('#offer-category', oferta.category);
   await page.fill('#offer-pay', oferta.pay);
   await page.fill('#offer-description', oferta.description);
@@ -228,6 +230,60 @@ describe('Publicar oferta', () => {
     await publicarOferta({ title: 'Oferta categoría otros', category: 'otros' });
     await page.selectOption('#employer-category-filter', 'otros');
     assert.deepEqual(await titulosVisibles(), ['Oferta categoría otros']);
+  });
+
+  test('las ofertas publicadas aparecen en el panel trabajador y admiten todos sus filtros', async () => {
+    const oferta = await publicarOferta({
+      title: 'Diseño de marca para La Paz',
+      location: 'La Paz',
+      type: 'Por proyecto',
+      employmentType: 'no-formal',
+      category: 'marketing',
+      description: 'Diseña una nueva identidad visual para una tienda local.'
+    });
+
+    await page.goto(baseUrl + '/frontend/website/homeTrabajador.html');
+    await page.waitForSelector('.offer-card h3');
+
+    assert.equal(
+      await page.locator('.offer-card:not([hidden]) h3').first().textContent(),
+      oferta.title
+    );
+    await page.fill('#job-search', 'IDENTIDAD VISUAL');
+    assert.deepEqual(
+      await page.$$eval('.offer-card:not([hidden]) h3', titles => titles.map(title => title.textContent.trim())),
+      [oferta.title]
+    );
+
+    await page.fill('#job-search', '');
+    await page.selectOption('#area-filter', 'diseno');
+    await page.selectOption('#city-filter', 'la-paz');
+    await page.locator('.type-filter[value="no-formal"]').check();
+    await page.locator('.modality-filter[value="por-proyecto"]').check();
+    assert.deepEqual(
+      await page.$$eval('.offer-card:not([hidden]) h3', titles => titles.map(title => title.textContent.trim())),
+      [oferta.title]
+    );
+
+    await page.selectOption('#sort-filter', 'za');
+    assert.equal(await page.locator('.offer-card:not([hidden]) h3').first().textContent(), oferta.title);
+    await page.locator('.offer-card:not([hidden]) .offer-details-button').click();
+    assert.equal(await page.textContent('#modal-offer-title'), oferta.title);
+    assert.equal(await page.textContent('#modal-offer-area'), 'Diseño y marketing');
+  });
+
+  test('la búsqueda de publicaciones del empleador también consulta ubicación y descripción', async () => {
+    const oferta = await publicarOferta({
+      title: 'Identidad visual',
+      location: 'La Paz',
+      category: 'marketing',
+      description: 'Diseña una nueva marca para una tienda local.'
+    });
+
+    await page.fill('#employer-search', 'la paz');
+    assert.deepEqual(await titulosVisibles(), [oferta.title]);
+    await page.fill('#employer-search', 'tienda local');
+    assert.deepEqual(await titulosVisibles(), [oferta.title]);
   });
 });
 

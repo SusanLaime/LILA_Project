@@ -9,6 +9,7 @@ export const CLAVE_ESTADOS = 'lila_estados_ofertas';
 export const CATEGORIAS = {
     gastronomia: 'Gastronomía',
     marketing: 'Diseño y marketing',
+    eventos: 'Eventos',
     ventas: 'Ventas y comercio',
     otros: 'Otros'
 };
@@ -57,6 +58,7 @@ export function guardarOferta(datos) {
     const modalidad = String(datos.type ?? '').trim();
     const pago = String(datos.pay ?? '').trim();
     const descripcion = String(datos.description ?? '').trim();
+    const tipoEmpleo = datos.employmentType === 'no-formal' ? 'no-formal' : 'formal';
     const categoria = Object.hasOwn(CATEGORIAS, datos.category) ? datos.category : 'otros';
 
     if (!titulo || !ubicacion || !modalidad || !pago || !descripcion) return null;
@@ -68,6 +70,7 @@ export function guardarOferta(datos) {
         location: ubicacion,
         city: normalizarTexto(ubicacion),
         type: modalidad,
+        employmentType: tipoEmpleo,
         pay: pago,
         description: descripcion,
         category: categoria,

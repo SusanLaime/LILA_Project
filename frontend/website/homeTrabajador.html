@@ -29,6 +29,7 @@
                         <option value="diseno">Diseño y marketing</option>
                         <option value="eventos">Eventos</option>
                         <option value="ventas">Ventas y comercio</option>
+                        <option value="otros">Otros</option>
                     </select>
                 </label>
                 <label for="city-filter">Ciudad
@@ -160,6 +161,9 @@
                     </article>
                 </div>
                 </div>
+                <p class="dashboard-empty" id="worker-empty" role="status" hidden>
+                    No encontramos ofertas que coincidan con los filtros seleccionados.
+                </p>
             </div>
         </section>
         <div id="footer-placeholder"></div>
@@ -194,6 +198,7 @@
     <script type="module">
         import { initFooter, initHeader } from '../assets/js/components.js';
         import { pedirApi } from '../assets/js/api.js';
+        import { CATEGORIAS, obtenerEstados, obtenerOfertas, normalizarTexto } from '../assets/js/ofertas.js';
         import { obtenerToken } from '../assets/js/sesion.js';
         initHeader('', 'trabajador');
         initFooter();
@@ -203,7 +208,109 @@
         const searchInput = document.getElementById('job-search');
         const sortFilter = document.getElementById('sort-filter');
         const offerGrid = document.querySelector('.offer-grid');
-        const offers = Array.from(document.querySelectorAll('.offer-card'));
+        const emptyState = document.getElementById('worker-empty');
+        const modalityLabels = {
+            'tiempo-completo': 'Tiempo completo',
+            'tiempo-parcial': 'Tiempo parcial',
+            'por-proyecto': 'Por proyecto',
+            'por-servicio': 'Por servicio'
+        };
+
+        function crearTarjetaOferta(oferta) {
+            const area = oferta.category === 'marketing' ? 'diseno' : oferta.category;
+            const modality = normalizarTexto(oferta.type);
+            const employerName = 'Empleador LILA';
+            const card = document.createElement('article');
+            card.className = 'offer-card';
+            card.dataset.area = area;
+            card.dataset.city = oferta.city || normalizarTexto(oferta.location);
+            card.dataset.modality = modality;
+            card.dataset.type = oferta.employmentType === 'no-formal' ? 'no-formal' : 'formal';
+            card.dataset.category = oferta.category;
+            card.dataset.published = String(oferta.createdAt);
+            card.dataset.employer = employerName;
+            card.dataset.deadline = 'No especificada';
+            card.dataset.experience = 'No especificada';
+            card.dataset.skills = 'Consulta los requisitos con el empleador.';
+            card.dataset.description = oferta.description;
+            card.dataset.requirements = 'Consulta los requisitos con el empleador.';
+            card.dataset.location = oferta.location;
+
+            const label = document.createElement('span');
+            label.className = 'role-label';
+            label.textContent = modalityLabels[modality] || oferta.type;
+            const title = document.createElement('h3');
+            title.textContent = oferta.title;
+            const description = document.createElement('p');
+            description.textContent = oferta.description;
+            const meta = document.createElement('div');
+            meta.className = 'offer-meta';
+            const location = document.createElement('span');
+            location.textContent = oferta.location;
+            const pay = document.createElement('span');
+            pay.textContent = oferta.pay;
+            meta.append(location, pay);
+
+            const footer = document.createElement('div');
+            footer.className = 'offer-card-footer';
+            const publisher = document.createElement('div');
+            publisher.className = 'offer-publisher';
+            publisher.tabIndex = 0;
+            publisher.dataset.publisherProfile = '';
+            publisher.setAttribute('aria-label', `Ver información de ${employerName}`);
+            const initials = document.createElement('span');
+            initials.className = 'offer-publisher-initials';
+            initials.setAttribute('aria-hidden', 'true');
+            initials.textContent = 'L';
+            const employer = document.createElement('strong');
+            employer.textContent = employerName;
+            const rating = document.createElement('span');
+            rating.className = 'offer-rating';
+            rating.setAttribute('aria-label', 'Empleador');
+            rating.textContent = 'LILA';
+            const popover = document.createElement('span');
+            popover.className = 'publisher-popover';
+            popover.setAttribute('role', 'tooltip');
+            const popoverTitle = document.createElement('strong');
+            popoverTitle.textContent = employerName;
+            const popoverDescription = document.createElement('span');
+            popoverDescription.textContent = 'Oferta publicada en LILA.';
+            popover.append(popoverTitle, popoverDescription);
+            publisher.append(initials, employer, rating, popover);
+
+            const detailsButton = document.createElement('button');
+            detailsButton.className = 'home-primary-button offer-details-button';
+            detailsButton.type = 'button';
+            detailsButton.textContent = 'Ver detalles';
+            footer.append(publisher, detailsButton);
+            card.append(label, title, description, meta, footer);
+            return card;
+        }
+
+        const storedStates = obtenerEstados();
+        obtenerOfertas()
+            .filter(oferta => storedStates[oferta.id] !== 'paused')
+            .forEach(oferta => offerGrid.prepend(crearTarjetaOferta(oferta)));
+
+        const offers = Array.from(offerGrid.querySelectorAll('.offer-card'));
+        const workerCities = new Map(
+            Array.from(cityFilter.options)
+                .filter(option => option.value !== 'todas')
+                .map(option => [normalizarTexto(option.value), option.textContent.trim()])
+        );
+        offers.forEach(offer => {
+            const city = normalizarTexto(offer.dataset.city);
+            if (!city || workerCities.has(city)) return;
+            workerCities.set(city, offer.dataset.location || city
+                .split('-')
+                .map(word => word.charAt(0).toLocaleUpperCase('es') + word.slice(1))
+                .join(' '));
+        });
+        Array.from(workerCities.entries())
+            .filter(([value]) => !Array.from(cityFilter.options)
+                .some(option => normalizarTexto(option.value) === value))
+            .sort((first, second) => first[1].localeCompare(second[1], 'es'))
+            .forEach(([value, label]) => cityFilter.add(new Option(label, value)));
         const offerCount = document.getElementById('offer-count');
         const modalityFilters = document.querySelectorAll('.modality-filter');
         const typeFilters = document.querySelectorAll('.type-filter');
@@ -286,10 +393,22 @@
         function openOfferModal(offer) {
             const title = offer.querySelector('h3').textContent;
             const meta = Array.from(offer.querySelectorAll('.offer-meta span')).map(item => item.textContent);
-            offerModalFields.area.textContent = offer.dataset.area;
+            const category = offer.dataset.area === 'diseno' ? 'marketing' : offer.dataset.area;
+            offerModalFields.area.textContent = CATEGORIAS[category] || category;
             offerModalFields.title.textContent = title;
             offerModalFields.employer.textContent = offer.dataset.employer;
-            offerModalFields.meta.innerHTML = `<span>${meta[0]}</span><span>${meta[1]}</span><span>${offer.dataset.modality.replaceAll('-', ' ')}</span><span>${offer.dataset.type.replace('-', ' ')}</span><span>Publicado recientemente</span><span>Postularse hasta ${offer.dataset.deadline}</span>`;
+            offerModalFields.meta.replaceChildren();
+            [
+                ...meta,
+                modalityLabels[offer.dataset.modality] || offer.dataset.modality,
+                offer.dataset.type === 'no-formal' ? 'No formal' : 'Formal',
+                'Publicado recientemente',
+                `Postularse hasta ${offer.dataset.deadline}`
+            ].forEach(value => {
+                const item = document.createElement('span');
+                item.textContent = value;
+                offerModalFields.meta.append(item);
+            });
             offerModalFields.description.textContent = offer.dataset.description;
             offerModalFields.requirements.textContent = offer.dataset.requirements;
             offerModalFields.experience.textContent = offer.dataset.experience;
@@ -320,8 +439,16 @@
             if (event.key === 'Escape' && !offerModal.hidden) closeOfferModal();
         });
 
+        function normalizeSearch(value) {
+            return String(value ?? '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLocaleLowerCase('es')
+                .trim();
+        }
+
         function filterOffers() {
-            const search = searchInput.value.trim().toLowerCase();
+            const search = normalizeSearch(searchInput.value);
             const selectedModalities = Array.from(modalityFilters).filter(filter => filter.checked).map(filter => filter.value);
             const selectedTypes = Array.from(typeFilters).filter(filter => filter.checked).map(filter => filter.value);
             const sortedOffers = [...offers].sort((firstOffer, secondOffer) => {
@@ -336,8 +463,15 @@
             let visibleOffers = 0;
             sortedOffers.forEach(offer => {
                 const matchesArea = areaFilter.value === 'todas' || offer.dataset.area === areaFilter.value;
-                const matchesCity = cityFilter.value === 'todas' || offer.dataset.city === cityFilter.value;
-                const matchesSearch = !search || offer.textContent.toLowerCase().includes(search);
+                const matchesCity = cityFilter.value === 'todas' ||
+                    normalizarTexto(offer.dataset.city) === normalizarTexto(cityFilter.value);
+                const category = offer.dataset.area === 'diseno' ? 'marketing' : offer.dataset.area;
+                const searchContent = [
+                    offer.textContent,
+                    CATEGORIAS[offer.dataset.category || category],
+                    offer.dataset.location
+                ].filter(Boolean).join(' ');
+                const matchesSearch = !search || normalizeSearch(searchContent).includes(search);
                 const matchesModality = selectedModalities.length === 0 || selectedModalities.includes(offer.dataset.modality);
                 const matchesType = selectedTypes.length === 0 || selectedTypes.includes(offer.dataset.type);
                 offer.hidden = !(matchesArea && matchesCity && matchesSearch && matchesModality && matchesType);
@@ -345,6 +479,7 @@
                 offerGrid.appendChild(offer);
             });
             offerCount.textContent = visibleOffers;
+            emptyState.hidden = visibleOffers > 0;
         }
 
         areaFilter.addEventListener('change', filterOffers);
@@ -353,6 +488,7 @@
         sortFilter.addEventListener('change', filterOffers);
         modalityFilters.forEach(filter => filter.addEventListener('change', filterOffers));
         typeFilters.forEach(filter => filter.addEventListener('change', filterOffers));
+        filterOffers();
 
         function updateBackToTopVisibility() {
             backToTop.classList.toggle('is-visible', window.scrollY > 320);

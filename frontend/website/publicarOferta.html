@@ -31,7 +31,16 @@
                 <label for="offer-type">Modalidad
                     <select id="offer-type" name="type" required>
                         <option value="" disabled selected>Selecciona una modalidad</option>
-                        <option>Tiempo completo</option><option>Tiempo parcial</option><option>Por proyecto</option><option>Por servicio</option>
+                        <option value="Tiempo completo">Tiempo completo</option>
+                        <option value="Tiempo parcial">Tiempo parcial</option>
+                        <option value="Por proyecto">Por proyecto</option>
+                        <option value="Por servicio">Por servicio</option>
+                    </select>
+                </label>
+                <label for="offer-employment-type">Tipo de empleo
+                    <select id="offer-employment-type" name="employmentType" required>
+                        <option value="formal">Formal</option>
+                        <option value="no-formal">No formal</option>
                     </select>
                 </label>
                 <label for="offer-category">Categoría
@@ -39,6 +48,7 @@
                         <option value="" disabled selected>Selecciona una categoría</option>
                         <option value="gastronomia">Gastronomía</option>
                         <option value="marketing">Diseño y marketing</option>
+                        <option value="eventos">Eventos</option>
                         <option value="ventas">Ventas y comercio</option>
                         <option value="otros">Otros</option>
                     </select>
