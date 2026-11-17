@@ -43,13 +43,21 @@ form?.addEventListener('submit', async event => {
         const roles = Array.isArray(usuario?.roles)
             ? usuario.roles
             : [usuario?.rol].filter(Boolean);
+        const rolPorAgregar = new URLSearchParams(window.location.search).get('agregarRol');
         const rolGuardado = localStorage.getItem('lila_rol_activo');
         const rol = roles.includes(rolGuardado) ? rolGuardado : roles[0];
         const destinos = {
             trabajador: '/frontend/website/homeTrabajador.html',
             empleador: '/frontend/website/homeEmpleador.html'
         };
-        const destino = destinos[rol];
+        const rolValidoParaAgregar =
+            rolPorAgregar === 'trabajador' || rolPorAgregar === 'empleador';
+        const destinoAgregar = rolValidoParaAgregar ? destinos[rolPorAgregar] : null;
+        const destino = destinoAgregar
+            ? roles.includes(rolPorAgregar)
+                ? destinoAgregar
+                : `/frontend/auth/register.html?agregarRol=${rolPorAgregar}`
+            : destinos[rol];
 
         if (!destino) {
             message.textContent = 'No se pudo identificar el tipo de cuenta.';

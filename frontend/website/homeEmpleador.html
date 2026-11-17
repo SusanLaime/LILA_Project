@@ -234,9 +234,9 @@
         </article>
     </template>
     <script type="module">
-        import { initFooter, initHeader } from '../assets/js/components.js';
+        import { initFooter, initHeader } from '../assets/js/components.js?v=4';
         import { CATEGORIAS, obtenerOfertas, obtenerEstados, guardarEstado, normalizarTexto } from '../assets/js/ofertas.js';
-        initHeader('', 'empleador');
+        await initHeader('', 'empleador');
         initFooter();
 
         const activePostsContainer = document.getElementById('active-posts');

@@ -9,6 +9,10 @@ import { requiereSesion } from '../seguridad.js';
 import { validarPerfil } from '../validacion.js';
 
 const router = express.Router();
+router.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+});
 router.use(requiereSesion);
 
 function obtenerRoles(usuarioId) {
@@ -91,6 +95,50 @@ router.get('/', (req, res) => {
     }
 
     return res.status(200).json(perfil);
+});
+
+router.post('/roles', (req, res) => {
+    const rol = req.body?.rol;
+    if (rol !== 'trabajador' && rol !== 'empleador') {
+        return res.status(400).json({
+            error: 'El perfil debe ser trabajador o empleador.'
+        });
+    }
+
+    const usuario = db.prepare(
+        'SELECT id FROM usuarios WHERE id = ?'
+    ).get(req.usuarioId);
+    if (!usuario) {
+        return res.status(401).json({
+            error: 'Debes iniciar sesión.'
+        });
+    }
+
+    db.exec('BEGIN IMMEDIATE');
+    try {
+        db.prepare(`
+            INSERT OR IGNORE INTO usuario_roles (usuario_id, rol)
+            VALUES (?, ?)
+        `).run(req.usuarioId, rol);
+
+        const tablaPerfil = rol === 'trabajador'
+            ? 'perfiles_trabajador'
+            : 'perfiles_empleador';
+        db.prepare(`
+            INSERT OR IGNORE INTO ${tablaPerfil} (usuario_id)
+            VALUES (?)
+        `).run(req.usuarioId);
+
+        db.exec('COMMIT');
+    } catch (error) {
+        db.exec('ROLLBACK');
+        throw error;
+    }
+
+    return res.status(200).json({
+        mensaje: 'Perfil agregado correctamente.',
+        roles: obtenerRoles(req.usuarioId)
+    });
 });
 
 router.put('/', (req, res) => {

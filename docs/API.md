@@ -103,6 +103,26 @@ Ejemplo de respuesta:
 
 Nunca se devuelve `ci` ni `password_hash`.
 
+### `POST /api/perfil/roles`
+
+Requiere `Authorization` con el token JWT de sesión. Agrega un perfil a la cuenta autenticada;
+no crea otro usuario ni solicita de nuevo CI, teléfono o contraseña.
+
+**Envía:**
+```json
+{
+  "rol": "empleador"
+}
+```
+
+La operación es idempotente: si el perfil ya existe, devuelve los roles actuales sin duplicarlos.
+
+| Estado | Cuándo | Respuesta |
+|---|---|---|
+| `200` | Perfil agregado o ya existente | `{ "mensaje": "...", "roles": ["trabajador", "empleador"] }` |
+| `400` | Rol inválido | `{ "error": "..." }` |
+| `401` | Sin sesión o usuario inexistente | `{ "error": "Debes iniciar sesión." }` |
+
 ### `PUT /api/perfil`
 
 Requiere `Authorization` con el token JWT de sesión como credencial Bearer. `rol` identifica

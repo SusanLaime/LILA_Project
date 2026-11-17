@@ -45,12 +45,12 @@ function mostrarPopupCrearPerfil(rolFaltante) {
 
     const esEmpleador = rolFaltante === 'empleador';
     const titulo = esEmpleador
-        ? 'Crea tu perfil de Empleador'
-        : 'Crea tu perfil de Trabajador';
+        ? 'Agrega tu perfil de Empleador'
+        : 'Agrega tu perfil de Trabajador';
     const descripcion = esEmpleador
-        ? 'Aún no tienes una cuenta de empleador activa. Regístrate con ese perfil para publicar ofertas y cambiar de modo.'
-        : 'Aún no tienes una cuenta de trabajador activa. Regístrate con ese perfil para postular a empleos y cambiar de modo.';
-    const urlDestino = '/frontend/auth/register.html';
+        ? 'Este perfil todavía no está asociado a tu cuenta. Regístralo para publicar ofertas y cambiar de modo.'
+        : 'Este perfil todavía no está asociado a tu cuenta. Regístralo para postular a empleos y cambiar de modo.';
+    const urlDestino = `/frontend/auth/register.html?agregarRol=${rolFaltante}`;
 
     const overlay = document.createElement('div');
     overlay.id = 'lila-role-modal';
@@ -78,7 +78,7 @@ function mostrarPopupCrearPerfil(rolFaltante) {
                 <a href="${urlDestino}" style="
                     padding: 10px 20px; border-radius: 999px; background: #6b54a8;
                     color: #ffffff; font-weight: 600; text-decoration: none; display: inline-block;
-                ">Registrarme</a>
+                ">Agregar perfil</a>
             </div>
         </div>
     `;
@@ -97,51 +97,42 @@ function mostrarPopupCrearPerfil(rolFaltante) {
  * Configura el enlace dinámico del logo y el botón de cambio de rol en headerCambio.html.
  */
 async function configurarHeaderCambio(token, rolSugerido) {
-    let tieneTrabajador = false;
-    let tieneEmpleador = false;
-    let rolBackend = rolSugerido || 'trabajador';
-
     const resultado = await pedirApi('/api/perfil', { token });
-    if (resultado.ok && resultado.datos) {
-        const d = resultado.datos;
-        const roles = Array.isArray(d.roles) ? d.roles : [d.rol];
-        rolBackend = d.rol || roles[0] || rolBackend;
-        tieneTrabajador =
-            roles.includes('trabajador') ||
-            d.rol === 'trabajador' ||
-            d.rol === 'ambos' ||
-            Boolean(d.tieneTrabajador || d.perfilTrabajador || d.es_trabajador);
-        tieneEmpleador =
-            roles.includes('empleador') ||
-            d.rol === 'empleador' ||
-            d.rol === 'ambos' ||
-            Boolean(d.tieneEmpleador || d.perfilEmpleador || d.es_empleador);
-    } else {
-        if (rolBackend === 'ambos') {
-            tieneTrabajador = true;
-            tieneEmpleador = true;
-        } else if (rolBackend === 'empleador') {
-            tieneEmpleador = true;
-        } else {
-            tieneTrabajador = true;
+    const textoRol = document.getElementById('texto-rol-actual');
+    const btnCambiar = document.getElementById('btn-cambiar-rol');
+    if (!resultado.ok || !resultado.datos) {
+        console.error('No se pudieron consultar los perfiles de la cuenta:', resultado.datos?.error);
+        if (textoRol) textoRol.textContent = 'Error al cargar perfil';
+        if (btnCambiar) {
+            btnCambiar.disabled = true;
+            btnCambiar.title = resultado.datos?.error || 'No se pudieron verificar tus perfiles.';
         }
+        return;
     }
 
-    let rolActivo = localStorage.getItem('lila_rol_activo');
+    const datosPerfil = resultado.datos;
+    const roles = Array.isArray(datosPerfil.roles)
+        ? datosPerfil.roles
+        : [datosPerfil.rol].filter(rol => rol === 'trabajador' || rol === 'empleador');
+    const tieneTrabajador = roles.includes('trabajador');
+    const tieneEmpleador = roles.includes('empleador');
+    let rolActivo = rolSugerido;
     if (rolActivo !== 'trabajador' && rolActivo !== 'empleador') {
-        rolActivo = rolBackend === 'empleador' ? 'empleador' : 'trabajador';
+        const rolGuardado = localStorage.getItem('lila_rol_activo');
+        rolActivo = roles.includes(rolGuardado) ? rolGuardado : roles[0];
     }
-    if (rolActivo === 'empleador' && !tieneEmpleador && tieneTrabajador) {
-        rolActivo = 'trabajador';
-    }
-    if (rolActivo === 'trabajador' && !tieneTrabajador && tieneEmpleador) {
-        rolActivo = 'empleador';
+    if (rolActivo !== 'trabajador' && rolActivo !== 'empleador') {
+        console.error('La cuenta no tiene un rol válido asociado.');
+        if (textoRol) textoRol.textContent = 'Perfil no disponible';
+        if (btnCambiar) {
+            btnCambiar.disabled = true;
+            btnCambiar.title = 'La cuenta no tiene un perfil válido.';
+        }
+        return;
     }
     localStorage.setItem('lila_rol_activo', rolActivo);
 
     const logoLink = document.getElementById('nav-logo-link');
-    const textoRol = document.getElementById('texto-rol-actual');
-    const btnCambiar = document.getElementById('btn-cambiar-rol');
 
     function actualizarVistaRol(rol) {
         const siguienteRol = rol === 'empleador' ? 'trabajador' : 'empleador';

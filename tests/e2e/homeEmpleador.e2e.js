@@ -11,6 +11,7 @@ import app from '../../backend/server.js';
 
 const RUTA_PANEL = '/frontend/website/homeEmpleador.html';
 const RUTA_PUBLICAR = '/frontend/website/publicarOferta.html';
+const RUTA_TRABAJADOR = '/frontend/website/homeTrabajador.html';
 
 let server;
 let baseUrl;
@@ -139,6 +140,104 @@ describe('Carga de la página', () => {
     if (await badge.count()) {
       assert.equal((await badge.textContent()).trim(), 'EMPLEADOR');
     }
+  });
+
+  test('el encabezado del trabajador ofrece cambiar al perfil de empleador aunque el rol guardado esté desactualizado', async () => {
+    await page.addInitScript(() => {
+      localStorage.setItem('lila_token', 'token-de-prueba');
+      localStorage.setItem('lila_rol_activo', 'empleador');
+    });
+    await page.route('**/api/perfil*', route => route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ rol: 'trabajador', roles: ['trabajador', 'empleador'] })
+    }));
+
+    await page.goto(baseUrl + RUTA_TRABAJADOR);
+    await page.waitForFunction(() =>
+      document.querySelector('#texto-rol-actual')?.textContent.trim() === 'Empleador');
+
+    assert.equal((await page.textContent('#texto-rol-actual')).trim(), 'Empleador');
+    assert.equal(await page.getAttribute('#btn-cambiar-rol', 'title'), 'Cambiar a Empleador');
+    assert.equal(await page.evaluate(() => localStorage.getItem('lila_rol_activo')), 'trabajador');
+  });
+
+  test('desde el panel trabajador, el cambio lleva al empleador si solo existe ese perfil', async () => {
+    await page.addInitScript(() => {
+      localStorage.setItem('lila_token', 'token-de-prueba');
+      localStorage.setItem('lila_rol_activo', 'empleador');
+    });
+    await page.route('**/api/perfil*', route => route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ rol: 'empleador', roles: ['empleador'] })
+    }));
+
+    await page.goto(baseUrl + RUTA_TRABAJADOR);
+    await page.waitForFunction(() =>
+      document.querySelector('#texto-rol-actual')?.textContent.trim() === 'Empleador');
+    await Promise.all([
+      page.waitForURL(`**${RUTA_PANEL}`),
+      page.click('#btn-cambiar-rol')
+    ]);
+
+    assert.equal(page.url().endsWith(RUTA_PANEL), true);
+    assert.equal(await page.locator('#lila-role-modal').count(), 0);
+  });
+
+  test('el registro agrega el perfil faltante a la cuenta actual y abre su panel', async () => {
+    await page.addInitScript(() => {
+      localStorage.setItem('lila_token', 'token-de-prueba');
+      localStorage.setItem('lila_rol_activo', 'trabajador');
+    });
+    await page.route(url => new URL(url).pathname.startsWith('/api/perfil'), route => {
+      if (route.request().method() === 'POST') {
+        return route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify({
+            mensaje: 'Perfil agregado correctamente.',
+            roles: ['trabajador', 'empleador']
+          })
+        });
+      }
+
+      const esPanelEmpleador = page.url().endsWith(RUTA_PANEL);
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          rol: esPanelEmpleador ? 'empleador' : 'trabajador',
+          roles: esPanelEmpleador ? ['trabajador', 'empleador'] : ['trabajador']
+        })
+      });
+    });
+
+    await page.goto(baseUrl + RUTA_TRABAJADOR);
+    await page.waitForFunction(() =>
+      document.querySelector('#texto-rol-actual')?.textContent.trim() === 'Empleador');
+    await page.click('#btn-cambiar-rol');
+    assert.equal(await page.textContent('#lila-role-modal a'), 'Agregar perfil');
+    await Promise.all([
+      page.waitForURL(url =>
+        url.pathname.endsWith('/frontend/auth/register.html') &&
+        url.searchParams.get('agregarRol') === 'empleador'),
+      page.click('#lila-role-modal a')
+    ]);
+
+    assert.equal(await page.textContent('#registro-titulo'), 'Agregar perfil de Empleador');
+    assert.equal(await page.locator('#registroForm').isHidden(), true);
+    const respuestaAgregar = page.waitForResponse(
+      response => new URL(response.url()).pathname.endsWith('/api/perfil/roles'),
+      { timeout: 5000 }
+    );
+    await page.click('#agregar-perfil-submit');
+    const respuesta = await respuestaAgregar;
+    assert.equal(respuesta.status(), 200);
+    await page.waitForURL(url => url.pathname.endsWith(RUTA_PANEL));
+
+    assert.equal(await page.evaluate(() => localStorage.getItem('lila_rol_activo')), 'empleador');
+    assert.equal(await page.locator('#lila-role-modal').count(), 0);
   });
 
   test('el KPI "Ofertas activas" coincide con las ofertas activas listadas', async () => {

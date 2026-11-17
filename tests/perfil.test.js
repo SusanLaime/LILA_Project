@@ -77,12 +77,79 @@ test('GET perfil requiere sesión y devuelve roles y perfil activo', async () =>
 
   const resultado = await pedirPerfil();
   assert.equal(resultado.response.status, 200);
+  assert.equal(resultado.response.headers.get('cache-control'), 'no-store');
   assert.deepEqual(resultado.body.roles, ['trabajador']);
   assert.equal(resultado.body.rol, 'trabajador');
   assert.equal(resultado.body.ciudad, 'La Paz');
   assert.equal(resultado.body.perfiles.trabajador.experiencia, 'Un año');
   assert.equal('ci' in resultado.body, false);
   assert.equal('password_hash' in resultado.body, false);
+});
+
+test('POST perfil roles requiere sesión y agrega el rol faltante a la misma cuenta', async () => {
+  const anonimo = await fetch(`${url}/roles`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ rol: 'empleador' })
+  });
+  assert.equal(anonimo.status, 401);
+  const rolInvalido = await fetch(`${url}/roles`, {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ rol: 'admin' })
+  });
+  assert.equal(rolInvalido.status, 400);
+
+  const nuevoUsuarioId = Number(db.prepare(`
+    INSERT INTO usuarios (
+      nombre, ci, telefono, password_hash, rol, consentimiento_fecha
+    )
+    VALUES (?, ?, ?, ?, ?, ?)
+  `).run(
+    'Luis Prueba',
+    '1234568',
+    '70000002',
+    'hash-solo-pruebas',
+    'trabajador',
+    new Date().toISOString()
+  ).lastInsertRowid);
+  db.prepare(
+    'INSERT INTO usuario_roles (usuario_id, rol) VALUES (?, ?)'
+  ).run(nuevoUsuarioId, 'trabajador');
+  db.prepare(
+    'INSERT INTO perfiles_trabajador (usuario_id) VALUES (?)'
+  ).run(nuevoUsuarioId);
+
+  const tokenUsuario = crearToken({ id: nuevoUsuarioId });
+  const pedirAgregarRol = () => fetch(`${url}/roles`, {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + tokenUsuario,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ rol: 'empleador' })
+  });
+  const agregado = await pedirAgregarRol();
+  const cuerpoAgregado = await agregado.json();
+  assert.equal(agregado.status, 200, cuerpoAgregado.error);
+  assert.deepEqual(cuerpoAgregado.roles, ['trabajador', 'empleador']);
+  assert.ok(db.prepare(
+    'SELECT usuario_id FROM perfiles_empleador WHERE usuario_id = ?'
+  ).get(nuevoUsuarioId));
+  assert.equal(db.prepare(
+    'SELECT COUNT(*) AS total FROM usuarios WHERE id = ?'
+  ).get(nuevoUsuarioId).total, 1);
+
+  const repetido = await pedirAgregarRol();
+  const cuerpoRepetido = await repetido.json();
+  assert.equal(repetido.status, 200);
+  assert.deepEqual(cuerpoRepetido.roles, ['trabajador', 'empleador']);
+  assert.equal(db.prepare(
+    'SELECT COUNT(*) AS total FROM usuario_roles WHERE usuario_id = ? AND rol = ?'
+  ).get(nuevoUsuarioId, 'empleador').total, 1);
 });
 
 test('PUT perfil no permite modificar roles no asignados', async () => {
