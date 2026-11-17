@@ -12,7 +12,7 @@
     <title>LILA — Publicar oferta</title>
 </head>
 <body>
-    <main class="role-home">
+    <main class="role-home offer-publish-page">
         <div id="header-placeholder"></div>
         <section class="role-content employer-layout" aria-labelledby="employer-title">
             <header class="role-header">
@@ -59,7 +59,11 @@
     <script type="module">
         import { initFooter, initHeader } from '../assets/js/components.js';
         import { guardarOferta } from '../assets/js/ofertas.js';
-        initHeader('', 'empleador');
+        await initHeader('', 'empleador');
+        const backLink = document.querySelector('#header-placeholder .nav-home-back');
+        if (backLink) {
+            backLink.href = '/frontend/website/homeEmpleador.html';
+        }
         initFooter();
         const backToTop = document.querySelector('.back-to-top');
         window.addEventListener('scroll', () => backToTop.classList.toggle('is-visible', window.scrollY > 320), { passive: true });

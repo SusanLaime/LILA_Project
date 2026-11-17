@@ -1,10 +1,19 @@
 <header class="navbar-cambio">
   <div class="navbar-container">
 
-    <!-- Logo: su href cambia dinámicamente según el rol activo -->
-    <a href="/frontend/homeTrabajador.html" id="nav-logo-link" class="nav-brand">
-      <img src="/frontend/images/L-logo-oficial.png" alt="LILA Logo" class="nav-logo-img">
-    </a>
+    <div class="nav-leading">
+      <a class="nav-home-back" href="/frontend/index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 12H5m7 7-7-7 7-7"></path>
+        </svg>
+        <span>Volver</span>
+      </a>
+
+      <!-- Logo: su href cambia dinámicamente según el rol activo -->
+      <a href="/frontend/homeTrabajador.html" id="nav-logo-link" class="nav-brand">
+        <img src="/frontend/images/L-logo-oficial.png" alt="LILA Logo" class="nav-logo-img">
+      </a>
+    </div>
 
     <!-- Zona Derecha: Botón de cambio de rol + Avatar -->
     <div class="nav-actions">
@@ -15,7 +24,7 @@
           <polyline points="7 23 3 19 7 15"></polyline>
           <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
         </svg>
-        <span id="texto-rol-actual">Trabajador</span>
+        <span id="texto-rol-actual">Cambiar perfil</span>
       </button>
 
       <!-- Avatar: siempre lleva a perfilTrabajador -->

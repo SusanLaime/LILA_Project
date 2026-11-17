@@ -1,43 +1,16 @@
 .employer-dashboard {
     --home-morado-oscuro: #272348;
     --home-morado: #5b4b8a;
+    --home-morado-claro: #8a74c9;
     --home-lila-claro: var(--LILA-primitives-purple-lavender);
     --home-lila-borde: #d6cee2;
+    background: var(--role-page-bg, #efe8fb);
 }
 
 .employer-dashboard .role-content {
-    background: #fff;
+    background: transparent;
     padding-right: 10px;
     padding-left: 10px;
-}
-
-.employer-back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 16px;
-    padding: 8px 0;
-    border: 0;
-    background: transparent;
-    color: var(--home-morado-oscuro);
-    cursor: pointer;
-    font: inherit;
-    font-weight: 600;
-}
-
-.employer-back-button svg {
-    width: 20px;
-    height: 20px;
-    fill: none;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 2;
-}
-
-.employer-back-button:focus-visible {
-    outline: 2px solid var(--home-morado);
-    outline-offset: 3px;
 }
 
 .employer-dashboard .dashboard-welcome > div {
@@ -106,7 +79,7 @@
 
 .employer-dashboard .employer-kpi-copy > span {
     color: #6d6b7c;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.35;
 }
 
@@ -142,13 +115,13 @@
     margin: 0;
     padding: 24px;
     border-radius: 20px;
-    background: #fff;
+    background: var(--role-surface, #fff);
 }
 
 .employer-history-panel {
     padding: 24px;
     border-radius: 20px;
-    background: #fff;
+    background: var(--role-surface, #fff);
 }
 
 .employer-history-heading {
@@ -216,7 +189,7 @@
     padding: 12px;
     border: 1px solid #e9e6ee;
     border-radius: 14px;
-    background: #fff;
+    background: var(--home-lila-claro);
     box-shadow: none;
 }
 
@@ -236,7 +209,7 @@
 .past-posts .employer-post-card h3 {
     overflow: hidden;
     color: var(--home-morado-oscuro);
-    font-size: 14px;
+    font-size: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -245,7 +218,7 @@
     min-height: 0;
     margin-top: 4px;
     color: #6d6b7c;
-    font-size: 11px;
+    font-size: 16px;
     line-height: 1.4;
 }
 
@@ -254,21 +227,21 @@
     padding: 4px 9px;
     background: #f0eef4;
     color: #646575;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .past-posts .post-metrics {
     justify-content: flex-end;
     gap: 12px;
     color: #6d6b7c;
-    font-size: 10px;
+    font-size: 12px;
     white-space: nowrap;
 }
 
 .past-posts .post-metrics strong {
     display: inline;
     color: var(--home-morado-oscuro);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .past-posts .post-actions {
@@ -279,7 +252,7 @@
     padding: 6px 9px;
     border-color: var(--home-lila-borde);
     color: var(--home-morado);
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .past-posts .post-actions button:first-child {
@@ -302,13 +275,13 @@
 }
 
 .employer-dashboard-grid .dashboard-section-heading h2 {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .employer-panel-heading > div > p {
     margin-top: 5px;
     color: #6d6b7c;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.5;
 }
 
@@ -328,7 +301,7 @@
     gap: 5px;
     min-width: 0;
     color: #6d6b7c;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 .employer-offer-filters select,
@@ -342,7 +315,7 @@
     background: #fff;
     color: var(--home-morado-oscuro);
     font: inherit;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .employer-offer-filters select:focus-visible,
@@ -384,7 +357,7 @@
     padding: 12px;
     border: 1px solid #e9e6ee;
     border-radius: 14px;
-    background: #fff;
+    background: var(--home-lila-claro);
     box-shadow: none;
 }
 
@@ -436,7 +409,7 @@
 #active-posts .employer-post-card h3 {
     overflow: hidden;
     color: var(--home-morado-oscuro);
-    font-size: 14px;
+    font-size: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -445,7 +418,7 @@
     min-height: 0;
     margin-top: 4px;
     color: #6d6b7c;
-    font-size: 11px;
+    font-size: 16px;
     line-height: 1.4;
 }
 
@@ -453,7 +426,7 @@
     display: block;
     margin-top: 4px;
     color: #858796;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 #active-posts .post-status {
@@ -461,7 +434,7 @@
     padding: 4px 9px;
     background: var(--home-lila-claro);
     color: var(--home-morado);
-    font-size: 10px;
+    font-size: 12px;
 }
 
 #active-posts .post-status.paused {
@@ -478,14 +451,14 @@
     justify-content: flex-end;
     gap: 12px;
     color: #6d6b7c;
-    font-size: 10px;
+    font-size: 12px;
     white-space: nowrap;
 }
 
 #active-posts .post-metrics strong {
     display: inline;
     color: var(--home-morado-oscuro);
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #active-posts .post-actions {
@@ -496,7 +469,7 @@
     padding: 6px 9px;
     border-color: var(--home-lila-borde);
     color: var(--home-morado);
-    font-size: 10px;
+    font-size: 12px;
 }
 
 #active-posts .post-actions button:first-child {
@@ -519,7 +492,7 @@
     padding: 20px;
     border: 1px solid #e9e6ee;
     border-radius: 20px;
-    background: #fff;
+    background: var(--role-surface, #fff);
 }
 
 .employer-side-heading {
@@ -532,14 +505,14 @@
 
 .employer-side-heading h2 {
     color: var(--home-morado-oscuro);
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.3;
 }
 
 .employer-side-heading a {
     flex: 0 0 auto;
     color: var(--home-morado);
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     text-decoration: none;
 }
@@ -572,7 +545,7 @@
     border-radius: 50%;
     background: var(--home-lila-claro);
     color: var(--home-morado);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
 }
 
@@ -585,7 +558,7 @@
 .employer-applicant-info strong {
     overflow: hidden;
     color: var(--home-morado-oscuro);
-    font-size: 11px;
+    font-size: 13px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -593,14 +566,14 @@
 .employer-applicant-info small {
     overflow: hidden;
     color: #6d6b7c;
-    font-size: 10px;
+    font-size: 12px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .employer-applicant-list time {
     color: #858796;
-    font-size: 9px;
+    font-size: 12px;
     white-space: nowrap;
 }
 
@@ -609,7 +582,7 @@
     padding-top: 10px;
     border-top: 1px solid #e9e6ee;
     color: #858796;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.4;
 }
 

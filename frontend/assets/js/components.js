@@ -64,7 +64,7 @@ function mostrarPopupCrearPerfil(rolFaltante) {
         <div role="dialog" aria-modal="true" style="
             background: #ffffff; border-radius: 16px; max-width: 420px; width: 100%;
             padding: 28px 24px; box-shadow: 0 20px 45px rgba(0,0,0,0.2);
-            text-align: center; font-family: inherit;
+            text-align: center; font-family: "Poppins", sans-serif;
         ">
             <h3 style="margin: 0 0 10px; color: #272348; font-size: 1.3rem;">${titulo}</h3>
             <p style="margin: 0 0 22px; color: #56526d; font-size: 0.95rem; line-height: 1.5;">
@@ -144,8 +144,12 @@ async function configurarHeaderCambio(token, rolSugerido) {
     const btnCambiar = document.getElementById('btn-cambiar-rol');
 
     function actualizarVistaRol(rol) {
+        const siguienteRol = rol === 'empleador' ? 'trabajador' : 'empleador';
         if (textoRol) {
-            textoRol.textContent = rol === 'empleador' ? 'Empleador' : 'Trabajador';
+            textoRol.textContent = siguienteRol === 'empleador' ? 'Empleador' : 'Trabajador';
+        }
+        if (btnCambiar) {
+            btnCambiar.title = `Cambiar a ${siguienteRol === 'empleador' ? 'Empleador' : 'Trabajador'}`;
         }
         if (logoLink) {
             logoLink.setAttribute(

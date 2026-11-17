@@ -1,19 +1,31 @@
 .role-home {
+    --role-page-bg: #efe8fb;
+    --role-surface: #ffffff;
+    --role-text: #272348;
+    --role-primary: #5b4b8a;
+    --role-accent: #8a74c9;
+    --role-border: #d6cee2;
     width: 100%;
-    background: #f3f5fa;
+    background: var(--role-page-bg);
     color: var(--LILA-semantic-color-text-primary);
-    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
+}
+
+.role-home > #header-placeholder {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .role-home h1,
 .role-home h2 {
-    font-family: "Poppins-Bold", Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .role-home a,
 .role-home button,
 .role-home .role-label {
-    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .role-home .lila-header-brand {
@@ -25,6 +37,10 @@
 .role-home .role-content {
     width: 100%;
     margin: 0;
+}
+
+.role-home .home-eyebrow {
+    color: var(--role-primary);
 }
 
 .role-content {
@@ -733,6 +749,15 @@
     gap: 16px;
 }
 
+.offer-publish-page .offer-form {
+    padding: 32px;
+}
+
+.offer-publish-page .role-content {
+    padding-right: 32px;
+    padding-left: 32px;
+}
+
 .offer-form h2 {
     color: var(--LILA-primitives-purple-brand);
 }
@@ -752,7 +777,7 @@
     border: 1px solid var(--LILA-semantic-color-border-default);
     border-radius: var(--LILA-primitives-radius-sm);
     background: #fff;
-    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .offer-form textarea {
@@ -773,6 +798,11 @@
 
 @media (max-width: 720px) {
     .role-content { padding: 24px 0 60px; }
+    .offer-publish-page .offer-form { padding: 24px 20px; }
+    .offer-publish-page .role-content {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
     .worker-toolbar,
     .worker-layout,
     .offer-grid,

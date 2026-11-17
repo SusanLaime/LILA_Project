@@ -15,15 +15,20 @@ body {
     position: relative;
 }
 
-.bienvenida-mvil.auth-layout > section {
-    padding-top: 76px;
+.auth-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding: 8px 24px;
+    border-bottom: 1px solid rgba(39, 35, 72, 0.08);
+    background: #f2edfa;
 }
 
 .auth-back-link {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 1;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -61,7 +66,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 .bienvenida-mvil header {
@@ -70,6 +75,12 @@ body {
     display: flex;
     justify-content: center;
     padding: 60px 0 40px 0; 
+}
+
+.bienvenida-mvil .auth-header {
+    justify-content: flex-start;
+    padding: 8px 24px;
+    background: #f2edfa;
 }
 
 .bienvenida-mvil .fondo-lavanda {

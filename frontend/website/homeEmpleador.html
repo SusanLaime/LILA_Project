@@ -16,10 +16,6 @@
     <main class="role-home employer-dashboard">
         <div id="header-placeholder"></div>
         <section class="role-content" aria-labelledby="employer-title">
-            <button class="employer-back-button" id="employer-back-button" type="button">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m7 7-7-7 7-7"/></svg>
-                <span>Volver</span>
-            </button>
             <header class="dashboard-welcome">
                 <div>
                     <span class="home-eyebrow">Panel del empleador</span>
@@ -241,14 +237,6 @@
         import { obtenerOfertas, obtenerEstados, guardarEstado, normalizarTexto } from '../assets/js/ofertas.js';
         initHeader('', 'empleador');
         initFooter();
-
-        document.getElementById('employer-back-button').addEventListener('click', () => {
-            if (window.history.length > 1) {
-                window.history.back();
-                return;
-            }
-            window.location.assign('/frontend/index.html');
-        });
 
         const activePostsContainer = document.getElementById('active-posts');
         const postTemplate = document.getElementById('employer-post-template');

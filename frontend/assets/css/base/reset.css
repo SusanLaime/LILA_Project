@@ -16,7 +16,7 @@
 html, body {
     width: 100%;
     min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: clip; /* Prevent horizontal scrolling without creating a scroll container */
     background-color: var(--LILA-semantic-color-bg-canvas, #ffffff);
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;

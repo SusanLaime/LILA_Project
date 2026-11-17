@@ -1,9 +1,12 @@
 .navbar-auth {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     width: 100%;
     max-width: none;
     margin: 0;
     background-color: #f3effa;
-    padding: 12px 24px;
+    padding: 12px 32px;
     border-bottom: 1px solid rgba(39, 35, 72, 0.06);
 }
 
@@ -12,15 +15,53 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
+        max-width: none;
+        margin: 0;
         gap: 16px;
+    }
+
+    .navbar-auth .nav-leading {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        min-width: 0;
     }
 
     .navbar-auth .nav-brand {
         display: flex;
         align-items: center;
         text-decoration: none;
+    }
+
+    .role-home .navbar-auth .nav-home-back {
+        display: inline-flex;
+    }
+
+    .navbar-auth .nav-home-back {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 0;
+        color: #272348;
+        font: inherit;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .navbar-auth .nav-home-back svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2;
+    }
+
+    .navbar-auth .nav-home-back:focus-visible {
+        outline: 2px solid #6b54a8;
+        outline-offset: 3px;
     }
 
     .navbar-auth .nav-logo-img {
