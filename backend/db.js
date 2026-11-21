@@ -1,6 +1,6 @@
 // =====================================================================
 // DUEÑA/O: Natalia Arze — Base de datos
-// Responsables: README.md (sección Equipo)  ·  Modelo de datos: docs/API.md
+// db.js — Abre la base de datos SQLite, crea las tablas, carga datos de prueba y comparte una sola conexión con todo el backend.
 // =====================================================================
 // Regla para todo el equipo: usar SIEMPRE consultas preparadas (db.prepare("... ?")),
 // nunca concatenar datos del usuario dentro del SQL (evita inyección SQL).
@@ -42,6 +42,8 @@ db.exec(esquema);
 
 /* =====================================================
    Actualización automática del perfil del trabajador
+   Las bases creadas antes no tenían las columnas género y edad;
+   aquí se agregan solo si faltan, sin borrar datos.
    ===================================================== */
 
 // Consultar las columnas existentes en usuarios
@@ -78,6 +80,10 @@ if (resultado.total === 0) {
 }
 
 // Migrar las cuentas existentes a roles y perfiles separados sin borrar datos.
+// Copia el rol de cada usuario a usuario_roles y sus datos de perfil a
+// perfiles_trabajador o perfiles_empleador. "OR IGNORE" evita duplicar lo que ya se copió,
+// así que es seguro repetirlo cada vez que arranca el servidor.
+// Si algo falla, se deshace todo (ROLLBACK).
 db.exec('BEGIN');
 try {
   db.exec(`

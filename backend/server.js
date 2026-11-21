@@ -1,7 +1,6 @@
 
 /* =====================================================================
- * Servidor principal de LILA
- * Frontend y rutas de registro, inicio de sesión y perfil.
+ * server.js — Servidor principal de LILA: arranca Express, entrega las páginas del frontend y conecta las rutas de registro, inicio de sesión y perfil.
  * ===================================================================== */
 
 import express from 'express';
@@ -18,6 +17,8 @@ import { validarConfiguracionJwt } from './seguridad.js';
 // CONFIGURACIÓN DE DIRECTORIOS
 // =====================================================================
 
+// carpetaActual = backend/ · raiz = carpeta principal del proyecto.
+// Se usan para encontrar la carpeta frontend/ sin importar desde dónde se arranque.
 const carpetaActual = dirname(fileURLToPath(import.meta.url));
 const raiz = resolve(carpetaActual, '..');
 
@@ -27,9 +28,11 @@ const raiz = resolve(carpetaActual, '..');
 
 const app = express();
 
-// Permitir recibir datos JSON
+// Permitir recibir datos JSON (máximo 20 KB por petición)
 app.use(express.json({ limit: '20kb' }));
 
+// Direcciones antiguas de páginas que se movieron de carpeta.
+// Si alguien entra a una dirección vieja, lo envía a la nueva (301 = cambio permanente).
 const redireccionesFrontend = {
   '/frontend/website/index.html': '/frontend/index.html',
   '/frontend/homeTrabajador.html': '/frontend/website/homeTrabajador.html',
@@ -42,7 +45,7 @@ app.get(Object.keys(redireccionesFrontend), (req, res) => {
   return res.redirect(301, redireccionesFrontend[req.path]);
 });
 
-// Servir los archivos del frontend
+// Servir los archivos del frontend (HTML, CSS, JS e imágenes) bajo /frontend/...
 app.use('/frontend', express.static(resolve(raiz, 'frontend')));
 
 // =====================================================================
@@ -62,10 +65,12 @@ app.use('/api/perfil', perfilRouter);
 // RUTA PRINCIPAL
 // =====================================================================
 
+// /frontend/index.html muestra la página de inicio, que en realidad está en website/index.html
 app.get('/frontend/index.html', (req, res) => {
   return res.sendFile(resolve(raiz, 'frontend', 'website', 'index.html'));
 });
 
+// Al abrir http://localhost:3000 se envía al usuario a la página de inicio
 app.get('/', (req, res) => {
   return res.redirect('/frontend/index.html');
 });
@@ -74,6 +79,8 @@ app.get('/', (req, res) => {
 // MANEJO DE RUTAS NO ENCONTRADAS
 // =====================================================================
 
+// Si piden una dirección /api/... que no existe, responde 404 en JSON
+// (para que el frontend pueda leer el error). Las demás pasan de largo.
 app.use((req, res, next) => {
   if (req.path.startsWith('/api/')) {
     return res.status(404).json({
@@ -88,6 +95,9 @@ app.use((req, res, next) => {
 // MANEJO GLOBAL DE ERRORES
 // =====================================================================
 
+// Atrapa cualquier error que no se manejó en las rutas.
+// Si el JSON enviado está mal escrito responde 400; para todo lo demás, 500.
+// El detalle del error solo se muestra en la consola, nunca al usuario.
 app.use((error, req, res, next) => {
   if (res.headersSent) {
     return next(error);
@@ -115,6 +125,7 @@ app.use((error, req, res, next) => {
 // EXPORTACIÓN PARA PRUEBAS
 // =====================================================================
 
+// Los tests importan "app" para probar las rutas sin tener que encender el servidor.
 export { app };
 export default app;
 
@@ -122,6 +133,8 @@ export default app;
 // INICIO DEL SERVIDOR
 // =====================================================================
 
+// Solo enciende el servidor si este archivo se ejecutó directamente (npm start).
+// Si lo importa un test, no lo enciende.
 const archivoEjecutado = process.argv[1]
   ? pathToFileURL(resolve(process.argv[1])).href
   : null;

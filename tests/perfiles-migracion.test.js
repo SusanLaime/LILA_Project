@@ -1,3 +1,5 @@
+// Tests that db.js moves old accounts to the new roles and profiles tables without losing any data.
+// Prueba que db.js pasa las cuentas antiguas a las nuevas tablas de roles y perfiles sin perder datos.
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, rmSync } from 'node:fs';

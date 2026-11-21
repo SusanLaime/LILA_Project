@@ -1,6 +1,5 @@
 // =====================================================================
-// DUEÑA/O: Joaquín Peredo — Inicio de sesión
-// Responsables: README.md (sección Equipo)  ·  Contrato: docs/API.md
+// login.js — Ruta POST /api/login: verifica carnet y contraseña y entrega el token de sesión.
 // =====================================================================
 
 import express from 'express';
@@ -10,7 +9,11 @@ import { crearToken, verificarPassword } from '../seguridad.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+// POST /api/login — Inicia la sesión del usuario.
+// Revisa que el carnet y la contraseña sean válidos, busca al usuario por su carnet
+// y compara la contraseña. Si todo está bien, obtiene sus roles y le entrega un token.
+// Si el carnet o la contraseña no coinciden, responde con un mensaje de error.
+router.post('/', async (req, res) => { 
   const datos = req.body ?? {};
   const validacion = validarLogin(datos);
 

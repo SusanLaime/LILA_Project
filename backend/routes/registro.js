@@ -1,7 +1,6 @@
 // =====================================================================
+// registro.js — Ruta POST /api/registro: crea una cuenta nueva (trabajador, empleador o ambos) y la guarda en la base de datos.
 // DUEÑA/O: Natalia Arze — Registro (CA-02)
-// Responsables: README.md (sección Equipo)  ·  Contrato: docs/API.md (POST /api/registro)
-// Criterio de aceptación: CA-02 (README.md)
 // =====================================================================
 
 //Este código depende de las funciones validarRegistro() de Susan 
@@ -15,6 +14,10 @@ import { hashPassword } from '../seguridad.js';
 
 const router = express.Router();
 
+// POST /api/registro — Registra a un usuario nuevo.
+// Revisa los datos del formulario, rechaza el registro si el carnet o el teléfono
+// ya existen, guarda la contraseña protegida (hash) y crea la cuenta con sus roles
+// y sus perfiles vacíos. Todo se guarda junto: si un paso falla, no se guarda nada.
 router.post('/', async (req, res) => {
   try {
     const datos = req.body ?? {};

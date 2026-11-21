@@ -1,3 +1,5 @@
+/* Shared styles for both role home pages and the publish-offer page: dashboard sections, offer cards, filters, offer detail window and offer form. */
+/* Estilos compartidos de las páginas de inicio de ambos roles y de publicar oferta: secciones del panel, tarjetas de ofertas, filtros, ventana de detalle de oferta y formulario de oferta. */
 .role-home,
 .offer-modal {
     --role-primary: #5b4b8a;

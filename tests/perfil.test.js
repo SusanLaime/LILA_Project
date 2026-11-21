@@ -1,3 +1,5 @@
+// Tests /api/perfil: it requires a session, returns the roles and active profile, adds a missing role, blocks editing roles the user does not have, and keeps worker and employer data separate.
+// Prueba /api/perfil: exige sesión, devuelve los roles y el perfil activo, agrega un rol faltante, impide editar roles que el usuario no tiene y mantiene separados los datos de trabajador y empleador.
 import test, { after } from 'node:test';
 import assert from 'node:assert/strict';
 

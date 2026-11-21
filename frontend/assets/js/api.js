@@ -1,5 +1,6 @@
 // =====================================================================
-// DUEÑA/O: Joaquín Peredo — Comunicación con el servidor (pedirApi)
+// Single helper the pages use to call the backend API: sends the request with JSON and the session token, and always returns { ok, estado, datos }.
+// Función única que usan las páginas para llamar a la API del backend: envía la petición con JSON y el token de sesión, y siempre devuelve { ok, estado, datos }.
 // Responsables: README.md (sección Equipo)  ·  Contrato con el backend: docs/API.md
 // Primera versión generada con ayuda de IA (ver README.md, sección Uso de IA):
 // revisarla, entenderla y adaptarla es parte de la tarea.

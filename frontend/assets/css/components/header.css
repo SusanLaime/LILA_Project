@@ -1,3 +1,5 @@
+/* Base navbar styles (logo, search bar and avatar) linked by the home, profile and publish-offer pages; components.js replaces it with navbarauth.css or navbarcambio.css when the header loads. */
+/* Estilos base de la barra de navegación (logo, buscador y avatar) que enlazan las páginas de inicio, perfil y publicar oferta; components.js la reemplaza por navbarauth.css o navbarcambio.css al cargar el encabezado. */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {

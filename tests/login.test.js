@@ -1,4 +1,6 @@
 // =====================================================================
+// Tests POST /api/login: correct login returns an 8-hour token and the user's roles, wrong password and unknown CI get the same answer, and missing data is rejected.
+// Prueba POST /api/login: el login correcto devuelve un token de 8 horas y los roles del usuario, la contraseña incorrecta y el CI inexistente reciben la misma respuesta, y se rechazan datos faltantes.
 // Pruebas de inicio de sesión con SQLite en memoria.
 // =====================================================================
 

@@ -1,6 +1,7 @@
 // components.js
 // Carga los componentes compartidos (encabezado y pie de página) en cada pantalla.
-// DUEÑA/O: Joaquín Peredo — Navbar y footer. Ver README.md (sección Equipo)
+// Loads the shared header and footer into each page, picks the visitor or logged-in navbar, sets up the Volver links and the role-switch button.
+// Carga el encabezado y el pie de página compartidos en cada página, elige la barra para visitantes o para usuarios con sesión, y configura los enlaces Volver y el botón para cambiar de rol.
 
 import { obtenerToken } from './sesion.js';
 import { pedirApi } from './api.js';

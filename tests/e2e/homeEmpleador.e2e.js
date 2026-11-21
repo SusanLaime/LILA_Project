@@ -1,5 +1,7 @@
 /* =====================================================================
  * Pruebas E2E de la página homeEmpleador.html (panel del empleador)
+ * End-to-end tests that open the real pages in Chrome or Edge: page load, header and Volver button, role switching, publishing offers, filters and the employer panel.
+ * Pruebas de punta a punta que abren las páginas reales en Chrome o Edge: carga de la página, encabezado y botón Volver, cambio de rol, publicar ofertas, filtros y el panel del empleador.
  * Ejecutar con: npm run test:e2e
  * Usa el Chrome (o Edge) instalado en el equipo mediante playwright-core.
  * ===================================================================== */

@@ -1,12 +1,23 @@
-/* DUEÑA/O: Susan Laime — Estilos globales: colores y letras (los usan todas las pantallas). */
+/* Susan Laime — Estilos globales: colores y letras (los usan todas las pantallas). */
+/* Loads the Poppins font and defines LILA's design variables (text styles, colors, spacing and corner radius) that every page reuses. */
+/* Carga la letra Poppins y define las variables de diseño de LILA (estilos de texto, colores, espacios y bordes redondeados) que reutilizan todas las páginas. */
+
+/* Load the Poppins font from Google Fonts (weights 400, 500, 600 and 700). */
+/* Carga la letra Poppins desde Google Fonts (grosores 400, 500, 600 y 700). */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+/* Use Poppins for the whole page. */
+/* Usa Poppins en toda la página. */
 html,
 body {
     font-family: "Poppins", sans-serif;
 }
 
+/* Design variables. Pages use them with var(--name) instead of repeating values. */
+/* Variables de diseño. Las páginas las usan con var(--nombre) en vez de repetir valores. */
 :root {
+    /* Text styles: large title (28px), title (22px), body (14px), action/buttons (14px, medium weight) and detail/small text (12px). */
+    /* Estilos de texto: título grande (28px), título (22px), cuerpo (14px), acción/botones (14px, semi-grueso) y detalle/texto pequeño (12px). */
     --LILA-t-tulo-grande-font-family: "Poppins", Helvetica;
     --LILA-t-tulo-grande-font-weight: 700;
     --LILA-t-tulo-grande-font-size: 28px;
@@ -37,7 +48,11 @@ body {
     --LILA-detalle-letter-spacing: 0px;
     --LILA-detalle-line-height: 16px;
     --LILA-detalle-font-style: normal;
+    /* Card shadow. */
+    /* Sombra de las tarjetas. */
     --LILA-elevaci-n-tarjeta: 0px 4px 14px 0px rgba(39, 35, 72, 0.12);
+    /* Base colors (primitives): brand purple, lavender, white, ink, gray, line gray, success green and warning gold. */
+    /* Colores base (primitivos): morado de marca, lavanda, blanco, tinta, gris, gris de líneas, verde de éxito y dorado de advertencia. */
     --LILA-primitives-purple-brand: rgba(39, 35, 72, 1);
     --LILA-primitives-purple-lavender: rgba(242, 237, 250, 1);
     --LILA-primitives-neutral-white: rgba(255, 255, 255, 1);
@@ -46,15 +61,21 @@ body {
     --LILA-primitives-neutral-line: rgba(233, 230, 238, 1);
     --LILA-primitives-status-success: rgba(46, 125, 50, 1);
     --LILA-primitives-status-gold: rgba(243, 184, 32, 1);
+    /* Spacing scale, from extra small (4px) to extra large (32px). */
+    /* Escala de espacios, de muy pequeño (4px) a muy grande (32px). */
     --LILA-primitives-spacing-xs: 4px;
     --LILA-primitives-spacing-sm: 8px;
     --LILA-primitives-spacing-md: 16px;
     --LILA-primitives-spacing-lg: 24px;
     --LILA-primitives-spacing-xl: 32px;
+    /* Corner radius; "full" (999px) makes fully rounded pill shapes. */
+    /* Bordes redondeados; "full" (999px) hace formas de píldora totalmente redondas. */
     --LILA-primitives-radius-sm: 12px;
     --LILA-primitives-radius-md: 18px;
     --LILA-primitives-radius-lg: 24px;
     --LILA-primitives-radius-full: 999px;
+    /* Colors by purpose (semantic): background, buttons, text, borders and status; they point to the base colors, so changing a base color updates the whole app. */
+    /* Colores por uso (semánticos): fondo, botones, texto, bordes y estados; apuntan a los colores base, así que cambiar un color base actualiza toda la app. */
     --LILA-semantic-color-bg-canvas: var(--LILA-primitives-neutral-white);
     --LILA-semantic-color-bg-subtle: var(--LILA-primitives-purple-lavender);
     --LILA-semantic-color-action-primary: var(--LILA-primitives-purple-brand);

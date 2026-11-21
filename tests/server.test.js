@@ -1,3 +1,5 @@
+// Tests server.js: the root address and old links redirect to the right pages, and the website pages and their files are served.
+// Prueba server.js: la dirección principal y los enlaces antiguos redirigen a las páginas correctas, y se entregan las páginas del sitio y sus archivos.
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import app from '../backend/server.js';

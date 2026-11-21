@@ -1,8 +1,8 @@
 // =====================================================================
-// DUEÑA/O: Natalia Arze — Pantalla de registro (trabajador o empleador)
-// Responsables: README.md (sección Equipo)  ·  Contrato con el backend: docs/API.md
-// Primera versión generada con ayuda de IA (ver README.md, sección Uso de IA):
-// revisarla, entenderla y adaptarla es parte de la tarea.
+// Natalia Arze — Pantalla de registro (trabajador o empleador)
+
+// Register page logic: sends the new account to /api/registro, and when the page opens with ?agregarRol it adds a second role to the current account instead.
+// Lógica de la página de registro: envía la cuenta nueva a /api/registro y, cuando la página se abre con ?agregarRol, agrega un segundo rol a la cuenta actual.
 // =====================================================================
 
 import { pedirApi } from './api.js';

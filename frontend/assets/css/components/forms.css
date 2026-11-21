@@ -1,4 +1,6 @@
-/* DUEÑA/O: Natalia Arze — Formularios de inicio de sesión y registro. */
+/* Natalia Arze — Formularios de inicio de sesión y registro. */
+/* Styles for the login and register forms (fields, password toggle, role selector, consent and messages). */
+/* Estilos de los formularios de inicio de sesión y registro (campos, mostrar contraseña, selector de roles, consentimiento y mensajes). */
 /* forms.css */
 .form-group {
     display: flex;

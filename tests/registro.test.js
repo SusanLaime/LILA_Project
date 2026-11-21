@@ -1,6 +1,6 @@
 // =====================================================================
-// Pruebas de registro: validación, alta de trabajador/empleador y duplicados.
-// La ruta usa una base SQLite en memoria; nunca modifica la base de demostración.
+// Tests POST /api/registro: creates worker, employer or dual accounts, and rejects invalid data, missing consent, unknown roles and duplicate CI or phone.
+// Prueba POST /api/registro: crea cuentas de trabajador, empleador o ambos, y rechaza datos inválidos, falta de consentimiento, roles no permitidos y CI o teléfono repetidos.
 // =====================================================================
 
 

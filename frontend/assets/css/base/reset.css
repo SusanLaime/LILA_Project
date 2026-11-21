@@ -1,10 +1,16 @@
-/* DUEÑA/O: Susan Laime — Estilos globales (los usan todas las pantallas). */
+/* Susan Laime — Estilos globales (los usan todas las pantallas). */
 /* 
  * base/reset.css
  * Universal CSS Reset for LILA Application
  * Ensures consistent rendering across all browsers and fixes responsive scaling.
+ *
+ * reset.css — Quita los estilos que cada navegador pone por defecto (márgenes,
+ * rellenos, viñetas, subrayados) para que todas las páginas de LILA se vean
+ * iguales en Chrome, Firefox, Safari y en el celular.
  */
 
+/* Todos los elementos empiezan sin márgenes ni rellenos.
+   border-box: el ancho de una caja ya incluye su relleno y borde, así no se desborda. */
 *,
 *::before,
 *::after {
@@ -13,6 +19,9 @@
     box-sizing: border-box; /* The crucial fix for responsive padding */
 }
 
+/* La página ocupa todo el ancho y al menos toda la altura de la pantalla,
+   sin desplazamiento horizontal. Usa el color de fondo de LILA (blanco si no existe)
+   y suaviza el texto. Evita que el celular agrande la letra por su cuenta. */
 html, body {
     width: 100%;
     min-height: 100vh;
@@ -24,6 +33,7 @@ html, body {
 }
 
 /* Ensure images never bleed outside their containers */
+/* Las imágenes y videos nunca se salen de su contenedor y mantienen su proporción. */
 img, picture, video, canvas, svg {
     max-width: 100%;
     height: auto;
@@ -31,23 +41,27 @@ img, picture, video, canvas, svg {
 }
 
 /* Inherit fonts for form elements */
+/* Los campos y botones de los formularios usan la misma letra y color que el resto de la página. */
 input, button, textarea, select {
     font: inherit;
     color: inherit;
 }
 
 /* Remove default list styles */
+/* Quita las viñetas y números de las listas (por ejemplo, en el menú). */
 ol, ul {
     list-style: none;
 }
 
 /* Remove default anchor styling */
+/* Quita el subrayado y el color azul de los enlaces; toman el color del texto que los rodea. */
 a {
     text-decoration: none;
     color: inherit;
 }
 
 /* Ensure footer sticks to bottom */
+/* Mantiene el pie de página abajo del todo, aunque la página tenga poco contenido. */
 main {
     display: flex;
     flex-direction: column;

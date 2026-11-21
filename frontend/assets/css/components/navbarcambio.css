@@ -1,3 +1,5 @@
+/* Navbar styles for logged-in users (headerCambio.html), with the back link, logo, role-switch button and avatar. */
+/* Estilos de la barra de navegación para usuarios con sesión (headerCambio.html), con el enlace Volver, logo, botón para cambiar de rol y avatar. */
 .navbar-cambio {
     position: sticky;
     top: 0;

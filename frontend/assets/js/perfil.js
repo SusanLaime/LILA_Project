@@ -1,7 +1,9 @@
 
 /* ==========================================================
  * LILA - PERFIL DEL USUARIO
- * DUEÑA/O: Sara Revollo
+ * Sara Revollo
+ * Profile page logic: loads the profile from /api/perfil, fills the form, manages skills and progress, saves changes, and handles the mobile menu.
+ * Lógica de la página de perfil: carga el perfil desde /api/perfil, llena el formulario, maneja las habilidades y el progreso, guarda los cambios y controla el menú para celulares.
  *
  * Frontend del perfil.
  * API existente: GET /api/perfil y PUT /api/perfil.

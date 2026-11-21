@@ -1,8 +1,7 @@
 // =====================================================================
-// DUEÑA/O: Natalia Arze — Pantalla de inicio de sesión
-// Responsables: README.md (sección Equipo)  ·  Contrato con el backend: docs/API.md
-// Primera versión generada con ayuda de IA (ver README.md, sección Uso de IA):
-// revisarla, entenderla y adaptarla es parte de la tarea.
+// Natalia Arze — Pantalla de inicio de sesión
+// Login page logic: sends carnet and password to /api/login, saves the token and the active role, and opens the home page for that role.
+// Lógica de la página de inicio de sesión: envía carnet y contraseña a /api/login, guarda el token y el rol activo, y abre la página de inicio de ese rol.
 // =====================================================================
 
 import { pedirApi } from './api.js';

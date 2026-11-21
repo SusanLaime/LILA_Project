@@ -1,7 +1,9 @@
 // ofertas.js
+// Saves the employer's job offers and their status (active or paused) in the browser for the demo, until the backend has an offers API.
+// Guarda las ofertas del empleador y su estado (activa o pausada) en el navegador para la demostración, hasta que el backend tenga una API de ofertas.
+
 // Almacenamiento local (localStorage) de las ofertas del empleador para la demostración.
-// Mientras no exista una API de ofertas en el backend, las ofertas publicadas y el
-// estado (activa / pausada) de cada oferta se guardan en el navegador.
+// Mientras no exista una API de ofertas en el backend, las ofertas publicadas y el estado (activa / pausada) de cada oferta se guardan en el navegador.
 
 export const CLAVE_OFERTAS = 'lila_ofertas';
 export const CLAVE_ESTADOS = 'lila_estados_ofertas';
