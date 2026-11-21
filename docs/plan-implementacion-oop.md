@@ -923,3 +923,40 @@ git mv backend/routes/perfil.js   backend/controladores/perfilController.js
 | **Dependencia** | A **usa** a B un momento (línea punteada, flecha abierta). |
 | **Composición** | B **es parte** de A y muere con A (rombo lleno). |
 | **Herencia / Implementación** | A **es un tipo de** B, o **cumple** el contrato de B (triángulo vacío). |
+
+---
+
+## 14. Limpieza de archivos sin uso (después del paso 9)
+
+Al terminar la refactorización se buscaron archivos que **ningún otro archivo del repositorio usa**. Es una excepción a la regla "no se borra ningún archivo" de la sección 0. Esa regla protege el código que se reorganiza; estos archivos no forman parte de la refactorización y estaban sobrando.
+
+### Cómo se comprobó
+
+Se revisaron todos los archivos que sigue Git (`git ls-files`):
+- imports de JavaScript, incluidos los imports dinámicos de los tests;
+- etiquetas `<script>`, `<link>` e `<img>` del HTML;
+- rutas que `components.js` arma como texto (solo carga `headerauth.html` y `headerCambio.html`);
+- búsqueda sin distinguir mayúsculas, porque en Windows `Header.html` y `header.html` son el mismo archivo.
+
+Ningún archivo menciona los tres archivos borrados.
+
+### Archivos borrados (`git rm`)
+
+| Archivo | Qué era | Por qué se borró |
+|---|---|---|
+| `frontend/assets/css/components/navbarempleador.css` | Estilos de un navbar antiguo para el empleador | Ningún HTML lo carga, ni siquiera `headerempleador.html` |
+| `frontend/assets/css/pages/empl_trab.css` | Estilos antiguos de las páginas de empleador y trabajador | Ningún HTML lo carga |
+| `frontend/components/headerempleador.html` | Header antiguo del empleador | `components.js` usa `headerauth.html` y `headerCambio.html`; ninguna página lo carga |
+
+Después de borrarlos: `npm test` 31/31 ✅.
+
+### Se encontraron sin uso pero se conservan (decisión del equipo)
+
+| Archivo o código | Por qué se conserva |
+|---|---|
+| `frontend/images/LILA-logotipo-oficial.jpeg` y `.png`, `Libreria Labora.jpeg`, `Lila transparent logo.jpeg` | La web no las usa, pero pueden ser archivos de marca del proyecto |
+| `frontend/website/perfilPúblico.html` | Página provisional "en construcción" para un incremento futuro |
+| `requiereSesion()` en `backend/seguridad.js` | Nadie la importa (la app usa `MiddlewareSesion`). Se decide con Joaquín Peredo |
+| `export { app };` en `backend/server.js` | Nadie lo importa (todos usan `export default app`). Es una sola línea |
+
+> Si se recuperan del historial: `git checkout <commit-anterior> -- <ruta del archivo>`.
