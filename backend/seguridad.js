@@ -53,6 +53,25 @@ export function crearToken(usuario) {
   return jwt.sign({ id: usuario.id }, obtenerJwtSecret(), { expiresIn: '8h' });
 }
 
+// Revisa un token de sesión. Si es válido devuelve el id del usuario;
+// si es falso, ya venció o no trae un id válido, devuelve null.
+// La usan requiereSesion y el adaptador TokensJwt.
+export function verificarToken(token) {
+  try {
+    const payload = jwt.verify(token, obtenerJwtSecret());
+    if (
+      typeof payload !== 'object' ||
+      !Number.isSafeInteger(payload.id) ||
+      payload.id < 1
+    ) {
+      return null;
+    }
+    return payload.id;
+  } catch {
+    return null;
+  }
+}
+
 // Middleware que protege las rutas privadas (por ejemplo, /api/perfil).
 // Busca el token en el encabezado "Authorization: Bearer <token>" y lo revisa.
 // Si es válido, guarda el id del usuario en req.usuarioId y deja pasar (next).
@@ -65,21 +84,13 @@ export function requiereSesion(req, res, next) {
     return res.status(401).json({ error: 'Debes iniciar sesión.' });
   }
 
-  try {
-    const payload = jwt.verify(coincidencia[1], obtenerJwtSecret());
-    if (
-      typeof payload !== 'object' ||
-      !Number.isSafeInteger(payload.id) ||
-      payload.id < 1
-    ) {
-      return res.status(401).json({ error: 'Debes iniciar sesión.' });
-    }
-
-    req.usuarioId = payload.id;
-    return next();
-  } catch {
+  const usuarioId = verificarToken(coincidencia[1]);
+  if (usuarioId === null) {
     return res.status(401).json({ error: 'Debes iniciar sesión.' });
   }
+
+  req.usuarioId = usuarioId;
+  return next();
 }
 
 // Nunca guardar ni mostrar la contraseña en texto plano, ni en la base de datos ni en los logs.
