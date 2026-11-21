@@ -17,3 +17,15 @@ export function cerrarSesion() {
     localStorage.removeItem(TOKEN_KEY);
     window.location.href = '/frontend/auth/login.html';
 }
+
+// Rol activo (trabajador o empleador) que el usuario eligió por última vez.
+// Así solo este archivo toca localStorage para la sesión.
+const ROL_ACTIVO_KEY = 'lila_rol_activo';
+
+export function guardarRolActivo(rol) {
+    localStorage.setItem(ROL_ACTIVO_KEY, rol);
+}
+
+export function obtenerRolActivo() {
+    return localStorage.getItem(ROL_ACTIVO_KEY);
+}
