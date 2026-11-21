@@ -1,7 +1,7 @@
 // =====================================================================
 // registroController.js — Ruta POST /api/registro: crea una cuenta nueva
 // (trabajador, empleador o ambos). Antes era routes/registro.js.
-// DUEÑA/O: Natalia Arze — Registro (CA-02)
+// Natalia Arze — Registro (CA-02)
 // =====================================================================
 // Solo traduce entre HTTP y ServicioAuth: las reglas están en el servicio
 // y el SQL en RepositorioUsuariosSqlite.

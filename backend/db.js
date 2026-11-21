@@ -1,5 +1,5 @@
 // =====================================================================
-// DUEÑA/O: Natalia Arze — Base de datos
+// Natalia Arze — Base de datos
 // db.js — Abre la base de datos SQLite, crea las tablas, carga datos de prueba y comparte una sola conexión con todo el backend.
 // =====================================================================
 // Regla para todo el equipo: usar SIEMPRE consultas preparadas (db.prepare("... ?")),

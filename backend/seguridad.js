@@ -1,5 +1,5 @@
 // =====================================================================
-// DUEÑA/O: Joaquín Peredo — Seguridad (contraseñas y sesión)
+// — Seguridad (contraseñas y sesión)
 // seguridad.js — Protege las contraseñas (hash) y maneja la sesión con tokens: los crea al iniciar sesión y los revisa en las rutas privadas.
 // =====================================================================
 

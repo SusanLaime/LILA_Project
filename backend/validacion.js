@@ -2,7 +2,7 @@
 // validacion.js — Revisa que los datos de registro, inicio de sesión y perfil estén completos y bien escritos antes de usarlos.
 // =====================================================================
 //
-// Lo usan Natalia (registro), Joaquín (login) y Sara (perfil): entregarlo primero.
+// Lo usan Natalia (registro), — (login) y Sara (perfil): entregarlo primero.
 // Cada función recibe los datos y devuelve { ok: true } o { ok: false, errores: ["..."] }.
 
 // Revisa el formulario de registro: nombre (3 a 100 letras), carnet (5 a 10 dígitos),

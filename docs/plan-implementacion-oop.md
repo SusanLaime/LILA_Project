@@ -244,7 +244,7 @@ En el diagrama se pintan en **gris punteado con `«futuro»`**: `Oferta`, `Perfi
 ---
 
 ### A. `routes/registro.js` → `controladores/registroController.js` 🔀
-**Dueña:** Natalia Arze · **120 líneas** · **Ruta:** `POST /api/registro`
+**120 líneas** · **Ruta:** `POST /api/registro`
 
 | Líneas | Qué hace hoy | Pasa a | Por qué ahí |
 |---|---|---|---|
@@ -330,7 +330,7 @@ Es el archivo que más se reparte, porque hoy hace de controlador, servicio, rep
 ---
 
 ### D. `backend/seguridad.js` → se queda, envuelto por 2 adaptadores 🔌
-**Dueño:** Joaquín Peredo · **85 líneas**
+**85 líneas**
 
 `seguridad.js` **sigue siendo el único archivo que conoce bcrypt y JWT**. Lo único que cambia dentro es sacar las líneas 69–76 (el `jwt.verify` y la revisión del `id`) a una función exportada:
 
@@ -369,14 +369,14 @@ export class TokensJwt extends Tokens {
 | `hashPassword`, `verificarPassword` | `HasheadorBcrypt` |
 | `crearToken`, `verificarToken` 🆕 | `TokensJwt` |
 | `validarConfiguracionJwt` | `server.js` (igual que hoy) |
-| `requiereSesion` | Ya no la usa la app (la reemplaza `MiddlewareSesion`). Se decide con Joaquín en el paso 7 si se borra o se deja para los tests. |
+| `requiereSesion` | Ya no la usa la app (la reemplaza `MiddlewareSesion`). Se decide con — en el paso 7 si se borra o se deja para los tests. |
 
 Los mensajes (`'Debes iniciar sesión.'`, `'JWT_SECRET no está configurado...'`), el vencimiento de **8 horas** y el costo de bcrypt (**10**) no cambian.
 
 ---
 
 ### E. `backend/db.js` → se queda igual ⬜
-**Dueña:** Natalia Arze · **116 líneas**
+**116 líneas**
 
 No cambia ni una línea y no se mueve de carpeta. Lo único que cambia es **quién lo importa**: hoy lo importan las tres rutas; después **solo** `server.js`, que se lo pasa a `RepositorioUsuariosSqlite` por el constructor. Sigue siendo un **Singleton**: una sola conexión para toda la app.
 
@@ -422,7 +422,7 @@ Las dos funciones nuevas existen porque hoy la clave `lila_rol_activo` se lee y 
 ---
 
 ### H. `frontend/assets/js/login.js` → contiene `PaginaLogin` ✏️
-**Dueña:** Natalia Arze · **73 líneas** · Mismo nombre y lugar.
+**73 líneas** · Mismo nombre y lugar.
 
 | Líneas | Qué hace | Pasa a |
 |---|---|---|
@@ -524,7 +524,7 @@ app.use('/api/perfil',   new PerfilController(servicioPerfil, sesion).router);
 
 ### 6.3 Adapter (Adaptador)
 - **Dónde:** `HasheadorBcrypt` y `TokensJwt` (envuelven `seguridad.js`), `ClienteApi` (envuelve `api.js`), `Sesion` (envuelve `sesion.js`).
-- **Problema que resuelve:** esos archivos ya funcionan y tienen dueño. En vez de reescribirlos, una clase pequeña los **adapta** a la forma que espera el diseño (un contrato o una clase).
+- **Problema que resuelve:** esos archivos ya funcionan y tienen responsable. En vez de reescribirlos, una clase pequeña los **adapta** a la forma que espera el diseño (un contrato o una clase).
 
 ### 6.4 Strategy (Estrategia) mediante interfaces
 - **Dónde:** `Hasheador` ← `HasheadorBcrypt`, `Tokens` ← `TokensJwt`.
@@ -799,7 +799,7 @@ git mv backend/routes/perfil.js   backend/controladores/perfilController.js
 - [ ] Confirmar que la carpeta `backend/routes/` quedó vacía y borrarla.
 - [ ] Revisar que ningún servicio ni controlador importe `db.js` o `seguridad.js`:
   `grep -rn "db.js\|seguridad.js" backend/servicios backend/controladores`
-- [ ] Decidir con Joaquín qué hacer con `requiereSesion` en `seguridad.js` (la app ya no la usa).
+- [ ] Decidir con — qué hacer con `requiereSesion` en `seguridad.js` (la app ya no la usa).
 - [ ] `npm test` → 28 ✅
 
 **Esfuerzo:** bajo.
@@ -867,7 +867,7 @@ git mv backend/routes/perfil.js   backend/controladores/perfilController.js
 | `backend/routes/registro.js` | Natalia Arze | Se renombra a `registroController.js` y se reparte | 5 |
 | `backend/routes/login.js` | — | Se renombra a `loginController.js` y se reparte | 5 |
 | `backend/routes/perfil.js` | — | Se renombra a `perfilController.js` y se reparte | 5 |
-| `backend/seguridad.js` | Joaquín Peredo | Se agrega `verificarToken()` | 3 |
+| `backend/seguridad.js` | — | Se agrega `verificarToken()` | 3 |
 | `backend/server.js` | — | Raíz de composición | 6 |
 | `frontend/assets/js/login.js` | Natalia Arze | Pasa a ser `PaginaLogin` | 8 |
 | `frontend/assets/js/registro.js` | — | Pasa a ser `PaginaRegistro` | 8 |
@@ -956,7 +956,7 @@ Después de borrarlos: `npm test` 31/31 ✅.
 |---|---|
 | `frontend/images/LILA-logotipo-oficial.jpeg` y `.png`, `Libreria Labora.jpeg`, `Lila transparent logo.jpeg` | La web no las usa, pero pueden ser archivos de marca del proyecto |
 | `frontend/website/perfilPúblico.html` | Página provisional "en construcción" para un incremento futuro |
-| `requiereSesion()` en `backend/seguridad.js` | Nadie la importa (la app usa `MiddlewareSesion`). Se decide con Joaquín Peredo |
+| `requiereSesion()` en `backend/seguridad.js` | Nadie la importa (la app usa `MiddlewareSesion`). Se decide con — |
 | `export { app };` en `backend/server.js` | Nadie lo importa (todos usan `export default app`). Es una sola línea |
 
 > Si se recuperan del historial: `git checkout <commit-anterior> -- <ruta del archivo>`.

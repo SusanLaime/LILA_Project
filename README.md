@@ -11,7 +11,7 @@
 ## Equipo y responsabilidades
 
 Cada persona se encarga de **una pantalla y del backend que está detrás de ella**.
-Cada archivo indica su dueña o dueño en la primera línea (`DUEÑA/O: ...`).
+Cada archivo indica en su primera línea a la persona responsable.
 **Solo se editan los archivos propios.** Si necesitas un cambio en un archivo de otra persona, pídeselo.
 
 | Integrante | Frontend | Backend | Pruebas |
@@ -19,12 +19,12 @@ Cada archivo indica su dueña o dueño en la primera línea (`DUEÑA/O: ...`).
 | **Susan Laime** | **Página de inicio (Home):** `frontend/index.html`, `css/pages/home.css`. **Estilos globales:** `css/base/reset.css`, `css/base/typography.css`, `css/utilities/responsive.css` | `backend/server.js`, `backend/validacion.js` | P-09 a P-11 (manuales) |
 | **Natalia Arze** | **Inicio de sesión y registro (trabajador o empleador):** `auth/login.html`, `auth/register.html`, `js/login.js`, `js/registro.js`, `css/pages/login.css`, `css/components/forms.css` | **Base de datos:** `database/schema.sql`, `database/seed.sql`, `backend/db.js`. **Registro:** `backend/controladores/registroController.js` (CA-02) | `tests/db.test.js`, `tests/registro.test.js` (P-00 a P-03) |
 | **Sara Revollo** | **Perfil:** `website/trabajador/perfil.html`, `js/perfil.js`, `css/pages/profile.css` (y revisar `css/pages/buscar.css`) | `backend/controladores/perfilController.js` (CA-01) | `tests/perfil.test.js` (P-06 a P-08) |
-| **Joaquín Peredo** | **Navbar y footer:** `components/header.html`, `components/footer.html`, `js/components.js`, `css/components/header.css`, `css/components/footer.css`. **Sesión en el navegador:** `js/sesion.js`, `js/api.js` | `backend/seguridad.js`, `backend/controladores/loginController.js` | `tests/login.test.js` (P-04, P-05) |
+| **—** | **Navbar y footer:** `components/header.html`, `components/footer.html`, `js/components.js`, `css/components/header.css`, `css/components/footer.css`. **Sesión en el navegador:** `js/sesion.js`, `js/api.js` | `backend/seguridad.js`, `backend/controladores/loginController.js` | `tests/login.test.js` (P-04, P-05) |
 
 **Acuerdo entre frontend y backend:** [`docs/API.md`](docs/API.md). Nadie lo cambia sin avisar al grupo.
 
 **Orden para no interrumpirse:**
-1. Primero: Natalia (base de datos), Susan (`server.js`, `validacion.js` y estilos globales) y Joaquín (`seguridad.js` y navbar). Los demás los necesitan.
+1. Primero: Natalia (base de datos), Susan (`server.js`, `validacion.js` y estilos globales) y — (`seguridad.js` y navbar). Los demás los necesitan.
 2. Después, en paralelo: cada persona hace su pantalla y su ruta.
 3. Al final: se une todo en `dev` y Susan hace las pruebas P-09 a P-11.
 
@@ -113,8 +113,8 @@ Cada persona completa las filas de sus pruebas **después de ejecutarlas**. Si u
 | P-01 Registro correcto | Natalia Arze | Datos válidos, rol trabajador y rol empleador | 201, cuentas creadas con su rol | _[Completar]_ | |
 | P-02 Registro duplicado (CA-02) | Natalia Arze | Mismo teléfono o CI por segunda vez | 409, mensaje de rechazo, solo 1 cuenta | _[Completar]_ | |
 | P-03 Dato inválido | Natalia Arze | Teléfono `123`, nombre vacío o rol `admin` | 400, mensaje de error | _[Completar]_ | |
-| P-04 Login correcto | Joaquín Peredo | Teléfono y contraseña correctos | 200 y token | _[Completar]_ | |
-| P-05 Contraseña incorrecta | Joaquín Peredo | Contraseña equivocada | 401, mensaje genérico | _[Completar]_ | |
+| P-04 Login correcto | — | Teléfono y contraseña correctos | 200 y token | _[Completar]_ | |
+| P-05 Contraseña incorrecta | — | Contraseña equivocada | 401, mensaje genérico | _[Completar]_ | |
 | P-06 Guardar y leer perfil (CA-01) | Sara Revollo | Ciudad, habilidades, experiencia | Datos y rol devueltos al volver a leer | _[Completar]_ | |
 | P-07 Perfil sin sesión | Sara Revollo | `GET /api/perfil` sin token | 401 | _[Completar]_ | |
 | P-08 Perfil con datos inválidos | Sara Revollo | Experiencia de más de 1000 caracteres | 400, mensaje de error | _[Completar]_ | |
@@ -142,7 +142,7 @@ Cada persona completa **su propia fila** con enlaces directos (issue, commit, pu
 | Susan Laime | Página de inicio, estilos globales, servidor, validaciones, pruebas de punta a punta | _Issue: · PR: · Commits:_ | Hacer el recorrido completo desde la Home y explicar las decisiones de diseño |
 | Natalia Arze | Inicio de sesión y registro (pantallas), base de datos, regla de duplicados (CA-02) | _Issue: · PR: · Commits:_ | Mostrar la tabla creada y el rechazo de un CI o teléfono repetido |
 | Sara Revollo | Perfil (pantalla y ruta), guardar y mostrar datos (CA-01) | _Issue: · PR: · Commits:_ | Guardar el perfil, salir, volver a ingresar y ver los mismos datos |
-| Joaquín Peredo | Navbar y footer, sesión en el navegador, cifrado de contraseñas, inicio de sesión | _Issue: · PR: · Commits:_ | Mostrar la contraseña cifrada en la BD y el cierre de sesión desde el navbar |
+| — | Navbar y footer, sesión en el navegador, cifrado de contraseñas, inicio de sesión | _Issue: · PR: · Commits:_ | Mostrar la contraseña cifrada en la BD y el cierre de sesión desde el navbar |
 
 ## Uso de IA generativa
 
@@ -151,7 +151,7 @@ Cada persona agrega una fila por cada uso relevante de IA (programación, depura
 | Integrante | Herramienta | Finalidad | Ejemplo de instrucción (prompt) | Verificación humana aplicada |
 |---|---|---|---|---|
 | Susan Laime (coordinación) | Claude Code (Anthropic) | Preparar la estructura del repositorio: limpieza, archivos guía con tareas (TODO) por integrante, contrato de la API y plantillas de documentación. **No se generó el código del backend.** | "Prepara el repositorio para que cada integrante sepa exactamente cuál es su parte." | _[Completar]_ |
-| Equipo (frontend) | Agente de IA para programación + Claude Code (Anthropic) | Primera versión del **frontend** (registro con selector de rol, inicio de sesión, perfil y scripts `api.js`, `sesion.js`, `registro.js`, `login.js`, `perfil.js`). Cada dueña o dueño de pantalla la revisa, la entiende y la mejora. El backend generado en la misma sesión **se descartó**. | _[Completar]_ | _[Cada integrante: qué revisó, qué cambió y cómo lo probó]_ |
+| Equipo (frontend) | Agente de IA para programación + Claude Code (Anthropic) | Primera versión del **frontend** (registro con selector de rol, inicio de sesión, perfil y scripts `api.js`, `sesion.js`, `registro.js`, `login.js`, `perfil.js`). Cada responsable de pantalla la revisa, la entiende y la mejora. El backend generado en la misma sesión **se descartó**. | _[Completar]_ | _[Cada integrante: qué revisó, qué cambió y cómo lo probó]_ |
 | | | | | |
 
 ## Estructura del proyecto
