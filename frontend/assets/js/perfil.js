@@ -8,120 +8,146 @@
  * Frontend del perfil.
  * API existente: GET /api/perfil y PUT /api/perfil.
  * No modifica la autenticación ni la base de datos.
+ * Contiene la clase PaginaPerfil (hereda de Pagina): cada sección es un método.
  * ========================================================== */
 
-import { pedirApi } from './api.js';
-import { obtenerToken } from './sesion.js';
+import { Pagina } from './nucleo/Pagina.js';
+import { ClienteApi } from './nucleo/ClienteApi.js';
+import { Sesion } from './nucleo/Sesion.js';
 import { initHeader } from './components.js';
 
-const token = obtenerToken();
+export class PaginaPerfil extends Pagina {
 
-if (!token) {
-    window.location.href = '/frontend/auth/login.html';
-} else {
+    // Elementos del formulario
+    #form;
+    #ciudad;
+    #telefono;
+    #experiencia;
+    #genero;
+    #edad;
+    #habilidades;
+    #habilidadesTags;
+    #habilidadNueva;
+    #btnAgregar;
+    #habilidadesSugeridas;
+    #contador;
+    #btnGuardar;
+    #btnCancelar;
+
+    // Estado de la página
+    #listaHabilidades = [];
+    #perfilGuardado = null;
+    #guardando = false;
+
+    // Menú móvil
+    #btnMenuMovil;
+    #btnCerrarMenu;
+    #fondoMenuMovil;
+    #menuLateral;
+    #mediaMenuMovil;
+
+    alCargar() {
+        // Sin sesión, ir a iniciar sesión
+        if (!this.sesion.obtener()) {
+            window.location.href = '/frontend/auth/login.html';
+            return;
+        }
+
+        this.#buscarElementos();
+        this.#mostrarFecha();
+        this.#activarCerrarSesion();
+        this.#activarContador();
+        this.#activarHabilidades();
+        this.#activarGuardarYCancelar();
+        this.#activarMenuMovil();
+        this.#cargarPerfil();
+    }
 
     // ======================================================
     // ELEMENTOS DEL FORMULARIO
     // ======================================================
 
-    const form = document.getElementById('perfil-form');
-    const mensaje = document.getElementById('perfil-mensaje');
+    #buscarElementos() {
+        this.#form = document.getElementById('perfil-form');
+        this.mensaje = document.getElementById('perfil-mensaje');
 
-    const ciudad = document.getElementById('ciudad');
-    const telefono = document.getElementById('telefono-perfil');
-    const experiencia = document.getElementById('experiencia');
-    const genero = document.getElementById('genero');
-    const edad = document.getElementById('edad');
+        this.#ciudad = document.getElementById('ciudad');
+        this.#telefono = document.getElementById('telefono-perfil');
+        this.#experiencia = document.getElementById('experiencia');
+        this.#genero = document.getElementById('genero');
+        this.#edad = document.getElementById('edad');
 
-    const habilidades = document.getElementById('habilidades');
-    const habilidadesTags = document.getElementById('habilidades-tags');
-    const habilidadNueva = document.getElementById('habilidad-nueva');
-    const btnAgregar = document.getElementById('btn-agregar-habilidad');
-    const habilidadesSugeridas = document.getElementById('habilidades-sugeridas');
+        this.#habilidades = document.getElementById('habilidades');
+        this.#habilidadesTags = document.getElementById('habilidades-tags');
+        this.#habilidadNueva = document.getElementById('habilidad-nueva');
+        this.#btnAgregar = document.getElementById('btn-agregar-habilidad');
+        this.#habilidadesSugeridas = document.getElementById('habilidades-sugeridas');
 
-    const contador = document.getElementById('contador-experiencia');
-    const btnGuardar = document.getElementById('btn-guardar-perfil');
-    const btnCancelar = document.getElementById('btn-cancelar-perfil');
-
-    let listaHabilidades = [];
-    let perfilGuardado = null;
-    let guardando = false;
+        this.#contador = document.getElementById('contador-experiencia');
+        this.#btnGuardar = document.getElementById('btn-guardar-perfil');
+        this.#btnCancelar = document.getElementById('btn-cancelar-perfil');
+    }
 
     // ======================================================
     // FECHA ACTUAL
     // ======================================================
 
-    const fecha = document.getElementById('fecha-hoy');
+    #mostrarFecha() {
+        const fecha = document.getElementById('fecha-hoy');
 
-    if (fecha) {
-        const texto = new Date().toLocaleDateString('es-BO', {
-            weekday: 'long',
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
+        if (fecha) {
+            const texto = new Date().toLocaleDateString('es-BO', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
 
-        fecha.textContent =
-            texto.charAt(0).toUpperCase() + texto.slice(1);
+            fecha.textContent =
+                texto.charAt(0).toUpperCase() + texto.slice(1);
+        }
     }
 
     // ======================================================
     // CERRAR SESIÓN
     // ======================================================
 
-    document.getElementById('btn-salir')?.addEventListener(
-        'click',
-        () => {
-            localStorage.removeItem('lila_token');
-
-            window.location.href =
-                '/frontend/auth/login.html';
-        }
-    );
-
-    // ======================================================
-    // MOSTRAR MENSAJES
-    // ======================================================
-
-    function mostrarMensaje(texto, tipo = '') {
-        if (!mensaje) return;
-
-        mensaje.textContent = texto;
-
-        if (tipo) {
-            mensaje.dataset.tipo = tipo;
-        } else {
-            delete mensaje.dataset.tipo;
-        }
+    #activarCerrarSesion() {
+        document.getElementById('btn-salir')?.addEventListener(
+            'click',
+            () => this.sesion.cerrar()
+        );
     }
 
     // ======================================================
     // CONTADOR DE EXPERIENCIA
     // ======================================================
 
-    function actualizarContador() {
-        if (!contador || !experiencia) return;
+    #actualizarContador() {
+        if (!this.#contador || !this.#experiencia) return;
 
-        contador.textContent = experiencia.value.length;
+        this.#contador.textContent = this.#experiencia.value.length;
     }
 
-    experiencia?.addEventListener(
-        'input',
-        actualizarContador
-    );
+    #activarContador() {
+        this.#experiencia?.addEventListener(
+            'input',
+            () => this.#actualizarContador()
+        );
+    }
 
     // ======================================================
     // HABILIDADES
     // ======================================================
 
-    function sincronizarHabilidades() {
-        habilidades.value = listaHabilidades.join(', ');
+    #sincronizarHabilidades() {
+        this.#habilidades.value = this.#listaHabilidades.join(', ');
     }
 
-    function renderizarHabilidades() {
-        habilidadesTags.replaceChildren();
+    #renderizarHabilidades() {
+        this.#habilidadesTags.replaceChildren();
 
-        listaHabilidades.forEach((habilidad, indice) => {
+        this.#listaHabilidades.forEach((habilidad, indice) => {
 
             const etiqueta = document.createElement('span');
             etiqueta.className = 'lp-habilidad-tag';
@@ -140,20 +166,20 @@ if (!token) {
             );
 
             boton.addEventListener('click', () => {
-                listaHabilidades.splice(indice, 1);
+                this.#listaHabilidades.splice(indice, 1);
 
-                renderizarHabilidades();
-                mostrarMensaje('');
+                this.#renderizarHabilidades();
+                this.mostrarMensaje('');
             });
 
             etiqueta.append(texto, boton);
-            habilidadesTags.appendChild(etiqueta);
+            this.#habilidadesTags.appendChild(etiqueta);
         });
 
-        sincronizarHabilidades();
+        this.#sincronizarHabilidades();
     }
 
-    function agregarHabilidad(valor) {
+    #agregarHabilidad(valor) {
         const nueva = String(valor || '').trim();
 
         if (!nueva) {
@@ -161,7 +187,7 @@ if (!token) {
         }
 
         if (nueva.length > 60) {
-            mostrarMensaje(
+            this.mostrarMensaje(
                 'Cada habilidad debe tener máximo 60 caracteres.',
                 'error'
             );
@@ -169,21 +195,21 @@ if (!token) {
         }
 
         if (nueva.includes(',')) {
-            mostrarMensaje(
+            this.mostrarMensaje(
                 'Agrega las habilidades de una en una, sin comas.',
                 'error'
             );
             return false;
         }
 
-        const existe = listaHabilidades.some(
+        const existe = this.#listaHabilidades.some(
             item =>
                 item.toLocaleLowerCase('es') ===
                 nueva.toLocaleLowerCase('es')
         );
 
         if (existe) {
-            mostrarMensaje(
+            this.mostrarMensaje(
                 'Esta habilidad ya fue agregada.',
                 'error'
             );
@@ -191,60 +217,63 @@ if (!token) {
         }
 
         const propuesta = [
-            ...listaHabilidades,
+            ...this.#listaHabilidades,
             nueva
         ].join(', ');
 
         if (propuesta.length > 300) {
-            mostrarMensaje(
+            this.mostrarMensaje(
                 'Las habilidades no pueden superar 300 caracteres en total.',
                 'error'
             );
             return false;
         }
 
-        listaHabilidades.push(nueva);
-        renderizarHabilidades();
-        mostrarMensaje('');
+        this.#listaHabilidades.push(nueva);
+        this.#renderizarHabilidades();
+        this.mostrarMensaje('');
 
         return true;
     }
 
-    // Agregar con el botón +
-    btnAgregar?.addEventListener('click', () => {
-        if (agregarHabilidad(habilidadNueva.value)) {
-            habilidadNueva.value = '';
-            habilidadNueva.focus();
-        }
-    });
-
-    // Agregar presionando Enter
-    habilidadNueva?.addEventListener('keydown', event => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-
-            if (agregarHabilidad(habilidadNueva.value)) {
-                habilidadNueva.value = '';
+    #activarHabilidades() {
+        // Agregar con el botón +
+        this.#btnAgregar?.addEventListener('click', () => {
+            if (this.#agregarHabilidad(this.#habilidadNueva.value)) {
+                this.#habilidadNueva.value = '';
+                this.#habilidadNueva.focus();
             }
-        }
-    });
+        });
 
-    // Agregar desde la lista de sugerencias
-    habilidadesSugeridas?.addEventListener('change', () => {
-        const valor = habilidadesSugeridas.value;
+        // Agregar presionando Enter
+        this.#habilidadNueva?.addEventListener('keydown', event => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
 
-        if (valor) {
-            agregarHabilidad(valor);
-        }
+                if (this.#agregarHabilidad(this.#habilidadNueva.value)) {
+                    this.#habilidadNueva.value = '';
+                }
+            }
+        });
 
-        habilidadesSugeridas.value = '';
-    });
+        // Agregar desde la lista de sugerencias
+        this.#habilidadesSugeridas?.addEventListener('change', () => {
+            const valor = this.#habilidadesSugeridas.value;
+
+            if (valor) {
+                this.#agregarHabilidad(valor);
+            }
+
+            this.#habilidadesSugeridas.value = '';
+        });
+    }
 
     // ======================================================
     // CIUDAD
     // ======================================================
 
-    function establecerCiudad(valor) {
+    #establecerCiudad(valor) {
+        const ciudad = this.#ciudad;
         const guardada = String(valor || '').trim();
 
         // Eliminar una opción temporal previa
@@ -279,7 +308,7 @@ if (!token) {
     // PROGRESO DEL PERFIL
     // ======================================================
 
-    function actualizarProgreso(perfil) {
+    #actualizarProgreso(perfil) {
 
         const campos = perfil.rol === 'empleador'
             ? ['ciudad', 'genero', 'edad']
@@ -325,13 +354,13 @@ if (!token) {
     // PRESENTAR LOS DATOS DEL USUARIO
     // ======================================================
 
-    function mostrarPerfil(perfil) {
+    #mostrarPerfil(perfil) {
 
-        perfilGuardado = { ...perfil };
+        this.#perfilGuardado = { ...perfil };
 
         const nombre = perfil.nombre || 'Usuario';
         const rol = perfil.rol || 'trabajador';
-        localStorage.setItem('lila_rol_activo', rol);
+        this.sesion.guardarRolActivo(rol);
 
         // Adaptar el menú de ofertas según el rol
         const enlaceOfertas = document.getElementById('enlace-ofertas');
@@ -388,24 +417,24 @@ if (!token) {
         );
 
         // Campos de Mis datos
-        establecerCiudad(perfil.ciudad);
+        this.#establecerCiudad(perfil.ciudad);
 
-        genero.value = perfil.genero || '';
-        edad.value = perfil.edad ?? '';
+        this.#genero.value = perfil.genero || '';
+        this.#edad.value = perfil.edad ?? '';
 
-        telefono.value = perfil.telefono
+        this.#telefono.value = perfil.telefono
             ? `+591 ${perfil.telefono}`
             : '';
 
-        listaHabilidades = String(perfil.habilidades || '')
+        this.#listaHabilidades = String(perfil.habilidades || '')
             .split(',')
             .map(item => item.trim())
             .filter(Boolean);
 
-        renderizarHabilidades();
+        this.#renderizarHabilidades();
 
-        experiencia.value = perfil.experiencia || '';
-        actualizarContador();
+        this.#experiencia.value = perfil.experiencia || '';
+        this.#actualizarContador();
 
         // Mantener el comportamiento por roles
         const esEmpleador = rol === 'empleador';
@@ -417,22 +446,20 @@ if (!token) {
 
         // Funciones existentes del proyecto
         initHeader(estado, rol);
-        actualizarProgreso(perfil);
+        this.#actualizarProgreso(perfil);
     }
 
     // ======================================================
     // CONSULTAR PERFIL EN SQLITE MEDIANTE LA API
     // ======================================================
 
-    async function cargarPerfil() {
+    async #cargarPerfil() {
 
-        const rolActivo = localStorage.getItem('lila_rol_activo');
+        const rolActivo = this.sesion.obtenerRolActivo();
         const ruta = rolActivo
             ? `/api/perfil?rol=${encodeURIComponent(rolActivo)}`
             : '/api/perfil';
-        const resultado = await pedirApi(ruta, {
-            token
-        });
+        const resultado = await this.api.get(ruta);
 
         if (resultado.estado === 401) {
             window.location.href =
@@ -441,7 +468,7 @@ if (!token) {
         }
 
         if (!resultado.ok) {
-            mostrarMensaje(
+            this.mostrarMensaje(
                 resultado.datos?.error ||
                 'No se pudo cargar el perfil.',
                 'error'
@@ -449,61 +476,63 @@ if (!token) {
             return;
         }
 
-        mostrarPerfil(resultado.datos);
+        this.#mostrarPerfil(resultado.datos);
     }
 
     // ======================================================
-    // GUARDAR PERFIL
+    // GUARDAR Y CANCELAR
     // ======================================================
 
-    form?.addEventListener('submit', async event => {
+    #activarGuardarYCancelar() {
+        this.#form?.addEventListener('submit', event => this.#guardar(event));
+        this.#btnCancelar?.addEventListener('click', () => this.#cancelar());
+    }
+
+    async #guardar(event) {
 
         event.preventDefault();
 
-        if (guardando || !perfilGuardado) {
+        if (this.#guardando || !this.#perfilGuardado) {
             return;
         }
 
+        const perfilGuardado = this.#perfilGuardado;
         const esTrabajador =
             perfilGuardado.rol === 'trabajador';
 
         // Agregar texto pendiente antes de guardar
-        if (esTrabajador && habilidadNueva.value.trim()) {
+        if (esTrabajador && this.#habilidadNueva.value.trim()) {
 
-            if (!agregarHabilidad(habilidadNueva.value)) {
+            if (!this.#agregarHabilidad(this.#habilidadNueva.value)) {
                 return;
             }
 
-            habilidadNueva.value = '';
+            this.#habilidadNueva.value = '';
         }
 
         const cuerpo = {
             rol: perfilGuardado.rol,
-            ciudad: ciudad.value,
-            genero: genero.value,
-            edad: edad.value === '' ? null : Number(edad.value),
+            ciudad: this.#ciudad.value,
+            genero: this.#genero.value,
+            edad: this.#edad.value === '' ? null : Number(this.#edad.value),
 
             // Mantener los valores anteriores si es empleador
             habilidades: esTrabajador
-                ? habilidades.value
+                ? this.#habilidades.value
                 : (perfilGuardado.habilidades || ''),
 
             experiencia: esTrabajador
-                ? experiencia.value
+                ? this.#experiencia.value
                 : (perfilGuardado.experiencia || '')
         };
 
-        guardando = true;
-        btnGuardar.disabled = true;
+        this.#guardando = true;
+        this.#btnGuardar.disabled = true;
 
-        mostrarMensaje('Guardando cambios...');
+        this.mostrarMensaje('Guardando cambios...');
 
         try {
-            const resultado = await pedirApi('/api/perfil', {
-                metodo: 'PUT',
-                token,
-                cuerpo
-            });
+            const resultado = await this.api.put('/api/perfil', cuerpo);
 
             if (resultado.estado === 401) {
                 window.location.href =
@@ -512,7 +541,7 @@ if (!token) {
             }
 
             if (!resultado.ok) {
-                mostrarMensaje(
+                this.mostrarMensaje(
                     resultado.datos?.error ||
                     'No se pudo guardar el perfil.',
                     'error'
@@ -521,9 +550,9 @@ if (!token) {
             }
 
             // Refrescar datos con la respuesta del backend
-            mostrarPerfil(resultado.datos);
+            this.#mostrarPerfil(resultado.datos);
 
-            mostrarMensaje(
+            this.mostrarMensaje(
                 'Perfil guardado correctamente.',
                 'exito'
             );
@@ -531,129 +560,130 @@ if (!token) {
         } catch (error) {
             console.error('Error al guardar perfil:', error);
 
-            mostrarMensaje(
+            this.mostrarMensaje(
                 'Ocurrió un problema al guardar los cambios.',
                 'error'
             );
 
         } finally {
-            guardando = false;
-            btnGuardar.disabled = false;
+            this.#guardando = false;
+            this.#btnGuardar.disabled = false;
         }
-    });
+    }
 
-    // ======================================================
-    // CANCELAR CAMBIOS
-    // ======================================================
+    #cancelar() {
 
-    btnCancelar?.addEventListener('click', () => {
-
-        if (!perfilGuardado) {
+        if (!this.#perfilGuardado) {
             return;
         }
 
-        mostrarPerfil(perfilGuardado);
+        this.#mostrarPerfil(this.#perfilGuardado);
 
-        habilidadNueva.value = '';
+        this.#habilidadNueva.value = '';
 
-        mostrarMensaje('');
-    });
-
+        this.mostrarMensaje('');
+    }
 
     // ======================================================
     // MENÚ HAMBURGUESA PARA CELULARES
     // ======================================================
 
-    const btnMenuMovil = document.getElementById('btn-menu-movil');
-    const btnCerrarMenu = document.getElementById('btn-cerrar-menu');
-    const fondoMenuMovil = document.getElementById('fondo-menu-movil');
-    const menuLateral = document.getElementById('menu-lateral');
-
-    const mediaMenuMovil = window.matchMedia('(max-width: 900px)');
-
-    function cerrarMenuMovil() {
+    #cerrarMenuMovil() {
+        const menuLateral = this.#menuLateral;
         if (!menuLateral) return;
 
         menuLateral.classList.remove('lp-sidebar-abierto');
-        fondoMenuMovil?.classList.remove('activo');
+        this.#fondoMenuMovil?.classList.remove('activo');
 
-        btnMenuMovil?.setAttribute('aria-expanded', 'false');
-        btnMenuMovil?.setAttribute(
+        this.#btnMenuMovil?.setAttribute('aria-expanded', 'false');
+        this.#btnMenuMovil?.setAttribute(
             'aria-label',
             'Abrir menú de navegación'
         );
 
         document.body.style.overflow = '';
 
-        menuLateral.inert = mediaMenuMovil.matches;
+        menuLateral.inert = this.#mediaMenuMovil.matches;
     }
 
-    function abrirMenuMovil() {
-        if (!menuLateral || !mediaMenuMovil.matches) return;
+    #abrirMenuMovil() {
+        const menuLateral = this.#menuLateral;
+        if (!menuLateral || !this.#mediaMenuMovil.matches) return;
 
         menuLateral.inert = false;
 
         menuLateral.classList.add('lp-sidebar-abierto');
-        fondoMenuMovil?.classList.add('activo');
+        this.#fondoMenuMovil?.classList.add('activo');
 
-        btnMenuMovil?.setAttribute('aria-expanded', 'true');
-        btnMenuMovil?.setAttribute(
+        this.#btnMenuMovil?.setAttribute('aria-expanded', 'true');
+        this.#btnMenuMovil?.setAttribute(
             'aria-label',
             'Cerrar menú de navegación'
         );
 
         document.body.style.overflow = 'hidden';
 
-        btnCerrarMenu?.focus();
+        this.#btnCerrarMenu?.focus();
     }
 
-    // Abrir al tocar el botón hamburguesa
-    btnMenuMovil?.addEventListener('click', () => {
-        if (menuLateral?.classList.contains('lp-sidebar-abierto')) {
-            cerrarMenuMovil();
-        } else {
-            abrirMenuMovil();
-        }
-    });
+    #activarMenuMovil() {
+        this.#btnMenuMovil = document.getElementById('btn-menu-movil');
+        this.#btnCerrarMenu = document.getElementById('btn-cerrar-menu');
+        this.#fondoMenuMovil = document.getElementById('fondo-menu-movil');
+        this.#menuLateral = document.getElementById('menu-lateral');
 
-    // Cerrar con el botón X
-    btnCerrarMenu?.addEventListener('click', () => {
-        cerrarMenuMovil();
-        btnMenuMovil?.focus();
-    });
+        this.#mediaMenuMovil = window.matchMedia('(max-width: 900px)');
 
-    // Cerrar al tocar fuera del menú
-    fondoMenuMovil?.addEventListener('click', () => {
-        cerrarMenuMovil();
-        btnMenuMovil?.focus();
-    });
+        const cerrar = () => this.#cerrarMenuMovil();
 
-    // Cerrar con Escape
-    document.addEventListener('keydown', (event) => {
-        if (
-            event.key === 'Escape' &&
-            menuLateral?.classList.contains('lp-sidebar-abierto')
-        ) {
-            cerrarMenuMovil();
-            btnMenuMovil?.focus();
-        }
-    });
+        // Abrir al tocar el botón hamburguesa
+        this.#btnMenuMovil?.addEventListener('click', () => {
+            if (this.#menuLateral?.classList.contains('lp-sidebar-abierto')) {
+                this.#cerrarMenuMovil();
+            } else {
+                this.#abrirMenuMovil();
+            }
+        });
 
-    // Cerrar al seleccionar un enlace
-    menuLateral?.querySelectorAll('a[href]').forEach((enlace) => {
-        enlace.addEventListener('click', cerrarMenuMovil);
-    });
+        // Cerrar con el botón X
+        this.#btnCerrarMenu?.addEventListener('click', () => {
+            this.#cerrarMenuMovil();
+            this.#btnMenuMovil?.focus();
+        });
 
-    // Adaptar el menú al cambiar el tamaño de pantalla
-    mediaMenuMovil.addEventListener('change', cerrarMenuMovil);
+        // Cerrar al tocar fuera del menú
+        this.#fondoMenuMovil?.addEventListener('click', () => {
+            this.#cerrarMenuMovil();
+            this.#btnMenuMovil?.focus();
+        });
 
-    // Configurar estado inicial
-    cerrarMenuMovil();
+        // Cerrar con Escape
+        document.addEventListener('keydown', (event) => {
+            if (
+                event.key === 'Escape' &&
+                this.#menuLateral?.classList.contains('lp-sidebar-abierto')
+            ) {
+                this.#cerrarMenuMovil();
+                this.#btnMenuMovil?.focus();
+            }
+        });
 
+        // Cerrar al seleccionar un enlace
+        this.#menuLateral?.querySelectorAll('a[href]').forEach((enlace) => {
+            enlace.addEventListener('click', cerrar);
+        });
 
-    // ======================================================
-    // INICIAR PERFIL
-    // ======================================================
+        // Adaptar el menú al cambiar el tamaño de pantalla
+        this.#mediaMenuMovil.addEventListener('change', cerrar);
 
-    cargarPerfil();
+        // Configurar estado inicial
+        this.#cerrarMenuMovil();
+    }
 }
+
+// ======================================================
+// INICIAR PERFIL
+// ======================================================
+
+const sesion = new Sesion();
+new PaginaPerfil(new ClienteApi(sesion), sesion).iniciar();
