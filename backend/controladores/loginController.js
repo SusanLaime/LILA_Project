@@ -1,68 +1,33 @@
 // =====================================================================
-// login.js — Ruta POST /api/login: verifica carnet y contraseña y entrega el token de sesión.
+// loginController.js — Ruta POST /api/login: verifica carnet y contraseña y
+// entrega el token de sesión. Antes era routes/login.js.
 // =====================================================================
+// Solo traduce entre HTTP y ServicioAuth.
 
 import express from 'express';
-import db from '../db.js';
-import { validarLogin } from '../validacion.js';
-import { crearToken, verificarPassword } from '../seguridad.js';
 
-const router = express.Router();
+export class LoginController {
+  #servicio;
 
-// POST /api/login — Inicia la sesión del usuario.
-// Revisa que el carnet y la contraseña sean válidos, busca al usuario por su carnet
-// y compara la contraseña. Si todo está bien, obtiene sus roles y le entrega un token.
-// Si el carnet o la contraseña no coinciden, responde con un mensaje de error.
-router.post('/', async (req, res) => { 
-  const datos = req.body ?? {};
-  const validacion = validarLogin(datos);
-
-  if (!validacion.ok) {
-    return res.status(400).json({ error: validacion.errores.join(' ') });
+  constructor(servicioAuth) {
+    this.#servicio = servicioAuth;
+    this.router = express.Router();
+    this.router.post('/', (req, res) => this.iniciarSesion(req, res));
   }
 
-  try {
-    const usuario = db.prepare(`
-      SELECT id, nombre, rol, password_hash
-      FROM usuarios
-      WHERE ci = ?
-    `).get(datos.ci.trim());
-
-    if (!usuario || !(await verificarPassword(datos.password, usuario.password_hash))) {
-      return res.status(401).json({
-        error: 'Carnet o contraseña incorrectos.'
+  // POST /api/login — 200 { token, usuario }, 400 datos inválidos, 401 carnet o clave incorrectos.
+  async iniciarSesion(req, res) {
+    try {
+      const resultado = await this.#servicio.iniciarSesion(req.body ?? {});
+      return res.status(200).json(resultado);
+    } catch (error) {
+      if (error.estado) {
+        return res.status(error.estado).json({ error: error.message });
+      }
+      console.error('Error al iniciar sesión:', error);
+      return res.status(500).json({
+        error: 'No se pudo iniciar sesión. Verifica la configuración del servidor.'
       });
     }
-
-    const rolesGuardados = db.prepare(`
-      SELECT rol
-      FROM usuario_roles
-      WHERE usuario_id = ?
-      ORDER BY CASE rol
-        WHEN 'trabajador' THEN 0
-        WHEN 'empleador' THEN 1
-      END
-    `).all(usuario.id).map(fila => fila.rol);
-    const roles = rolesGuardados.length > 0
-      ? rolesGuardados
-      : [usuario.rol];
-
-    const token = crearToken(usuario);
-    return res.status(200).json({
-      token,
-      usuario: {
-        id: usuario.id,
-        nombre: usuario.nombre,
-        rol: roles[0],
-        roles
-      }
-    });
-  } catch (error) {
-    console.error('Error al iniciar sesión:', error);
-    return res.status(500).json({
-      error: 'No se pudo iniciar sesión. Verifica la configuración del servidor.'
-    });
   }
-});
-
-export default router;
+}

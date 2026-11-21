@@ -6,7 +6,6 @@
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import express from 'express';
 import bcrypt from 'bcryptjs';
 
 // =======================================================
@@ -74,21 +73,11 @@ before(async () => {
 
   process.env.DB_PATH = ':memory:';
 
-  // Importar la ruta real de registro.
-  const { default: routerRegistro } =
-    await import('../backend/controladores/registroController.js');
+  // Importar la aplicación real (server.js monta RegistroController).
+  const { default: app } = await import('../backend/server.js');
 
-  // Importar la conexión SQLite utilizada por la ruta.
+  // Importar la conexión SQLite utilizada por el repositorio.
   ({ db } = await import('../backend/db.js'));
-
-  // Crear una aplicación Express solo para las pruebas.
-  const app = express();
-
-  // Permitir recibir datos JSON.
-  app.use(express.json());
-
-  // Conectar la ruta de registro.
-  app.use('/api/registro', routerRegistro);
 
   // Iniciar el servidor en un puerto disponible.
   servidor = app.listen(0, '127.0.0.1');

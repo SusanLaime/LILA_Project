@@ -7,11 +7,32 @@ import express from 'express';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
-import registroRouter from './controladores/registroController.js';
-import loginRouter from './controladores/loginController.js';
-import perfilRouter from './controladores/perfilController.js';
-
+import db from './db.js';
 import { validarConfiguracionJwt } from './seguridad.js';
+
+import { RepositorioUsuariosSqlite } from './infraestructura/RepositorioUsuariosSqlite.js';
+import { HasheadorBcrypt } from './infraestructura/HasheadorBcrypt.js';
+import { TokensJwt } from './infraestructura/TokensJwt.js';
+import { ServicioAuth } from './servicios/ServicioAuth.js';
+import { ServicioPerfil } from './servicios/ServicioPerfil.js';
+import { MiddlewareSesion } from './controladores/MiddlewareSesion.js';
+import { RegistroController } from './controladores/registroController.js';
+import { LoginController } from './controladores/loginController.js';
+import { PerfilController } from './controladores/perfilController.js';
+
+// =====================================================================
+// RAÍZ DE COMPOSICIÓN
+// =====================================================================
+
+// Este es el ÚNICO lugar que conoce las clases concretas: crea cada pieza
+// y se la pasa por el constructor a quien la necesita (inyección de dependencias).
+const usuarios = new RepositorioUsuariosSqlite(db);
+const hasheador = new HasheadorBcrypt();
+const tokens = new TokensJwt();
+
+const servicioAuth = new ServicioAuth({ usuarios, hasheador, tokens });
+const servicioPerfil = new ServicioPerfil({ usuarios });
+const middlewareSesion = new MiddlewareSesion(tokens);
 
 // =====================================================================
 // CONFIGURACIÓN DE DIRECTORIOS
@@ -53,13 +74,13 @@ app.use('/frontend', express.static(resolve(raiz, 'frontend')));
 // =====================================================================
 
 // Registro de usuarios
-app.use('/api/registro', registroRouter);
+app.use('/api/registro', new RegistroController(servicioAuth).router);
 
 // Inicio de sesión
-app.use('/api/login', loginRouter);
+app.use('/api/login', new LoginController(servicioAuth).router);
 
 // Perfil del usuario autenticado
-app.use('/api/perfil', perfilRouter);
+app.use('/api/perfil', new PerfilController(servicioPerfil, middlewareSesion).router);
 
 // =====================================================================
 // RUTA PRINCIPAL

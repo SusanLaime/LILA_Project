@@ -7,13 +7,11 @@ process.env.DB_PATH = ':memory:';
 process.env.JWT_SECRET = 'solo-para-pruebas-de-integracion';
 
 const [
-  { default: express },
-  { default: perfilRouter },
+  { default: app },
   { default: db },
   { crearToken }
 ] = await Promise.all([
-  import('express'),
-  import('../backend/controladores/perfilController.js'),
+  import('../backend/server.js'),
   import('../backend/db.js'),
   import('../backend/seguridad.js')
 ]);
@@ -41,10 +39,6 @@ db.prepare(`
   )
   VALUES (?, ?, ?, ?, ?, ?)
 `).run(usuarioId, 'La Paz', 'Ventas', 'Un año', 'femenino', 25);
-
-const app = express();
-app.use(express.json());
-app.use('/api/perfil', perfilRouter);
 
 const server = app.listen(0, '127.0.0.1');
 await new Promise(resolve => server.once('listening', resolve));

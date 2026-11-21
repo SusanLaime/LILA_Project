@@ -13,13 +13,11 @@ process.env.DB_PATH = ':memory:';
 process.env.JWT_SECRET = 'solo-para-pruebas-de-integracion';
 
 const [
-  { default: express },
-  { default: loginRouter },
+  { default: app },
   { default: db },
   { hashPassword }
 ] = await Promise.all([
-  import('express'),
-  import('../backend/controladores/loginController.js'),
+  import('../backend/server.js'),
   import('../backend/db.js'),
   import('../backend/seguridad.js')
 ]);
@@ -40,10 +38,6 @@ const usuarioId = Number(insert.run(
   'trabajador',
   new Date().toISOString()
 ).lastInsertRowid);
-
-const app = express();
-app.use(express.json());
-app.use('/api/login', loginRouter);
 
 const server = app.listen(0, '127.0.0.1');
 await new Promise(resolve => server.once('listening', resolve));
