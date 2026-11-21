@@ -76,7 +76,7 @@ before(async () => {
 
   // Importar la ruta real de registro.
   const { default: routerRegistro } =
-    await import('../backend/routes/registro.js');
+    await import('../backend/controladores/registroController.js');
 
   // Importar la conexión SQLite utilizada por la ruta.
   ({ db } = await import('../backend/db.js'));

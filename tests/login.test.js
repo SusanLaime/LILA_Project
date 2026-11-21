@@ -19,7 +19,7 @@ const [
   { hashPassword }
 ] = await Promise.all([
   import('express'),
-  import('../backend/routes/login.js'),
+  import('../backend/controladores/loginController.js'),
   import('../backend/db.js'),
   import('../backend/seguridad.js')
 ]);

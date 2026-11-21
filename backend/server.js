@@ -7,9 +7,9 @@ import express from 'express';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
-import registroRouter from './routes/registro.js';
-import loginRouter from './routes/login.js';
-import perfilRouter from './routes/perfil.js';
+import registroRouter from './controladores/registroController.js';
+import loginRouter from './controladores/loginController.js';
+import perfilRouter from './controladores/perfilController.js';
 
 import { validarConfiguracionJwt } from './seguridad.js';
 

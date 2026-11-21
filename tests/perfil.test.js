@@ -13,7 +13,7 @@ const [
   { crearToken }
 ] = await Promise.all([
   import('express'),
-  import('../backend/routes/perfil.js'),
+  import('../backend/controladores/perfilController.js'),
   import('../backend/db.js'),
   import('../backend/seguridad.js')
 ]);
