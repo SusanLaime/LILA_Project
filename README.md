@@ -17,9 +17,9 @@ Cada archivo indica su dueña o dueño en la primera línea (`DUEÑA/O: ...`).
 | Integrante | Frontend | Backend | Pruebas |
 |---|---|---|---|
 | **Susan Laime** | **Página de inicio (Home):** `frontend/index.html`, `css/pages/home.css`. **Estilos globales:** `css/base/reset.css`, `css/base/typography.css`, `css/utilities/responsive.css` | `backend/server.js`, `backend/validacion.js` | P-09 a P-11 (manuales) |
-| **Natalia Arze** | **Inicio de sesión y registro (trabajador o empleador):** `auth/login.html`, `auth/register.html`, `js/login.js`, `js/registro.js`, `css/pages/login.css`, `css/components/forms.css` | **Base de datos:** `database/schema.sql`, `database/seed.sql`, `backend/db.js`. **Registro:** `backend/routes/registro.js` (CA-02) | `tests/db.test.js`, `tests/registro.test.js` (P-00 a P-03) |
-| **Sara Revollo** | **Perfil:** `website/trabajador/perfil.html`, `js/perfil.js`, `css/pages/profile.css` (y revisar `css/pages/buscar.css`) | `backend/routes/perfil.js` (CA-01) | `tests/perfil.test.js` (P-06 a P-08) |
-| **Joaquín Peredo** | **Navbar y footer:** `components/header.html`, `components/footer.html`, `js/components.js`, `css/components/header.css`, `css/components/footer.css`. **Sesión en el navegador:** `js/sesion.js`, `js/api.js` | `backend/seguridad.js`, `backend/routes/login.js` | `tests/login.test.js` (P-04, P-05) |
+| **Natalia Arze** | **Inicio de sesión y registro (trabajador o empleador):** `auth/login.html`, `auth/register.html`, `js/login.js`, `js/registro.js`, `css/pages/login.css`, `css/components/forms.css` | **Base de datos:** `database/schema.sql`, `database/seed.sql`, `backend/db.js`. **Registro:** `backend/controladores/registroController.js` (CA-02) | `tests/db.test.js`, `tests/registro.test.js` (P-00 a P-03) |
+| **Sara Revollo** | **Perfil:** `website/trabajador/perfil.html`, `js/perfil.js`, `css/pages/profile.css` (y revisar `css/pages/buscar.css`) | `backend/controladores/perfilController.js` (CA-01) | `tests/perfil.test.js` (P-06 a P-08) |
+| **Joaquín Peredo** | **Navbar y footer:** `components/header.html`, `components/footer.html`, `js/components.js`, `css/components/header.css`, `css/components/footer.css`. **Sesión en el navegador:** `js/sesion.js`, `js/api.js` | `backend/seguridad.js`, `backend/controladores/loginController.js` | `tests/login.test.js` (P-04, P-05) |
 
 **Acuerdo entre frontend y backend:** [`docs/API.md`](docs/API.md). Nadie lo cambia sin avisar al grupo.
 
@@ -156,12 +156,35 @@ Cada persona agrega una fila por cada uso relevante de IA (programación, depura
 
 ## Estructura del proyecto
 
+El código está organizado con programación orientada a objetos (OOP). La arquitectura
+sigue siendo un monolito cliente-servidor en tres capas; el detalle está en
+[`docs/plan-implementacion-oop.md`](docs/plan-implementacion-oop.md) y el diagrama de clases en
+[`docs/LILA diagrama-clases-oop.drawio`](docs/LILA%20diagrama-clases-oop.drawio).
+
 ```
-backend/      Servidor Express, validaciones, seguridad y rutas de la API
-database/     Esquema y datos de prueba de SQLite
-frontend/     Página de inicio, inicio de sesión, registro, perfil, navbar y footer
-tests/        Pruebas automatizadas (node --test)
-docs/API.md   Acuerdo entre frontend y backend
+backend/
+├── server.js            Arranca Express y crea e inyecta todas las piezas (raíz de composición)
+├── db.js                Conexión única a SQLite (crea tablas y carga datos de prueba)
+├── seguridad.js         Hash de contraseñas (bcrypt) y tokens de sesión (JWT)
+├── validacion.js        Reglas de los formularios de registro, login y perfil
+├── dominio/             Objetos del negocio: Usuario, Perfil, PerfilTrabajador, PerfilEmpleador
+├── contratos/           Interfaces: RepositorioUsuarios, Hasheador, Tokens
+├── servicios/           Casos de uso: ServicioAuth (registro y login), ServicioPerfil
+├── infraestructura/     RepositorioUsuariosSqlite (todo el SQL), HasheadorBcrypt, TokensJwt
+└── controladores/       Rutas HTTP de la API: registro, login, perfil y MiddlewareSesion
+database/                Esquema y datos de prueba de SQLite
+frontend/
+├── auth/, website/      Páginas HTML (vista)
+├── components/          Navbar y footer compartidos
+└── assets/
+    ├── css/             Estilos
+    └── js/
+        ├── nucleo/      Pagina (clase base), ClienteApi y Sesion
+        ├── login.js, registro.js, perfil.js   Clases PaginaLogin, PaginaRegistro, PaginaPerfil
+        ├── api.js, sesion.js                  Llamadas a la API y sesión en el navegador
+        └── components.js, ofertas.js          Navbar/footer y ofertas (en localStorage)
+tests/                   Pruebas automatizadas (node --test); tests/servicios/ usa repositorios falsos
+docs/API.md              Acuerdo entre frontend y backend
 ```
 
 ## Limitaciones conocidas
