@@ -70,17 +70,38 @@ npm run test:e2e   # Abre las páginas reales en Chrome o Edge y prueba el recor
 
 ## Cómo está organizado
 
-El proyecto tiene tres grandes partes: el **servidor**, las **páginas** que ve el usuario y la **base de datos**, acompañadas de pruebas automatizadas y documentación.
+```
+LILA_Project/
+├── backend/
+│   ├── contratos/
+│   ├── controladores/
+│   ├── dominio/
+│   ├── infraestructura/
+│   ├── servicios/
+│   ├── db.js
+│   ├── seguridad.js
+│   ├── server.js
+│   └── validacion.js
+├── database/
+├── docs/
+├── frontend/
+│   ├── assets/
+│   ├── auth/
+│   ├── components/
+│   ├── images/
+│   └── website/
+├── tests/
+└── README.md
+```
 
-Dentro del servidor, el código sigue el mismo orden que las capas de la arquitectura, de afuera hacia adentro:
+- **backend/**: el servidor que recibe las peticiones, aplica las reglas del negocio y guarda los datos.
+- **database/**: la estructura de las tablas y los datos de prueba.
+- **docs/**: la documentación del proyecto.
+- **frontend/**: las pantallas, estilos y lógica que el usuario ve y usa en el navegador.
+- **tests/**: las pruebas automáticas que revisan que todo funcione.
+- **README.md**: este documento, con el resumen del proyecto.
 
-1. **Controladores:** reciben las peticiones del navegador y devuelven las respuestas.
-2. **Servicios:** aplican las reglas de cada caso de uso, como registrarse, iniciar sesión o editar el perfil.
-3. **Dominio:** representa los conceptos del negocio (el usuario y sus perfiles de trabajador y empleador) con sus propias reglas.
-4. **Contratos:** describen qué se necesita (guardar usuarios, cifrar contraseñas, crear sesiones) sin decir cómo se hace.
-5. **Infraestructura:** cumple esos contratos con herramientas reales (la base de datos, el cifrado y los tokens).
-
-Un único punto de arranque crea todas estas piezas y las conecta entre sí.
+En la raíz también hay archivos secundarios. `package.json` define los comandos (`npm start`, `npm test`) y las librerías que usa la app. `package-lock.json` guarda la versión exacta de cada librería para que todo el equipo instale lo mismo. `.gitignore` indica qué archivos no se suben al repositorio, y `LICENSE` contiene la licencia del proyecto.
 
 ## Diseño orientado a objetos
 
