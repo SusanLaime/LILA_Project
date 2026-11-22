@@ -18,10 +18,14 @@
 
 ## Arquitectura
 
-- **Monolítica modular:** todo corre en un solo proceso de Node.js. `backend/server.js` arranca, crea las piezas, entrega el frontend, atiende la API y usa SQLite dentro del mismo proceso.
-- **Cliente-servidor (API REST + JSON):** el navegador (`ClienteApi`) pide datos con `fetch` a `/api/registro`, `/api/login` y `/api/perfil`. El servidor responde en JSON, y la sesión viaja como token JWT (`Authorization: Bearer`).
-- **Tres capas:** presentación (`frontend/` y `backend/controladores/`), aplicación (`backend/servicios/`, `backend/dominio/`, `backend/contratos/`) y datos (`backend/infraestructura/`, `backend/db.js`, `database/`).
-- **MVC:** la Vista son las páginas HTML y las clases `Pagina*`; el Controlador son los `*Controller`; el Modelo son los servicios, el dominio y el repositorio.
+LILA combina cuatro ideas de arquitectura, y cada una responde a una pregunta distinta:
+
+- **¿Cómo se despliega? Monolítica modular.** Todo el sistema funciona como una sola aplicación, con una sola base de datos. Es más simple de construir, probar y poner en marcha que varios servicios separados. Por dentro, el código está dividido en módulos con responsabilidades claras, lo que permite repartir el trabajo entre el equipo.
+- **¿Cómo se comunican sus partes? Cliente-servidor con API REST.** El navegador (cliente) pide información y el servidor la procesa y responde. Cada recurso tiene una dirección, cada acción usa un método HTTP y los datos viajan en formato JSON. Toda la lógica sensible se ejecuta en el servidor, porque lo que envía el cliente no se considera confiable.
+- **¿Cómo se ordena el código? Tres capas.** La **presentación** muestra la información y recibe las acciones del usuario. La **aplicación** contiene las reglas del negocio. Los **datos** guardan y recuperan la información. Cada capa solo conversa con la de al lado.
+- **¿Cómo se separan responsabilidades? MVC.** La **Vista** es lo que el usuario ve, el **Controlador** recibe sus acciones y decide qué hacer, y el **Modelo** representa los datos y sus reglas. Así, cambiar el diseño de una pantalla no obliga a cambiar la lógica, y al revés.
+
+Además, el sistema aplica **inversión de dependencias**: las reglas del negocio no dependen de herramientas concretas (la base de datos, la librería de cifrado o la de tokens), sino de **contratos** que esas herramientas cumplen. Si mañana se cambia una tecnología, las reglas no se tocan.
 
 ## Tech stack
 
@@ -60,94 +64,44 @@ JWT_SECRET=cambia-esta-clave  # obligatorio: sin esta clave el servidor no arran
 ```bash
 npm start          # Arranca el servidor con .env; abrir http://localhost:3000
 npm run dev        # Igual que start, pero reinicia solo al guardar cambios
-npm test           # Corre todas las pruebas automatizadas de tests/ con una base en memoria
+npm test           # Corre todas las pruebas automatizadas con una base en memoria
 npm run test:e2e   # Abre las páginas reales en Chrome o Edge y prueba el recorrido
 ```
 
-## Estructura del repositorio
+## Cómo está organizado
 
-El repositorio está dividido en tres partes: `backend/`, el servidor en Node.js y Express; `frontend/`, las páginas que ve el usuario; y `database/` con `tests/`, la base SQLite y las pruebas. Dentro de `backend/`, cada carpeta corresponde a una capa de la arquitectura: los controladores reciben HTTP, los servicios aplican las reglas, el dominio guarda los objetos del negocio, los contratos definen las interfaces y la infraestructura habla con SQLite, bcrypt y JWT. `server.js` es el único archivo que une todo.
+El proyecto tiene tres grandes partes: el **servidor**, las **páginas** que ve el usuario y la **base de datos**, acompañadas de pruebas automatizadas y documentación.
 
-```
-backend/
-├── server.js          Punto de entrada: crea, inyecta y monta todas las piezas
-├── db.js              Conexión única a SQLite
-├── seguridad.js       bcrypt (contraseñas) y JWT (tokens)
-├── validacion.js      Reglas de registro, login y perfil
-├── controladores/     RegistroController, LoginController, PerfilController, MiddlewareSesion
-├── servicios/         ServicioAuth, ServicioPerfil, errores.js
-├── dominio/           Usuario, Perfil, PerfilTrabajador, PerfilEmpleador
-├── contratos/         RepositorioUsuarios, Hasheador, Tokens
-└── infraestructura/   RepositorioUsuariosSqlite, HasheadorBcrypt, TokensJwt
-database/              Esquema y datos de prueba
-frontend/
-├── auth/, website/    Páginas HTML
-├── components/        Navbar y footer
-└── assets/
-    ├── css/           Estilos
-    └── js/
-        ├── nucleo/                          Pagina, ClienteApi, Sesion
-        ├── login.js, registro.js, perfil.js PaginaLogin, PaginaRegistro, PaginaPerfil
-        └── api.js, sesion.js, components.js, ofertas.js
-tests/                 Pruebas automatizadas (npm test)
-docs/                  API.md, plan de implementación y diagrama de clases
-```
+Dentro del servidor, el código sigue el mismo orden que las capas de la arquitectura, de afuera hacia adentro:
 
-## Diagrama de clases
+1. **Controladores:** reciben las peticiones del navegador y devuelven las respuestas.
+2. **Servicios:** aplican las reglas de cada caso de uso, como registrarse, iniciar sesión o editar el perfil.
+3. **Dominio:** representa los conceptos del negocio (el usuario y sus perfiles de trabajador y empleador) con sus propias reglas.
+4. **Contratos:** describen qué se necesita (guardar usuarios, cifrar contraseñas, crear sesiones) sin decir cómo se hace.
+5. **Infraestructura:** cumple esos contratos con herramientas reales (la base de datos, el cifrado y los tokens).
 
-El diagrama de clases ([`docs/LILA diagrama-clases-oop REPO V5.drawio`](docs/LILA%20diagrama-clases-oop%20REPO%20V5.drawio), pestaña *LILA - Clases OOP*) es sencillo y muestra cómo LILA aplica la programación orientada a objetos: clases con una sola responsabilidad, herencia, composición e interfaces. Está dividido en seis grupos, que coinciden con las carpetas del código: **Frontend**, **Controladores HTTP**, **Servicios**, **Dominio**, **Contratos** y **Datos e infraestructura**. Las clases en gris punteado («futuro») son del siguiente incremento (ofertas). Abajo se resume en una línea qué hace cada clase y cuáles son las relaciones clave para entender el diagrama de una pasada.
+Un único punto de arranque crea todas estas piezas y las conecta entre sí.
 
-**Relaciones clave**
-- **Usuario ◆— Perfil (composición):** un `Usuario` tiene 1 o 2 perfiles; sin el usuario, el perfil no existe.
-- **PerfilTrabajador y PerfilEmpleador ◁— Perfil (herencia):** los dos son un `Perfil`, y el servicio los trata igual (polimorfismo).
-- **Controlador → Servicio:** `RegistroController` y `LoginController` usan `ServicioAuth`; `PerfilController` usa `ServicioPerfil` y pasa antes por `MiddlewareSesion`.
-- **Servicio → Contrato ◁┄ Infraestructura (implementa):** los servicios dependen de las interfaces (`RepositorioUsuarios`, `Hasheador`, `Tokens`), y `RepositorioUsuariosSqlite`, `HasheadorBcrypt` y `TokensJwt` las implementan.
-- **server.js ┄> todo (crea e inyecta / monta):** `server.js` crea las clases concretas, se las pasa a los servicios y monta los controladores.
-- **Pagina → ClienteApi → Sesion → (HTTP) Controladores:** cada página usa `ClienteApi`, que envía el token de `Sesion` a la API.
+## Diseño orientado a objetos
 
-**Frontend**
-- `Pagina` (abstracta): base de las páginas; `iniciar()` llama a `alCargar()` y muestra mensajes.
-- `PaginaLogin`: formulario de inicio de sesión; guarda el token.
-- `PaginaRegistro`: formulario de registro y modo "agregar rol".
-- `PaginaPerfil`: carga, muestra y guarda el perfil.
-- `ClienteApi`: `get`, `post` y `put` a la API con el token de `Sesion`.
-- `Sesion`: guarda, lee y borra el token y el rol activo en el navegador.
+El sistema está modelado con **programación orientada a objetos**, siguiendo cuatro principios:
 
-**Controladores HTTP**
-- `server.js` (módulo): crea las clases concretas, las inyecta y monta los controladores.
-- `RegistroController`: `POST /api/registro` → `ServicioAuth.registrar()`.
-- `LoginController`: `POST /api/login` → `ServicioAuth.iniciarSesion()`.
-- `PerfilController`: `GET`/`PUT /api/perfil` y `POST /api/perfil/roles` → `ServicioPerfil`.
-- `MiddlewareSesion`: revisa el token antes de las rutas de perfil y guarda `req.usuarioId`.
+- **Una responsabilidad por clase:** cada clase tiene un solo motivo para cambiar. La que atiende peticiones no guarda datos, y la que guarda datos no decide reglas.
+- **Herencia y polimorfismo:** los perfiles de trabajador y de empleador comparten una base común y cada uno agrega lo suyo. El resto del sistema los trata igual, sin preguntar de qué tipo son. Lo mismo ocurre con las páginas del navegador.
+- **Composición:** un usuario está formado por uno o dos perfiles. Un perfil no existe sin su usuario.
+- **Abstracción:** las partes del sistema se comunican mediante contratos (interfaces), no mediante detalles técnicos. Así, cada pieza puede cambiar o probarse por separado.
 
-**Servicios**
-- `ServicioAuth`: registra usuarios (`registrar`) e inicia sesión (`iniciarSesion`).
-- `ServicioPerfil`: ve, actualiza y agrega un rol al perfil.
-
-**Dominio**
-- `Usuario`: datos de la cuenta y sus perfiles; agrega y busca un perfil por rol.
-- `Perfil` (abstracta): datos comunes (ciudad, género, edad); `actualizar()` y `aJSON()`.
-- `PerfilTrabajador`: hereda de `Perfil` y agrega habilidades y experiencia.
-- `PerfilEmpleador`: hereda de `Perfil` con el rol empleador.
-
-**Contratos**
-- `RepositorioUsuarios`: define `buscarPorId`, `buscarPorCi`, `existe` y `guardar`.
-- `Hasheador`: define `hashear` y `comparar` contraseñas.
-- `Tokens`: define `crear` y `verificar` el token de sesión.
-
-**Datos e infraestructura**
-- `RepositorioUsuariosSqlite`: implementa `RepositorioUsuarios`; es la única clase con SQL.
-- `HasheadorBcrypt`: implementa `Hasheador` con bcrypt.
-- `TokensJwt`: implementa `Tokens` con JWT (8 horas).
+El diagrama de clases está en la documentación del proyecto. Las clases marcadas como «futuro» corresponden al siguiente incremento: la publicación de ofertas.
 
 ## Patrones de diseño
 
-Los patrones de diseño están marcados en la pestaña *Design Patterns* del mismo drawio. Cada patrón aparece como un óvalo unido a las clases que participan en él, sin cambiar el orden del diagrama de clases. Se usan siete patrones, y cada uno resuelve un problema concreto del código: separar el SQL, aislar las librerías externas, cambiar de tecnología sin tocar los servicios y evitar repetir código en el frontend.
+LILA aplica patrones de diseño conocidos para resolver problemas concretos:
 
-- **Repository:** `RepositorioUsuariosSqlite` concentra todo el acceso a SQLite detrás de `RepositorioUsuarios`.
-- **Adapter:** `HasheadorBcrypt`, `TokensJwt` y `Sesion` adaptan bcrypt, JWT y `localStorage` a una interfaz propia.
-- **Strategy:** los servicios dependen de `RepositorioUsuarios`, `Hasheador` y `Tokens`, no de una tecnología concreta.
-- **Dependency Injection:** solo `server.js` crea las clases concretas y se las pasa por el constructor.
-- **Template Method:** `Pagina.iniciar()` define los pasos y cada página implementa `alCargar()`.
-- **Facade:** `ClienteApi` oculta `fetch`, el token y el manejo de errores detrás de `get`, `post` y `put`.
-- **Chain of Responsibility:** `MiddlewareSesion` → `PerfilController`; cada eslabón atiende la petición o la corta con `401`.
+- **Repository:** concentra todo el acceso a la base de datos en un solo lugar. El resto del sistema pide "busca" o "guarda" sin saber cómo se almacena la información.
+- **Adapter:** envuelve herramientas externas (el cifrado, los tokens, el almacenamiento del navegador) para que encajen en una forma propia del sistema, sin reescribirlas.
+- **Strategy:** permite intercambiar una tecnología por otra que cumpla el mismo contrato, sin modificar las reglas del negocio.
+- **Inyección de dependencias:** cada pieza recibe lo que necesita desde afuera, en vez de crearlo ella misma. Esto reduce el acoplamiento y facilita las pruebas.
+- **Template Method:** una clase base define los pasos comunes de un proceso, y cada variante completa solo su parte. Se usa para que todas las páginas arranquen igual.
+- **Facade:** ofrece una puerta de entrada simple a algo complejo. Las páginas se comunican con el servidor sin ocuparse de los detalles de la conexión ni de la sesión.
+- **Chain of Responsibility:** una petición pasa por una cadena de pasos, y cualquiera puede atenderla o detenerla. Así se revisa la sesión antes de dar acceso al perfil.
+- **Observer:** las páginas se suscriben a las acciones del usuario (clics, envíos de formularios, cambios en los campos) y reaccionan cuando ocurren, mediante el modelo de eventos del navegador.
