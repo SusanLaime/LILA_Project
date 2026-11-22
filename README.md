@@ -1,11 +1,18 @@
 # LILA — Librería Laboral
 
-## Integrantes
+Plataforma web que conecta a personas que buscan trabajo con empleadores en Bolivia.
 
-- Natalia Arze Torrez
-- Susan Laime Lucero
-- Sara Revollo Mérida
-- Joaquin Peredo
+## Índice
+
+1. [¿Qué es LILA?](#qué-es-lila)
+2. [Tecnologías](#tecnologías)
+3. [Cómo ejecutarlo](#cómo-ejecutarlo)
+4. [Estructura del proyecto](#estructura-del-proyecto)
+5. [Arquitectura](#arquitectura)
+6. [Diseño orientado a objetos](#diseño-orientado-a-objetos)
+7. [Patrones de diseño](#patrones-de-diseño)
+8. [Equipo](#equipo)
+9. [Licencia](#licencia)
 
 ## ¿Qué es LILA?
 
@@ -16,18 +23,7 @@
 - Contraseñas cifradas, sesión segura y perfil propio para cada rol.
 - Este incremento cubre: **registro → inicio de sesión → ver y editar el perfil**.
 
-## Arquitectura
-
-LILA combina cuatro ideas de arquitectura, y cada una responde a una pregunta distinta:
-
-- **¿Cómo se despliega? Monolítica modular.** Todo el sistema funciona como una sola aplicación, con una sola base de datos. Es más simple de construir, probar y poner en marcha que varios servicios separados. Por dentro, el código está dividido en módulos con responsabilidades claras, lo que permite repartir el trabajo entre el equipo.
-- **¿Cómo se comunican sus partes? Cliente-servidor con API REST.** El navegador (cliente) pide información y el servidor la procesa y responde. Cada recurso tiene una dirección, cada acción usa un método HTTP y los datos viajan en formato JSON. Toda la lógica sensible se ejecuta en el servidor, porque lo que envía el cliente no se considera confiable.
-- **¿Cómo se ordena el código? Tres capas.** La **presentación** muestra la información y recibe las acciones del usuario. La **aplicación** contiene las reglas del negocio. Los **datos** guardan y recuperan la información. Cada capa solo conversa con la de al lado.
-- **¿Cómo se separan responsabilidades? MVC.** La **Vista** es lo que el usuario ve, el **Controlador** recibe sus acciones y decide qué hacer, y el **Modelo** representa los datos y sus reglas. Así, cambiar el diseño de una pantalla no obliga a cambiar la lógica, y al revés.
-
-Además, el sistema aplica **inversión de dependencias**: las reglas del negocio no dependen de herramientas concretas (la base de datos, la librería de cifrado o la de tokens), sino de **contratos** que esas herramientas cumplen. Si mañana se cambia una tecnología, las reglas no se tocan.
-
-## Tech stack
+## Tecnologías
 
 - **Backend:** Node.js 22.13+ (ES Modules) con Express 5
 - **Base de datos:** SQLite incorporado en Node (`node:sqlite`); no se instala ningún motor aparte
@@ -35,7 +31,7 @@ Además, el sistema aplica **inversión de dependencias**: las reglas del negoci
 - **Frontend:** HTML, CSS y JavaScript sin frameworks, organizado en clases
 - **Pruebas:** `node:test` (incluido en Node) y playwright-core para las pruebas en el navegador
 
-## Getting started
+## Cómo ejecutarlo
 
 ### Prerrequisitos
 
@@ -68,7 +64,7 @@ npm test           # Corre todas las pruebas automatizadas con una base en memor
 npm run test:e2e   # Abre las páginas reales en Chrome o Edge y prueba el recorrido
 ```
 
-## Cómo está organizado
+## Estructura del proyecto
 
 ```
 LILA_Project/
@@ -103,6 +99,17 @@ LILA_Project/
 
 En la raíz también hay archivos secundarios. `package.json` define los comandos (`npm start`, `npm test`) y las librerías que usa la app. `package-lock.json` guarda la versión exacta de cada librería para que todo el equipo instale lo mismo. `.gitignore` indica qué archivos no se suben al repositorio, y `LICENSE` contiene la licencia del proyecto.
 
+## Arquitectura
+
+LILA combina cuatro ideas de arquitectura, y cada una responde a una pregunta distinta:
+
+- **¿Cómo se despliega? Monolítica modular.** Todo el sistema funciona como una sola aplicación, con una sola base de datos. Es más simple de construir, probar y poner en marcha que varios servicios separados. Por dentro, el código está dividido en módulos con responsabilidades claras, lo que permite repartir el trabajo entre el equipo.
+- **¿Cómo se comunican sus partes? Cliente-servidor con API REST.** El navegador (cliente) pide información y el servidor la procesa y responde. Cada recurso tiene una dirección, cada acción usa un método HTTP y los datos viajan en formato JSON. Toda la lógica sensible se ejecuta en el servidor, porque lo que envía el cliente no se considera confiable.
+- **¿Cómo se ordena el código? Tres capas.** La **presentación** muestra la información y recibe las acciones del usuario. La **aplicación** contiene las reglas del negocio. Los **datos** guardan y recuperan la información. Cada capa solo conversa con la de al lado.
+- **¿Cómo se separan responsabilidades? MVC.** La **Vista** es lo que el usuario ve, el **Controlador** recibe sus acciones y decide qué hacer, y el **Modelo** representa los datos y sus reglas. Así, cambiar el diseño de una pantalla no obliga a cambiar la lógica, y al revés.
+
+Además, el sistema aplica **inversión de dependencias**: las reglas del negocio no dependen de herramientas concretas (la base de datos, la librería de cifrado o la de tokens), sino de **contratos** que esas herramientas cumplen. Si mañana se cambia una tecnología, las reglas no se tocan.
+
 ## Diseño orientado a objetos
 
 El sistema está modelado con **programación orientada a objetos**, siguiendo cuatro principios:
@@ -116,13 +123,35 @@ El diagrama de clases está en la documentación del proyecto. Las clases marcad
 
 ## Patrones de diseño
 
-LILA aplica patrones de diseño conocidos para resolver problemas concretos:
+LILA aplica 12 patrones y técnicas de diseño que se detallan a continuación:
+### Patrones de arquitectura
 
-- **Repository:** concentra todo el acceso a la base de datos en un solo lugar. El resto del sistema pide "busca" o "guarda" sin saber cómo se almacena la información.
-- **Adapter:** envuelve herramientas externas (el cifrado, los tokens, el almacenamiento del navegador) para que encajen en una forma propia del sistema, sin reescribirlas.
-- **Strategy:** permite intercambiar una tecnología por otra que cumpla el mismo contrato, sin modificar las reglas del negocio.
-- **Inyección de dependencias:** cada pieza recibe lo que necesita desde afuera, en vez de crearlo ella misma. Esto reduce el acoplamiento y facilita las pruebas.
-- **Template Method:** una clase base define los pasos comunes de un proceso, y cada variante completa solo su parte. Se usa para que todas las páginas arranquen igual.
-- **Facade:** ofrece una puerta de entrada simple a algo complejo. Las páginas se comunican con el servidor sin ocuparse de los detalles de la conexión ni de la sesión.
-- **Chain of Responsibility:** una petición pasa por una cadena de pasos, y cualquiera puede atenderla o detenerla. Así se revisa la sesión antes de dar acceso al perfil.
-- **Observer:** las páginas se suscriben a las acciones del usuario (clics, envíos de formularios, cambios en los campos) y reaccionan cuando ocurren, mediante el modelo de eventos del navegador.
+1. **Repository:** `RepositorioUsuariosSqlite` concentra todo el SQL de usuarios y perfiles, y los servicios solo le piden buscar o guardar sin saber que debajo hay SQLite.
+2. **Inyección de dependencias:** `server.js` crea todas las piezas concretas y se las pasa a cada clase por su constructor, en vez de que cada una las cree.
+
+### Principios de orientación a objetos
+
+3. **Herencia:** `PerfilTrabajador` y `PerfilEmpleador` heredan de la clase abstracta `Perfil`, y las páginas del navegador heredan de `Pagina`.
+4. **Polimorfismo:** `ServicioPerfil` llama a `actualizar(datos)` sobre cualquier perfil y cada tipo decide qué campos cambiar.
+5. **Composición:** un `Usuario` contiene uno o dos perfiles (uno por rol), así una persona puede ser trabajador y empleador con una sola cuenta.
+
+### Patrones clásicos
+
+6. **Adapter:** `HasheadorBcrypt` y `TokensJwt` adaptan las funciones de `seguridad.js` a los contratos del sistema, y `Sesion` y `ClienteApi` hacen lo mismo en el navegador.
+7. **Strategy:** `ServicioAuth` usa los contratos `Hasheador` y `Tokens`, hoy con una sola implementación cada uno (bcrypt y JWT), que podría cambiarse sin tocar las reglas del negocio.
+8. **Template Method:** `Pagina.iniciar()` define cómo arranca toda página y cada página hija solo completa `alCargar()`.
+9. **Facade:** `ClienteApi` ofrece a las páginas `get`, `post` y `put`, y oculta el token, el formato JSON y el manejo de errores de conexión.
+10. **Chain of Responsibility:** en `/api/perfil`, el middleware de Express `MiddlewareSesion` revisa el token y corta con 401 o deja pasar la petición al controlador.
+11. **Singleton (a nivel de módulo):** `db.js` abre una única conexión a SQLite y la exporta para que todo el backend la comparta.
+12. **Observer:** las páginas se suscriben con `addEventListener` a los eventos del navegador (clics, envíos, cambios) y reaccionan cuando ocurren.
+
+## Equipo
+
+- Natalia Arze Torrez
+- Susan Laime Lucero
+- Sara Revollo Mérida
+- Joaquin Peredo
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia Apache 2.0. Consulta el archivo [LICENSE](LICENSE).
