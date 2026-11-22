@@ -1,201 +1,153 @@
 # LILA — Librería Laboral
 
-**Plataforma web de trabajos ocasionales en Bolivia.**
+## Integrantes
 
-> **Primer Parcial — Primer incremento funcional.**
-> Este repositorio contiene **solo** el primer recorrido del MVP:
-> **página de inicio → crear cuenta (trabajador o empleador) → validación → guardar en la base de datos → iniciar sesión → ver y editar el perfil.**
+- Natalia Arze Torrez
+- Susan Laime Lucero
+- Sara Revollo Mérida
+- Joaquin Peredo
 
-<!-- Coordinación del README: Susan Laime. Cada integrante completa SUS filas y los TODO con su nombre. -->
+## ¿Qué es LILA?
 
-## Equipo y responsabilidades
+**LILA conecta, de forma ágil, simple y confiable, a personas que buscan trabajo con empleadores que necesitan talento en Bolivia.**
 
-Cada persona se encarga de **una pantalla y del backend que está detrás de ella**.
-Cada archivo indica en su primera línea a la persona responsable.
-**Solo se editan los archivos propios.** Si necesitas un cambio en un archivo de otra persona, pídeselo.
+- Reúne en un solo lugar trabajos formales, informales, temporales, por proyecto o por servicio, que hoy están dispersos en grupos y canales informales.
+- Una misma cuenta puede ser **trabajador**, **empleador** o ambos.
+- Contraseñas cifradas, sesión segura y perfil propio para cada rol.
+- Este incremento cubre: **registro → inicio de sesión → ver y editar el perfil**.
 
-| Integrante | Frontend | Backend | Pruebas |
-|---|---|---|---|
-| **Susan Laime** | **Página de inicio (Home):** `frontend/index.html`, `css/pages/home.css`. **Estilos globales:** `css/base/reset.css`, `css/base/typography.css`, `css/utilities/responsive.css` | `backend/server.js`, `backend/validacion.js` | P-09 a P-11 (manuales) |
-| **Natalia Arze** | **Inicio de sesión y registro (trabajador o empleador):** `auth/login.html`, `auth/register.html`, `js/login.js`, `js/registro.js`, `css/pages/login.css`, `css/components/forms.css` | **Base de datos:** `database/schema.sql`, `database/seed.sql`, `backend/db.js`. **Registro:** `backend/controladores/registroController.js` (CA-02) | `tests/db.test.js`, `tests/registro.test.js` (P-00 a P-03) |
-| **Sara Revollo** | **Perfil:** `website/trabajador/perfil.html`, `js/perfil.js`, `css/pages/profile.css` (y revisar `css/pages/buscar.css`) | `backend/controladores/perfilController.js` (CA-01) | `tests/perfil.test.js` (P-06 a P-08) |
-| **—** | **Navbar y footer:** `components/header.html`, `components/footer.html`, `js/components.js`, `css/components/header.css`, `css/components/footer.css`. **Sesión en el navegador:** `js/sesion.js`, `js/api.js` | `backend/seguridad.js`, `backend/controladores/loginController.js` | `tests/login.test.js` (P-04, P-05) |
+## Arquitectura
 
-**Acuerdo entre frontend y backend:** [`docs/API.md`](docs/API.md). Nadie lo cambia sin avisar al grupo.
+- **Monolítica modular:** todo corre en un solo proceso de Node.js. `backend/server.js` arranca, crea las piezas, entrega el frontend, atiende la API y usa SQLite dentro del mismo proceso.
+- **Cliente-servidor (API REST + JSON):** el navegador (`ClienteApi`) pide datos con `fetch` a `/api/registro`, `/api/login` y `/api/perfil`. El servidor responde en JSON, y la sesión viaja como token JWT (`Authorization: Bearer`).
+- **Tres capas:** presentación (`frontend/` y `backend/controladores/`), aplicación (`backend/servicios/`, `backend/dominio/`, `backend/contratos/`) y datos (`backend/infraestructura/`, `backend/db.js`, `database/`).
+- **MVC:** la Vista son las páginas HTML y las clases `Pagina*`; el Controlador son los `*Controller`; el Modelo son los servicios, el dominio y el repositorio.
 
-**Orden para no interrumpirse:**
-1. Primero: Natalia (base de datos), Susan (`server.js`, `validacion.js` y estilos globales) y — (`seguridad.js` y navbar). Los demás los necesitan.
-2. Después, en paralelo: cada persona hace su pantalla y su ruta.
-3. Al final: se une todo en `dev` y Susan hace las pruebas P-09 a P-11.
+## Tech stack
 
-**Ramas:** `main` (entrega) ← `dev` ← una rama `feature/...` por persona. Se une a `dev` con pull request y cada quien hace commits desde su propia cuenta. Solo Natalia ejecuta `npm install` para agregar dependencias, así nadie más modifica `package.json`.
+- **Backend:** Node.js 22.13+ (ES Modules) con Express 5
+- **Base de datos:** SQLite incorporado en Node (`node:sqlite`); no se instala ningún motor aparte
+- **Seguridad:** bcryptjs (cifrado de contraseñas) y jsonwebtoken (sesión con JWT de 8 horas)
+- **Frontend:** HTML, CSS y JavaScript sin frameworks, organizado en clases
+- **Pruebas:** `node:test` (incluido en Node) y playwright-core para las pruebas en el navegador
 
-Para resolver conflictos de combinación en VS Code, consulta [`docs/Solving_conflicts.md`](docs/Solving_conflicts.md).
+## Getting started
 
-## Funcionalidad implementada
+### Prerrequisitos
 
-<!-- TODO (Susan): describir en 3–5 líneas solo lo que SÍ funciona al momento de la entrega. -->
-
-## Criterios de aceptación
-
-| ID | Dado / Cuando / Entonces | Cómo verificar | Responsables |
-|---|---|---|---|
-| **CA-01** | **Dado** un usuario registrado (trabajador o empleador) que inició sesión, **cuando** guarda los datos de su perfil, **entonces** los datos quedan en la base de datos y se muestran al volver a abrir el perfil, incluso después de cerrar sesión y volver a ingresar. | Registrar → ingresar → guardar perfil → salir → volver a ingresar → ver los mismos datos y el rol. Pruebas P-06 y P-11. | Sara Revollo |
-| **CA-02** | **Dado** que ya existe una cuenta con un CI o teléfono, **cuando** alguien intenta registrarse otra vez con ese mismo CI o teléfono, **entonces** el sistema rechaza el registro, explica el motivo y no crea una segunda cuenta. | Registrar dos veces el mismo teléfono → ver el mensaje de rechazo → comprobar que solo existe una cuenta. Pruebas P-02 y P-09. | Natalia Arze |
-
-La verificación de identidad (carnet, rostro, entrevista, teléfono) queda para el Segundo Parcial.
-
-## Requisitos previos
-
-- [Node.js](https://nodejs.org/) **22.13 o superior** (incluye `npm` y SQLite incorporado; no hace falta instalar un motor de base de datos)
+- [Node.js](https://nodejs.org/) **22.13 o superior** (incluye `npm`)
 - Git
-- Un navegador actualizado
+- Chrome o Edge instalado (solo para `npm run test:e2e`)
 
-## Instalación y arranque
+### Instalación
 
 ```bash
 git clone https://github.com/SusanLaime/LILA_Project.git
 cd LILA_Project
 npm install
-cp .env.example .env        # en Windows (PowerShell): Copy-Item .env.example .env
-npm start
 ```
 
-Abrir **http://localhost:3000** en el navegador. La ruta principal redirige a la página
-de inicio servida desde `frontend/website/index.html`.
+Crea un archivo `.env` en la raíz del proyecto:
 
-Para hacer pruebas con la base de datos configurada en `.env.local`, iniciar el mismo
-servidor principal con:
-
-```powershell
-node --env-file-if-exists=.env.local backend/server.js
+```
+PORT=3000                   # puerto del servidor (opcional, por defecto 3000)
+DB_PATH=database/lila.db    # archivo SQLite (opcional, se crea al arrancar)
+JWT_SECRET=cambia-esta-clave  # obligatorio: sin esta clave el servidor no arranca
 ```
 
-`npm start` carga `.env`; confirma que `DB_PATH` apunte a la base que quieres usar antes
-de registrar usuarios.
-
-<!-- TODO (Susan): confirmar estos pasos en una computadora limpia antes de la entrega. -->
-
-## Variables de entorno
-
-Ver [`.env.example`](.env.example). No contiene secretos reales.
-
-| Variable | Para qué sirve |
-|---|---|
-| `PORT` | Puerto del servidor (por defecto 3000) |
-| `DB_PATH` | Ruta del archivo de la base de datos SQLite (se crea al iniciar) |
-| `JWT_SECRET` | Texto secreto para firmar las sesiones |
-
-## Datos de prueba
-
-<!-- TODO (Natalia): teléfono y contraseña de los usuarios de prueba de database/seed.sql
-     (un trabajador y un empleador; datos inventados, nunca reales). -->
-
-## Cómo comprobar el flujo principal
-
-<!-- TODO (Susan): pasos exactos para que el docente compruebe CA-01 y CA-02 desde la pantalla. -->
-
-## Pruebas
+### Comandos
 
 ```bash
-npm test
+npm start          # Arranca el servidor con .env; abrir http://localhost:3000
+npm run dev        # Igual que start, pero reinicia solo al guardar cambios
+npm test           # Corre todas las pruebas automatizadas de tests/ con una base en memoria
+npm run test:e2e   # Abre las páginas reales en Chrome o Edge y prueba el recorrido
 ```
 
-Cada persona completa las filas de sus pruebas **después de ejecutarlas**. Si una prueba falla, se anota el defecto y su estado; no se oculta.
+## Estructura del repositorio
 
-**Entorno:** _(ej. Windows 11, Node 24.x, Chrome 1xx)_ · **Commit / versión:** _(ej. v0.1-parcial1)_
-
-### Pruebas automatizadas (`npm test`)
-
-| Caso | Responsable | Entrada | Resultado esperado | Resultado real | Fecha |
-|---|---|---|---|---|---|
-| P-00 Base de datos | Natalia Arze | Iniciar; insertar CI repetido o rol `admin` directamente | Tabla creada; la BD rechaza ambos | _[Completar]_ | |
-| P-01 Registro correcto | Natalia Arze | Datos válidos, rol trabajador y rol empleador | 201, cuentas creadas con su rol | _[Completar]_ | |
-| P-02 Registro duplicado (CA-02) | Natalia Arze | Mismo teléfono o CI por segunda vez | 409, mensaje de rechazo, solo 1 cuenta | _[Completar]_ | |
-| P-03 Dato inválido | Natalia Arze | Teléfono `123`, nombre vacío o rol `admin` | 400, mensaje de error | _[Completar]_ | |
-| P-04 Login correcto | — | Teléfono y contraseña correctos | 200 y token | _[Completar]_ | |
-| P-05 Contraseña incorrecta | — | Contraseña equivocada | 401, mensaje genérico | _[Completar]_ | |
-| P-06 Guardar y leer perfil (CA-01) | Sara Revollo | Ciudad, habilidades, experiencia | Datos y rol devueltos al volver a leer | _[Completar]_ | |
-| P-07 Perfil sin sesión | Sara Revollo | `GET /api/perfil` sin token | 401 | _[Completar]_ | |
-| P-08 Perfil con datos inválidos | Sara Revollo | Experiencia de más de 1000 caracteres | 400, mensaje de error | _[Completar]_ | |
-
-### Pruebas manuales en el navegador
-
-| Caso | Responsable | Pasos | Resultado esperado | Resultado real | Fecha |
-|---|---|---|---|---|---|
-| P-09 Registro desde la pantalla | Susan Laime | Registrar un empleador; repetir el mismo teléfono | Mensaje de éxito; luego mensaje de duplicado visible | _[Completar]_ | |
-| P-10 Perfil sin sesión | Susan Laime | Abrir el perfil sin haber ingresado | Redirige al inicio de sesión | _[Completar]_ | |
-| P-11 Recorrido completo (CA-01) | Susan Laime | Inicio → registrar trabajador → ingresar → guardar perfil → Salir → ingresar | El navbar dice TRABAJADOR y los datos siguen ahí | _[Completar]_ | |
-
-### Defectos encontrados
-
-| ID | Descripción | Prueba | Estado | Responsable |
-|---|---|---|---|---|
-| | | | | |
-
-## Contribuciones individuales
-
-Cada persona completa **su propia fila** con enlaces directos (issue, commit, pull request, prueba, corrección de error). La cantidad de commits no basta: los enlaces deben mostrar el trabajo real.
-
-| Integrante | Responsabilidad | Enlaces / evidencia | Demostración en la defensa |
-|---|---|---|---|
-| Susan Laime | Página de inicio, estilos globales, servidor, validaciones, pruebas de punta a punta | _Issue: · PR: · Commits:_ | Hacer el recorrido completo desde la Home y explicar las decisiones de diseño |
-| Natalia Arze | Inicio de sesión y registro (pantallas), base de datos, regla de duplicados (CA-02) | _Issue: · PR: · Commits:_ | Mostrar la tabla creada y el rechazo de un CI o teléfono repetido |
-| Sara Revollo | Perfil (pantalla y ruta), guardar y mostrar datos (CA-01) | _Issue: · PR: · Commits:_ | Guardar el perfil, salir, volver a ingresar y ver los mismos datos |
-| — | Navbar y footer, sesión en el navegador, cifrado de contraseñas, inicio de sesión | _Issue: · PR: · Commits:_ | Mostrar la contraseña cifrada en la BD y el cierre de sesión desde el navbar |
-
-## Uso de IA generativa
-
-Cada persona agrega una fila por cada uso relevante de IA (programación, depuración, pruebas o documentación) y guarda ejemplos de las instrucciones (prompts) por si el docente los pide. Cada estudiante sigue siendo responsable de lo que entrega.
-
-| Integrante | Herramienta | Finalidad | Ejemplo de instrucción (prompt) | Verificación humana aplicada |
-|---|---|---|---|---|
-| Susan Laime (coordinación) | Claude Code (Anthropic) | Preparar la estructura del repositorio: limpieza, archivos guía con tareas (TODO) por integrante, contrato de la API y plantillas de documentación. **No se generó el código del backend.** | "Prepara el repositorio para que cada integrante sepa exactamente cuál es su parte." | _[Completar]_ |
-| Equipo (frontend) | Agente de IA para programación + Claude Code (Anthropic) | Primera versión del **frontend** (registro con selector de rol, inicio de sesión, perfil y scripts `api.js`, `sesion.js`, `registro.js`, `login.js`, `perfil.js`). Cada responsable de pantalla la revisa, la entiende y la mejora. El backend generado en la misma sesión **se descartó**. | _[Completar]_ | _[Cada integrante: qué revisó, qué cambió y cómo lo probó]_ |
-| | | | | |
-
-## Estructura del proyecto
-
-El código está organizado con programación orientada a objetos (OOP). La arquitectura
-sigue siendo un monolito cliente-servidor en tres capas; el detalle está en
-[`docs/plan-implementacion-oop.md`](docs/plan-implementacion-oop.md) y el diagrama de clases en
-[`docs/LILA diagrama-clases-oop.drawio`](docs/LILA%20diagrama-clases-oop.drawio).
+El repositorio está dividido en tres partes: `backend/`, el servidor en Node.js y Express; `frontend/`, las páginas que ve el usuario; y `database/` con `tests/`, la base SQLite y las pruebas. Dentro de `backend/`, cada carpeta corresponde a una capa de la arquitectura: los controladores reciben HTTP, los servicios aplican las reglas, el dominio guarda los objetos del negocio, los contratos definen las interfaces y la infraestructura habla con SQLite, bcrypt y JWT. `server.js` es el único archivo que une todo.
 
 ```
 backend/
-├── server.js            Arranca Express y crea e inyecta todas las piezas (raíz de composición)
-├── db.js                Conexión única a SQLite (crea tablas y carga datos de prueba)
-├── seguridad.js         Hash de contraseñas (bcrypt) y tokens de sesión (JWT)
-├── validacion.js        Reglas de los formularios de registro, login y perfil
-├── dominio/             Objetos del negocio: Usuario, Perfil, PerfilTrabajador, PerfilEmpleador
-├── contratos/           Interfaces: RepositorioUsuarios, Hasheador, Tokens
-├── servicios/           Casos de uso: ServicioAuth (registro y login), ServicioPerfil
-├── infraestructura/     RepositorioUsuariosSqlite (todo el SQL), HasheadorBcrypt, TokensJwt
-└── controladores/       Rutas HTTP de la API: registro, login, perfil y MiddlewareSesion
-database/                Esquema y datos de prueba de SQLite
+├── server.js          Punto de entrada: crea, inyecta y monta todas las piezas
+├── db.js              Conexión única a SQLite
+├── seguridad.js       bcrypt (contraseñas) y JWT (tokens)
+├── validacion.js      Reglas de registro, login y perfil
+├── controladores/     RegistroController, LoginController, PerfilController, MiddlewareSesion
+├── servicios/         ServicioAuth, ServicioPerfil, errores.js
+├── dominio/           Usuario, Perfil, PerfilTrabajador, PerfilEmpleador
+├── contratos/         RepositorioUsuarios, Hasheador, Tokens
+└── infraestructura/   RepositorioUsuariosSqlite, HasheadorBcrypt, TokensJwt
+database/              Esquema y datos de prueba
 frontend/
-├── auth/, website/      Páginas HTML (vista)
-├── components/          Navbar y footer compartidos
+├── auth/, website/    Páginas HTML
+├── components/        Navbar y footer
 └── assets/
-    ├── css/             Estilos
+    ├── css/           Estilos
     └── js/
-        ├── nucleo/      Pagina (clase base), ClienteApi y Sesion
-        ├── login.js, registro.js, perfil.js   Clases PaginaLogin, PaginaRegistro, PaginaPerfil
-        ├── api.js, sesion.js                  Llamadas a la API y sesión en el navegador
-        └── components.js, ofertas.js          Navbar/footer y ofertas (en localStorage)
-tests/                   Pruebas automatizadas (node --test); tests/servicios/ usa repositorios falsos
-docs/API.md              Acuerdo entre frontend y backend
+        ├── nucleo/                          Pagina, ClienteApi, Sesion
+        ├── login.js, registro.js, perfil.js PaginaLogin, PaginaRegistro, PaginaPerfil
+        └── api.js, sesion.js, components.js, ofertas.js
+tests/                 Pruebas automatizadas (npm test)
+docs/                  API.md, plan de implementación y diagrama de clases
 ```
 
-## Limitaciones conocidas
+## Diagrama de clases
 
-- La verificación de identidad (carnet, reconocimiento facial, entrevista, confirmación de teléfono) **no** forma parte de este incremento; todos los usuarios quedan como "no verificado".
-- Ofertas, postulaciones, búsqueda, calificaciones y panel de administración quedan para incrementos posteriores.
-<!-- TODO (Susan): agregar errores o pendientes reales al momento de la entrega. -->
+El diagrama de clases ([`docs/LILA diagrama-clases-oop REPO V5.drawio`](docs/LILA%20diagrama-clases-oop%20REPO%20V5.drawio), pestaña *LILA - Clases OOP*) es sencillo y muestra cómo LILA aplica la programación orientada a objetos: clases con una sola responsabilidad, herencia, composición e interfaces. Está dividido en seis grupos, que coinciden con las carpetas del código: **Frontend**, **Controladores HTTP**, **Servicios**, **Dominio**, **Contratos** y **Datos e infraestructura**. Las clases en gris punteado («futuro») son del siguiente incremento (ofertas). Abajo se resume en una línea qué hace cada clase y cuáles son las relaciones clave para entender el diagrama de una pasada.
 
-## Versión de entrega
+**Relaciones clave**
+- **Usuario ◆— Perfil (composición):** un `Usuario` tiene 1 o 2 perfiles; sin el usuario, el perfil no existe.
+- **PerfilTrabajador y PerfilEmpleador ◁— Perfil (herencia):** los dos son un `Perfil`, y el servicio los trata igual (polimorfismo).
+- **Controlador → Servicio:** `RegistroController` y `LoginController` usan `ServicioAuth`; `PerfilController` usa `ServicioPerfil` y pasa antes por `MiddlewareSesion`.
+- **Servicio → Contrato ◁┄ Infraestructura (implementa):** los servicios dependen de las interfaces (`RepositorioUsuarios`, `Hasheador`, `Tokens`), y `RepositorioUsuariosSqlite`, `HasheadorBcrypt` y `TokensJwt` las implementan.
+- **server.js ┄> todo (crea e inyecta / monta):** `server.js` crea las clases concretas, se las pasa a los servicios y monta los controladores.
+- **Pagina → ClienteApi → Sesion → (HTTP) Controladores:** cada página usa `ClienteApi`, que envía el token de `Sesion` a la API.
 
-<!-- TODO (Susan): etiqueta y commit entregados, ej. v0.1-parcial1 (abc1234). -->
+**Frontend**
+- `Pagina` (abstracta): base de las páginas; `iniciar()` llama a `alCargar()` y muestra mensajes.
+- `PaginaLogin`: formulario de inicio de sesión; guarda el token.
+- `PaginaRegistro`: formulario de registro y modo "agregar rol".
+- `PaginaPerfil`: carga, muestra y guarda el perfil.
+- `ClienteApi`: `get`, `post` y `put` a la API con el token de `Sesion`.
+- `Sesion`: guarda, lee y borra el token y el rol activo en el navegador.
 
----
-© 2026 LILA. Todos los derechos reservados.
+**Controladores HTTP**
+- `server.js` (módulo): crea las clases concretas, las inyecta y monta los controladores.
+- `RegistroController`: `POST /api/registro` → `ServicioAuth.registrar()`.
+- `LoginController`: `POST /api/login` → `ServicioAuth.iniciarSesion()`.
+- `PerfilController`: `GET`/`PUT /api/perfil` y `POST /api/perfil/roles` → `ServicioPerfil`.
+- `MiddlewareSesion`: revisa el token antes de las rutas de perfil y guarda `req.usuarioId`.
+
+**Servicios**
+- `ServicioAuth`: registra usuarios (`registrar`) e inicia sesión (`iniciarSesion`).
+- `ServicioPerfil`: ve, actualiza y agrega un rol al perfil.
+
+**Dominio**
+- `Usuario`: datos de la cuenta y sus perfiles; agrega y busca un perfil por rol.
+- `Perfil` (abstracta): datos comunes (ciudad, género, edad); `actualizar()` y `aJSON()`.
+- `PerfilTrabajador`: hereda de `Perfil` y agrega habilidades y experiencia.
+- `PerfilEmpleador`: hereda de `Perfil` con el rol empleador.
+
+**Contratos**
+- `RepositorioUsuarios`: define `buscarPorId`, `buscarPorCi`, `existe` y `guardar`.
+- `Hasheador`: define `hashear` y `comparar` contraseñas.
+- `Tokens`: define `crear` y `verificar` el token de sesión.
+
+**Datos e infraestructura**
+- `RepositorioUsuariosSqlite`: implementa `RepositorioUsuarios`; es la única clase con SQL.
+- `HasheadorBcrypt`: implementa `Hasheador` con bcrypt.
+- `TokensJwt`: implementa `Tokens` con JWT (8 horas).
+
+## Patrones de diseño
+
+Los patrones de diseño están marcados en la pestaña *Design Patterns* del mismo drawio. Cada patrón aparece como un óvalo unido a las clases que participan en él, sin cambiar el orden del diagrama de clases. Se usan siete patrones, y cada uno resuelve un problema concreto del código: separar el SQL, aislar las librerías externas, cambiar de tecnología sin tocar los servicios y evitar repetir código en el frontend.
+
+- **Repository:** `RepositorioUsuariosSqlite` concentra todo el acceso a SQLite detrás de `RepositorioUsuarios`.
+- **Adapter:** `HasheadorBcrypt`, `TokensJwt` y `Sesion` adaptan bcrypt, JWT y `localStorage` a una interfaz propia.
+- **Strategy:** los servicios dependen de `RepositorioUsuarios`, `Hasheador` y `Tokens`, no de una tecnología concreta.
+- **Dependency Injection:** solo `server.js` crea las clases concretas y se las pasa por el constructor.
+- **Template Method:** `Pagina.iniciar()` define los pasos y cada página implementa `alCargar()`.
+- **Facade:** `ClienteApi` oculta `fetch`, el token y el manejo de errores detrás de `get`, `post` y `put`.
+- **Chain of Responsibility:** `MiddlewareSesion` → `PerfilController`; cada eslabón atiende la petición o la corta con `401`.
