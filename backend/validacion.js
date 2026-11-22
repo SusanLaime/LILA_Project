@@ -1,11 +1,13 @@
 // =====================================================================
-// DUEÑA/O: Susan Laime — Validaciones
-// Responsables: README.md (sección Equipo)  ·  Reglas de validación: docs/API.md
+// validacion.js — Revisa que los datos de registro, inicio de sesión y perfil estén completos y bien escritos antes de usarlos.
 // =====================================================================
 //
-// Lo usan Natalia (registro), Joaquín (login) y Sara (perfil): entregarlo primero.
+// Lo usan Natalia (registro), — (login) y Sara (perfil): entregarlo primero.
 // Cada función recibe los datos y devuelve { ok: true } o { ok: false, errores: ["..."] }.
 
+// Revisa el formulario de registro: nombre (3 a 100 letras), carnet (5 a 10 dígitos),
+// teléfono (8 dígitos, empieza con 6 o 7), contraseña (mínimo 8), consentimiento aceptado
+// y rol (trabajador, empleador o ambos, sin repetir). Lo usa registro.js.
 export function validarRegistro(datos) {
   const errores = [];
 
@@ -34,8 +36,20 @@ export function validarRegistro(datos) {
     errores.push('Debes aceptar el tratamiento de tus datos personales.');
   }
 
-  if (datos.rol !== 'trabajador' && datos.rol !== 'empleador') {
-    errores.push('El rol debe ser trabajador o empleador.');
+  const roles = Array.isArray(datos.roles)
+    ? datos.roles
+    : [datos.rol];
+  const rolesValidos = ['trabajador', 'empleador'];
+
+  if (
+    roles.length < 1 ||
+    roles.length > rolesValidos.length ||
+    roles.some(rol => !rolesValidos.includes(rol)) ||
+    new Set(roles).size !== roles.length
+  ) {
+    errores.push(
+      'Selecciona trabajador, empleador o ambos perfiles, sin repetirlos.'
+    );
   }
 
   return errores.length === 0
@@ -43,6 +57,8 @@ export function validarRegistro(datos) {
     : { ok: false, errores };
 }
 
+// Revisa el formulario de inicio de sesión: carnet de 5 a 10 dígitos y contraseña no vacía.
+// No comprueba si son correctos; eso lo hace login.js con la base de datos.
 export function validarLogin(datos) {
   const errores = [];
 
@@ -63,4 +79,65 @@ export function validarLogin(datos) {
     : { ok: false, errores };
 }
 
-// TODO (Susan): validarPerfil(datos) — ciudad, habilidades y experiencia según docs/API.md.
+// TODO (Sara): validarPerfil(datos) — ciudad, habilidades y experiencia según docs/API.md.
+
+// Revisa los datos del perfil: ciudad (máx. 60), habilidades (máx. 300) y experiencia
+// (máx. 1000) como texto; género (masculino, femenino u otro) y edad (18 a 100) obligatorios.
+// Lo usa perfil.js al guardar cambios.
+export function validarPerfil(datos) {
+  if (
+    !datos ||
+    typeof datos !== 'object' ||
+    Array.isArray(datos)
+  ) {
+    return {
+      ok: false,
+      errores: ['Los datos del perfil no son válidos.']
+    };
+  }
+
+  const errores = [];
+
+  const campos = [
+    ['ciudad', 60],
+    ['habilidades', 300],
+    ['experiencia', 1000]
+  ];
+
+  for (const [campo, maximo] of campos) {
+    if (
+      typeof datos[campo] !== 'string' ||
+      datos[campo].trim().length > maximo
+    ) {
+      errores.push(
+        `El campo ${campo} debe ser texto de máximo ${maximo} caracteres.`
+      );
+    }
+  }
+
+  // Género obligatorio
+  const generosPermitidos = [
+      'masculino',
+      'femenino',
+      'otro'
+  ];
+
+  if (!generosPermitidos.includes(datos.genero)) {
+      errores.push('Debes seleccionar tu género.');
+  }
+
+  // Edad obligatoria
+  if (
+      !Number.isInteger(datos.edad) ||
+      datos.edad < 18 ||
+      datos.edad > 100
+  ) {
+      errores.push(
+          'Debes ingresar una edad válida entre 18 y 100 años.'
+      );
+  }
+
+  return errores.length === 0
+    ? { ok: true }
+    : { ok: false, errores };
+}

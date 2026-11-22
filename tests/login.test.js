@@ -1,4 +1,6 @@
 // =====================================================================
+// Tests POST /api/login: correct login returns an 8-hour token and the user's roles, wrong password and unknown CI get the same answer, and missing data is rejected.
+// Prueba POST /api/login: el login correcto devuelve un token de 8 horas y los roles del usuario, la contraseña incorrecta y el CI inexistente reciben la misma respuesta, y se rechazan datos faltantes.
 // Pruebas de inicio de sesión con SQLite en memoria.
 // =====================================================================
 
@@ -11,13 +13,11 @@ process.env.DB_PATH = ':memory:';
 process.env.JWT_SECRET = 'solo-para-pruebas-de-integracion';
 
 const [
-  { default: express },
-  { default: loginRouter },
+  { default: app },
   { default: db },
   { hashPassword }
 ] = await Promise.all([
-  import('express'),
-  import('../backend/routes/login.js'),
+  import('../backend/server.js'),
   import('../backend/db.js'),
   import('../backend/seguridad.js')
 ]);
@@ -38,10 +38,6 @@ const usuarioId = Number(insert.run(
   'trabajador',
   new Date().toISOString()
 ).lastInsertRowid);
-
-const app = express();
-app.use(express.json());
-app.use('/api/login', loginRouter);
 
 const server = app.listen(0, '127.0.0.1');
 await new Promise(resolve => server.once('listening', resolve));
@@ -73,13 +69,40 @@ test('P-04: login correcto devuelve token de 8 horas y usuario público', async 
   assert.deepEqual(body.usuario, {
     id: usuarioId,
     nombre: 'Ana Prueba',
-    rol: 'trabajador'
+    rol: 'trabajador',
+    roles: ['trabajador']
   });
 
   const payload = jwt.verify(body.token, process.env.JWT_SECRET);
   assert.equal(payload.id, usuarioId);
   assert.equal(payload.exp - payload.iat, 8 * 60 * 60);
   assert.equal('password_hash' in body.usuario, false);
+});
+
+test('login devuelve los dos perfiles habilitados para la cuenta', async () => {
+  const multiHash = await hashPassword(password);
+  const multiUsuarioId = Number(insert.run(
+    'Persona Ambos',
+    '1234568',
+    '70000002',
+    multiHash,
+    'trabajador',
+    new Date().toISOString()
+  ).lastInsertRowid);
+  const insertarRol = db.prepare(
+    'INSERT INTO usuario_roles (usuario_id, rol) VALUES (?, ?)'
+  );
+  insertarRol.run(multiUsuarioId, 'trabajador');
+  insertarRol.run(multiUsuarioId, 'empleador');
+
+  const { response, body } = await iniciarSesion({
+    ci: '1234568',
+    password
+  });
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(body.usuario.roles, ['trabajador', 'empleador']);
+  assert.equal(body.usuario.rol, 'trabajador');
 });
 
 test('P-05: contraseña incorrecta y CI inexistente responden igual', async () => {

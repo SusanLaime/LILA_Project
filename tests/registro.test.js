@@ -1,12 +1,11 @@
 // =====================================================================
-// Pruebas de registro: validación, alta de trabajador/empleador y duplicados.
-// La ruta usa una base SQLite en memoria; nunca modifica la base de demostración.
+// Tests POST /api/registro: creates worker, employer or dual accounts, and rejects invalid data, missing consent, unknown roles and duplicate CI or phone.
+// Prueba POST /api/registro: crea cuentas de trabajador, empleador o ambos, y rechaza datos inválidos, falta de consentimiento, roles no permitidos y CI o teléfono repetidos.
 // =====================================================================
 
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import express from 'express';
 import bcrypt from 'bcryptjs';
 
 // =======================================================
@@ -74,21 +73,11 @@ before(async () => {
 
   process.env.DB_PATH = ':memory:';
 
-  // Importar la ruta real de registro.
-  const { default: routerRegistro } =
-    await import('../backend/routes/registro.js');
+  // Importar la aplicación real (server.js monta RegistroController).
+  const { default: app } = await import('../backend/server.js');
 
-  // Importar la conexión SQLite utilizada por la ruta.
+  // Importar la conexión SQLite utilizada por el repositorio.
   ({ db } = await import('../backend/db.js'));
-
-  // Crear una aplicación Express solo para las pruebas.
-  const app = express();
-
-  // Permitir recibir datos JSON.
-  app.use(express.json());
-
-  // Conectar la ruta de registro.
-  app.use('/api/registro', routerRegistro);
 
   // Iniciar el servidor en un puerto disponible.
   servidor = app.listen(0, '127.0.0.1');
@@ -133,7 +122,7 @@ after(async () => {
 // También comprobamos que la contraseña se guarde
 // mediante un hash bcrypt y no como texto plano.
 
-test('REG-01: registra un usuario correctamente', async () => {
+test('REG-01: registra un usuario y crea su perfil correctamente', async () => {
 
   // Preparar los datos.
   const datos = usuarioValido();
@@ -161,6 +150,15 @@ test('REG-01: registra un usuario correctamente', async () => {
   assert.equal(guardado.ci, datos.ci);
   assert.equal(guardado.telefono, datos.telefono);
   assert.equal(guardado.rol, datos.rol);
+  assert.deepEqual(
+    db.prepare(
+      'SELECT rol FROM usuario_roles WHERE usuario_id = ?'
+    ).all(cuerpo.id).map(fila => fila.rol),
+    ['trabajador']
+  );
+  assert.ok(db.prepare(
+    'SELECT usuario_id FROM perfiles_trabajador WHERE usuario_id = ?'
+  ).get(cuerpo.id));
 
   // La contraseña guardada no debe ser la original.
   assert.notEqual(
@@ -255,6 +253,37 @@ test('REG-04: rechaza rol no permitido', async () => {
 
   // No debe permitir registrar un administrador.
   assert.equal(respuesta.status, 400);
+});
+
+test('REG-07: una cuenta puede registrarse con ambos perfiles', async () => {
+  const datos = usuarioValido({
+    roles: ['trabajador', 'empleador']
+  });
+  delete datos.rol;
+
+  const respuesta = await enviarRegistro(datos);
+  const cuerpo = await respuesta.json();
+
+  assert.equal(respuesta.status, 201);
+  assert.deepEqual(
+    db.prepare(
+      'SELECT rol FROM usuario_roles WHERE usuario_id = ? ORDER BY rol'
+    ).all(cuerpo.id).map(fila => fila.rol),
+    ['empleador', 'trabajador']
+  );
+  assert.ok(db.prepare(
+    'SELECT usuario_id FROM perfiles_trabajador WHERE usuario_id = ?'
+  ).get(cuerpo.id));
+  assert.ok(db.prepare(
+    'SELECT usuario_id FROM perfiles_empleador WHERE usuario_id = ?'
+  ).get(cuerpo.id));
+});
+
+test('REG-08: rechaza una lista de perfiles vacía, repetida o desconocida', async () => {
+  for (const roles of [[], ['trabajador', 'trabajador'], ['admin']]) {
+    const respuesta = await enviarRegistro(usuarioValido({ roles }));
+    assert.equal(respuesta.status, 400);
+  }
 });
 
 // =======================================================

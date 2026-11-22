@@ -1,0 +1,41 @@
+<!-- Navbar for logged-in users, with the Volver link, logo, role-switch button and avatar; components.js loads it when there is a token. -->
+<!-- Barra de navegación para usuarios con sesión, con el enlace Volver, logo, botón para cambiar de rol y avatar; components.js la carga cuando hay token. -->
+<header class="navbar-cambio">
+  <div class="navbar-container">
+
+    <div class="nav-leading">
+      <a class="nav-home-back" href="/frontend/index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 12H5m7 7-7-7 7-7"></path>
+        </svg>
+        <span>Volver</span>
+      </a>
+
+      <!-- Logo: su href cambia dinámicamente según el rol activo -->
+      <a href="/frontend/homeTrabajador.html" id="nav-logo-link" class="nav-brand">
+        <img src="/frontend/images/L-logo-oficial.png" alt="LILA Logo" class="nav-logo-img">
+      </a>
+    </div>
+
+    <!-- Zona Derecha: Botón de cambio de rol + Avatar -->
+    <div class="nav-actions">
+      <button type="button" id="btn-cambiar-rol" class="nav-role-switch" title="Cambiar modo de usuario">
+        <svg class="switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 1 21 5 17 9"></polyline>
+          <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+          <polyline points="7 23 3 19 7 15"></polyline>
+          <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+        </svg>
+        <span id="texto-rol-actual">Cambiar perfil</span>
+      </button>
+
+      <!-- Avatar: siempre lleva a perfilTrabajador -->
+      <a href="/frontend/website/trabajador/perfil.html" class="nav-avatar" title="Mi Perfil">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm0 14c-2.03 0-3.8-.85-5.05-2.2.03-1.67 3.37-2.58 5.05-2.58 1.67 0 5.02.91 5.05 2.58C15.8 19.15 14.03 20 12 20z"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</header>

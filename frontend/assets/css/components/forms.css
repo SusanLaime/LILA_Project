@@ -1,4 +1,6 @@
-/* DUEÑA/O: Natalia Arze — Formularios de inicio de sesión y registro. */
+/* Natalia Arze — Formularios de inicio de sesión y registro. */
+/* Styles for the login and register forms (fields, password toggle, role selector, consent and messages). */
+/* Estilos de los formularios de inicio de sesión y registro (campos, mostrar contraseña, selector de roles, consentimiento y mensajes). */
 /* forms.css */
 .form-group {
     display: flex;
@@ -8,7 +10,7 @@
 }
 
 .form-group label {
-    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     font-size: 14px;
     color: #272348;
     margin-bottom: 8px;
@@ -22,7 +24,7 @@
     border: 1px solid #d6cee2;
     border-radius: 8px;
     font-size: 14px;
-    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     color: #272348;
     background-color: #ffffff;
     width: 100%;
@@ -84,7 +86,9 @@
     border-radius: 8px;
     background: #ffffff;
     color: #272348;
-    font: inherit;
+    font-family: "Poppins", Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
     cursor: pointer;
 }
 
@@ -110,6 +114,31 @@
     gap: 10px;
     line-height: 1.5;
     cursor: pointer;
+}
+
+.selector-roles {
+    border: 0;
+    padding: 0;
+}
+
+.selector-roles legend {
+    font-family: "Poppins", Helvetica, sans-serif;
+    font-size: 14px;
+    color: #272348;
+    margin-bottom: 8px;
+}
+
+.registro-form .selector-roles label {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.registro-form .selector-roles input[type="checkbox"] {
+    flex: 0 0 18px;
 }
 
 /* Tamaño correcto de la casilla */

@@ -1,12 +1,18 @@
+/* Styles for the landing page (index.html): top menu, main banner, purpose section and audience and trust sections; the role home pages and publish-offer page also link it. */
+/* Estilos de la página principal (index.html): menú superior, portada, sección de propósito y secciones de público y confianza; también lo enlazan las páginas de inicio por rol y publicar oferta. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 .home-page {
+    width: 100%;
     background: var(--LILA-semantic-color-bg-canvas);
     color: var(--LILA-semantic-color-text-primary);
+    font-family: "Poppins", Helvetica, sans-serif;
 }
 
 .home-nav {
-    width: min(1120px, calc(100% - 32px));
+    width: min(1416px, 100%);
     margin: 0 auto;
-    padding: 18px 0;
+    padding: 18px 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,17 +57,20 @@
 }
 
 .home-hero {
-    width: min(1120px, calc(100% - 32px));
+    width: 100%;
     min-height: 470px;
     margin: 0 auto;
     padding: 72px 0 80px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
     align-items: center;
-    gap: 56px;
+    gap: 48px;
 }
 
-.home-hero-copy { max-width: 580px; }
+.home-hero-copy {
+    max-width: 580px;
+    padding-left: 40px;
+}
 
 .home-eyebrow {
     display: inline-block;
@@ -92,105 +101,36 @@
 .home-secondary-button { padding: 14px 8px; }
 
 .home-hero-art {
-    position: relative;
-    min-height: 350px;
-    border-radius: 42% 58% 55% 45% / 38% 40% 60% 62%;
-    background: var(--LILA-primitives-purple-lavender);
-}
-
-.home-orbit {
-    position: absolute;
-    border: 1px solid rgba(39, 35, 72, 0.16);
-    border-radius: 50%;
-}
-
-.home-orbit-large {
-    width: 240px;
-    height: 240px;
-    top: 42px;
-    left: calc(50% - 120px);
-}
-
-.home-orbit-small {
-    width: 150px;
-    height: 150px;
-    top: 87px;
-    left: calc(50% - 75px);
-}
-
-.home-art-card {
-    position: absolute;
-    right: 8%;
-    bottom: 18%;
+    min-width: 0;
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    min-width: 190px;
-    padding: 20px;
-    border: 1px solid rgba(39, 35, 72, 0.08);
-    border-radius: var(--LILA-primitives-radius-md);
-    background: #fff;
-    box-shadow: var(--LILA-elevaci-n-tarjeta);
+    align-items: center;
+    justify-content: center;
+    background: transparent;
 }
 
-.home-art-card strong { color: var(--LILA-primitives-purple-brand); }
-.home-art-card span:last-child { color: var(--LILA-semantic-color-text-muted); font-size: 0.8rem; }
-.home-art-icon, .home-card-icon { color: var(--LILA-semantic-color-text-brand); font-size: 1.8rem; }
+.home-hero-image {
+    display: block;
+    width: min(100%, 600px);
+    height: auto;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
 
-.home-audience {
-    width: min(1120px, calc(100% - 32px));
+.home-audience-space {
+    width: 100%;
     margin: 0 auto;
-    padding: 24px 0 76px;
+    min-height: 100px;
 }
-
-.home-section-heading { margin-bottom: 26px; }
-.home-section-heading h2 {
-    color: var(--LILA-primitives-purple-brand);
-    font-size: clamp(1.7rem, 4vw, 2.4rem);
-}
-
-.home-audience-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.home-audience-card {
-    padding: 30px;
-    border: 1px solid var(--LILA-semantic-color-border-default);
-    border-radius: var(--LILA-primitives-radius-md);
-    background: #fff;
-    box-shadow: var(--LILA-elevaci-n-tarjeta);
-}
-
-.home-audience-card-accent { background: var(--LILA-primitives-purple-lavender); }
-.home-audience-card h3 {
-    margin: 12px 0 8px;
-    color: var(--LILA-primitives-purple-brand);
-    font-size: 1.35rem;
-}
-
-.home-audience-card p {
-    min-height: 48px;
-    margin-bottom: 20px;
-    color: var(--LILA-semantic-color-text-muted);
-}
-
-.home-audience-card a {
-    color: var(--LILA-semantic-color-text-brand);
-    font-weight: 700;
-}
-
-.home-audience-card a span { margin-left: 6px; }
 
 .home-trust {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    width: min(1120px, calc(100% - 32px));
+    width: 100%;
     margin: 0 auto 72px;
     padding: 24px;
-    border-radius: var(--LILA-primitives-radius-md);
+    border-radius: 0;
     background: var(--LILA-primitives-purple-brand);
     color: #fff;
 }
@@ -198,7 +138,79 @@
 .home-trust div { display: flex; flex-direction: column; gap: 4px; text-align: center; }
 .home-trust span { color: #d9d4e8; font-size: 0.85rem; }
 
+.home-purpose {
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto 72px;
+    padding: 88px 40px 96px;
+    border-radius: 0;
+    background: var(--LILA-primitives-purple-brand);
+    box-shadow: var(--LILA-elevaci-n-tarjeta);
+    color: #fff;
+}
+
+.home-purpose-inner {
+    display: grid;
+    gap: clamp(88px, 12vw, 148px);
+    width: 100%;
+    margin: 0 auto;
+}
+
+.home-purpose-item {
+    position: relative;
+}
+
+.home-purpose-copy {
+    width: 48%;
+    text-align: right;
+}
+
+.home-purpose-copy h2 {
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1;
+}
+
+.home-purpose-copy p {
+    color: #e2e4ec;
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.home-purpose-vision .home-purpose-copy {
+    margin-left: 20%;
+}
+
+.home-purpose-connector {
+    position: absolute;
+    top: 42px;
+    right: -15vw;
+    left: calc(48% + 28px);
+    height: 2px;
+    background: var(--LILA-primitives-purple-lavender);
+}
+
+.home-purpose-connector::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--LILA-primitives-purple-lavender);
+    content: "";
+    transform: translate(-50%, -50%);
+}
+
+.home-purpose-vision .home-purpose-connector {
+    left: calc(68% + 28px);
+}
+
 @media (max-width: 720px) {
+    .home-nav { padding: 18px 20px; }
     .home-brand img { height: 40px; }
     .home-nav-actions { gap: 10px; }
     .home-nav-button { padding: 0 14px; font-size: 0.85rem; }
@@ -208,11 +220,25 @@
         gap: 36px;
         padding: 52px 0 64px;
     }
-    .home-hero-art { min-height: 260px; }
-    .home-orbit-large { width: 190px; height: 190px; top: 35px; left: calc(50% - 95px); }
-    .home-orbit-small { width: 120px; height: 120px; top: 70px; left: calc(50% - 60px); }
-    .home-audience-grid, .home-trust { grid-template-columns: 1fr; }
+    .home-trust { grid-template-columns: 1fr; }
     .home-trust { gap: 18px; margin-bottom: 48px; }
+    .home-purpose { margin-bottom: 48px; padding: 56px 28px; }
+    .home-purpose-inner { gap: 56px; }
+    .home-purpose-copy,
+    .home-purpose-vision .home-purpose-copy {
+        width: 100%;
+        margin-left: 0;
+        padding-left: 26px;
+        text-align: left;
+    }
+    .home-purpose-copy h2 { font-size: clamp(2.25rem, 10vw, 3.25rem); }
+    .home-purpose-connector,
+    .home-purpose-vision .home-purpose-connector {
+        top: 21px;
+        right: auto;
+        left: 0;
+        width: 16px;
+    }
 }
 
 @media (max-width: 430px) {

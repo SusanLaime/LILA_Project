@@ -1,8 +1,9 @@
 -- =====================================================================
--- DUEÑA/O: Natalia Arze — Datos de prueba
+-- Natalia Arze — Datos de prueba
+-- seed.sql — Usuarios de ejemplo para probar la app. db.js lo ejecuta solo cuando la tabla usuarios está vacía.
 -- =====================================================================
 --
--- TODO (Natalia): insertar 2 usuarios de prueba para la demostración:
+-- TODO: insertar 2 usuarios de prueba para la demostración:
 --   - uno con rol 'trabajador' y otro con rol 'empleador'.
 --   - Datos inventados (nunca CI ni teléfonos reales).
 --   - La contraseña debe guardarse ya cifrada (hash bcrypt), nunca en texto plano.

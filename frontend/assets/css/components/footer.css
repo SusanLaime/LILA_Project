@@ -1,4 +1,6 @@
-/* DUEÑA/O: Joaquín Peredo — Footer. */
+/* — Footer. */
+/* Styles for the footer shown at the bottom of every page (brand, links and report link). */
+/* Estilos del pie de página que aparece abajo en todas las páginas (marca, enlaces y enlace de reporte). */
 /* footer.css */
 .lila-footer {
   background-color: var(--color-gray-50, #f7fafc);
@@ -9,13 +11,13 @@
 }
 
 .lila-footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  text-align: center;
+    max-width: 1600px; /* Mismo largo máximo que .lila-footer-content */
+    margin: 0 auto; /* Centra el contenido igual que el footer */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
 }
 
 .lila-footer-brand {

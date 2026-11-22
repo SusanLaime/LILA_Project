@@ -1,4 +1,6 @@
-/* DUEÑA/O: Natalia Arze — Inicio de sesión y registro. */
+/* Natalia Arze — Inicio de sesión y registro. */
+/* Layout styles for the login and register pages (layout, header, welcome block and back link), adapted to small phones. */
+/* Estilos de diseño de las páginas de inicio de sesión y registro (distribución, encabezado, bienvenida y enlace Volver), adaptados a celulares pequeños. */
 /* 
  * login.css 
  * Completely rewritten using Flexbox to ensure perfect responsive scaling 
@@ -10,6 +12,53 @@ body {
     padding: 0;
 }
 
+.auth-layout {
+    font-family: "Poppins", Helvetica, sans-serif;
+    position: relative;
+}
+
+.auth-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding: 8px 24px;
+    border-bottom: 1px solid rgba(39, 35, 72, 0.08);
+    background: #f2edfa;
+}
+
+.auth-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border: 0;
+    background: transparent;
+    color: #272348;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-back-link svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+}
+
+.auth-back-link:focus-visible {
+    outline: 2px solid #272348;
+    outline-offset: 2px;
+}
+
 .bienvenida-mvil {
     background-color: #ffffff;
     width: 100%;
@@ -19,7 +68,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 .bienvenida-mvil header {
@@ -28,6 +77,12 @@ body {
     display: flex;
     justify-content: center;
     padding: 60px 0 40px 0; 
+}
+
+.bienvenida-mvil .auth-header {
+    justify-content: flex-start;
+    padding: 8px 24px;
+    background: #f2edfa;
 }
 
 .bienvenida-mvil .fondo-lavanda {
@@ -48,7 +103,7 @@ body {
 }
 
 .bienvenida-mvil .saludo {
-    font-family: "Poppins-Bold", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     font-weight: 700;
     color: #272348;
     font-size: 24px;
@@ -56,7 +111,7 @@ body {
 }
 
 .bienvenida-mvil .introducci-n {
-    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     color: #6d6b7c;
     font-size: 15px;
     line-height: 1.4;
@@ -87,7 +142,7 @@ body {
     width: 100%;
     height: 52px;
     border-radius: 26px;
-    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     font-weight: 500;
     font-size: 15px;
     cursor: pointer;
@@ -116,7 +171,7 @@ body {
     background-color: transparent;
     border: none;
     color: #272348;
-    font-family: "Poppins-Medium", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
     font-size: 14px;
     margin-top: 10px;
     cursor: pointer;
@@ -133,5 +188,5 @@ body {
 .bienvenida-mvil .legal {
     color: #6d6b7c;
     font-size: 11px;
-    font-family: "Poppins-Regular", Helvetica, sans-serif;
+    font-family: "Poppins", Helvetica, sans-serif;
 }

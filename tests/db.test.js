@@ -1,6 +1,8 @@
 // =====================================================================
-// DUEÑA/O: Natalia Arze — Base de datos (P-00)
-// Registro de resultados: README.md (sección Pruebas)
+// Natalia Arze — Base de datos 
+
+// Checks the database rules directly: the usuarios table exists, a user can be saved, and duplicate CI, duplicate phone and the admin role are rejected.
+// Revisa las reglas de la base de datos directamente: la tabla usuarios existe, se puede guardar un usuario y se rechazan CI repetido, teléfono repetido y el rol admin.
 // Se ejecuta con: npm test   (usa el ejecutor incorporado de Node: node --test)
 // =====================================================================
 //

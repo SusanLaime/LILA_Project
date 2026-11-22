@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- Page where the employer fills in and publishes a new job offer; ofertas.js saves it in the browser for the demo. -->
+<!-- Página donde el empleador llena y publica una nueva oferta de trabajo; ofertas.js la guarda en el navegador para la demostración. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Publica una oferta de trabajo en LILA." />
+    <link rel="stylesheet" href="../assets/css/base/reset.css" />
+    <link rel="stylesheet" href="../assets/css/base/typography.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home.css" />
+    <link rel="stylesheet" href="../assets/css/pages/home-roles.css" />
+    <link rel="stylesheet" href="../assets/css/components/header.css" />
+    <title>LILA — Publicar oferta</title>
+</head>
+<body>
+    <main class="role-home offer-publish-page">
+        <div id="header-placeholder"></div>
+        <section class="role-content employer-layout" aria-labelledby="employer-title">
+            <header class="role-header">
+                <span class="home-eyebrow">Encuentra talento</span>
+                <h1 id="employer-title">Publica una oferta y conecta con las personas indicadas.</h1>
+                <p>Describe el trabajo, indica las condiciones y recibe postulaciones de trabajadores de tu zona.</p>
+            </header>
+            <form class="offer-form" id="offer-form">
+                <h2>Crear oferta de trabajo</h2>
+                <label for="offer-title">Título de la oferta
+                    <input id="offer-title" name="title" type="text" placeholder="Ej. Ayudante de cocina" required />
+                </label>
+                <label for="offer-location">Ubicación
+                    <input id="offer-location" name="location" type="text" placeholder="Ej. Cochabamba" required />
+                </label>
+                <label for="offer-type">Modalidad
+                    <select id="offer-type" name="type" required>
+                        <option value="" disabled selected>Selecciona una modalidad</option>
+                        <option value="Tiempo completo">Tiempo completo</option>
+                        <option value="Tiempo parcial">Tiempo parcial</option>
+                        <option value="Por proyecto">Por proyecto</option>
+                        <option value="Por servicio">Por servicio</option>
+                    </select>
+                </label>
+                <label for="offer-employment-type">Tipo de empleo
+                    <select id="offer-employment-type" name="employmentType" required>
+                        <option value="formal">Formal</option>
+                        <option value="no-formal">No formal</option>
+                    </select>
+                </label>
+                <label for="offer-category">Categoría
+                    <select id="offer-category" name="category" required>
+                        <option value="" disabled selected>Selecciona una categoría</option>
+                        <option value="gastronomia">Gastronomía</option>
+                        <option value="marketing">Diseño y marketing</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="ventas">Ventas y comercio</option>
+                        <option value="otros">Otros</option>
+                    </select>
+                </label>
+                <label for="offer-pay">Pago o presupuesto
+                    <input id="offer-pay" name="pay" type="text" placeholder="Ej. Bs. 150 por día" required />
+                </label>
+                <label for="offer-description">Descripción
+                    <textarea id="offer-description" name="description" placeholder="Cuenta qué tareas realizará la persona..." required></textarea>
+                </label>
+                <p class="form-message" id="offer-message" role="status" aria-live="polite"></p>
+                <button class="home-primary-button" type="submit">Publicar oferta</button>
+            </form>
+        </section>
+        <div id="footer-placeholder"></div>
+    </main>
+    <button class="back-to-top" type="button" aria-label="Volver arriba" title="Volver arriba">↑</button>
+    <script type="module">
+        import { initFooter, initHeader } from '../assets/js/components.js?v=5';
+        import { guardarOferta } from '../assets/js/ofertas.js';
+        await initHeader('', 'empleador');
+        initFooter();
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => backToTop.classList.toggle('is-visible', window.scrollY > 320), { passive: true });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        const form = document.getElementById('offer-form');
+        const message = document.getElementById('offer-message');
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            const oferta = guardarOferta(Object.fromEntries(new FormData(form)));
+            if (!oferta) {
+                message.textContent = 'Completa todos los campos para publicar la oferta.';
+                return;
+            }
+            message.textContent = 'Oferta publicada. Redirigiendo a tu panel...';
+            window.location.href = '/frontend/website/homeEmpleador.html';
+        });
+    </script>
+</body>
+</html>

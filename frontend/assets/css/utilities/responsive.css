@@ -1,4 +1,6 @@
-/* DUEÑA/O: Susan Laime — Estilos globales: adaptación a celular. */
+/* Susan Laime — Estilos globales: adaptación a celular. */
+/* Mobile adjustments for the old job-search screen (.buscar-oportunidades): removes fixed positions so cards, search bar and bottom menu fit any screen width; no current page uses that class. */
+/* Ajustes para celular de la antigua pantalla de búsqueda (.buscar-oportunidades): quita las posiciones fijas para que las tarjetas, el buscador y el menú inferior se adapten a cualquier ancho; ninguna página actual usa esa clase. */
 /* responsive.css - Overrides absolute positioning to make the layout responsive */
 
 /* ---------------------------------

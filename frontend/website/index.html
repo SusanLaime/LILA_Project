@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- LILA landing page: presents the platform and its purpose, with buttons to log in or create an account. -->
+<!-- Página principal de LILA: presenta la plataforma y su propósito, con botones para iniciar sesión o crear una cuenta. -->
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="LILA conecta talento y oportunidades laborales en Bolivia." />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/typography.css" />
+    <link rel="stylesheet" href="assets/css/pages/home.css" />
+    <link rel="stylesheet" href="assets/css/utilities/responsive.css" />
+    <title>LILA — Librería Laboral</title>
+</head>
+<body>
+    <main class="home-page">
+        <section class="home-hero" aria-labelledby="home-title">
+            <div class="home-hero-copy">
+                <span class="home-eyebrow">Una nueva forma de conectar</span>
+                <h1 id="home-title">Tu talento merece una oportunidad.</h1>
+                <p>
+                    LILA conecta a personas que buscan trabajo con empleadores
+                    que necesitan talento. Encuentra oportunidades con confianza,
+                    cerca de ti.
+                </p>
+                <div class="home-hero-actions">
+                    <a class="home-primary-button" href="/frontend/auth/register.html">Comenzar ahora</a>
+                    <a class="home-secondary-button" href="/frontend/auth/login.html">Ya tengo una cuenta</a>
+                </div>
+            </div>
+            <div class="home-hero-art">
+                <img
+                    class="home-hero-image"
+                    src="images/Dise%C3%B1oPaginaInicio.png"
+                    alt="Caja de herramientas morada con herramientas plateadas"
+                    fetchpriority="high" />
+            </div>
+        </section>
+
+        <div class="home-audience-space" aria-hidden="true"></div>
+
+        <section class="home-trust" aria-label="Características de LILA">
+            <div><strong>Simple</strong><span>Regístrate en pocos pasos</span></div>
+            <div><strong>Humana</strong><span>Conexiones pensadas para ti</span></div>
+            <div><strong>Local</strong><span>Oportunidades en Bolivia</span></div>
+        </section>
+
+        <section class="home-purpose" aria-label="Misión y visión de LILA">
+            <div class="home-purpose-inner">
+                <article class="home-purpose-item home-purpose-mission">
+                    <div class="home-purpose-copy">
+                        <h2>MISIÓN</h2>
+                        <p>
+                            Conectar de forma segura y confiable a trabajadores con habilidades técnicas y a personas que necesitan el servicio en Bolivia, empezando en Cochabamba, centralizando ofertas no formales con perfiles verificados, reputación y matching por habilidades.
+                        </p>
+                    </div>
+                    <span class="home-purpose-connector" aria-hidden="true"></span>
+                </article>
+                <article class="home-purpose-item home-purpose-vision">
+                    <div class="home-purpose-copy">
+                        <h2>VISIÓN</h2>
+                        <p>
+                            Ser la plataforma de referencia del trabajo no formal en Bolivia, donde los trabajadores con oficios sean encontrados y accedan a ofertas confiables en un mercado laboral más transparente.
+                        </p>
+                    </div>
+                    <span class="home-purpose-connector" aria-hidden="true"></span>
+                </article>
+            </div>
+        </section>
+
+        <div id="footer-placeholder"></div>
+    </main>
+    <script type="module">
+        import { initFooter } from './assets/js/components.js';
+        initFooter();
+    </script>
+</body>
+</html>

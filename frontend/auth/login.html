@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!-- Login page: the user enters carnet and password; login.js sends them to the server and opens the home page for their role. -->
+<!-- Página de inicio de sesión: el usuario escribe su carnet y contraseña; login.js los envía al servidor y abre la página de inicio de su rol. -->
 <html lang="es">
 
 <head>
     <!--
-      DUEÑA/O: Natalia Arze — Inicio de sesión. Ver README.md (sección Equipo)
+      Natalia Arze — Inicio de sesión. Ver README.md (sección Equipo)
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
@@ -18,10 +20,14 @@
 </head>
 
 <body>
-    <main class="bienvenida-mvil" aria-labelledby="saludo-principal">
-        <header>
-            <div class="fondo-lavanda" aria-hidden="true"></div>
-            <img class="logotipo-oficial" src="../public/LILA-logotipo-oficial.png" alt="LILA Librería Laboral" />
+    <main class="bienvenida-mvil auth-layout" aria-labelledby="saludo-principal">
+        <header class="auth-header">
+            <a class="auth-back-link" href="/frontend/index.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M19 12H5m7 7-7-7 7-7"/>
+                </svg>
+                <span>Volver</span>
+            </a>
         </header>
         <section aria-labelledby="saludo-principal">
             <h1 class="saludo" id="saludo-principal">Hola, bienvenido/a a LILA</h1>
@@ -68,7 +74,7 @@
     </main>
     <script type="module" src="../assets/js/login.js"></script>
     <script type="module">
-        import { initFooter } from '../assets/js/components.js';
+        import { initFooter } from '../assets/js/components.js?v=2';
         initFooter();
     </script>
 </body>
